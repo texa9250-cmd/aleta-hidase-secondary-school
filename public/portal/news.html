@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title data-en="Exam news | አለታ ህዳሴ Grade 12 Prep"
+         data-am="የፈተና ዜና | አለታ ህዳሴ 12ኛ ክፍል ዝግጅት">
+    Exam news | አለታ ህዳሴ Grade 12 Prep
+  </title>
+
+  <script src="/site-effects.js"></script>
+
+  <link rel="stylesheet" href="css/portal.css">
+  <link rel="stylesheet" href="css/portal-extra.css">
+</head>
+
+<body data-page="news">
+
+  <div id="site-header"></div>
+
+  <div class="pagehead">
+    <div class="wrap">
+
+      <!-- Back Navigator -->
+      <a href="/"
+         onclick="if (window.history.length > 1) { event.preventDefault(); window.history.back(); }"
+         style="display:inline-block; margin-bottom:15px; text-decoration:none; color:inherit; font-weight:600;"
+         data-en="← Back"
+         data-am="← ተመለስ">
+        ← Back
+      </a>
+
+      <h1 data-en="Exam news" data-am="የፈተና ዜና">
+        Exam news
+      </h1>
+
+      <p
+        data-en="Dates, rules and announcements, posted by the school office. Pinned items stay on top."
+        data-am="ቀኖች፣ ደንቦችና ማስታወቂያዎች በትምህርት ቤቱ ጽሕፈት ቤት ይለጠፋሉ። የተሰኩ ዜናዎች ከላይ ይቆያሉ።">
+        Dates, rules and announcements, posted by the school office. Pinned items stay on top.
+      </p>
+
+    </div>
+  </div>
+
+  <main>
+    <div class="wrap" style="padding-top:24px">
+
+      <div id="list" class="news-list"></div>
+
+      <div
+        id="empty"
+        class="empty"
+        hidden
+        data-en="No news yet. Check back soon."
+        data-am="እስካሁን ዜና የለም። በቅርቡ እንደገና ይመልከቱ።">
+        No news yet. Check back soon.
+      </div>
+
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="/site-nav.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/portal-config.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="Aleta Hidase School" data-am="አለታ ህዳሴ ትምህርት ቤት">Aleta Hidase School</title>
+    <link rel="stylesheet" href="./sgh.css">
+    <link rel="stylesheet" href="levels.css">
+    <link rel="icon" type="image/svg+xml" href="/logo.svg">
+    <script src="./site-effects.js"></script>
+
+    <style>
+        :root{
+            --sc-navy:#0e1a35;
+            --sc-navy-soft:#152347;
+            --sc-coral:#f08a5d;
+            --sc-sand:#c9b8a8;
+            --sc-cream:#f4efe9;
+        }
+
+        /* =========================================================
+           NAV BAR
+           ========================================================= */
+        .logo{
+            display: flex;
+            align-items: center;
+            height: 100%;
+            flex: 0 0 auto;
+            margin-right: 24px;
+        }
+      
+        .nav-actions {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* =========================================================
+           SECTIONS
+           ========================================================= */
+        .sc-section{
+            max-width:1100px;
+            margin:0 auto;
+            padding:56px 20px;
+        }
+        .sc-section h2{
+            font-size:clamp(1.6rem,3.2vw,2.1rem);
+            color:var(--sc-navy);
+            margin:0 0 8px;
+            position:relative;
+            padding-bottom:14px;
+        }
+        .sc-section h2::after{
+            content:"";
+            position:absolute;
+            left:0;bottom:0;
+            width:60px;height:5px;
+            background:var(--sc-coral);
+            border-radius:3px;
+        }
+        .sc-section .sc-sub{
+            color:#4A5468;
+            margin:14px 0 32px;
+            max-width:60ch;
+            line-height:1.6;
+        }
+        .band{background:#f8fafc}
+        .band-cream{background:#fdfaf6}
+
+        .hero{
+            background:
+                linear-gradient(rgba(15,23,42,.72),rgba(15,23,42,.72)),
+                url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1800&q=85")
+                center/cover;
+        }
+        .hero-content{
+            position:relative;
+        }
+        .hero h1{color:#fff!important;text-shadow:0 2px 12px rgba(0,0,0,.35)}
+        .hero h1 .h1{
+            display:inline;
+            width:auto;
+            overflow:visible;
+            white-space:normal;
+            animation:none;
+            color:#ffb08d!important;
+        }
+        .hero-letter{
+            display:inline-block;
+            opacity:0;
+            animation:heroLetterReveal .35s ease-out forwards;
+            animation-delay:var(--letter-delay);
+        }
+        .hero p{
+            max-width:66ch;
+            margin:0 auto 1.5rem;
+            color:#fff;
+            text-shadow:0 1px 8px rgba(0,0,0,.45);
+        }
+        @keyframes heroLetterReveal{
+            from{opacity:0;transform:translateY(8px)}
+            to{opacity:1;transform:translateY(0)}
+        }
+        @media(prefers-reduced-motion:reduce){
+            .hero-letter{animation:none;opacity:1}
+        }
+
+        /* =========================================================
+           8. STATISTICS BAR
+           ========================================================= */
+        .stats-bar{
+            position:relative;
+            overflow:hidden;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(240,138,93,.25) 0%, transparent 45%),
+                radial-gradient(circle at 85% 80%, rgba(94,194,255,.18) 0%, transparent 45%),
+                linear-gradient(135deg,#0a1328 0%,#0e1a35 50%,#152347 100%);
+            color:var(--sc-cream);
+            padding:70px 20px;
+            border-top:4px solid var(--sc-coral);
+            border-bottom:4px solid var(--sc-coral);
+        }
+        .stats-bar::before{
+            content:"";
+            position:absolute;
+            inset:0;
+            background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.06) 50%,transparent 70%);
+            background-size:200% 100%;
+            animation:scShimmer 6s linear infinite;
+            pointer-events:none;
+        }
+        @keyframes scShimmer{
+            0%   { background-position:200% 0; }
+            100% { background-position:-100% 0; }
+        }
+        .stats-bar::after{
+            content:"";
+            position:absolute;
+            inset:0;
+            background-image:
+                linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+                linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+            background-size:44px 44px;
+            pointer-events:none;
+            mask-image:radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
+            -webkit-mask-image:radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
+        }
+
+        .stats-inner{
+            position:relative;
+            max-width:1100px;
+            margin:0 auto;
+            z-index:1;
+        }
+        .stats-title{
+            text-align:center;
+            margin:0 0 6px;
+            font-size:clamp(1.4rem,3vw,1.9rem);
+            color:var(--sc-cream);
+            font-weight:800;
+            letter-spacing:.5px;
+        }
+        .stats-title span{color:var(--sc-coral)}
+        .stats-sub{
+            text-align:center;
+            margin:0 0 42px;
+            color:var(--sc-sand);
+            font-size:.95rem;
+            letter-spacing:.08em;
+            text-transform:uppercase;
+        }
+
+        .stats-grid{
+            display:grid;
+            grid-template-columns:repeat(4,minmax(0,1fr));
+            gap:22px;
+        }
+
+        .stat{
+            position:relative;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            text-align:center;
+            padding:30px 18px 26px;
+            min-width:0;
+            background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+            border:1px solid rgba(240,138,93,.28);
+            border-radius:18px;
+            backdrop-filter:blur(10px);
+            -webkit-backdrop-filter:blur(10px);
+            transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+            overflow:hidden;
+        }
+        .stat::before{
+            content:"";
+            position:absolute;
+            top:0;left:50%;
+            transform:translateX(-50%);
+            width:52px;height:4px;
+            background:linear-gradient(90deg,transparent,var(--sc-coral),transparent);
+            border-radius:0 0 6px 6px;
+        }
+        .stat:hover{
+            transform:translateY(-8px);
+            border-color:var(--sc-coral);
+            box-shadow:
+                0 20px 40px rgba(0,0,0,.35),
+                0 0 0 1px rgba(240,138,93,.35),
+                0 0 40px rgba(240,138,93,.2);
+        }
+        .stat:hover .stat-ic{transform:scale(1.15) rotate(-6deg)}
+        .stat:hover b{
+            color:#fff;
+            text-shadow:0 0 20px rgba(240,138,93,.9), 0 0 40px rgba(240,138,93,.55);
+        }
+
+        .stat .stat-ic{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            flex:0 0 52px;
+            width:52px;height:52px;
+            margin:0 auto 14px;
+            border-radius:14px;
+            font-size:1.6rem;
+            background:linear-gradient(135deg,rgba(240,138,93,.28),rgba(240,138,93,.08));
+            border:1px solid rgba(240,138,93,.4);
+            transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+        }
+
+        .stat b{
+            display:block;
+            font-size:clamp(1.8rem,4vw,2.6rem);
+            color:var(--sc-coral);
+            font-weight:900;
+            line-height:1.05;
+            margin-bottom:10px;
+            letter-spacing:-1px;
+            transition:color .3s ease, text-shadow .3s ease;
+            font-variant-numeric:tabular-nums;
+        }
+
+        .stat span{
+            display:block;
+            font-size:.82rem;
+            letter-spacing:.14em;
+            text-transform:uppercase;
+            color:var(--sc-sand);
+            font-weight:600;
+        }
+        .stat span.stat-ic{
+            display:flex;
+            font-size:1.6rem;
+            letter-spacing:normal;
+            text-transform:none;
+        }
+
+        @media(max-width:820px){
+            .stats-grid{grid-template-columns:repeat(2,1fr);gap:18px}
+        }
+        @media(max-width:420px){
+            .stats-grid{grid-template-columns:1fr}
+            .stats-bar{padding:50px 16px}
+        }
+        @media(prefers-reduced-motion:reduce){
+            .stats-bar::before{animation:none}
+            .stat, .stat-ic, .stat b{transition:none}
+        }
+
+        /* =========================================================
+           ANNOUNCEMENTS GRID
+           ========================================================= */
+        .announce-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .announce-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .announce-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        .announce-card.is-pinned {
+            border-color: var(--sc-coral);
+            border-top-width: 5px;
+            background: linear-gradient(180deg, #fff 0%, #fffaf7 100%);
+        }
+        @media (min-width: 640px) {
+            .announce-card.is-pinned { grid-column: 1 / -1; }
+            .announce-card.is-pinned h3 { font-size: 1.4rem; }
+            .announce-card.is-pinned p { -webkit-line-clamp: 5; }
+        }
+        .announce-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .announce-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 99px;
+            background: #ffedd5;
+            color: #9a3412;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .announce-badge.normal {
+            background: #e2e8f0;
+            color: #475569;
+        }
+        .announce-date {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+        .announce-card h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1.15rem;
+            color: var(--sc-navy);
+            line-height: 1.4;
+        }
+        .announce-card p {
+            margin: 0;
+            color: #4A5468;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .announce-more {
+            display: inline-flex;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 1rem;
+            color: var(--sc-coral);
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .announce-more:hover {
+            text-decoration: underline;
+        }
+
+        .quick-grid{
+            background:transparent;
+            border:0;
+        }
+        .quick-grid .card{
+            background:#fff;
+            border-color:#e2e8f0;
+        }
+        .quick-grid .card h3{color:#0e1a35}
+        .quick-grid .card p{color:#4A5468}
+        .quick-grid .card .icon{
+            background:linear-gradient(180deg,#0e1a35 0%,#0a1328 100%);
+        }
+        .quick-grid .card .button{
+            border-color:#0e1a35;
+            color:#0e1a35;
+        }
+        .quick-grid .card .button:hover{
+            background:#f08a5d;
+            border-color:#f08a5d;
+            color:#0e1a35;
+        }
+        .announce h2{color:#0e1a35}
+
+        /* =========================================================
+           10. UPCOMING EVENTS
+           ========================================================= */
+        .event-list{
+            list-style:none;
+            margin:0;padding:0;
+            display:grid;
+            gap:14px;
+        }
+        .event-list li{
+            display:grid;
+            grid-template-columns:80px 1fr auto;
+            gap:18px;
+            align-items:center;
+            background:#fff;
+            border:1px solid #e2e8f0;
+            border-left:5px solid var(--sc-coral);
+            border-radius:12px;
+            padding:14px 18px;
+            transition:transform .25s,box-shadow .25s,border-color .25s;
+        }
+        .event-list li.has-event-image{grid-template-columns:80px 104px 1fr auto}
+        .event-photo{width:104px;height:76px;object-fit:cover;border-radius:8px;background:#e2e8f0}
+        .event-file{display:inline-block;margin-top:6px;color:var(--sc-navy);font-weight:700;font-size:.85rem}
+        .event-list li:hover{
+            transform:translate(-4px,-4px);
+            box-shadow:6px 6px 0 var(--sc-coral);
+            border-color:var(--sc-coral);
+        }
+        .event-date{
+            text-align:center;
+            background:var(--sc-navy);
+            color:var(--sc-cream);
+            border-radius:10px;
+            padding:8px 4px;
+            line-height:1.1;
+        }
+        .event-date b{display:block;font-size:1.4rem;font-weight:800;color:var(--sc-coral)}
+        .event-date span{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}
+        .event-info b{display:block;color:var(--sc-navy);font-size:1.05rem;margin-bottom:3px}
+        .event-info span{color:#64748b;font-size:.9rem}
+        .event-where{
+            font-size:.82rem;
+            font-weight:700;
+            padding:5px 12px;
+            border-radius:999px;
+            background:#f1f5f9;
+            color:#475569;
+            white-space:nowrap;
+        }
+        @media(max-width:620px){
+            .event-list li{grid-template-columns:64px 1fr;gap:14px}
+            .event-list li.has-event-image{grid-template-columns:64px 76px 1fr}
+            .event-photo{width:76px;height:64px}
+            .event-where{grid-column:1 / -1;justify-self:start}
+        }
+
+        /* =========================================================
+           12. FACILITIES
+           ========================================================= */
+        .facilities-grid{
+            display:grid;
+            grid-template-columns:repeat(4,minmax(0,1fr));
+            gap:1rem;
+            max-width:72rem;
+            margin:0 auto;
+            padding:0 .5rem;
+            align-items: stretch;
+        }
+        .facility{
+            position:relative;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            text-align:center;
+            gap:.45rem;
+            padding:1.25rem 1rem 1.15rem;
+            background:var(--surface,#fff);
+            border:2px solid var(--border,#E3E7F0);
+            border-radius:14px;
+            overflow:hidden;
+            height: 100%;
+            transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+        }
+        .facility::before{
+            content:"";
+            position:absolute;
+            inset:0 0 auto 0;
+            height:6px;
+            background:var(--sc-coral);
+            transform:scaleX(0);
+            transform-origin:left;
+            transition:transform .35s ease;
+        }
+        .facility:hover{
+            transform:translate(-4px,-4px);
+            border-color:var(--sc-navy);
+            box-shadow:6px 6px 0 var(--sc-navy);
+        }
+        .facility:hover::before{transform:scaleX(1)}
+        .facility .fac-ic{
+            width:52px;
+            height:52px;
+            display:grid;
+            place-items:center;
+            border-radius:14px;
+            background:var(--sc-navy);
+            color:#fff;
+            font-size:1.65rem;
+            margin-bottom:.2rem;
+            line-height:1;
+        }
+        .facility .facility-photo{
+            display:block;
+            width:100%;
+            height:75px;
+            object-fit:cover;
+            border-radius:8px;
+            background:#e2e8f0;
+            margin-top:0.5rem;
+        }
+        .facility b{
+            display:block;
+            color:var(--sc-navy);
+            font-size:1.08rem;
+            margin:0;
+            line-height:1.25;
+        }
+        .facility p{
+            margin:0;
+            max-width:28ch;
+            font-size:.86rem;
+            line-height:1.45;
+            color:#4A5468;
+            flex-grow: 1;
+        }
+        @media(max-width:760px){
+            .facilities-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+            .facility{padding:1rem .75rem}
+        }
+
+        /* =========================================================
+           18. VISIT US
+           ========================================================= */
+        .visit-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+            gap:20px;
+        }
+        .visit-card{
+            background:#fff;
+            border:1px solid #e2e8f0;
+            border-top:5px solid var(--sc-navy);
+            border-radius:14px;
+            padding:26px 22px;
+            transition:transform .25s, box-shadow .25s, border-color .25s;
+        }
+        .visit-card:hover{
+            transform:translate(-4px,-4px);
+            box-shadow:6px 6px 0 var(--sc-coral);
+            border-top-color:var(--sc-coral);
+        }
+        .visit-card .v-ic{
+            font-size:1.9rem;
+            display:block;
+            margin-bottom:10px;
+        }
+        .visit-card h3{
+            margin:0 0 10px;
+            color:var(--sc-navy);
+            font-size:1.1rem;
+        }
+        .visit-card ul{
+            list-style:none;
+            margin:0;padding:0;
+            color:#475569;
+            line-height:1.9;
+            font-size:.95rem;
+        }
+        .visit-card ul li{
+            display:flex;
+            justify-content:space-between;
+            gap:12px;
+            border-bottom:1px dashed #e2e8f0;
+            padding:4px 0;
+        }
+        .visit-card ul li:last-child{border-bottom:none}
+        .visit-card ul li b{color:var(--sc-navy)}
+        .visit-card a{color:var(--sc-coral);text-decoration:none;font-weight:600}
+        .visit-card a:hover{text-decoration:underline}
+
+    </style>
+    <style id="stats-cards-v2">
+        .stats-grid{perspective:1000px}
+        .stat{
+            backdrop-filter:none;-webkit-backdrop-filter:none;
+            background:linear-gradient(160deg,rgba(255,255,255,.13),rgba(255,255,255,.03) 60%),rgba(14,26,53,.78);
+            box-shadow:0 10px 26px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.14);
+            animation:statSpin 8s infinite;
+            will-change:rotate;
+        }
+        @keyframes statSpin{
+            0%{rotate:0 1 0 0deg;animation-timing-function:cubic-bezier(.65,0,.35,1)}
+            16%,100%{rotate:0 1 0 -360deg}
+        }
+        .stat:nth-child(4){animation-delay:0s}
+        .stat:nth-child(3){animation-delay:.45s}
+        .stat:nth-child(2){animation-delay:.9s}
+        .stat:nth-child(1){animation-delay:1.35s}
+
+        @media(max-width:820px){
+            .stat:nth-child(2){animation-delay:0s}
+            .stat:nth-child(1){animation-delay:.45s}
+            .stat:nth-child(4){animation-delay:.9s}
+            .stat:nth-child(3){animation-delay:1.35s}
+        }
+        @media(max-width:600px){
+            .stats-bar{padding:34px 12px;border-top-width:3px;border-bottom-width:3px}
+            .stats-title{font-size:1.25rem;margin-bottom:4px}
+            .stats-sub{margin-bottom:20px;font-size:.66rem;letter-spacing:.06em}
+            .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+            .stat{padding:14px 8px 12px;border-radius:14px}
+            .stat::before{width:36px;height:3px}
+            .stat .stat-ic,.stat span.stat-ic{flex:0 0 38px;width:38px;height:38px;margin-bottom:8px;border-radius:11px;font-size:1.15rem}
+            .stat b{font-size:1.5rem;margin-bottom:5px;letter-spacing:-.5px;text-shadow:0 0 16px rgba(240,138,93,.35)}
+            .stat span{font-size:.64rem;letter-spacing:.09em}
+        }
+        @media(max-width:420px){
+            .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+            .stats-bar{padding:34px 12px}
+        }
+        @media(prefers-reduced-motion:reduce){.stat{animation:none}}
+    </style>
+    <style id="hero-slider">
+        .hero.hero-slider{position:relative;overflow:hidden;isolation:isolate;background:#0f172a;
+            min-height:clamp(340px,46vw,520px);display:flex;align-items:center;justify-content:center}
+        .hero.hero-slider .hero-content{width:100%}
+        .hero-slides{position:absolute;inset:0;z-index:0}
+        .hero-slide{position:absolute;inset:0;overflow:hidden;transform:translateX(100%);transition:transform .8s cubic-bezier(.65,0,.35,1);will-change:transform}
+        .hero-slide.is-active{transform:translateX(0)}
+        .hero-slide.is-leaving{transform:translateX(-100%)}
+        .hero-slide img{position:relative;display:block;width:100%;height:100%;object-fit:cover;object-position:var(--pos,center)}
+        .hero-slide.portrait::before{content:"";position:absolute;inset:-24px;background:var(--bg) var(--pos,center)/cover;filter:blur(20px) brightness(.85)}
+        .hero-slide.portrait img{object-fit:contain}
+        @media(max-aspect-ratio:11/10){.hero-slide.portrait img{object-fit:cover}.hero-slide.portrait::before{display:none}}
+        .hero.hero-slider::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+            background:linear-gradient(180deg,rgba(15,23,42,.58),rgba(15,23,42,.72))}
+        .hero.hero-slider .hero-content{position:relative;z-index:2}
+        .hero-dots{position:absolute;left:0;right:0;bottom:12px;z-index:2;display:flex;justify-content:center;gap:7px;pointer-events:none}
+        .hero-dots i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.45);transition:background .3s,transform .3s}
+        .hero-dots i.on{background:#ffb08d;transform:scale(1.25)}
+        @media(prefers-reduced-motion:reduce){.hero-slide{transition:none}}
+    </style>
+
+    <style id="fund-portal-and-fixes">
+        /* ---------- FUNDING PORTAL ---------- */
+        .fund-portal{
+            position:relative;overflow:hidden;
+            background:radial-gradient(circle at 12% 20%,rgba(240,138,93,.28) 0%,transparent 45%),
+                       radial-gradient(circle at 88% 80%,rgba(94,194,255,.16) 0%,transparent 45%),
+                       linear-gradient(135deg,#0a1328 0%,#0e1a35 50%,#152347 100%);
+            color:var(--sc-cream);
+            border-top:4px solid var(--sc-coral);border-bottom:4px solid var(--sc-coral);
+            padding:56px 20px;
+        }
+        .fund-portal-in{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:center;position:relative;z-index:1}
+        .fund-badge{display:inline-block;background:rgba(240,138,93,.18);border:1px solid rgba(240,138,93,.5);color:var(--sc-coral);font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:999px;margin-bottom:14px}
+        .fund-portal h2{color:var(--sc-cream);font-size:clamp(1.5rem,3.4vw,2.2rem);margin:0 0 10px}
+        .fund-portal h2 span{color:var(--sc-coral)}
+        .fund-portal p{color:var(--sc-sand);line-height:1.65;margin:0 0 22px;max-width:52ch}
+        .fund-btn{display:inline-flex;align-items:center;gap:10px;background:var(--sc-coral);color:var(--sc-navy)!important;font-weight:800;text-decoration:none;padding:14px 26px;border-radius:999px;transition:transform .25s,box-shadow .25s}
+        .fund-btn:hover{transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--sc-cream)}
+        .fund-list{display:grid;gap:10px}
+        .fund-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.03));border:1px solid rgba(240,138,93,.3)}
+        .fund-item .fi{flex:none;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-size:1.25rem;background:rgba(240,138,93,.22)}
+        .fund-item b{display:block;color:var(--sc-cream);font-size:.95rem}
+        .fund-item span{font-size:.8rem;color:var(--sc-sand)}
+        @media(max-width:760px){
+            .fund-portal{padding:36px 16px}
+            .fund-portal-in{grid-template-columns:1fr;gap:20px;text-align:center}
+            .fund-portal p{margin-left:auto;margin-right:auto}
+            .fund-item{text-align:left}
+        }
+
+        /* ---------- FACILITIES: four equal cards ---------- */
+        .facilities-grid{grid-auto-rows:1fr}
+        .facility{height:100%;min-height:210px;justify-content:flex-start}
+        .facility p{flex-grow:0;max-width:none}
+        .facility .facility-photo{margin-top:auto;height:90px;flex:none}
+        @media(max-width:760px){.facility{min-height:190px}}
+
+        /* ---------- VISIT US: compact, phone friendly ---------- */
+        .visit-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+        .visit-card{padding:16px 16px;border-top-width:4px;border-radius:12px}
+        .visit-card .v-ic{font-size:1.3rem;display:inline-block;margin:0 8px 0 0;vertical-align:middle}
+        .visit-card h3{display:inline-block;margin:0 0 8px;font-size:1rem;vertical-align:middle}
+        .visit-card ul{font-size:.85rem;line-height:1.5}
+        .visit-card ul li{padding:3px 0}
+        @media(max-width:600px){
+            #visit.sc-section{padding:28px 14px}
+            #visit .sc-sub{margin:10px 0 16px;font-size:.88rem}
+            .visit-grid{grid-template-columns:1fr;gap:10px}
+            .visit-card{padding:12px 14px}
+            .visit-card ul{font-size:.8rem}
+        }
+    </style>
+</head>
+<body id="top">
+        
+
+<header style=" position: sticky; top: 0; z-index: 100; background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);">
+    <nav>
+        
+       <div class="logo">
+    <span data-en="Aleta" data-am="አለታ">Aleta</span> <span style="color: darkgrey;" data-en="-Hidase" data-am="-ህዳሴ">-Hidase</span>
+</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="./index.html" data-en="Home" data-am="መነሻ">Home</a></li>
+            <li><a href="./announcements.html" data-en="Announcement" data-am="ማስታወቂያ">Announcement</a></li>
+            <li><a href="./achievement.html" data-en="Achievements" data-am="ስኬቶች">Achievements</a></li>
+            <li><a href="./history.html" data-en="About" data-am="ስለ ትምህርት ቤቱ">About</a></li>
+            <li><a href="./contact.html" data-en="Contact" data-am="አግኙን">Contact</a></li>
+        </ul>
+    <div class="nav-actions">
+     <button id="theme-toggle" class="icon-button" type="button">☾</button>
+    </div>
+   </nav>
+    </header>
+    <main id="main-content">
+        <section class="hero hero-slider">
+            <div class="hero-slides" id="hero-slides" aria-hidden="true"></div>
+            <div class="hero-dots" id="hero-dots" aria-hidden="true"></div>
+            
+            <div class="hero-content">
+                <h1 style="color: darkgrey;">
+                    <span class="h1" data-en="Welcome to Aleta Hidase School" data-am="ወደ አለታ ህዳሴ ትምህርት ቤት እንኳን በደህና መጡ" style="color: coral;">Welcome to Aleta Hidase School</span>
+                </h1>
+                <p data-en="Aleta Hidase School helps students expand their knowledge, develop their skills, and prepare for future success." data-am="አለታ ህዳሴ ትምህርት ቤት ተማሪዎች ዕውቀታቸውን እንዲያሰፉ፣ ክህሎታቸውን እንዲያዳብሩ እና ለወደፊት ስኬት እንዲዘጋጁ ያግዛል።">Aleta Hidase School helps students expand their knowledge, develop their skills, and prepare for future success.</p>
+            </div>
+        </section>
+
+    <!-- ==================== 8. STATISTICS BAR ==================== -->
+    <section class="stats-bar" aria-labelledby="statistics-title">
+        <div class="stats-inner">
+            <h2 class="stats-title" id="statistics-title"><b data-en="Aleta Hidase" data-am="አለታ ህዳሴ">Aleta Hidase</b> <span data-en="in numbers" data-am="በቁጥር">in numbers</span></h2>
+            <p class="stats-sub" data-en="One decade of learning, growth and achievement" data-am="አስር ዓመት የመማር፣ የዕድገት እና የስኬት">One decade of learning, growth and achievement</p>
+
+            <div class="stats-grid">
+                <div class="stat">
+                    <span class="stat-ic">🏛️</span>
+                    <b>2009 E.C</b>
+                    <span data-en="Founded" data-am="የተመሠረተ">Founded</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-ic">🎓</span>
+                    <b>2000+</b>
+                    <span data-en="Students" data-am="ተማሪዎች">Students</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-ic">👩‍🏫</span>
+                    <b>123</b>
+                    <span data-en="Teachers" data-am="መምህራን">Teachers</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-ic">🏆</span>
+                    <b>7.8%</b>
+                    <span data-en="Pass rate" data-am="የማለፍ መጠን">Pass rate</span>
+                    <b>12.9%</b>
+                    <span>REMIDIAL RATE</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+     <section>
+        <div class="quick-grid">
+            <article class="card 1">
+                <div class="icon"></div>
+          <h3 data-en="Announcement" data-am="ማስታወቂያ">Announcement</h3>
+          <p data-en="Read the latest school news and important notices." data-am="የቅርብ ጊዜ የትምህርት ቤቱን ዜናዎች እና አስፈላጊ ማስታወቂያዎችን ያንብቡ።">Read the latest school news and important notices.</p>
+          <a style="text-decoration: none;" class="button" href="./announcements.html" data-en="Announcements" data-am="ማስታወቂያዎች"> Announcements </a>
+        </article> 
+
+        <article class="card one">
+        <div class="icon"></div>
+        <h3 data-en="Achievements" data-am="ስኬቶች">Achievements</h3>
+        <p data-en="Explore our achievements here." data-am="ስኬቶቻችንን እዚህ ይመልከቱ።">Explore our achievements here.</p>
+        <a style="text-decoration: none;" href="./achievement.html" class="button" data-en="Achievements" data-am="ስኬቶች">Achievements</a>
+        </article>
+
+        <article class="card 1">
+        <div class="icon"></div>
+        <h3 data-en="G-12 special platform" data-am="የ12ኛ ክፍል ልዩ መድረክ">G-12 special platform</h3>
+        <p data-en="Access the special preparatory platform for students." data-am="ለተማሪዎች የተዘጋጀውን ልዩ የመሰናዶ መድረክ ይጠቀሙ።">Access the special preparatory platform for students.</p>
+        <a style="text-decoration: none;" href="./portal/students.html" class="button" data-en="Access" data-am="ይግቡ">Access</a>
+        </article>
+
+        <article class="card 1">
+        <div class="icon"></div>
+        <h3 data-en="About us" data-am="ስለ እኛ">About us</h3>
+        <p data-en="Our history from the beginning to the present." data-am="ከመጀመሪያው እስከ አሁን ያለው ታሪካችን።">Our history from the beginning to the present.</p>
+        <a style="text-decoration: none;" href="./history.html" class="button" data-en="History" data-am="ታሪክ">History</a>
+        </article>
+    </div>
+    </section>
+
+   <section>
+    <div class="announce">
+        <h2 data-en="Latest announcements" data-am="የቅርብ ጊዜ ማስታወቂያዎች">Latest announcements</h2>
+        <p style="padding-left: 20px; margin-bottom: 2rem;" data-en="Stay informed about everything happening at Aleta Hidase." data-am="በአለታ ህዳሴ ስለሚከናወኑ ጉዳዮች ሁሉ ወቅታዊ መረጃ ያግኙ።">Stay informed about everything happening at Aleta Hidase.</p>
+    </div>
+
+    <div class="announce-cont" id="pinned-announcements" aria-live="polite">
+        <!-- Content will be injected here by JavaScript -->
+    </div>
+</section>
+
+<!-- ==================== 10. CALENDAR / UPCOMING EVENTS ==================== -->
+<section class="sc-section band" id="calendar">
+    <h2 data-en="Upcoming events" data-am="መጪ ክንውኖች">Upcoming events</h2>
+    <p class="sc-sub" data-en="Key dates for the school year — exams, registration, and school events." data-am="ለዚህ የትምህርት ዘመን ዋና ቀኖች — ፈተናዎች፣ ምዝገባ እና የትምህርት ቤት ክንውኖች።">Key dates for the school year — exams, registration, and school events.</p>
+
+    <ul class="event-list" id="homeEventList" aria-live="polite"></ul>
+</section>
+
+<!-- ==================== 12. FACILITIES ==================== -->
+<section class="sc-section" id="facilities">
+    <h2 data-en="Our facilities" data-am="መገልገያዎቻችን">Our facilities</h2>
+    <p class="sc-sub" data-en="Everything a student needs to learn, explore, and grow." data-am="ተማሪ ለመማር፣ ለመመርመር እና ለማደግ የሚያስፈልገው ሁሉ።">Everything a student needs to learn, explore, and grow.</p>
+
+    <div class="facilities-grid">
+    <a class="facility" href="library.html" style="text-decoration: none; color: inherit;">
+        <span class="fac-ic">📚</span>
+        <b data-en="Library" data-am="ቤተ መጻሕፍት">Library</b>
+        <p data-en="Thousands of textbooks, references, and quiet study space." data-am="ሺዎች የመማሪያ መጻሕፍት፣ የማጣቀሻ ሰነዶች እና ጸጥ ያለ የመማሪያ ቦታ።">Thousands of textbooks, references, and quiet study space.</p>
+    </a>
+
+    <a class="facility" href="science-labs.html" style="text-decoration: none; color: inherit;">
+        <span class="fac-ic">🔬</span>
+        <b data-en="Science Labs" data-am="የሳይንስ ላቦራቶሪዎች">Science Labs</b>
+        <p data-en="Physics, chemistry, and biology labs with modern equipment." data-am="ዘመናዊ መሣሪያዎች ያላቸው የፊዚክስ፣ ኬሚስትሪ እና ባዮሎጂ ላቦራቶሪዎች።">Physics, chemistry, and biology labs with modern equipment.</p>
+    </a>
+
+    <a class="facility" href="./beauty-of-school.html" style="text-decoration: none; color: inherit;">
+        <span class="fac-ic">🌳</span>
+        <b data-en="Our School Beauty" data-am="የትምህርት ቤታችን ውበት">Our School Beauty</b>
+        <p data-en="Discover the beautiful gardens, green spaces, and peaceful environment of our school." data-am="ውብ የአትክልት ስፍራዎችን፣ አረንጓዴ ቦታዎችን እና ጸጥ ያለ አካባቢን ይመልከቱ።">Discover the beautiful gardens, green spaces, and peaceful environment of our school.</p>
+    </a>
+
+    <a class="facility" href="classrooms.html" style="text-decoration: none; color: inherit;">
+        <span class="fac-ic">🏫</span>
+        <b data-en="Classrooms" data-am="የመማሪያ ክፍሎች">Classrooms</b>
+        <p data-en="Bright, spacious classrooms with modern teaching aids." data-am="ዘመናዊ የማስተማሪያ መርጃዎች ያሏቸው ብሩህ እና ሰፊ የመማሪያ ክፍሎች።">Bright, spacious classrooms with modern teaching aids.</p>
+    </a>
+</div>
+</section>
+
+<!-- ==================== PLATFORM FOR GRADE 9–11 ==================== -->
+<section class="lv-home">
+  <div class="lv-home-head">
+    <h2 data-en="Choose your grade" data-am="ክፍልዎን ይምረጡ">Choose your grade</h2>
+    <p data-en="Select your grade to see the Foundation, Growth, and Excellence learning paths available to you." data-am="ለእርስዎ የሚገኙትን የመሠረት፣ የዕድገት እና የልህቀት የመማር መንገዶች ለማየት ክፍልዎን ይምረጡ።">Select your grade to see the Foundation, Growth, and Excellence learning paths available to you.</p>
+  </div>
+  <div class="lv-home-grid">
+    <a class="lv-home-card" style="--c:#1f9d8a" href="levels.html?grade=9">
+      <span class="ic">📘</span><h3 data-en="Grade 9" data-am="9ኛ ክፍል">Grade 9</h3>
+      <p data-en="Explore the learning paths for Grade 9." data-am="ለ9ኛ ክፍል የተዘጋጁትን የመማር መንገዶች ይመልከቱ።">Explore the learning paths for Grade 9.</p><b data-en="Choose Grade 9 →" data-am="9ኛ ክፍልን ይምረጡ →">Choose Grade 9 →</b></a>
+    <a class="lv-home-card" style="--c:#ff7a3d" href="levels.html?grade=10">
+      <span class="ic">📗</span><h3 data-en="Grade 10" data-am="10ኛ ክፍል">Grade 10</h3>
+      <p data-en="Explore the learning paths for Grade 10." data-am="ለ10ኛ ክፍል የተዘጋጁትን የመማር መንገዶች ይመልከቱ።">Explore the learning paths for Grade 10.</p><b data-en="Choose Grade 10 →" data-am="10ኛ ክፍልን ይምረጡ →">Choose Grade 10 →</b></a>
+    <a class="lv-home-card" style="--c:#5b3fd1" href="levels.html?grade=11">
+      <span class="ic">📙</span><h3 data-en="Grade 11" data-am="11ኛ ክፍል">Grade 11</h3>
+      <p data-en="Explore the learning paths for Grade 11." data-am="ለ11ኛ ክፍል የተዘጋጁትን የመማር መንገዶች ይመልከቱ።">Explore the learning paths for Grade 11.</p><b data-en="Choose Grade 11 →" data-am="11ኛ ክፍልን ይምረጡ →">Choose Grade 11 →</b></a>
+  </div>
+  <div class="lv-home-links">
+    <a href="levels.html" data-en="Choose a grade and find my path" data-am="ክፍል መርጬ መንገዴን ፈልግ">Choose a grade and find my path</a>
+    <a class="alt" href="discuss.html" data-en="Discussion board" data-am="የውይይት መድረክ">Discussion board</a>
+  </div>
+</section>
+
+<!-- ==================== FUNDING PORTAL ==================== -->
+<section class="fund-portal" id="fund">
+  <div class="fund-portal-in">
+    <div>
+      <span class="fund-badge" data-en="Support our school" data-am="ትምህርት ቤታችንን ይደግፉ">Support our school</span>
+      <h2><span data-en="Fund a project," data-am="ፕሮጀክት ይደግፉ፣">Fund a project,</span> <span style="color:var(--sc-cream)" data-en="build our future" data-am="መጪውን ጊዜ ይገንቡ">build our future</span></h2>
+      <p data-en="Choose a school project, see how much is still needed, and give any amount quickly and safely through Telebirr." data-am="የትምህርት ቤት ፕሮጀክት ይምረጡ፣ ምን ያህል እንደሚያስፈልግ ይመልከቱ፣ እና በቴሌብር በፍጥነት እና በደህንነት ማንኛውንም መጠን ይለግሱ።">Choose a school project, see how much is still needed, and give any amount quickly and safely through Telebirr.</p>
+      <a class="fund-btn" href="./funding.html"><span data-en="Open funding portal" data-am="የድጋፍ መግቢያ ክፈት">Open funding portal</span> <span aria-hidden="true">→</span></a>
+    </div>
+    <!-- DYNAMIC PROJECT LIST -->
+    <div class="fund-list" id="homeFundList">
+       <div class="fund-item"><div><b data-en="Loading projects..." data-am="ፕሮጀክቶች በመጫን ላይ...">Loading projects...</b></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 18. VISIT US ==================== -->
+<section class="sc-section band" id="visit">
+    <h2 data-en="Visit us" data-am="ይጎብኙን">Visit us</h2>
+    <p class="sc-sub" data-en="Come see the school, or reach out with any question." data-am="ትምህርት ቤቱን ለመጠየቅ ይምጡ፣ ወይም በማንኛውም ጥያቄ ያግኙን።">Come see the school, or reach out with any question.</p>
+
+    <div class="visit-grid">
+        <div class="visit-card">
+            <span class="v-ic">📍</span>
+            <h3 data-en="Address" data-am="አድራሻ">Address</h3>
+            <ul>
+                <li><span data-en="Town" data-am="ከተማ">Town</span><b data-en="Aleta Wondo" data-am="አለታ ወንዶ">Aleta Wondo</b></li>
+                <li><span data-en="Region" data-am="ክልል">Region</span><b data-en="Sidama" data-am="ሲዳማ">Sidama</b></li>
+                <li><span data-en="Country" data-am="አገር">Country</span><b data-en="Ethiopia" data-am="ኢትዮጵያ">Ethiopia</b></li>
+            </ul>
+        </div>
+
+        <div class="visit-card">
+            <span class="v-ic">🕒</span>
+            <h3 data-en="School hours" data-am="የትምህርት ሰዓት">School hours</h3>
+            <ul>
+                <li><span data-en="Monday – Friday" data-am="ሰኞ – አርብ">Monday – Friday</span><b data-en="2:00 – 10:45" data-am="2:00 – 10:45">2:00 – 10:45</b></li>
+            </ul>
+        </div>
+
+        <div class="visit-card">
+            <span class="v-ic">☎️</span>
+            <h3 data-en="Contact" data-am="አግኙን">Contact</h3>
+            <ul>
+                <li><span data-en="Phone" data-am="ስልክ">Phone</span><a href="tel:+251462241295" data-en="+251 4 62 24 12 95" data-am="+251 4 62 24 12 95">+251 4 62 24 12 95</a></li>
+                 <li><span data-en="Phone" data-am="ስልክ">Phone</span><a href="tel:+251916851434" data-en="+251 9 16 85 14 34" data-am="+251 9 16 85 14 34">+251 9 16 85 14 34</a></li>
+                <li><span data-en="Email" data-am="ኢሜይል">Email</span><a href="mailto:aletahidasesecondaryschool@gmail.com" data-en="aletahidasesecondaryschool@gmail.com" data-am="aletahidasesecondaryschool@gmail.com">aletahidasesecondaryschool@gmail.com</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+    </main>
+
+<style>
+.site-footer{
+  --navy:#0e1a35; --navy-deep:#0a1328; --coral:#f08a5d; --sand:#c9b8a8; --white:#f4efe9;
+  background:linear-gradient(180deg,var(--navy) 0%,var(--navy-deep) 100%);
+  color:var(--sand);
+  border-top:4px solid var(--coral);
+  padding:56px 20px 0;
+  font-family:inherit;
+}
+.site-footer *{box-sizing:border-box}
+.footer-grid{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:1.6fr 1fr 1.2fr 1fr;gap:36px;
+}
+.footer-brand h3{color:var(--coral);font-size:1.7rem;margin:0 0 10px}
+.footer-brand p{line-height:1.7;margin:0 0 18px;max-width:34ch}
+.site-footer h4{color:var(--white);font-size:1.05rem;margin:0 0 16px;padding-bottom:8px;position:relative}
+.site-footer h4::after{content:"";position:absolute;left:0;bottom:0;width:32px;height:3px;background:var(--coral);border-radius:2px}
+.site-footer ul{list-style:none;margin:0;padding:0}
+.site-footer li{margin-bottom:10px}
+.site-footer a{color:var(--sand);text-decoration:none;transition:color .2s,padding-left .2s}
+.site-footer ul a:hover{color:var(--coral);padding-left:6px}
+.site-footer a:focus-visible{outline:2px solid var(--coral);outline-offset:3px}
+.footer-contact li{display:flex;gap:10px;line-height:1.5}
+.footer-contact span.icon{color:var(--coral);flex:none}
+.footer-social{display:flex;gap:10px;flex-wrap:wrap}
+.footer-social a{
+  border:1px solid rgba(240,138,93,.5);color:var(--coral);
+  padding:8px 14px;border-radius:999px;font-size:.9rem;
+}
+.footer-social a:hover{background:var(--coral);color:var(--navy)}
+.footer-bottom{
+  max-width:1100px;margin:44px auto 0;padding:20px 0;
+  border-top:1px solid rgba(201,184,168,.2);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  font-size:.9rem;
+}
+.footer-bottom a{color:var(--coral)}
+
+/* ADMIN BUTTON */
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--coral);
+  color: var(--navy) !important;
+  padding: 10px 18px;
+  border-radius: 99px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+  margin: 10px 0;
+}
+.admin-btn:hover {
+  background: #ff9e75;
+  transform: translateY(-2px);
+}
+
+@media (max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){
+  .footer-grid{grid-template-columns:1fr; text-align: center;}
+  .footer-social { justify-content: center; }
+  .footer-brand p { margin: 0 auto 18px; }
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+</style>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+
+    <div class="footer-brand">
+      <h3><span data-en="Aleta" data-am="አለታ">Aleta</span><span style="color: gray;" data-en="-Hidase" data-am="-ህዳሴ">-Hidase</span></h3>
+      <p data-en="Aleta Hidase School is our home, where we build knowledge, develop skills, and prepare for future success." data-am="አለታ ህዳሴ ትምህርት ቤት፤ ዕውቀትን የምናዳብርበት፣ ችሎታን የምናሳድግበት እና ለወደፊት ስኬት የምንዘጋጅበት ቤታችን።">Aleta Hidase School is our home, where we build knowledge, develop skills, and prepare for future success.</p>
+    </div>
+
+    <div>
+      <h4 data-en="Quick links" data-am="ፈጣን አገናኞች">Quick links</h4>
+      <ul>
+        <li><a href="./index.html"          data-en="Home"         data-am="መነሻ">Home</a></li>
+        <li><a href="./announcements.html" data-en="Announcement" data-am="ማስታወቂያ">Announcement</a></li>
+        <li><a href="./achievement.html"   data-en="Achievements" data-am="ስኬቶች">Achievements</a></li>
+        <li><a href="./history.html"       data-en="About"        data-am="ስለ ትምህርት ቤቱ">About</a></li>
+        <li><a href="./contact.html"       data-en="Contact"      data-am="አግኙን">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 data-en="Contact · Address" data-am="አግኙን · አድራሻ">Contact · አድራሻ</h4>
+      <ul class="footer-contact">
+        <li><span class="icon">&#9679;</span><span data-en="Aleta Wondo, Ethiopia" data-am="አለታ ወንዶ፣ ኢትዮጵያ">Aleta Wondo, Ethiopia</span></li>
+        <li><span class="icon">&#9679;</span><a href="tel:0462241295" data-en="04 62 24 12 95" data-am="04 62 24 12 95">04 62 24 12 95</a></li>
+        <li><span class="icon">&#9679;</span><a href="tel:0916851434" data-en="0916 85 14 34" data-am="0916 85 14 34">0916 85 14 34</a></li>
+        <li><span class="icon">&#9679;</span><a href="mailto:aletahidasesecondaryschool@gmail.com" data-en="aletahidasesecondaryschool@gmail.com" data-am="aletahidasesecondaryschool@gmail.com">aletahidasesecondaryschool@gmail.com</a></li>
+        <li><span class="icon">&#9679;</span><span data-en="Mon to Fri, 8:00 am to 5:00 pm" data-am="ሰኞ እስከ ዓርብ፣ ከጠዋቱ 8:00 እስከ ከሰዓቱ 5:00">Mon to Fri, 8:00 am to 5:00 pm</span></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 data-en="For students" data-am="ለተማሪዎች">For students</h4>
+      <ul>
+        <li><a href="./levels.html"      data-en="Find my path"     data-am="የእኔን መንገድ ፈልግ">Find my path</a></li>
+        <li><a href="./discuss.html"     data-en="Discussion board" data-am="የውይይት መድረክ">Discussion board</a></li>
+        <li><a href="./portal/news.html" data-en="Exam news"        data-am="የፈተና ዜና">Exam NEWS</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <span data-en="Developed by Texa. © 2026 Aleta Hidase School. All rights reserved." data-am="በቴክሳ የተዘጋጀ። © 2026 አለታ ህዳሴ ትምህርት ቤት። መብቱ በሕግ የተጠበቀ ነው።">Developed by Texa. &copy; 2026 Aleta Hidase School. All rights reserved.</span>
+    
+    <!-- ADMIN BUTTON ADDED HERE -->
+    <a href="./admin.html" class="admin-btn">
+        🔐 <span data-en="Staff Login" data-am="የሰራተኛ መግቢያ">Staff Login</span>
+    </a>
+
+    <a href="#top" data-en="Back to top ↑" data-am="ወደ ላይ ተመለስ ↑">Back to top &uarr;</a>
+  </div>
+</footer>    
+
+<script>
+async function loadHomePagePhotos() {
+  const loadJson = async url => {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Request failed (${response.status}): ${url}`);
+    return response.json();
+  };
+  const [assetsResult, facilitiesResult, eventsResult] = await Promise.allSettled([
+    loadJson('/api/content-assets?target_type=event-image'),
+    loadJson('/api/campus/facilities'),
+    loadJson('/api/home-events')
+  ]);
+  if (assetsResult.status === 'rejected') console.error('Could not load event images:', assetsResult.reason);
+  if (facilitiesResult.status === 'rejected') console.error('Could not load facility photos:', facilitiesResult.reason);
+  if (eventsResult.status === 'rejected') console.error('Could not load upcoming events:', eventsResult.reason);
+  
+  const assets = assetsResult.status === 'fulfilled' ? assetsResult.value : [];
+  const facilities = facilitiesResult.status === 'fulfilled' ? facilitiesResult.value : [];
+  const events = eventsResult.status === 'fulfilled' ? eventsResult.value : null;
+  
+  const eventList = document.getElementById('homeEventList');
+  if (events) {
+    const eventImages = new Map(assets.map(asset => [asset.target_key, asset]));
+    eventList.replaceChildren();
+    if (!events.length) {
+      const empty = document.createElement('li');
+      empty.textContent = 'New school events will be posted here.';
+      eventList.append(empty);
+    }
+    events.forEach(event => {
+      const item = document.createElement('li');
+      item.dataset.eventId = event.id;
+      const date = new Date(`${event.event_date}T00:00:00Z`);
+      const ethiopianDate = new Intl.DateTimeFormat('en-u-ca-ethiopic-nu-latn', {
+        year: 'numeric', month: 'numeric', day: 'numeric', timeZone: 'UTC'
+      }).formatToParts(date);
+      const datePart = type => Number(ethiopianDate.find(part => part.type === type)?.value || 0);
+      const ethiopianDay = datePart('day');
+      const ethiopianMonth = datePart('month');
+      const amharicMonths = ['መስከረም', 'ጥቅምት', 'ኅዳር', 'ታኅሣሥ', 'ጥር', 'የካቲት', 'መጋቢት', 'ሚያዝያ', 'ግንቦት', 'ሰኔ', 'ሐምሌ', 'ነሐሴ', 'ጳጉሜ'];
+      const dateBox = document.createElement('div');
+      dateBox.className = 'event-date';
+      const day = document.createElement('b');
+      day.textContent = String(ethiopianDay);
+      const month = document.createElement('span');
+      month.textContent = amharicMonths[ethiopianMonth - 1] || '';
+      dateBox.append(day, month);
+      const info = document.createElement('div');
+      info.className = 'event-info';
+      const title = document.createElement('b');
+      title.textContent = event.title;
+      const description = document.createElement('span');
+      description.textContent = event.description;
+      info.append(title, description);
+      const asset = eventImages.get(event.id);
+      if (asset?.mime === 'application/pdf') {
+        const link = document.createElement('a');
+        link.className = 'event-file';
+        link.href = asset.url;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.dataset.en = 'Open attached event file';
+        link.dataset.am = 'የተያያዘውን የክንውን ፋይል ክፈት';
+        link.textContent = 'Open attached event file';
+        info.append(link);
+      } else if (asset) {
+        const image = document.createElement('img');
+        image.className = 'event-photo';
+        image.src = asset.url;
+        image.alt = event.title;
+        image.loading = 'lazy';
+        item.classList.add('has-event-image');
+        item.append(dateBox, image, info);
+      } else {
+        item.append(dateBox, info);
+      }
+      if (event.location) {
+        const location = document.createElement('span');
+        location.className = 'event-where';
+        location.textContent = event.location;
+        item.append(location);
+      }
+      eventList.append(item);
+    });
+  } else {
+    eventList.textContent = 'Upcoming events could not be loaded. Please try again later.';
+  }
+
+  // =========================================================
+  // INJECT FACILITY IMAGES INTO HOME PAGE CARDS
+  // =========================================================
+  if (facilitiesResult.status === 'fulfilled') {
+    // Create a map of facility titles (lowercase) to their uploaded cover image URL
+    const facilityPhotos = new Map(
+      facilities
+        .filter(item => item.cover)
+        .map(item => [item.title.toLowerCase(), item.cover])
+    );
+
+    document.querySelectorAll('.facilities-grid .facility').forEach(card => {
+      // Find the title of the card (e.g., "library", "science labs")
+      const title = card.querySelector('b')?.getAttribute('data-en')?.toLowerCase() || card.querySelector('b')?.textContent?.toLowerCase();
+      const url = title && facilityPhotos.get(title);
+      
+      if (!url) return;
+      
+      // If an image exists, append it to the bottom of the card
+      const image = document.createElement('img');
+      image.className = 'facility-photo';
+      image.src = url;
+      image.alt = card.querySelector('b')?.textContent || 'School facility';
+      image.loading = 'lazy';
+      card.append(image);
+    });
+  }
+}
+loadHomePagePhotos();
+
+const welcomeHeading = document.querySelector('.hero h1');
+const welcomeText = welcomeHeading && welcomeHeading.querySelector('.h1');
+if (welcomeHeading && welcomeText) {
+  const renderWelcome = () => {
+    const text = welcomeText.getAttribute(`data-${document.documentElement.lang === 'am' ? 'am' : 'en'}`).trim();
+    welcomeHeading.setAttribute('aria-label', text);
+    welcomeText.setAttribute('aria-hidden', 'true');
+    welcomeText.textContent = '';
+    Array.from(text).forEach((character, index) => {
+      if (character === ' ') {
+        welcomeText.appendChild(document.createTextNode(' '));
+        return;
+      }
+      const letter = document.createElement('span');
+      letter.className = 'hero-letter';
+      letter.style.setProperty('--letter-delay', `${index * 65}ms`);
+      letter.textContent = character;
+      welcomeText.appendChild(letter);
+    });
+  };
+  renderWelcome();
+  new MutationObserver(renderWelcome).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+}
+
+// =========================================================
+// LOAD DYNAMIC FUNDING PROJECTS
+// =========================================================
+async function loadHomeFunding() {
+  const container = document.getElementById('homeFundList');
+  if (!container) return;
+  try {
+    const res = await fetch('/api/funding/projects');
+    if (!res.ok) return;
+    const projects = await res.json();
+    
+    if (!projects || !projects.length) {
+      container.innerHTML = `<div class="fund-item"><div><b data-en="No active projects right now." data-am="አሁን ምንም ንቁ ፕሮጀክቶች የሉም።">No active projects right now.</b></div></div>`;
+      return;
+    }
+    
+    // Show the top 3 most recent projects
+    const topProjects = projects.slice(0, 3);
+    
+    container.innerHTML = topProjects.map(p => {
+      const pct = p.goal > 0 ? Math.min(100, Math.round((p.raised / p.goal) * 100)) : 0;
+      return `
+        <div class="fund-item">
+          <span class="fi">${p.icon || '🏫'}</span>
+          <div>
+            <b data-en="${p.title}" data-am="${p.title_am || p.title}">${p.title}</b>
+            <span data-en="${pct}% funded — ${p.raised} / ${p.goal} ETB" data-am="${pct}% ተሰብስቧል — ${p.raised} / ${p.goal} ብር">${pct}% funded — ${p.raised} / ${p.goal} ETB</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+    
+    // Apply the current language to the newly created elements
+    let lang = 'en';
+    try { lang = localStorage.getItem('site_lang') === 'am' ? 'am' : 'en'; } catch {}
+    container.querySelectorAll('[data-en]').forEach(el => {
+      el.textContent = lang === 'am' ? el.dataset.am : el.dataset.en;
+    });
+    
+  } catch (e) {
+    console.warn("Could not load funding projects for home page", e);
+  }
+}
+loadHomeFunding();
+
+// =========================================================
+// LOAD LATEST ANNOUNCEMENTS (pinned first, up to 3 cards)
+// Dates are shown in the Ethiopian calendar with Amharic month names.
+// =========================================================
+const HOME_AM_MONTHS = ['መስከረም','ጥቅምት','ኅዳር','ታኅሣሥ','ጥር','የካቲት','መጋቢት','ሚያዝያ','ግንቦት','ሰኔ','ሐምሌ','ነሐሴ','ጳጉሜ'];
+const HOME_ETH_FORMAT = new Intl.DateTimeFormat('en-u-ca-ethiopic-nu-latn', { year: 'numeric', month: 'numeric', day: 'numeric', timeZone: 'UTC' });
+
+function ethiopianDateLabel(iso) {
+  try {
+    const parts = HOME_ETH_FORMAT.formatToParts(new Date(iso + 'T00:00:00Z'));
+    const val = type => Number(parts.find(p => p.type === type)?.value || 0);
+    const day = val('day'), month = val('month'), year = val('year');
+    if (day && month && year && HOME_AM_MONTHS[month - 1]) return `${day} ${HOME_AM_MONTHS[month - 1]} ${year}`;
+  } catch {}
+  // Fallback if the browser cannot do the Ethiopian calendar
+  return new Date(iso + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function escHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+async function loadLatestAnnouncements() {
+  const container = document.getElementById('pinned-announcements');
+  if (!container) return;
+  try {
+    const res = await fetch('/api/announcements');
+    if (!res.ok) throw new Error('Failed to fetch announcements');
+    const data = await res.json();
+
+    if (!data || !data.length) {
+      container.innerHTML = `
+        <div style="padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; text-align: center; color: var(--muted);">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📢</div>
+            <p data-en="No announcements right now." data-am="አሁን ምንም ማስታወቂያ የለም።">No announcements right now.</p>
+        </div>`;
+      return;
+    }
+
+    // Sort: pinned first, then by date descending (newest first)
+    data.sort((a, b) => {
+      if (a.pinned && !b.pinned) return -1;
+      if (!a.pinned && b.pinned) return 1;
+      return new Date(b.date) - new Date(a.date);
+    });
+
+    // Take the top 3 announcements (the pinned one is always first)
+    const latest = data.slice(0, 3);
+    const categoryAm = { Academic: 'ትምህርታዊ', Events: 'ዝግጅቶች', Sports: 'ስፖርት' };
+
+    const cardsHtml = latest.map(a => {
+      const dateStr = ethiopianDateLabel(a.date);
+      const isPinned = !!a.pinned;
+      const badge = isPinned
+        ? `<span class="announce-badge" data-en="📌 Important" data-am="📌 አስፈላጊ">📌 Important</span>`
+        : `<span class="announce-badge normal" data-en="${escHtml(a.category)}" data-am="${escHtml(categoryAm[a.category] || 'አጠቃላይ')}">${escHtml(a.category)}</span>`;
+      const more = isPinned
+        ? `<a class="announce-more" href="./announcements.html" data-en="Read more →" data-am="ተጨማሪ ያንብቡ →">Read more →</a>`
+        : '';
+
+      return `
+        <article class="announce-card ${isPinned ? 'is-pinned' : ''}">
+          <div class="announce-header">
+            ${badge}
+            <span class="announce-date">${escHtml(dateStr)}</span>
+          </div>
+          <h3 data-en="${escHtml(a.title)}" data-am="${escHtml(a.title_am || a.title)}">${escHtml(a.title)}</h3>
+          <p data-en="${escHtml(a.body)}" data-am="${escHtml(a.body_am || a.body)}">${escHtml(a.body)}</p>
+          ${more}
+        </article>
+      `;
+    }).join('');
+
+    container.innerHTML = `<div class="announce-grid">${cardsHtml}</div>`;
+
+    // Apply the current language to the newly created elements
+    let lang = 'en';
+    try { lang = localStorage.getItem('site_lang') === 'am' ? 'am' : 'en'; } catch {}
+    container.querySelectorAll('[data-en]').forEach(el => {
+      el.textContent = lang === 'am' ? el.dataset.am : el.dataset.en;
+    });
+
+  } catch (e) {
+    console.error('Could not load announcements', e);
+    container.innerHTML = `<p class="msg err" style="padding: 1rem;">Could not load announcements.</p>`;
+  }
+}
+loadLatestAnnouncements();
+</script>
+
+<script>
+// FETCH UPLOADED IMAGES FROM THE ADMIN PANEL
+async function loadHeroSlider() {
+    try {
+        console.log("Fetching hero slider images...");
+        const res = await fetch('/api/content-assets?target_type=hero-slider');
+        
+        if (!res.ok) {
+            console.error("Failed to fetch images. Status:", res.status);
+            return;
+        }
+        
+        const assets = await res.json();
+        console.log("Images found in database:", assets);
+        
+        // If no images uploaded yet, keep the default look
+        if (!assets || !assets.length) {
+            console.log("No hero images uploaded yet.");
+            return; 
+        }
+
+        // Sort by target_key (hero-1, hero-2, etc.) to maintain upload order
+        assets.sort((a, b) => a.target_key.localeCompare(b.target_key));
+
+        const slidesContainer = document.getElementById('hero-slides');
+        const dotsContainer = document.getElementById('hero-dots');
+        
+        assets.forEach((asset, index) => {
+            // Create slide element
+            const slide = document.createElement('div');
+            slide.className = 'hero-slide';
+            slide.style.setProperty('--bg', `url('${asset.url}')`);
+            
+            const img = document.createElement('img');
+            img.src = asset.url;
+            img.alt = 'School Photo';
+            img.decoding = 'async';
+            
+            // Check if portrait to apply specific styling
+            img.onload = () => {
+                if (img.naturalHeight > img.naturalWidth) {
+                    slide.classList.add('portrait');
+                }
+            };
+            
+            slide.appendChild(img);
+            slidesContainer.appendChild(slide);
+
+            // Create dot element
+            const dot = document.createElement('i');
+            dotsContainer.appendChild(dot);
+        });
+
+        // Start animation
+        initSlider();
+
+    } catch (e) { 
+        console.error("Error loading hero slider:", e); 
+    }
+}
+
+function initSlider() {
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.hero-slide'));
+    var dots = Array.prototype.slice.call(document.querySelectorAll('.hero-dots i'));
+    if (!slides.length) return;
+    
+    var i = 0, timer = null;
+    function mark() { dots.forEach(function (d, k) { d.classList.toggle('on', k === i); }); }
+    slides[0].classList.add('is-active'); mark();
+    if (slides.length < 2) return;
+    
+    function next() {
+        var cur = slides[i];
+        i = (i + 1) % slides.length;
+        var nxt = slides[i];
+        nxt.classList.add('is-active');
+        cur.classList.remove('is-active');
+        cur.classList.add('is-leaving');
+        mark();
+        setTimeout(function () {                       
+            cur.style.transition = 'none';
+            cur.classList.remove('is-leaving');
+            void cur.offsetWidth;
+            cur.style.transition = '';
+        }, 900);
+    }
+    function start() { if (!timer) timer = setInterval(next, 3000); }
+    function stop() { clearInterval(timer); timer = null; }
+    document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+    start();
+}
+
+loadHeroSlider();
+</script>
+</body>
+</html>

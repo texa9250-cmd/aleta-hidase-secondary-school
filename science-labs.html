@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-en="Science Labs | አለታ ህዳሴ" data-am="የሳይንስ ላብራቶሪዎች | አለታ ህዳሴ">Science Labs | አለታ ህዳሴ</title>
+<link rel="stylesheet" href="./sgh.css">
+<link rel="stylesheet" href="levels.css">
+<script src="./site-effects.js"></script>
+<style>
+:root{--navy:#0e1a35;--navy-soft:#152347;--coral:#f08a5d;--sand:#c9b8a8;--cream:#f4efe9;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:#f8fafc;color:var(--ink)}
+.fx-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-soft) 100%);color:#fff;padding:80px 20px 70px;text-align:center;position:relative;overflow:hidden;border-bottom:5px solid var(--coral)}
+.fx-hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%,rgba(240,138,93,.25),transparent 45%),radial-gradient(circle at 80% 70%,rgba(94,194,255,.15),transparent 45%);pointer-events:none}
+.fx-hero-inner{position:relative;max-width:900px;margin:0 auto}
+.back-link {display: inline-flex; align-items: center; text-decoration: none; font-weight: 600; color: var(--sand); margin-bottom: 1.5rem; font-size: 0.95rem; transition: all 0.2s; background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 99px;}
+.back-link:hover { color: var(--cream); background: rgba(255,255,255,0.2); }
+.back-link svg { margin-right: 6px; margin-top: -2px; }
+.fx-hero .icon{font-size:4.5rem;display:block;margin-bottom:14px;line-height:1}
+.fx-hero h1{font-size:clamp(2rem,5vw,3.2rem);margin:0 0 12px;color:var(--cream)}
+.fx-hero p{margin:0;color:var(--sand);font-size:1.1rem;max-width:640px;margin-inline:auto;line-height:1.6}
+.fx-wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+.fx-photo-hero{max-width:1100px;margin:-50px auto 40px;border-radius:22px;overflow:hidden;box-shadow:0 30px 60px rgba(14,26,53,.18);position:relative;z-index:2}
+.fx-photo-hero img{width:100%;height:auto;aspect-ratio:16/8;object-fit:cover;display:block;background:#d8e1ee}
+.fx-photo-hero .cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(14,26,53,.95));color:#fff;padding:50px 26px 22px;font-size:1.05rem}
+.fx-section{padding:60px 20px}
+.fx-section h2{font-size:clamp(1.5rem,3vw,2rem);color:var(--navy);margin:0 0 10px;position:relative;padding-bottom:14px}
+.fx-section h2::after{content:"";position:absolute;left:0;bottom:0;width:60px;height:5px;background:var(--coral);border-radius:3px}
+.fx-section .sub{color:var(--muted);margin:14px 0 34px;max-width:60ch;line-height:1.7;font-size:1.05rem}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+.g-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 14px rgba(14,26,53,.06);transition:transform .25s,box-shadow .25s;border:1px solid var(--line)}
+.g-card:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 var(--coral)}
+.g-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#d8e1ee}
+.g-card .txt{padding:16px 18px}
+.g-card b{display:block;color:var(--navy);font-size:1.05rem;margin-bottom:4px}
+.g-card span{color:var(--muted);font-size:.9rem;line-height:1.5}
+</style>
+</head>
+<body data-facility-page="Science Labs">
+
+<header id="site-nav-slot"></header>
+<script src="/site-nav.js"></script>
+<script>if (typeof mountSiteNav === 'function') mountSiteNav("#site-nav-slot", { active: "about" });</script>
+
+<section class="fx-hero">
+<div class="fx-hero-inner">
+<a href="./index.html" onclick="if (history.length > 1) { event.preventDefault(); history.back(); }" class="back-link">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+  Back
+</a>
+<span class="icon">🧪</span>
+<h1 data-en="Chemistry Laboratory" data-am="የኬሚስትሪ ላብራቶሪ">Chemistry Laboratory</h1>
+<p data-en="Hands-on chemistry for Grades 9–12: chemicals, instruments, and safe practical work in a dedicated lab." data-am="ከ9ኛ እስከ 12ኛ ክፍል የተግባር ኬሚስትሪ፡ ኬሚካሎች፣ መሣሪያዎች እና ደህንነቱ የተጠበቀ ሙከራ በተወሰነ ላብራቶሪ።">Hands-on chemistry for Grades 9–12: chemicals, instruments, and safe practical work in a dedicated lab.</p>
+</div>
+</section>
+
+<div class="fx-photo-hero">
+<img src="https://images.unsplash.com/photo-1554475901-4538ddfbccc2?auto=format&fit=crop&w=1600&q=80" alt="Chemistry Lab main view" data-facility-image="cover">
+<div class="cap" data-en="Chemistry Lab — fully equipped for practical sessions" data-am="የኬሚስትሪ ላብራቶሪ — ለተግባር ስልጠና ሙሉ በሙሉ የተዘጋጀ">Chemistry Lab — fully equipped for practical sessions</div>
+</div>
+
+<section class="fx-section">
+<div class="fx-wrap">
+<h2 data-en="Inside the chemistry lab" data-am="በኬሚስትሪ ላብራቶሪ ውስጥ">Inside the chemistry lab</h2>
+<p class="sub" data-en="Upload photos from Admin → Facilities → Science Labs. Each card below matches an upload slot." data-am="ከአስተዳዳሪ → መገልገያዎች → የሳይንስ ላብራቶሪዎች ምስሎችን ይጫኑ።">Upload photos from Admin → Facilities → Science Labs. Each card below matches an upload slot.</p>
+
+<div class="gallery" data-facility-gallery>
+<div class="g-card">
+<img src="https://images.unsplash.com/photo-1554475901-4538ddfbccc2?auto=format&fit=crop&w=800&q=80" alt="Chemistry Lab" data-facility-image="card:chemistry-lab">
+<div class="txt">
+  <b data-en="Chemistry Lab — main view" data-am="የኬሚስትሪ ላብራቶሪ — ዋና እይታ">Chemistry Lab — main view</b>
+  <span data-en="Benches, fume hoods, and workstations for class practicals." data-am="ጠረጴዛዎች፣ ፉም ሁድ እና የሥራ ጣቢያዎች።">Benches, fume hoods, and workstations for class practicals.</span>
+</div>
+</div>
+<div class="g-card">
+<img src="https://images.unsplash.com/photo-1581093588401-fbb62c8f3dba?auto=format&fit=crop&w=800&q=80" alt="Chemicals and reagents" data-facility-image="card:chemicals">
+<div class="txt">
+  <b data-en="Chemicals & reagents" data-am="ኬሚካሎችና ሪጀንቶች">Chemicals & reagents</b>
+  <span data-en="Stored reagents and chemicals used in experiments." data-am="በሙከራዎች የሚያገለግሉ ኬሚካሎችና ሪጀንቶች።">Stored reagents and chemicals used in experiments.</span>
+</div>
+</div>
+<div class="g-card">
+<img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80" alt="Instruments and apparatus" data-facility-image="card:instruments">
+<div class="txt">
+  <b data-en="Instruments & apparatus" data-am="መሣሪያዎችና አፓራተስ">Instruments & apparatus</b>
+  <span data-en="Glassware, burners, balances, and measuring instruments." data-am="የመስታወት ዕቃዎች፣ ቡርነሮች፣ ሚዛኖች።">Glassware, burners, balances, and measuring instruments.</span>
+</div>
+</div>
+<div class="g-card">
+<img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Safety equipment" data-facility-image="card:safety-equipment">
+<div class="txt">
+  <b data-en="Instruments" data-am="መሣሪያዎች">Instruments</b>
+  <span data-en="Instruments and chemicals" data-am="መሣሪያዎችና ኬሚካሎች።">Instruments and chemicals</span>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<footer class="site-footer" style="background:linear-gradient(180deg,#0e1a35 0%,#0a1328 100%);color:#c9b8a8;border-top:4px solid #f08a5d;padding:56px 20px 0;margin-top:60px;">
+<div style="max-width:1100px;margin:0 auto;text-align:center;padding-bottom:20px;border-top:1px solid rgba(201,184,168,.2);padding-top:20px;font-size:.9rem;">
+&copy; 2026 አለታ ህዳሴ ትምህርት ቤት | <a href="./index.html" style="color:#f08a5d;text-decoration:none;" data-en="Back to Home" data-am="ወደ መነሻ ገጽ ተመለስ">Back to Home</a>
+</div>
+</footer>
+
+<script src="/facility-images.js"></script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="Facilities | አለታ ህዳሴ" data-am="ተቋማት | አለታ ህዳሴ">Facilities | አለታ ህዳሴ</title>
+    <link rel="stylesheet" href="./sgh.css">
+    <link rel="stylesheet" href="levels.css">
+    <script src="./site-effects.js"></script>
+
+    <style>
+        /* =========================================================
+           FACILITY PAGE STYLES
+           ========================================================= */
+        .facility-hero {
+            background: linear-gradient(135deg, #0e1a35 0%, #152347 100%);
+            color: #fff;
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 5px solid #f08a5d;
+        }
+        .facility-hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin: 0 0 10px;
+            color: #f4efe9;
+        }
+        .facility-hero p {
+            color: #c9b8a8;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        /* --- Photo Container --- */
+        .photo-container {
+            max-width: 900px;
+            margin: 40px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(14,26,53,.15);
+            position: relative;
+        }
+        .photo-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            background: #e2e8f0; /* Fallback if image is missing */
+        }
+        .photo-container .caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(14,26,53,.95));
+            color: #fff;
+            padding: 40px 24px 20px;
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+
+        /* --- Content Area --- */
+        .facility-content {
+            max-width: 900px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+        .facility-content h2 {
+            color: #0e1a35;
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+        .facility-content p {
+            color: #475569;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 24px;
+        }
+        .facility-features {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .facility-features li {
+            background: #fff;
+            border-left: 4px solid #f08a5d;
+            padding: 16px 20px;
+            border-radius: 8px;
+            color: #0e1a35;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0,0,0,.04);
+        }
+    </style>
+</head>
+<body data-facility-page="Library">
+
+<header id="site-nav-slot"></header>
+<script src="/site-nav.js"></script>
+<script>mountSiteNav("#site-nav-slot", { active: "about" });</script>
+
+<main id="main-content">
+    <!-- ====== HERO ====== -->
+    <section class="facility-hero">
+        <h1 data-en="Library" data-am="ቤተ መጻሕፍት">Library</h1> <!-- CHANGE: e.g., Science Labs -->
+        <p data-en="Thousands of textbooks, references, and quiet study space." data-am="በሺዎች የሚቆጠሩ የመማሪያና የማጣቀሻ መጻሕፍት፣ እንዲሁም ጸጥ ያለ የጥናት ቦታ።">Thousands of textbooks, references, and quiet study space.</p> <!-- CHANGE -->
+    </section>
+
+    <!-- ====== PHOTO CONTAINER ====== -->
+    <div class="photo-container">
+        <!-- CHANGE: Replace the src with your actual image file -->
+        <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1200&q=80" alt="Library Interior" data-facility-image="cover">
+        <div class="caption" data-en="The main reading hall at Aleta Hidase School" data-am="በአለታ ህዳሴ ትምህርት ቤት ዋናው የንባብ አዳራሽ">The main reading hall at Aleta Hidase School</div> <!-- CHANGE -->
+    </div>
+
+    <!-- ====== CONTENT ====== -->
+    <div class="facility-content">
+        <h2 data-en="About our Library" data-am="ስለ ቤተ መጻሕፍታችን">About our Library</h2> <!-- CHANGE -->
+        <p data-en="Our library holds over 15,000 titles, including textbooks, reference books, and fiction. Students can study quietly, borrow books for home reading, and use the digital catalogue to find materials quickly." data-am="ቤተ መጻሕፍታችን ከ15,000 በላይ መጻሕፍት ይዟል፤ የመማሪያ መጻሕፍት፣ የማጣቀሻ መጻሕፍትና ልብወለድም ይገኙበታል። ተማሪዎች በጸጥታ ማጥናት፣ መጻሕፍትን ወደ ቤት ውሰደው ማንበብና በዲጂታል ካታሎግ ቁሳቁሶችን በፍጥነት ማግኘት ይችላሉ።">
+            Our library holds over 15,000 titles, including textbooks, reference books, and
+            fiction. Students can study quietly, borrow books for home reading, and use the
+            digital catalogue to find materials quickly. <!-- CHANGE -->
+        </p>
+
+        <ul class="facility-features">
+            <li data-en="📚 15,000+ books" data-am="📚 ከ15,000 በላይ መጻሕፍት">📚 15,000+ books</li> <!-- CHANGE -->
+            <li data-en="🪑 120 reading seats" data-am="🪑 120 የንባብ መቀመጫዎች">🪑 120 reading seats</li>
+            <li data-en="💡 Quiet study zones" data-am="💡 ጸጥ ያሉ የጥናት ቦታዎች">💡 Quiet study zones</li>
+            <li data-en="💻 Digital catalogue" data-am="💻 ዲጂታል ካታሎግ">💻 Digital catalogue</li>
+        </ul>
+    </div>
+</main>
+
+<footer class="site-footer">
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <h3>አለታ<span style="color: gray;">-ህዳሴ </span></h3>
+            <p data-en="Aleta Hidase School: our home for growing knowledge, developing skills, and preparing for future success." data-am="አለታ ህዳሴ ትምህርት ቤት፤ ዕውቀትን የምናዳብርበት፣ ችሎታን የምናሳድግበት እና ለወደፊት ስኬት የምንዘጋጅበት ቤታችን።">አለታ ህዳሴ ትምህርት ቤት፤ ዕውቀትን የምናዳብርበት፣ ችሎታን የምናሳድግበት እና ለወደፊት ስኬት የምንዘጋጅበት ቤታችን።</p>
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook">Facebook</a>
+                <a style="margin-left: 50px;" href="#" aria-label="Telegram">Telegram</a>
+            </div>
+        </div>
+        <div>
+            <h4 data-en="Quick links" data-am="ፈጣን አገናኞች">Quick links</h4>
+            <ul>
+                <li><a href="./index.html" data-en="Home" data-am="መነሻ">Home</a></li>
+                <li><a href="./announcements.html" data-en="Announcement" data-am="ማስታወቂያ">Announcement</a></li>
+                <li><a href="./achievement.html" data-en="Achievements" data-am="ስኬቶች">Achievements</a></li>
+                <li><a href="./history.html" data-en="About" data-am="ስለ ትምህርት ቤቱ">About</a></li>
+                <li><a href="./contact.html" data-en="Contact" data-am="ያግኙን">Contact</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 data-en="Contact · Address" data-am="ያግኙን · አድራሻ">Contact · አድራሻ</h4>
+            <ul class="footer-contact">
+                <li><span class="icon">&#9679;</span><span data-en="Aleta Wondo, Ethiopia" data-am="አለታ ወንዶ፣ ኢትዮጵያ">Aleta Wondo, Ethiopia</span></li>
+                <li><span class="icon">&#9679;</span><a href="tel:+251926165788">+251 926 165 788</a></li>
+                <li><span class="icon">&#9679;</span><a href="mailto:texa9250@gmail.com">texa9250@gmail.com</a></li>
+                <li><span class="icon">&#9679;</span><span data-en="Mon to Fri, 8:00 am to 5:00 pm" data-am="ከሰኞ እስከ ዓርብ፣ ከጠዋቱ 2:00 እስከ 11:00">Mon to Fri, 8:00 am to 5:00 pm</span></li>
+            </ul>
+        </div>
+        <div>
+            <h4 data-en="For students" data-am="ለተማሪዎች">For students</h4>
+            <ul>
+                <li><a href="./levels.html" data-en="Find my path" data-am="የትምህርት መንገዴን ፈልግ">Find my path</a></li>
+                <li><a href="./discuss.html" data-en="Discussion board" data-am="የውይይት መድረክ">Discussion board</a></li>
+                <li><a href="./portal/news.html" data-en="Exam NEWS" data-am="የፈተና ዜና">Exam NEWS</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>developed by Texa. &copy; 2026 አለታ ህዳሴ ትምህርት ቤት። መብቱ በህግ የተጠበቀ ነው።</span>
+        <a href="#top" data-en="Back to top ↑" data-am="ወደ ላይ ተመለስ ↑">Back to top &uarr;</a>
+    </div>
+</footer>
+
+<script src="/facility-images.js"></script>
+
+<script>
+(function () {
+  const KEY = 'site_lang';
+  const btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  // Theme toggle logic (if you have it in site-effects.js, this is a fallback)
+  btn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    btn.textContent = document.body.classList.contains('dark-mode') ? '☀' : '☾';
+  });
+})();
+</script>
+
+</body>
+</html>

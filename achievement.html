@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="am">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1b2436">
+  <meta name="description" content="Celebrate the achievements, hard work, and community spirit of አለታ-ህዳሴ Secondary and Preparatory School.">
+  <title data-en="Our Achievements | አለታ-ህዳሴ" data-am="ስኬቶቻችን | አለታ-ህዳሴ">Our Achievements | አለታ-ህዳሴ</title>
+  <script src="./site-effects.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abyssinica+SIL&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --navy:#1b2436; --navy-deep:#11192a; --orange:#ff7954; --gold:#efb971; --silver:#b9bac2; --gray:#555b68; --am:'Abyssinica SIL',serif; --sans:'DM Sans',Arial,sans-serif; --serif:'Playfair Display',Georgia,serif; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--gray); color:#f0eff1; font-family:var(--sans); }
+    .topline { height:2px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+    .old-header { height:92px; background:var(--navy); color:#f5f5f6; display:flex; align-items:center; border-bottom:1px solid rgba(239,185,113,.58); }
+    .header-inner { width:min(1320px,100%); margin:auto; padding:0 5.2%; display:flex; align-items:center; justify-content:space-between; }
+    .brand { display:flex; align-items:center; gap:12px; font:700 30px/1 var(--am); letter-spacing:.01em; }
+    .brand .first { color:var(--orange); } .brand .second { color:var(--silver); }
+    .page-label { color:#e9eaf0; font-size:15px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; border:1px solid rgba(239,185,113,.3); padding:11px 17px; border-radius:2px; }
+    .hero { min-height:520px; display:flex; justify-content:center; align-items:center; padding:65px 28px 72px; position:relative; isolation:isolate; overflow:hidden; text-align:center; background:linear-gradient(135deg,#535966,#5b616e 54%,#505663); }
+    .hero:before,.hero:after { content:""; position:absolute; z-index:-1; border-radius:50%; }
+    .hero:before { width:560px; height:560px; left:-270px; top:-320px; border:1px solid rgba(255,255,255,.09); box-shadow:0 0 0 45px rgba(255,255,255,.025),0 0 0 90px rgba(255,255,255,.02); }
+    .hero:after { width:480px; height:480px; right:-300px; bottom:-350px; border:1px solid rgba(239,185,113,.16); box-shadow:0 0 0 60px rgba(239,185,113,.025),0 0 0 120px rgba(239,185,113,.02); }
+    .hero-inner { width:min(1120px,100%); }
+    .eyebrow { display:inline-flex; gap:12px; align-items:center; color:#f5c889; text-transform:uppercase; font-size:11px; font-weight:700; letter-spacing:.24em; }
+    .eyebrow:before,.eyebrow:after { content:""; width:33px; height:1px; background:currentColor; opacity:.8; }
+    h1 { margin:26px 0 22px; font:700 clamp(48px,7.2vw,94px)/1.27 var(--am); text-shadow:0 3px 16px rgba(14,19,31,.12); }
+    h1 .orange { color:var(--orange); } h1 .silver { color:#c0c0c7; }
+    .hero-copy { max-width:850px; margin:0 auto; color:#f0bd80; font:400 clamp(18px,2.1vw,25px)/1.9 var(--am); }
+    .hero-rule { width:72px; height:2px; background:var(--orange); margin:28px auto 0; }
+    .intro { background:var(--gray); padding:66px 24px 34px; text-align:center; }
+    .kicker { color:var(--gold); font-size:11px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; }
+    h2 { color:#d0d0d5; font:600 clamp(32px,4vw,48px)/1.16 var(--serif); margin:13px 0 14px; }
+    .intro p { max-width:720px; margin:0 auto; color:#ecebf0; font:400 17px/1.8 var(--am); }
+    .achievements { width:min(1180px,100%); padding:42px 32px 95px; margin:auto; display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+    .card { min-height:292px; padding:30px 27px 27px; background:rgba(27,36,54,.72); border:1px solid rgba(255,255,255,.12); position:relative; overflow:hidden; transition:transform .25s,border-color .25s,background .25s; }
+    .card:hover { transform:translateY(-5px); border-color:rgba(239,185,113,.6); background:rgba(27,36,54,.9); }
+    .card:after { content:""; position:absolute; width:135px; height:135px; border:1px solid rgba(239,185,113,.15); border-radius:50%; right:-71px; bottom:-75px; box-shadow:0 0 0 16px rgba(239,185,113,.025),0 0 0 34px rgba(239,185,113,.025); }
+    .icon { width:49px; height:49px; display:grid; place-items:center; color:var(--orange); margin-bottom:23px; border:1px solid rgba(255,121,84,.38); background:rgba(255,121,84,.07); border-radius:50%; }
+    .icon svg { width:23px; height:23px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+    .card-label { color:var(--gold); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.18em; }
+    h3 { color:#f4f1ed; font:600 23px/1.3 var(--serif); margin:9px 0 12px; }
+    .card p { color:#cfd1d7; font-size:13px; line-height:1.75; margin:0; max-width:300px; }
+    .feature { width:min(1180px,100%); margin:0 auto; padding:0 32px 100px; display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:62px; }
+    .feature-photo { min-height:360px; position:relative; overflow:hidden; background:#293747; }
+    .feature-photo img { display:block; width:100%; height:360px; object-fit:cover; }
+    .photo-shade { position:absolute; inset:45% 0 0; background:linear-gradient(0deg,rgba(17,25,42,.85),transparent); }
+    .photo-credit { position:absolute; left:18px; right:18px; bottom:15px; color:#f3f1ed; font-size:10px; line-height:1.5; }
+    .photo-credit a { text-decoration:underline; text-underline-offset:3px; }
+    .feature-copy h2 { color:#d0d0d5; margin-top:14px; }
+    .feature-copy p { color:#ecebf0; font-size:14px; line-height:1.85; }
+    .editable { color:#f0bd80; font:400 17px/1.85 var(--am); }
+    .note { margin-top:20px; padding:13px 15px; border-left:3px solid var(--orange); background:rgba(27,36,54,.58); color:#dedee2; font-size:11px; line-height:1.7; }
+    .closing { background:var(--navy); padding:58px 24px 62px; text-align:center; border-top:1px solid rgba(239,185,113,.3); }
+    .closing h2 { color:#e3e2e7; margin:0 0 13px; }
+    .closing p { color:#d0d3d9; max-width:620px; margin:0 auto; font:400 16px/1.8 var(--am); }
+    footer { background:var(--navy-deep); color:#abb2bc; padding:25px 28px; text-align:center; font-size:11px; letter-spacing:.06em; }
+    footer strong { color:#f4f2ee; font:600 16px var(--am); margin-right:8px; }
+    @media(max-width:1000px) { .achievements { grid-template-columns:repeat(2,1fr); padding-top:30px; } .feature { gap:35px; } }
+    @media(max-width:620px) { .old-header { height:78px; } .header-inner { padding:0 22px; } .brand { font-size:26px; } .page-label { font-size:10px; padding:9px 11px; letter-spacing:.1em; } .hero { min-height:475px; padding:58px 22px; } h1 { font-size:clamp(43px,9vw,68px); } .hero-copy { font-size:17px; } .intro { padding-top:53px; } .achievements { grid-template-columns:1fr; max-width:440px; padding:32px 22px 70px; } .card { min-height:245px; } .feature { grid-template-columns:1fr; padding:0 23px 72px; gap:34px; } .feature-photo,.feature-photo img { min-height:290px; height:290px; } }
+    @media(max-width:430px) { .brand { font-size:22px; gap:7px; } .page-label { font-size:9px; padding:8px; } .eyebrow { font-size:9px; letter-spacing:.17em; } .eyebrow:before,.eyebrow:after { width:20px; } }
+
+    a.card { display:block; color:inherit; text-decoration:none; cursor:pointer; }
+    a.card:focus-visible { outline:3px solid var(--orange); outline-offset:3px; }
+    .more { display:inline-flex; gap:8px; align-items:center; margin-top:18px; color:var(--gold); font-size:11px; text-transform:uppercase; letter-spacing:.12em; font-weight:700; }
+    .more i { font-style:normal; transition:transform .25s; }
+    a.card:hover .more i, a.card:focus-visible .more i { transform:translateX(6px); }
+    /* this page is already dark, so night mode leaves it as it is */
+    html[data-night="on"] body > * { filter:none !important; }
+    #theme-toggle.floating { display:none; }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { transition:none!important; } }
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <header id="site-nav-slot"></header>
+  <main>
+    <section class="hero" aria-labelledby="page-title"><div class="hero-inner">
+      <div class="eyebrow" data-en="Dedication · Discovery · Distinction" data-am="ቁርጠኝነት · ግኝት · ልዩ ስኬት">Dedication · Discovery · Distinction</div>
+      <h1 id="page-title"><span class="orange" data-en="Our story of achievement" data-am="የስኬት ታሪካችን">የስኬት ታሪካችን</span><br><span class="silver" data-en="" data-am="የጋራ ድላችን">የጋራ ድላችን</span></h1>
+      <p class="hero-copy" data-en="Every achievement begins with effort. The achievements at Aleta Hidase are the result of the shared work of students, teachers, and our community." data-am="እያንዳንዱ ስኬት በጥረት ይጀምራል። በአለታ-ህዳሴ የሚገኙ ስኬቶች የተማሪዎች፣ የመምህራን እና የማኅበረሰባችን የጋራ ሥራ ውጤት ናቸው።">እያንዳንዱ ስኬት በጥረት ይጀምራል። በአለታ-ህዳሴ የሚገኙ ስኬቶች የተማሪዎች፣ የመምህራን እና የማኅበረሰባችን የጋራ ሥራ ውጤት ናቸው።</p>
+      <div class="hero-rule"></div>
+    </div></section>
+    <section class="intro"><div class="kicker" data-en="Celebrating excellence" data-am="ልቀትን እናከብራለን">Celebrating excellence</div><h2 data-en="Big goals. Brilliant effort. Shared pride." data-am="ታላላቅ ግቦች። የላቀ ጥረት። የጋራ ኩራት።">Big goals. Brilliant effort. Shared pride.</h2><p data-en="From outstanding exam results to awards and community leadership, celebrate the people and moments that make አለታ-ህዳሴ proud." data-am="ከአስደናቂ የፈተና ውጤቶች እስከ ሽልማቶችና የማኅበረሰብ አመራር ድረስ፣ አለታ-ህዳሴን የሚያኮሩትን ሰዎችና አፍታዎች እናክብር።">From outstanding exam results to awards and community leadership, celebrate the people and moments that make አለታ-ህዳሴ proud.</p></section>
+    <section class="achievements" aria-label="Major school achievements">
+      <a class="card" href="achievement-detail.html?type=exam"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M7 6H4v2a4 4 0 0 0 4 4M17 6h3v2a4 4 0 0 1-4 4M9 8l2 2 4-4"/></svg></div><div class="card-label" data-en="Academic excellence" data-am="የትምህርት ልቀት">Academic excellence</div><h3 data-en="Top exam scores" data-am="ከፍተኛ የፈተና ውጤቶች">Top exam scores</h3><p data-en="Honor students who achieve outstanding results in regional, national, or school examinations." data-am="በክልላዊ፣ በብሔራዊ ወይም በትምህርት ቤት ፈተናዎች እጅግ ጥሩ ውጤት ያስመዘገቡ ተማሪዎችን እናክብር።">Honor students who achieve outstanding results in regional, national, or school examinations.</p><span class="more"><span data-en="View top students" data-am="ከፍተኛ ውጤት ያስመዘገቡ ተማሪዎችን ይመልከቱ">View top students</span> <i aria-hidden="true">→</i></span></a>
+      <a class="card" href="achievement-detail.html?type=awards"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 14.8 8.7 21 9.6l-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z"/><path d="M9 21h6"/></svg></div><div class="card-label" data-en="School recognition" data-am="የትምህርት ቤቱ እውቅና">School recognition</div><h3 data-en="School awards" data-am="የትምህርት ቤት ሽልማቶች">School awards</h3><p data-en="Showcase official awards earned by the school for academic achievement, teaching, or service." data-am="ትምህርት ቤቱ በትምህርት ስኬት፣ በማስተማር ወይም በአገልግሎት ያገኛቸውን ኦፊሴላዊ ሽልማቶች ያቅርቡ።">Showcase official awards earned by the school for academic achievement, teaching, or service.</p><span class="more"><span data-en="View all awards" data-am="ሁሉንም ሽልማቶች ይመልከቱ">View all awards</span> <i aria-hidden="true">→</i></span></a>
+      <a class="card" href="achievement-detail.html?type=competitions"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div class="card-label" data-en="Student talent" data-am="የተማሪዎች ተሰጥኦ">Student talent</div><h3 data-en="Competition wins" data-am="የውድድር ድሎች">Competition wins</h3><p data-en="Celebrate standout performances in science fairs, debates, quizzes, arts, and other competitions." data-am="በሳይንስ አውደ ርዕዮች፣ ክርክሮች፣ የጥያቄ ውድድሮች፣ ጥበባትና ሌሎች ውድድሮች የላቀ ብቃት ያሳዩ ተማሪዎችን እናክብር።">Celebrate standout performances in science fairs, debates, quizzes, arts, and other competitions.</p><span class="more"><span data-en="View all wins" data-am="ሁሉንም ድሎች ይመልከቱ">View all wins</span> <i aria-hidden="true">→</i></span></a>
+      <a class="card" href="achievement-detail.html?type=community"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM20 8v6M23 11h-6"/></svg></div><div class="card-label" data-en="Community leadership" data-am="የማኅበረሰብ አመራር">Community leadership</div><h3 data-en="Making a difference" data-am="ለውጥ ማምጣት">Making a difference</h3><p data-en="Highlight student-led service projects and contributions that make the local community stronger." data-am="የተማሪዎችን የአገልግሎት ፕሮጀክቶችና የአካባቢውን ማኅበረሰብ የሚያጠናክሩ አስተዋጽኦዎችን ያበረታቱ።">Highlight student-led service projects and contributions that make the local community stronger.</p><span class="more"><span data-en="View all projects" data-am="ሁሉንም ፕሮጀክቶች ይመልከቱ">View all projects</span> <i aria-hidden="true">→</i></span></a>
+    </section>
+        <section class="feature"><div class="feature-photo">
+      <img id="achievement-cover-img" src="./image_74a772d6.jpg" onerror="this.style.display='none'" alt="An education project in Aleta Wondo, Ethiopia, with classroom buildings and a community green space" loading="lazy">
+      <div class="photo-shade"></div>
+    </div><div class="feature-copy"><div class="kicker" data-en="A legacy of access to education" data-am="የትምህርት ዕድልን የማስፋፋት ትሩፋት">A legacy of access to education</div><h2 data-en="Serving generations of students." data-am="ለትውልድ ተማሪዎች አገልግሎት መስጠት።">Serving generations of students.</h2><p class="editable" data-en="Opening educational opportunities for many students is one of Aleta Hidase's major contributions. This historical information shows the school's service to generations in the area." data-am="ለብዙ ተማሪዎች የትምህርት ዕድል መክፈት የአለታ-ህዳሴ ትልቅ አስተዋፅኦ ነው። ይህ ታሪካዊ መረጃ ትምህርት ቤቱ በአካባቢው ለትውልዶች ያበረከተውን አገልግሎት ያሳያል።">ለብዙ ተማሪዎች የትምህርት ዕድል መክፈት የአለታ-ህዳሴ ትልቅ አስተዋፅኦ ነው። ይህ ታሪካዊ መረጃ ትምህርት ቤቱ በአካባቢው ለትውልዶች ያበረከተውን አገልግሎት ያሳያል።</p><p data-en="In its 2011/12 preparatory survey, the Japan International Cooperation Agency listed Aleta Wondo Secondary and Preparatory School among the area's existing secondary schools. The record describes a large school community, with 3,732 enrolled students across 58 sections in grades 9–12." data-am="በ2011/12 የመሰናዶ ጥናቱ፣ የጃፓን ዓለም አቀፍ የትብብር ድርጅት የአለታ ወንዶ ሁለተኛና መሰናዶ ትምህርት ቤትን በአካባቢው ካሉ ሁለተኛ ደረጃ ትምህርት ቤቶች መካከል ጠቅሶታል። መዝገቡ ከ9ኛ እስከ 12ኛ ክፍል በ58 ክፍሎች የተመዘገቡ 3,732 ተማሪዎች ያሉበትን ትልቅ የትምህርት ማኅበረሰብ ይገልጻል።">In its 2011/12 preparatory survey, the Japan International Cooperation Agency listed Aleta Wondo Secondary and Preparatory School among the area's existing secondary schools. The record describes a large school community, with 3,732 enrolled students across 58 sections in grades 9–12.</p><p data-en="This is a historical snapshot, not a current enrollment figure. Use the achievement cards above to add confirmed student scores, school awards, competition wins, and community projects." data-am="ይህ የታሪክ መዝገብ እንጂ የአሁኑ የተማሪ ብዛት አይደለም። ከላይ ያሉትን ካርዶች በተረጋገጡ የተማሪ ውጤቶች፣ በሽልማቶች፣ በውድድር ድሎችና በማኅበረሰብ ፕሮጀክቶች ለማዘመን ይጠቀሙ።">This is a historical snapshot, not a current enrollment figure. Use the achievement cards above to add confirmed student scores, school awards, competition wins, and community projects.</p></div></section>
+    <section class="closing"><div class="kicker" data-en="Celebrate every generation" data-am="እያንዳንዱን ትውልድ እናክብር">Celebrate every generation</div><h2 data-en="We Will Continue Achieving💪." data-am="ማሳካታችንን እንቀጥላለን💪">We Will Continue Achieving💪.</h2></section>
+  </main>
+  <footer><strong>አለታ-ህዳሴ</strong><span data-en=" · Our Achievements · Aleta Wondo, Ethiopia" data-am=" · ስኬቶቻችን · አለታ ወንዶ፣ ኢትዮጵያ"> · Our Achievements · Aleta Wondo, Ethiopia</span></footer>
+<script src="/site-nav.js"></script><script>mountSiteNav("#site-nav-slot",{active:'achievements'});</script>
+<script>
+  // Load the custom cover image uploaded by the admin, if it exists
+  fetch('/api/content-assets?target_type=achievement-cover')
+    .then(res => res.json())
+    .then(assets => {
+      const cover = Array.isArray(assets)
+        ? assets.find(asset => asset.target_key === 'achievement-main')
+        : null;
+      if (cover) {
+        const img = document.getElementById('achievement-cover-img');
+        img.src = cover.url;
+        img.style.display = 'block';
+      }
+    })
+    .catch(err => console.log('Cover image not loaded', err));
+</script>
+</body>
+</html>

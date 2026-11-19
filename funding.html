@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Support Aleta Hidase School</title>
+<style>
+:root{--sc-navy:#0e1a35;--sc-coral:#f08a5d;--sc-sand:#c9b8a8;--sc-cream:#f4efe9;--surface:#fff;--border:#e2e8f0;--text:#0e1a35;--muted:#4a5468;--page:#f8fafc;--bar:#e2e8f0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--surface:#152347;--border:#26335a;--text:#f4efe9;--muted:#c9b8a8;--page:#0a1328;--bar:#26335a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Ethiopic",sans-serif;line-height:1.6}
+header.top{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+header nav{max-width:1100px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:14px}
+.logo{font-weight:800;font-size:1.25rem}.logo span{color:darkgrey}
+.back{margin-left:auto;color:var(--text);text-decoration:none;font-weight:700;font-size:.92rem;border:2px solid var(--sc-navy);border-radius:999px;padding:6px 14px}
+.back:hover{background:var(--sc-coral);border-color:var(--sc-coral);color:var(--sc-navy)}
+.lang{background:transparent;color:var(--text);border:2px solid var(--border);padding:6px 12px;font-size:.85rem;border-radius:999px}
+.hero{position:relative;overflow:hidden;color:var(--sc-cream);text-align:center;padding:56px 20px 80px;border-bottom:4px solid var(--sc-coral);
+background:radial-gradient(circle at 15% 20%,rgba(240,138,93,.28) 0%,transparent 45%),radial-gradient(circle at 85% 80%,rgba(94,194,255,.18) 0%,transparent 45%),linear-gradient(135deg,#0a1328 0%,#0e1a35 50%,#152347 100%)}
+.hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(circle,#000 30%,transparent 80%);mask-image:radial-gradient(circle,#000 30%,transparent 80%)}
+.hero>*{position:relative}
+.tag{display:inline-block;background:rgba(240,138,93,.18);border:1px solid rgba(240,138,93,.5);color:var(--sc-coral);font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:999px;margin-bottom:14px}
+.hero h1{font-size:clamp(1.8rem,5vw,2.8rem);margin:0 0 12px;line-height:1.2}.hero h1 span{color:var(--sc-coral)}
+.hero p{max-width:56ch;margin:0 auto;color:var(--sc-sand)}
+.wrap{max-width:1100px;margin:-46px auto 0;padding:0 20px 56px;position:relative}
+.total{background:var(--surface);border:1px solid var(--border);border-top:5px solid var(--sc-navy);border-radius:14px;padding:22px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center;margin-bottom:14px}
+.stats b{display:block;font-size:clamp(1.2rem,3.5vw,1.8rem);color:var(--sc-coral);font-weight:900}
+.stats span{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.bar{height:12px;background:var(--bar);border-radius:99px;overflow:hidden;margin:8px 0}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sc-navy),var(--sc-coral));border-radius:99px;transition:width 1s ease}
+.row{display:flex;justify-content:space-between;gap:8px;font-size:.88rem;color:var(--muted);flex-wrap:wrap}.row b{color:var(--text)}
+h2.sec{font-size:clamp(1.4rem,3.2vw,1.9rem);margin:44px 0 22px;position:relative;padding-bottom:14px}
+h2.sec:after{content:"";position:absolute;left:0;bottom:0;width:60px;height:5px;background:var(--sc-coral);border-radius:3px}
+.grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--surface);border:1px solid var(--border);border-top:5px solid var(--sc-navy);border-radius:14px;padding:22px;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s,border-color .25s}
+.card:hover{transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--sc-coral);border-top-color:var(--sc-coral)}
+.ico{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:1.65rem;background:var(--sc-navy);margin-bottom:12px}
+.card h3{margin:0 0 6px;font-size:1.1rem}.card p{margin:0 0 14px;color:var(--muted);font-size:.92rem;flex:1}
+.pct{font-weight:800;color:var(--sc-coral)}
+button{font:inherit;cursor:pointer;border:0;border-radius:999px;padding:12px 20px;font-weight:700}
+.fund{background:var(--sc-navy);color:var(--sc-cream);border:2px solid var(--sc-navy);margin-top:14px;transition:.2s}
+.fund:hover{background:var(--sc-coral);border-color:var(--sc-coral);color:var(--sc-navy)}
+.fund[disabled]{opacity:.5;cursor:default}
+dialog{border:0;border-radius:16px;padding:24px;width:min(430px,93vw);background:var(--surface);color:var(--text)}
+dialog::backdrop{background:rgba(10,19,40,.7)}
+label{display:block;font-size:.83rem;color:var(--muted);margin:12px 0 4px}
+input,textarea{width:100%;font:inherit;padding:11px 12px;border-radius:10px;border:1px solid var(--border);background:var(--page);color:var(--text)}
+textarea{resize:vertical;min-height:70px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.chip{background:var(--bar);color:var(--text);padding:7px 12px;font-weight:600}
+.actions{display:flex;gap:10px;margin-top:18px}.actions .fund{flex:1;margin:0}
+.ghost{background:transparent;color:var(--muted);border:2px solid var(--border)}
+.note{font-size:.88rem;color:var(--muted);margin-top:14px;background:var(--page);padding:12px;border-radius:10px;border-left:4px solid var(--sc-coral)}
+.note a.dial{display:inline-block;margin-top:8px;background:var(--sc-coral);color:var(--sc-navy);padding:9px 16px;border-radius:999px;text-decoration:none;font-weight:800}
+.err{color:#c0392b;font-size:.85rem;margin-top:8px;min-height:1em}
+.comments{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px}
+.cform{display:grid;gap:8px;margin-bottom:18px}.cform .fund{margin:0}
+.c{display:flex;gap:12px;padding:14px 0;border-top:1px dashed var(--border)}
+.av{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:var(--sc-navy);color:var(--sc-coral)}
+.c .meta{font-size:.82rem;color:var(--muted)}.c .meta b{color:var(--text);font-size:.95rem}
+.c .tagp{background:var(--bar);border-radius:99px;padding:1px 9px;font-size:.75rem;margin-left:6px}
+.c p{margin:4px 0 0;white-space:pre-wrap;word-break:break-word}
+.empty{color:var(--muted);text-align:center;padding:16px 0 4px}
+footer{background:linear-gradient(180deg,#0e1a35,#0a1328);color:var(--sc-sand);border-top:4px solid var(--sc-coral);text-align:center;padding:26px 20px;font-size:.9rem}
+footer a{color:var(--sc-coral);text-decoration:none}
+.adm{border:2px dashed var(--sc-coral);border-radius:14px;padding:20px;background:var(--surface)}
+.ap{border:1px solid var(--border);border-left:5px solid var(--sc-navy);border-radius:12px;padding:14px;margin-bottom:14px;display:grid;gap:8px;grid-template-columns:repeat(2,1fr)}
+.ap .full{grid-column:1/-1}.ap label{margin:0 0 3px}
+.ap .pc{font-weight:800;color:var(--sc-coral)}
+.ap .btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.ap .btns .fund,.ap .btns .ghost{margin:0;padding:9px 16px}
+.ap .del{color:#c0392b;border-color:#c0392b}
+@media(max-width:600px){.ap{grid-template-columns:1fr}}
+.infobox{margin-top:20px;background:var(--surface);border:1px solid var(--border);border-left:5px solid var(--sc-coral);border-radius:14px;padding:18px 20px}
+.infobox h3{margin:0 0 10px;font-size:1.05rem}
+.infobox dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0 0 10px;font-size:.92rem}
+.infobox dt{color:var(--muted)}.infobox dd{margin:0;font-weight:700;word-break:break-word}
+.infobox p{margin:6px 0 0;font-size:.9rem;color:var(--muted)}.infobox p b{color:var(--text)}
+.facts{margin:0 0 12px;font-size:.88rem;display:grid;gap:4px}.facts div{color:var(--muted)}.facts b{color:var(--text)}
+.feed .it{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px}
+.feed .it img{display:block;width:100%;max-height:260px;object-fit:cover;border-radius:10px;margin-top:10px}
+.feed .it h4{margin:2px 0 4px;font-size:1.02rem}.feed .it .m{font-size:.8rem;color:var(--muted)}.feed .it p{margin:4px 0 0;font-size:.92rem;white-space:pre-wrap}
+.drow{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px dashed var(--border);font-size:.92rem;flex-wrap:wrap}
+.drow:first-child{border-top:0}.drow .a{font-weight:800;color:var(--sc-coral)}.drow .m{font-size:.8rem;color:var(--muted)}
+.sub{margin:8px 0 14px;color:var(--muted);font-size:.9rem}
+.acc{border:1px solid var(--border);border-left:5px solid var(--sc-coral);border-radius:12px;padding:12px 14px;margin-bottom:12px;background:var(--page)}
+.acc .ah{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:1rem}.acc .ai{font-size:1.25rem}
+.acc .ar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:7px 0;border-top:1px dashed var(--border)}
+.acc .ar span{display:block;font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.acc .ar b{font-size:1.02rem;overflow-wrap:anywhere;user-select:all}.acc .ar>div{min-width:0}
+.acc .an{font-size:.82rem;color:var(--muted);margin-top:6px}
+.cp{flex:none;background:var(--sc-navy);color:var(--sc-cream);padding:8px 12px;font-size:.85rem;min-width:76px}
+.cp.done{background:var(--sc-coral);color:var(--sc-navy)}
+@media(max-width:600px){.hero{padding:40px 16px 70px}.wrap{padding:0 14px 40px}.total{padding:16px}}
+</style>
+</head>
+<body id="top">
+<header class="top"><nav>
+  <div class="logo"><span style="color:inherit">Aleta</span><span>-Hidase</span></div>
+  <a class="back" href="./index.html" id="back" data-en="← Back" data-am="← ተመለስ">← Back</a>
+  <button class="lang" id="lang" type="button">አማ</button>
+</nav></header>
+
+<section class="hero">
+  <span class="tag" data-en="Community fundraising" data-am="የማህበረሰብ ድጋፍ">Community fundraising</span>
+  <h1><span data-en="Help us build" data-am="የተሻለ ትምህርት ቤት">Help us build</span> <span style="color:var(--sc-cream)" data-en="a better school" data-am="እንድንገነባ ይርዱን">a better school</span></h1>
+  <p data-en="Pick a project and give any amount by Telebirr or bank transfer. Every birr goes straight to the project you choose." data-am="ፕሮጀክት ይምረጡ እና በቴሌብር ወይም በባንክ ማንኛውንም መጠን ይለግሱ። እያንዳንዱ ብር በቀጥታ ለመረጡት ፕሮጀክት ይውላል።">Pick a project and give any amount by Telebirr or bank transfer. Every birr goes straight to the project you choose.</p>
+</section>
+
+<div class="wrap">
+  <div class="total">
+    <div class="stats">
+      <div><b id="sRaised">0</b><span data-en="Raised (ETB)" data-am="የተሰበሰበ (ብር)">Raised (ETB)</span></div>
+      <div><b id="sLeft">0</b><span data-en="Still needed" data-am="የሚያስፈልግ">Still needed</span></div>
+      <div><b id="sProj">0</b><span data-en="Projects" data-am="ፕሮጀክቶች">Projects</span></div>
+    </div>
+    <div class="bar"><i id="tBar"></i></div>
+    <div class="row"><span id="tPct"></span><span id="tGoal"></span></div>
+  </div>
+
+  <div class="infobox" id="infoBox" hidden></div>
+
+  <h2 class="sec" data-en="Projects you can fund" data-am="መደገፍ የሚችሏቸው ፕሮጀክቶች">Projects you can fund</h2>
+  <div class="grid" id="list"></div>
+
+  <div id="updWrap" hidden><h2 class="sec" data-en="What your money did" data-am="ገንዘብዎ ምን ሠራ">What your money did</h2><div class="feed" id="updList"></div></div>
+  <div id="donWrap" hidden><h2 class="sec" data-en="Recent donations" data-am="የቅርብ ጊዜ ልገሳዎች">Recent donations</h2><div class="comments" id="donList"></div></div>
+
+  <h2 class="sec" data-en="Words from our supporters" data-am="ከደጋፊዎቻችን የተሰጡ አስተያየቶች">Words from our supporters</h2>
+  <div class="comments">
+    <div class="cform">
+      <input id="cName" type="text" maxlength="40" data-ph-en="Your name" data-ph-am="ስምዎ" placeholder="Your name">
+      <textarea id="cMsg" maxlength="400" data-ph-en="Leave an encouraging comment…" data-ph-am="አበረታች አስተያየት ይተው…" placeholder="Leave an encouraging comment…"></textarea>
+      <button class="fund" id="cPost" type="button" data-en="Post comment" data-am="አስተያየት ላክ">Post comment</button>
+      <div class="err" id="cErr"></div>
+    </div>
+    <div id="cList"></div>
+  </div>
+</div>
+
+<footer><span data-en="Developed by Texa. © 2026 Aleta Hidase School. All rights reserved." data-am="በቴክሳ የተዘጋጀ። © 2026 አለታ ህዳሴ ትምህርት ቤት። መብቱ በሕግ የተጠበቀ ነው።">Developed by Texa. © 2026 Aleta Hidase School. All rights reserved.</span> · <a href="#top" data-en="Back to top ↑" data-am="ወደ ላይ ተመለስ ↑">Back to top ↑</a></footer>
+
+<dialog id="dlg">
+  <h2 id="dTitle" style="margin:0;font-size:1.2rem"></h2>
+  <p class="sub" data-en="Send your donation to any account below. Tap Copy, then paste it in your Telebirr or bank app." data-am="ልገሳዎን ከታች ካሉት ማናቸውም አካውንቶች ይላኩ። ኮፒ ይጫኑ፣ ከዚያ በቴሌብር ወይም በባንክ መተግበሪያዎ ላይ ይለጥፉ።">Send your donation to any account below. Tap Copy, then paste it in your Telebirr or bank app.</p>
+  <div id="accList"></div>
+  <div class="note" id="refNote"></div>
+  <div class="actions"><button class="ghost" id="cancel" type="button" data-en="Close" data-am="ዝጋ">Close</button></div>
+</dialog>
+
+<script>
+/* ===== CONFIG ===== */
+const CONFIG={
+  merchantShortCode:"000000",
+  // Your server API for projects (used on your own website). GET list (public); PUT/DELETE {apiBase}/{id} (admin only, session cookie).
+  apiBase:"/api/funding/projects",   // public list (GET). Admin edits are made in admin.html > School funding
+
+  merchantName:"Aleta Hidase School"
+};
+let projects=[];
+const T={
+ en:{etb:"ETB",of:"of",needed:"still needed",done:"Fully funded. Thank you!",fund:"Fund it",fundP:"Fund: ",goal:"Goal",pct:"of our goal",pay:"Pay with Telebirr",opening:"Opening Telebirr…",
+  noAcc:"Payment accounts will be added soon. Please check back.",lOwner:"Account owner",lAccNo:"Account number",lPhoneNo:"Phone number",copy:"Copy",copied:"Copied ✓",refLbl:"When you pay, write this as the reason:",telebirr:"Telebirr",noProj:"No projects yet. Please check back soon.",lWho:"Who receives your donation",lSchool:"School",lMerch:"Telebirr merchant",lCode:"Merchant code",lPhone:"Phone",lMail:"Email",lSur:"If a project gets more than it needs:",lBen:"Who benefits",lPur:"What it buys",anonD:"Anonymous",e1:"Please enter an amount of at least 10 ETB.",e2:"Enter a valid Ethiopian phone number.",e3:"Could not start payment. Please try again.",e4:"Please add your name and a comment.",
+  empty:"Be the first to leave a comment.",funded:"funded",anon:"Anonymous",just:"just now",m:" min ago",h:" h ago"},
+ am:{etb:"ብር",of:"ከ",needed:"ገና ያስፈልጋል",done:"ሙሉ በሙሉ ተሸፍኗል። እናመሰግናለን!",fund:"ይደግፉ",fundP:"ይደግፉ፡ ",goal:"ግብ",pct:"የግባችን",pay:"በቴሌብር ይክፈሉ",opening:"ቴሌብር በመክፈት ላይ…",
+  noAcc:"የክፍያ አካውንቶች በቅርቡ ይጨመራሉ። እባክዎ በቅርቡ ይመለሱ።",lOwner:"የአካውንት ባለቤት",lAccNo:"የአካውንት ቁጥር",lPhoneNo:"ስልክ ቁጥር",copy:"ኮፒ",copied:"ተቀድቷል ✓",refLbl:"ሲከፍሉ ይህንን እንደ ምክንያት ይጻፉ፦",telebirr:"ቴሌብር",noProj:"እስካሁን ፕሮጀክት የለም። እባክዎ በቅርቡ ይመለሱ።",lWho:"ልገሳዎን ማን ይቀበላል",lSchool:"ትምህርት ቤት",lMerch:"የቴሌብር ነጋዴ",lCode:"የነጋዴ ኮድ",lPhone:"ስልክ",lMail:"ኢሜይል",lSur:"ፕሮጀክት ከሚያስፈልገው በላይ ቢያገኝ፦",lBen:"ተጠቃሚዎች",lPur:"ምን ይገዛል",anonD:"ስም የለሽ",e1:"ቢያንስ 10 ብር ያስገቡ።",e2:"ትክክለኛ የኢትዮጵያ ስልክ ቁጥር ያስገቡ።",e3:"ክፍያ መጀመር አልተቻለም። እባክዎ እንደገና ይሞክሩ።",e4:"እባክዎ ስምዎን እና አስተያየትዎን ያስገቡ።",
+  empty:"የመጀመሪያው አስተያየት ሰጪ ይሁኑ።",funded:"ደግፈዋል",anon:"ስም የለሽ",just:"አሁን",m:" ደቂቃ በፊት",h:" ሰዓት በፊት"}
+};
+let L="en";const t=k=>T[L][k];
+const $=s=>document.querySelector(s);
+const nf=n=>new Intl.NumberFormat("en-US").format(n);
+const fmt=n=>nf(n)+" "+t("etb");
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let current=null,first=true;
+
+let info=null,donations=[],updates=[];
+const loc=(a,b)=>L==="am"?(b||a):a;
+const facts=p=>{const b=loc(p.ben,p.bam),u=loc(p.pu,p.pam);return(b||u)?`<div class="facts">${b?`<div><b>${t("lBen")}:</b> ${esc(b)}</div>`:""}${u?`<div><b>${t("lPur")}:</b> ${esc(u)}</div>`:""}</div>`:""};
+const merchName=()=>(info&&(info.merchant_name||info.legal_name))||CONFIG.merchantName;
+const merchCode=()=>(info&&info.merchant_code)||CONFIG.merchantShortCode;
+const pname=id=>{const p=projects.find(x=>x.id===String(id));return p?p[L]:""};
+function renderInfo(){
+  const i=info||{},box=$("#infoBox");
+  const has=i.legal_name||i.merchant_name||i.merchant_code||i.statement;
+  if(!has){box.hidden=true;return}
+  const rows=[[t("lSchool"),i.legal_name],[t("lMerch"),i.merchant_name],[t("lCode"),i.merchant_code],[t("lPhone"),i.phone],[t("lMail"),i.email]].filter(r=>r[1]);
+  const st=loc(i.statement,i.statement_am),su=loc(i.surplus_rule,i.surplus_rule_am);
+  box.innerHTML=`<h3>🔒 ${t("lWho")}</h3><dl>${rows.map(r=>`<dt>${r[0]}</dt><dd>${esc(r[1])}</dd>`).join("")}</dl>${st?`<p>${esc(st)}</p>`:""}${su?`<p><b>${t("lSur")}</b> ${esc(su)}</p>`:""}`;
+  box.hidden=false;
+}
+function renderFeed(){
+  $("#updWrap").hidden=!updates.length;
+  $("#updList").innerHTML=updates.map(u=>`<div class="it"><div class="m">${esc(pname(u.project_id))} · ${esc(u.update_date)}</div><h4>${esc(u.title)}</h4>${u.body?`<p>${esc(u.body)}</p>`:""}${u.photo_url?`<img src="${esc(u.photo_url)}" alt="" loading="lazy">`:""}</div>`).join("");
+  $("#donWrap").hidden=!donations.length;
+  $("#donList").innerHTML=donations.map(d=>`<div class="drow"><div><b>${esc(d.donor||t("anonD"))}</b><div class="m">${esc(pname(d.project_id))} · ${esc(d.donated_at)}${d.reference?" · Ref "+esc(d.reference):""}</div></div><div class="a">${fmt(d.amount)}</div></div>`).join("");
+}
+/* One rule for every percentage and every bar: percent = raised / goal, capped at 100. */
+const pctOf=(raised,goal)=>goal>0?Math.min(100,Math.round(raised/goal*100)):0;
+function render(){
+  const raised=projects.reduce((a,p)=>a+p.raised,0),goal=projects.reduce((a,p)=>a+p.goal,0),
+        tp=pctOf(projects.reduce((a,p)=>a+Math.min(p.raised,p.goal),0),goal);
+  $("#sRaised").textContent=nf(raised);$("#sLeft").textContent=nf(Math.max(0,goal-raised));$("#sProj").textContent=projects.length;
+  $("#tPct").textContent=tp+"% "+t("pct");$("#tGoal").textContent=t("goal")+" "+fmt(goal);
+  $("#tBar").dataset.w=tp;$("#tBar").parentNode.setAttribute("role","progressbar");$("#tBar").parentNode.setAttribute("aria-valuenow",tp);$("#tBar").parentNode.setAttribute("aria-valuemin",0);$("#tBar").parentNode.setAttribute("aria-valuemax",100);
+  $("#list").innerHTML=projects.map(p=>{
+    const pc=pctOf(p.raised,p.goal),left=Math.max(0,p.goal-p.raised);
+    return `<article class="card"><div class="ico">${p.icon}</div><h3>${p[L]}</h3><p>${p["d"+L]}</p>${facts(p)}
+    <div class="bar" role="progressbar" aria-valuenow="${pc}" aria-valuemin="0" aria-valuemax="100"><i data-w="${pc}"></i></div>
+    <div class="row"><span><b>${fmt(p.raised)}</b> ${t("of")} ${fmt(p.goal)}</span><span class="pct">${pc}%</span></div>
+    <div class="row"><span>${left?fmt(left)+" "+t("needed"):t("done")}</span></div>
+    <button class="fund" data-id="${p.id}" ${left?"":"disabled"}>${t("fund")}</button></article>`}).join("")||`<p class="empty" style="grid-column:1/-1">${t("noProj")}</p>`;
+  drawComments();renderInfo();renderFeed();if($("#dlg").open)renderAccounts();
+  /* bars always follow their percent: start at 0 on first load, then grow to the value */
+  const bars=[...document.querySelectorAll(".bar i[data-w]")];
+  if(first){bars.forEach(b=>b.style.width="0%");requestAnimationFrame(()=>requestAnimationFrame(()=>bars.forEach(b=>b.style.width=b.dataset.w+"%")))}
+  else bars.forEach(b=>{b.style.transition="none";b.style.width=b.dataset.w+"%"});
+  first=false;
+}
+function setLang(l){
+  L=l;document.documentElement.lang=l;$("#lang").textContent=l==="en"?"አማ":"EN";
+  document.querySelectorAll("[data-en]").forEach(e=>e.textContent=e.dataset[l]);
+  document.querySelectorAll("[data-ph-en]").forEach(e=>e.placeholder=e.dataset["ph"+(l==="en"?"En":"Am")]);
+  if(current)$("#dTitle").textContent=t("fundP")+current[L];
+  render();
+}
+$("#lang").onclick=()=>setLang(L==="en"?"am":"en");
+$("#back").onclick=e=>{if(history.length>1){e.preventDefault();history.back()}};
+let accounts=[];
+const copyText=async txt=>{try{await navigator.clipboard.writeText(txt);return true}catch(e){
+  try{const a=document.createElement("textarea");a.value=txt;a.style.position="fixed";a.style.opacity="0";document.body.appendChild(a);a.select();const ok=document.execCommand("copy");a.remove();return ok}catch(_){return false}}};
+function renderAccounts(){
+  const box=$("#accList");
+  if(!accounts.length){box.innerHTML=`<div class="empty">${t("noAcc")}</div>`}
+  else box.innerHTML=accounts.map(a=>{
+    const tb=a.kind==="telebirr",head=tb?t("telebirr"):a.bank_name;
+    const row=(lbl,val)=>`<div class="ar"><div><span>${lbl}</span><b>${esc(val)}</b></div><button type="button" class="cp" data-c="${esc(val)}">${t("copy")}</button></div>`;
+    return `<div class="acc"><div class="ah"><span class="ai">${tb?"📱":"🏦"}</span><b>${esc(head)}</b></div>${row(t("lOwner"),a.owner_name)}${row(tb?t("lPhoneNo"):t("lAccNo"),a.account_number)}${a.note?`<div class="an">${esc(a.note)}</div>`:""}</div>`}).join("");
+  $("#refNote").innerHTML=current?`${t("refLbl")} <b>${esc(current[L])}</b>`:"";
+}
+$("#accList").addEventListener("click",async e=>{
+  const b=e.target.closest(".cp");if(!b)return;
+  const ok=await copyText(b.dataset.c);
+  const old=t("copy");b.textContent=ok?t("copied"):"✗";b.classList.toggle("done",ok);
+  setTimeout(()=>{b.textContent=t("copy");b.classList.remove("done")},1600);
+});
+$("#list").addEventListener("click",e=>{
+  const b=e.target.closest("[data-id]");if(!b)return;
+  current=projects.find(p=>p.id===b.dataset.id);
+  $("#dTitle").textContent=t("fundP")+current[L];
+  renderAccounts();
+  $("#dlg").showModal();
+});
+$("#cancel").onclick=()=>$("#dlg").close();
+
+/* ===== Comments ===== */
+let comments=[],db=null,canWrite=false;
+const ago=ts=>{const s=(Date.now()-ts)/1000;if(s<60)return t("just");if(s<3600)return Math.floor(s/60)+t("m");if(s<86400)return Math.floor(s/3600)+t("h");return new Date(ts).toLocaleDateString()};
+function drawComments(){
+  const l=comments.slice().sort((a,b)=>b.t-a.t);
+  $("#cList").innerHTML=l.length?l.map(c=>`<div class="c"><div class="av">${esc((c.name||"?").trim()[0]||"?").toUpperCase()}</div><div><div class="meta"><b>${esc(c.name)}</b>${c.proj?`<span class="tagp">${t("funded")} ${esc(c.proj)}${c.amount?" · "+nf(c.amount):""}</span>`:""} · ${ago(c.t)}</div><p>${esc(c.msg)}</p></div></div>`).join(""):`<div class="empty">${t("empty")}</div>`;
+}
+async function addComment(name,msg,proj,amount){
+  const c={name:name.slice(0,40),msg:msg.slice(0,400),t:Date.now()};
+  if(proj){c.proj=proj;c.amount=amount}
+  if(db&&canWrite){try{await db.collection("comments").add(c);return}catch(e){}}
+  comments.push(c);drawComments();
+}
+$("#cPost").onclick=()=>{
+  const n=$("#cName").value.trim(),m=$("#cMsg").value.trim();
+  if(!n||!m){$("#cErr").textContent=t("e4");return}
+  $("#cErr").textContent="";addComment(n,m);$("#cMsg").value="";
+};
+const fromServer=(d,i)=>({id:String(d.id),order:i+1,icon:d.icon||"🏫",en:d.title,am:d.title_am||d.title,den:d.description||"",dam:d.description_am||d.description||"",goal:Number(d.goal)||1,raised:Number(d.raised)||0,ben:d.beneficiaries||"",bam:d.beneficiaries_am||"",pu:d.purpose||"",pam:d.purpose_am||""});
+async function loadExtras(){
+  if(!CONFIG.apiBase)return;
+  const base=CONFIG.apiBase.replace(/\/projects$/,"");
+  const get=async p=>{try{const x=await fetch(base+p);return x.ok?await x.json():null}catch(e){return null}};
+  const [i,d,u,ac]=await Promise.all([get("/info"),get("/donations"),get("/updates"),get("/accounts")]);
+  if(Array.isArray(ac))accounts=ac;if($("#dlg").open)renderAccounts();
+  if(i&&typeof i==="object")info=i;if(Array.isArray(d))donations=d;if(Array.isArray(u))updates=u;
+  renderInfo();renderFeed();
+}
+async function loadApi(){
+  if(!CONFIG.apiBase)return;
+  try{const r=await fetch(CONFIG.apiBase,{credentials:"include"});if(!r.ok)return;const d=await r.json();
+    if(Array.isArray(d)){projects=d.map(fromServer);render()}}catch(e){}
+}
+loadApi().then(loadExtras);
+render();
+(async()=>{
+  try{
+    if(typeof claude==="undefined")return;
+    const u=await claude.use("user");db=await claude.use("db");
+    if(!db)return;
+    canWrite=!u||u.can("data.write")!==false;
+    db.collection("comments").orderBy("t","desc").limit(100).onSnapshot(s=>{comments=s.docs.map(d=>d.data());drawComments()},()=>{});
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

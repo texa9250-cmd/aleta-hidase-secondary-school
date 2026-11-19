@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="Visual study lab | አለታ ህዳሴ" data-am="የእይታ የጥናት ላብ | አለታ ህዳሴ">Visual study lab | አለታ ህዳሴ</title>
+<script src="/site-effects.js"></script>
+<style>
+:root{--bg:#0a1029;--bg2:#101a3d;--card:#131d42;--line:#26346a;--ink:#eef1ff;--muted:#9aa7d4;--acc:#ff8a5b;--acc2:#ffc857;--blue:#5ec2ff;--green:#6ee7b7}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 600px at 80% -10%,#1b2a66 0,transparent 60%),var(--bg);color:var(--ink);font:400 1rem/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+:focus-visible{outline:3px solid var(--acc2);outline-offset:2px}
+.wrap{max-width:62rem;margin:0 auto;padding:1.2rem 1.1rem 3rem}
+.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.top a{color:var(--acc2);text-decoration:none;font-weight:600}
+.top a:hover{text-decoration:underline}
+h1{margin:.2rem 0 .3rem;font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.15}
+h1 span{color:var(--acc)}
+.sub{color:var(--muted);margin:0 0 1.2rem;max-width:42rem}
+.tabs{display:flex;gap:.55rem;flex-wrap:wrap;margin-bottom:1rem}
+.tab{font:600 .95rem system-ui,sans-serif;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.55rem 1rem;cursor:pointer;transition:transform .15s,background .15s}
+.tab:hover{transform:translateY(-2px)}
+.tab[aria-selected="true"]{background:var(--acc);color:#1b1020;border-color:var(--acc)}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) 18.5rem;gap:1rem;align-items:start}
+@media(max-width:52rem){.stage{grid-template-columns:1fr}}
+.panel{background:linear-gradient(180deg,var(--card),#0f1836);border:1px solid var(--line);border-radius:18px;padding:1rem}
+.canvaswrap{padding:.6rem}
+canvas{display:block;width:100%;border-radius:12px;background:#0c1432}
+.head{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin:.2rem 0 .5rem}
+.head h2{margin:0;font-size:1.25rem}
+.pill{font-size:.78rem;font-weight:700;color:#1b1020;background:var(--acc2);padding:.1rem .6rem;border-radius:999px}
+.blurb{color:var(--muted);margin:.2rem 0 .8rem}
+.ctl{display:block;margin:.7rem 0}
+.ctl span{display:flex;justify-content:space-between;font-weight:600;font-size:.92rem;margin-bottom:.2rem}
+.ctl output{color:var(--acc2);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--acc)}
+.grp{margin:.8rem 0}
+.grp>b{display:block;font-size:.88rem;margin-bottom:.35rem}
+.opts{display:flex;gap:.4rem;flex-wrap:wrap}
+.opt,.act{font:600 .88rem system-ui,sans-serif;color:var(--ink);background:#1a2552;border:1px solid var(--line);border-radius:10px;padding:.45rem .8rem;cursor:pointer}
+.opt[aria-pressed="true"]{background:var(--blue);color:#07142a;border-color:var(--blue)}
+.act{background:var(--acc);color:#1b1020;border-color:var(--acc);margin-top:.3rem}
+.act:hover{filter:brightness(1.08)}
+.read{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:.55rem;margin-top:.9rem}
+.read div{background:#0e1738;border:1px solid var(--line);border-radius:12px;padding:.5rem .7rem}
+.read small{display:block;color:var(--muted);font-size:.76rem;text-transform:uppercase;letter-spacing:.04em}
+.read b{font-size:1.05rem;font-variant-numeric:tabular-nums}
+.task{margin-top:1rem;border-left:4px solid var(--acc);background:#16214b;border-radius:0 12px 12px 0;padding:.7rem .9rem}
+.task b{color:var(--acc2)}
+</style></head>
+<body>
+<div class="wrap">
+  <div class="top"><a id="back" href="students.html" data-en="← Back to my study space" data-am="← ወደ ጥናት ቦታዬ ተመለስ">&larr; Back to my study space</a><a href="../index.html" data-en="School site" data-am="የትምህርት ቤቱ ድረ-ገጽ">School site</a></div>
+  <h1><span data-en="Visual study lab" data-am="የእይታ የጥናት ላብ">Visual study lab</span></h1>
+  <p class="sub" data-en="Move the sliders and watch the idea change. Seeing a graph, a flight or a current in motion makes it easier to remember than reading a formula." data-am="ማንሸራተቻዎቹን ያንቀሳቅሱና ሃሳቡ ሲቀየር ይመልከቱ። ግራፍን፣ በረራን ወይም የኤሌክትሪክ ፍሰትን በእንቅስቃሴ ማየት ቀመር ከማንበብ ይልቅ ለማስታወስ ያግዛል።">Move the sliders and watch the idea change. Seeing a graph, a flight or a current in motion makes it easier to remember than reading a formula.</p>
+  <div class="tabs" id="tabs" role="tablist" aria-label="Choose a tool" data-en-aria-label="Choose a tool" data-am-aria-label="መሣሪያ ይምረጡ"></div>
+  <div class="stage">
+    <div class="panel canvaswrap"><canvas id="cv" role="img" aria-label="Animation" data-en-aria-label="Animation" data-am-aria-label="እነማ"></canvas>
+      <div class="read" id="read" aria-live="polite"></div></div>
+    <div class="panel">
+      <div class="head"><h2 id="tname"></h2><span class="pill" id="tsub"></span></div>
+      <p class="blurb" id="tblurb"></p>
+      <div id="controls"></div>
+      <div class="task"><b data-en="Try this:" data-am="ይህን ይሞክሩ፦">Try this:</b> <span id="ttask"></span></div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  const $ = s => document.querySelector(s);
+  const TAU = Math.PI * 2, ACC = '#ff8a5b', ACC2 = '#ffc857', BLUE = '#5ec2ff', GREEN = '#6ee7b7', INK = '#eef1ff', MUTED = '#8f9bc4', GRID = 'rgba(150,170,240,.14)';
+  const RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const n = (x, d = 2) => String(Math.abs(x) < 1e-9 ? 0 : +x.toFixed(d));
+
+  /* back link keeps the grade and level */
+  const P = new URLSearchParams(location.search);
+  if (['9', '10', '11'].includes(P.get('grade'))) $('#back').href = 'grade.html?grade=' + P.get('grade') + (P.get('level') ? '&level=' + P.get('level') : '');
+
+  const cv = $('#cv'), ctx = cv.getContext('2d');
+  let locale = localStorage.getItem('site_lang') === 'am' ? 'am' : 'en';
+  let W = 600, H = 360;
+  function resize() {
+    W = cv.parentElement.clientWidth - 20;
+    H = Math.round(W < 480 ? W * 0.85 : Math.min(W * 0.58, 430));
+    const d = window.devicePixelRatio || 1;
+    cv.width = W * d; cv.height = H * d; cv.style.height = H + 'px';
+    ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+
+  /* ---------- drawing helpers ---------- */
+  function line(x1, y1, x2, y2, c, w, dash) {
+    ctx.beginPath(); ctx.setLineDash(dash || []); ctx.strokeStyle = c; ctx.lineWidth = w || 1;
+    ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); ctx.setLineDash([]);
+  }
+  function dot(x, y, r, c, glow) {
+    ctx.save(); ctx.fillStyle = c; if (glow) { ctx.shadowColor = c; ctx.shadowBlur = glow; }
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fill(); ctx.restore();
+  }
+  function arrow(x1, y1, x2, y2, c) {
+    const a = Math.atan2(y2 - y1, x2 - x1);
+    line(x1, y1, x2, y2, c, 2.5);
+    ctx.fillStyle = c; ctx.beginPath(); ctx.moveTo(x2, y2);
+    ctx.lineTo(x2 - 9 * Math.cos(a - 0.4), y2 - 9 * Math.sin(a - 0.4));
+    ctx.lineTo(x2 - 9 * Math.cos(a + 0.4), y2 - 9 * Math.sin(a + 0.4)); ctx.closePath(); ctx.fill();
+  }
+  function background() {
+    const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#11204d'); g.addColorStop(1, '#0a1030');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  }
+  function drawLobes(cx, cy, start, R, nLobes, rgb) {
+    for (let i = 0; i < nLobes; i++) {
+      const a = start + i * TAU / nLobes;
+      ctx.save(); ctx.translate(cx, cy); ctx.rotate(a); ctx.translate(R * 0.55, 0);
+      const lg = ctx.createRadialGradient(0, 0, 2, 0, 0, R * 0.5);
+      lg.addColorStop(0, 'rgba(' + rgb + ',0.9)'); lg.addColorStop(1, 'rgba(' + rgb + ',0)');
+      ctx.fillStyle = lg;
+      ctx.beginPath(); ctx.ellipse(0, 0, R * 0.42, R * 0.26, 0, 0, TAU); ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  const CANVAS_AM = {
+    'Parabola': 'ፓራቦላ', 'vertex': 'ጫፍ ነጥብ', 'Earth': 'ምድር', 'Moon': 'ጨረቃ', 'Mars': 'ማርስ',
+    'Series': 'ተከታታይ', 'Parallel': 'ትይዩ', 'Current': 'ፍሰት', 'Voltage': 'ቮልቴጅ',
+    'sin': 'ሳይን', 'cos': 'ኮሳይን', 'hypotenuse': 'ገመድ', 'opposite': 'ተቃራኒ ጎን', 'adjacent': 'ተቀጣጣይ ጎን',
+    'object': 'ነገር', 'image at infinity': 'ምስሉ በማያልቅ ርቀት ላይ ነው', 'real, inverted': 'እውነተኛ፣ የተገለበጠ',
+    'virtual, upright': 'ምናባዊ፣ ቀጥ ያለ', 'reactants': 'ምላሽ ሰጪዎች', 'products': 'ምርቶች',
+    'transition state': 'የሽግግር ሁኔታ', 'Exothermic': 'ኤግዞተርሚክ', 'Endothermic': 'ኢንዶተርሚክ',
+    'reaction progress': 'የምላሽ ሂደት', 'energy': 'ኃይል', 'equivalence': 'እኩልነት', 'pH': 'pH',
+    'base added (mL)': 'የተጨመረ ቤዝ (mL)', 'B here': 'B በዚህ', 'I': 'I', 'F': 'F', 'v': 'v',
+    'Interphase': 'ኢንተርፌዝ', 'Prophase': 'ፕሮፌዝ', 'Metaphase': 'ሜታፌዝ', 'Anaphase': 'አናፌዝ', 'Telophase': 'ቴሎፌዝ',
+    'parent (dashed)  →  transformed': 'ወላጅ (ባለ ተቋራጭ)  →  የተለወጠ', 'unit circle': 'ክፍል ክብ',
+    'y = sin θ': 'y = ሳይን θ', 'SOH-CAH-TOA': 'SOH-CAH-TOA', 'θ': 'θ'
+  };
+  function text(s, x, y, c, size, align) {
+    ctx.fillStyle = c || INK; ctx.font = '600 ' + (size || 13) + 'px system-ui,sans-serif'; ctx.textAlign = align || 'left';
+    ctx.fillText(locale === 'am' ? (CANVAS_AM[s] || s) : s, x, y);
+  }
+
+  /* =====================================================
+     TOOL 1: Quadratic explorer
+     ===================================================== */
+  const quad = {
+    id: 'quad', name: 'Quadratic explorer', sub: 'Mathematics',
+    blurb: 'Change a, b and c and watch the parabola, its vertex and its roots move.',
+    task: 'Make the curve touch the x-axis at exactly one point. What is the discriminant then?',
+    v: {a: 1, b: -2, c: -3}, reveal: 0,
+    sliders: [{id: 'a', label: 'a', min: -3, max: 3, step: 0.1}, {id: 'b', label: 'b', min: -6, max: 6, step: 0.1}, {id: 'c', label: 'c', min: -8, max: 8, step: 0.1}],
+    onChange() { this.reveal = 0; },
+    read(v) {
+      const {a, b, c} = v, D = b * b - 4 * a * c; let roots;
+      if (Math.abs(a) < 0.05) roots = Math.abs(b) < 0.05 ? 'none' : 'x = ' + n(-c / b);
+      else if (D < 0) roots = 'no real roots';
+      else if (Math.abs(D) < 1e-9) roots = 'x = ' + n(-b / (2 * a)) + ' (one root)';
+      else roots = n((-b - Math.sqrt(D)) / (2 * a)) + ' and ' + n((-b + Math.sqrt(D)) / (2 * a));
+      const xv = -b / (2 * a), vert = Math.abs(a) < 0.05 ? 'none (a is 0)' : '(' + n(xv) + ', ' + n(a * xv * xv + b * xv + c) + ')';
+      return [['Equation', 'y = ' + n(a, 1) + 'x² ' + (b < 0 ? '− ' : '+ ') + n(Math.abs(b), 1) + 'x ' + (c < 0 ? '− ' : '+ ') + n(Math.abs(c), 1)], ['Discriminant', n(D)], ['Roots', roots], ['Vertex', vert], ['Opens', a > 0.05 ? 'upward' : a < -0.05 ? 'downward' : 'a straight line']];
+    },
+    draw(t, v, dt) {
+      const {a, b, c} = v, X0 = -8, X1 = 8, Y0 = -10, Y1 = 10;
+      const px = x => (x - X0) / (X1 - X0) * W, py = y => H - (y - Y0) / (Y1 - Y0) * H, f = x => a * x * x + b * x + c;
+      for (let x = X0; x <= X1; x += 2) { line(px(x), 0, px(x), H, x === 0 ? '#6d7fc7' : GRID, x === 0 ? 1.6 : 1); if (x && x % 4 === 0) text(x, px(x), py(0) + 14, MUTED, 11, 'center'); }
+      for (let y = Y0; y <= Y1; y += 2) { line(0, py(y), W, py(y), y === 0 ? '#6d7fc7' : GRID, y === 0 ? 1.6 : 1); if (y && y % 4 === 0) text(y, px(0) - 6, py(y) + 4, MUTED, 11, 'right'); }
+      this.reveal = Math.min(1, this.reveal + (RM ? 1 : dt / 700));
+      const xe = X0 + (X1 - X0) * this.reveal;
+      if (Math.abs(a) >= 0.05) { const xv = -b / (2 * a); if (xv > X0 && xv < X1) line(px(xv), 0, px(xv), H, 'rgba(255,200,87,.45)', 1.5, [6, 6]); }
+      ctx.save(); ctx.beginPath(); ctx.strokeStyle = ACC; ctx.lineWidth = 3.5; ctx.shadowColor = ACC; ctx.shadowBlur = 12; ctx.lineJoin = 'round';
+      for (let x = X0, first = true; x <= xe; x += 0.05) { const X = px(x), Y = py(f(x)); first ? ctx.moveTo(X, Y) : ctx.lineTo(X, Y); first = false; }
+      ctx.stroke(); ctx.restore();
+      if (this.reveal >= 1) {
+        const D = b * b - 4 * a * c, pulse = 7 + 3 * Math.sin(t / 250);
+        if (Math.abs(a) >= 0.05) {
+          const xv = -b / (2 * a), yv = f(xv);
+          if (xv > X0 && xv < X1 && yv > Y0 && yv < Y1) { dot(px(xv), py(yv), 6, ACC2, 14); text('vertex', px(xv) + 10, py(yv) - 8, ACC2, 12); }
+          if (D >= 0) [(-b - Math.sqrt(D)) / (2 * a), (-b + Math.sqrt(D)) / (2 * a)].forEach(r => {
+            if (r > X0 && r < X1) { dot(px(r), py(0), 5, GREEN, 12); ctx.strokeStyle = GREEN; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(px(r), py(0), pulse, 0, TAU); ctx.stroke(); text('x=' + n(r), px(r), py(0) - 14, GREEN, 12, 'center'); }
+          });
+        } else if (Math.abs(b) >= 0.05) { const r = -c / b; if (r > X0 && r < X1) dot(px(r), py(0), 5, GREEN, 12); }
+        const xm = X0 + (X1 - X0) * (0.5 + 0.5 * Math.sin(t / 1800)), ym = f(xm);
+        if (ym > Y0 && ym < Y1) { dot(px(xm), py(ym), 6, BLUE, 16); text('(' + n(xm, 1) + ', ' + n(ym, 1) + ')', px(xm) + 10, py(ym) - 10, BLUE, 12); }
+      }
+    }
+  };
+
+  /* =====================================================
+     TOOL 2: Projectile lab
+     ===================================================== */
+  const proj = {
+    id: 'proj', name: 'Projectile lab', sub: 'Physics',
+    blurb: 'Launch a ball and compare how it flies on Earth, the Moon and Mars.',
+    task: 'Which launch angle gives the longest range on Earth? Try 30°, 45° and 60°, then Moon gravity.',
+    v: {speed: 30, angle: 45, g: 9.8}, ts: 0, running: false, trail: [], endHold: 0,
+    sliders: [{id: 'speed', label: 'Launch speed', min: 5, max: 60, step: 1, unit: ' m/s'}, {id: 'angle', label: 'Angle', min: 5, max: 85, step: 1, unit: '°'}],
+    choices: [{id: 'g', label: 'Gravity', opts: [[9.8, 'Earth'], [1.62, 'Moon'], [3.71, 'Mars']]}],
+    buttons: [{label: 'Launch again', run() { proj.launch(); }}],
+    launch() { this.ts = 0; this.running = true; this.trail = []; },
+    onChange() { this.launch(); },
+    reset() { this.launch(); },
+    stats(v) { const th = v.angle * Math.PI / 180, vx = v.speed * Math.cos(th), vy = v.speed * Math.sin(th); return {vx, vy, T: 2 * vy / v.g, R: vx * 2 * vy / v.g, Hm: vy * vy / (2 * v.g)}; },
+    read(v) { const s = this.stats(v); return [['Flight time', n(s.T) + ' s'], ['Range', n(s.R, 1) + ' m'], ['Max height', n(s.Hm, 1) + ' m'], ['Horizontal speed', n(s.vx, 1) + ' m/s']]; },
+    draw(t, v, dt) {
+      const s = this.stats(v), padL = 44, padR = 36, padB = 46, padT = 46;
+      const sc = Math.min(50, (W - padL - padR) / Math.max(s.R, 1), (H - padB - padT) / Math.max(s.Hm, 1));
+      const gx = x => padL + x * sc, gy = y => H - padB - y * sc;
+      for (let i = 0; i < 40; i++) { const a = Math.sin(i * 91.7) * 0.5 + 0.5, b = Math.sin(i * 37.3) * 0.5 + 0.5; dot(a * W, b * (H - padB - 10), 1 + a, 'rgba(255,255,255,.35)'); }
+      ctx.fillStyle = '#1b2d63'; ctx.fillRect(0, gy(0), W, H - gy(0)); line(0, gy(0), W, gy(0), '#6d7fc7', 2);
+      for (let x = 0; x <= s.R + 0.01; x += Math.max(5, Math.round(s.R / 6 / 5) * 5)) { line(gx(x), gy(0), gx(x), gy(0) + 6, MUTED, 1); text(Math.round(x) + ' m', gx(x), gy(0) + 20, MUTED, 11, 'center'); }
+      ctx.save(); ctx.beginPath(); ctx.strokeStyle = 'rgba(255,255,255,.28)'; ctx.setLineDash([6, 7]); ctx.lineWidth = 1.5;
+      for (let i = 0; i <= 80; i++) { const tt = s.T * i / 80, X = gx(s.vx * tt), Y = gy(s.vy * tt - 0.5 * v.g * tt * tt); i ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y); }
+      ctx.stroke(); ctx.restore();
+      dot(gx(s.R / 2), gy(s.Hm), 4, ACC2, 8); text('top: ' + n(s.Hm, 1) + ' m', gx(s.R / 2), gy(s.Hm) - 12, ACC2, 12, 'center');
+      if (this.running) { this.ts += dt / 1000 * (s.T / (RM ? 0.6 : 2.6)); if (this.ts >= s.T) { this.ts = s.T; this.running = false; } }
+      const x = s.vx * this.ts, y = Math.max(0, s.vy * this.ts - 0.5 * v.g * this.ts * this.ts);
+      if (this.running || !this.trail.length) this.trail.push([x, y]);
+      this.trail.forEach((p, i) => dot(gx(p[0]), gy(p[1]), 2 + 3 * i / this.trail.length, 'rgba(255,138,91,' + (0.15 + 0.6 * i / this.trail.length) + ')'));
+      if (this.running) {
+        const vyNow = s.vy - v.g * this.ts; arrow(gx(x), gy(y), gx(x) + s.vx * 2.2, gy(y) - vyNow * 2.2, GREEN);
+        text('speed ' + n(Math.hypot(s.vx, vyNow), 1) + ' m/s', gx(x) + 14, gy(y) - 14, GREEN, 12);
+      }
+      dot(gx(x), gy(y), 9, ACC, 20);
+      if (!this.running && this.ts >= s.T) { text('landed ' + n(s.R, 1) + ' m away', gx(s.R), gy(0) - 14, ACC2, 13, 'center'); }
+    }
+  };
+
+  /* =====================================================
+     TOOL 3: Circuit flow
+     ===================================================== */
+  const circ = {
+    id: 'circ', name: 'Circuit flow', sub: 'Physics',
+    blurb: 'Dots show the current. The faster they move, the larger the current in that wire.',
+    task: 'Switch between series and parallel with the same resistors. Which gives the larger total current?',
+    v: {volts: 12, r1: 4, r2: 6, mode: 'series'}, off: [0, 0],
+    sliders: [{id: 'volts', label: 'Battery', min: 1, max: 24, step: 1, unit: ' V'}, {id: 'r1', label: 'Resistor R1', min: 1, max: 20, step: 1, unit: ' Ω'}, {id: 'r2', label: 'Resistor R2', min: 1, max: 20, step: 1, unit: ' Ω'}],
+    choices: [{id: 'mode', label: 'Connection', opts: [['series', 'Series'], ['parallel', 'Parallel']], text: true}],
+    calc(v) {
+      if (v.mode === 'series') { const R = v.r1 + v.r2, I = v.volts / R; return {R, I, i1: I, i2: I, v1: I * v.r1, v2: I * v.r2}; }
+      const R = 1 / (1 / v.r1 + 1 / v.r2); return {R, I: v.volts / R, i1: v.volts / v.r1, i2: v.volts / v.r2, v1: v.volts, v2: v.volts};
+    },
+    read(v) { const c = this.calc(v); return [['Total resistance', n(c.R) + ' Ω'], ['Total current', n(c.I) + ' A'], ['V across R1', n(c.v1) + ' V'], ['V across R2', n(c.v2) + ' V'], ['Current in R1', n(c.i1) + ' A'], ['Current in R2', n(c.i2) + ' A'], ['Power used', n(c.I * v.volts, 1) + ' W']]; },
+    draw(t, v, dt) {
+      const c = this.calc(v), s = Math.min(W / 600, H / 340);
+      ctx.save(); ctx.translate((W - 600 * s) / 2, (H - 340 * s) / 2); ctx.scale(s, s);
+      const wire = (x1, y1, x2, y2) => line(x1, y1, x2, y2, '#8ea2e8', 3);
+      const zig = (x1, y1, x2, y2, col) => {
+        const dx = x2 - x1, dy = y2 - y1, L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L, nx = -uy, ny = ux, lead = L * 0.15, N = 6;
+        ctx.beginPath(); ctx.strokeStyle = col; ctx.lineWidth = 3.5; ctx.lineJoin = 'round'; ctx.moveTo(x1, y1); ctx.lineTo(x1 + ux * lead, y1 + uy * lead);
+        for (let i = 0; i < N; i++) { const q = lead + (L - 2 * lead) * (i + 0.5) / N, sg = i % 2 ? -1 : 1; ctx.lineTo(x1 + ux * q + nx * 10 * sg, y1 + uy * q + ny * 10 * sg); }
+        ctx.lineTo(x2 - ux * lead, y2 - uy * lead); ctx.lineTo(x2, y2); ctx.stroke();
+      };
+      const glow = (x, y, p) => { const g = ctx.createRadialGradient(x, y, 2, x, y, 60); g.addColorStop(0, 'rgba(255,138,91,' + Math.min(0.55, p / 120) + ')'); g.addColorStop(1, 'rgba(255,138,91,0)'); ctx.fillStyle = g; ctx.fillRect(x - 60, y - 60, 120, 120); };
+      let loops;
+      if (v.mode === 'series') {
+        wire(70, 300, 70, 200); wire(70, 150, 70, 50); wire(70, 50, 250, 50); wire(350, 50, 530, 50); wire(530, 50, 530, 300); wire(530, 300, 350, 300); wire(250, 300, 70, 300);
+        glow(300, 50, c.I * c.I * v.r1); glow(300, 300, c.I * c.I * v.r2);
+        zig(250, 50, 350, 50, ACC); zig(350, 300, 250, 300, ACC);
+        text('R1 = ' + v.r1 + ' Ω', 300, 28, INK, 14, 'center'); text(n(c.v1) + ' V', 300, 82, ACC2, 13, 'center');
+        text('R2 = ' + v.r2 + ' Ω', 300, 336, INK, 14, 'center'); text(n(c.v2) + ' V', 300, 272, ACC2, 13, 'center');
+        loops = [{pts: [[70, 300], [70, 50], [530, 50], [530, 300], [70, 300]], I: c.I}];
+      } else {
+        wire(70, 300, 70, 200); wire(70, 150, 70, 50); wire(70, 50, 520, 50); wire(70, 300, 520, 300);
+        wire(300, 50, 300, 125); wire(300, 225, 300, 300); wire(520, 50, 520, 125); wire(520, 225, 520, 300);
+        glow(300, 175, c.i1 * c.v1); glow(520, 175, c.i2 * c.v2);
+        zig(300, 125, 300, 225, ACC); zig(520, 125, 520, 225, ACC);
+        text('R1 = ' + v.r1 + ' Ω', 300, 112, INK, 14, 'center'); text('R2 = ' + v.r2 + ' Ω', 520, 112, INK, 14, 'center');
+        text(n(c.i1) + ' A', 345, 180, ACC2, 13, 'left'); text(n(c.i2) + ' A', 565, 180, ACC2, 13, 'left');
+        loops = [{pts: [[70, 300], [70, 50], [300, 50], [300, 300], [70, 300]], I: c.i1}, {pts: [[70, 300], [70, 50], [520, 50], [520, 300], [70, 300]], I: c.i2}];
+      }
+      line(52, 160, 88, 160, INK, 4); line(70, 150, 70, 160, '#8ea2e8', 3); line(60, 185, 80, 185, INK, 7); line(70, 185, 70, 200, '#8ea2e8', 3);
+      text('+', 100, 166, ACC2, 18); text('−', 100, 192, BLUE, 18); text(v.volts + ' V', 40, 178, INK, 14, 'right');
+      loops.forEach((lp, k) => {
+        const cum = [0]; for (let i = 1; i < lp.pts.length; i++) cum.push(cum[i - 1] + Math.hypot(lp.pts[i][0] - lp.pts[i - 1][0], lp.pts[i][1] - lp.pts[i - 1][1]));
+        const L = cum[cum.length - 1], count = Math.floor(L / 30);
+        this.off[k] = (this.off[k] + dt / 1000 * lp.I * (RM ? 3 : 14)) % L;
+        for (let i = 0; i < count; i++) {
+          const sPos = (this.off[k] + i * L / count) % L; let j = 1; while (cum[j] < sPos) j++;
+          const f = (sPos - cum[j - 1]) / (cum[j] - cum[j - 1]);
+          dot(lp.pts[j - 1][0] + (lp.pts[j][0] - lp.pts[j - 1][0]) * f, lp.pts[j - 1][1] + (lp.pts[j][1] - lp.pts[j - 1][1]) * f, 4.2, ACC2, 10);
+        }
+      });
+      ctx.restore();
+    }
+  };
+
+  /* =====================================================
+     TOOL 4: Unit circle and waves
+     ===================================================== */
+  const wave = {
+    id: 'wave', name: 'Unit circle and waves', sub: 'Mathematics',
+    blurb: 'A point spins around the circle. Its height draws the sine wave, its width gives the cosine.',
+    task: 'Pause at 30°, 45° and 60°. At which angle are sin and cos equal? What happens to tan at 90°?',
+    v: {angle: 40, speed: 40, auto: RM ? 0 : 1},
+    sliders: [{id: 'angle', label: 'Angle', min: 0, max: 360, step: 1, unit: '°'}, {id: 'speed', label: 'Spin speed', min: 10, max: 120, step: 5, unit: '°/s'}],
+    choices: [{id: 'auto', label: 'Spin', opts: [[1, 'Spinning'], [0, 'Paused']]}],
+    read(v) { const r = v.angle * Math.PI / 180, c = Math.cos(r); return [['Angle', n(v.angle, 0) + '°'], ['sin θ', n(Math.sin(r), 3)], ['cos θ', n(c, 3)], ['tan θ', Math.abs(c) < 0.01 ? 'undefined' : n(Math.sin(r) / c, 3)]]; },
+    draw(t, v, dt) {
+      if (v.auto) { v.angle = (v.angle + dt / 1000 * v.speed) % 360; const sl = $('#c_angle'); if (sl) { sl.value = v.angle; const o = $('#o_angle'); if (o) o.textContent = Math.round(v.angle) + '°'; } if (!this._r || t - this._r > 120) { this._r = t; renderRead(); } }
+      const th = v.angle * Math.PI / 180, cx = W * 0.24, cy = H / 2, r = Math.min(H * 0.34, W * 0.17);
+      const x0 = W * 0.5, x1 = W - 24, wx = a => x0 + a / 360 * (x1 - x0), wy = a => cy - r * Math.sin(a * Math.PI / 180);
+      line(cx - r - 18, cy, cx + r + 18, cy, '#6d7fc7', 1.5); line(cx, cy - r - 18, cx, cy + r + 18, '#6d7fc7', 1.5);
+      ctx.strokeStyle = 'rgba(160,180,255,.55)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(cx, cy, r, 0, TAU); ctx.stroke();
+      line(x0, cy, x1, cy, '#6d7fc7', 1.5); line(x0, cy - r, x0, cy + r, '#6d7fc7', 1.5);
+      [0, 90, 180, 270, 360].forEach(a => { line(wx(a), cy - 4, wx(a), cy + 4, MUTED, 1); text(a + '°', wx(a), cy + r + 22, MUTED, 11, 'center'); });
+      ctx.beginPath(); ctx.strokeStyle = 'rgba(255,255,255,.18)'; ctx.lineWidth = 2; for (let a = 0; a <= 360; a += 3) a ? ctx.lineTo(wx(a), wy(a)) : ctx.moveTo(wx(a), wy(a)); ctx.stroke();
+      ctx.save(); ctx.beginPath(); ctx.strokeStyle = ACC; ctx.lineWidth = 3.5; ctx.shadowColor = ACC; ctx.shadowBlur = 12;
+      for (let a = 0; a <= v.angle; a += 2) a ? ctx.lineTo(wx(a), wy(a)) : ctx.moveTo(wx(a), wy(a)); ctx.lineTo(wx(v.angle), wy(v.angle)); ctx.stroke(); ctx.restore();
+      const px = cx + r * Math.cos(th), py = cy - r * Math.sin(th);
+      ctx.strokeStyle = ACC2; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(cx, cy, r * 0.28, 0, -th, true); ctx.stroke();
+      line(px, cy, px, py, GREEN, 3); line(cx, cy, px, cy, BLUE, 3); line(cx, cy, px, py, INK, 2.5);
+      text('sin', px + (Math.cos(th) >= 0 ? 8 : -8), (cy + py) / 2, GREEN, 13, Math.cos(th) >= 0 ? 'left' : 'right');
+      text('cos', (cx + px) / 2, cy + (Math.sin(th) >= 0 ? 18 : -10), BLUE, 13, 'center');
+      line(px, py, wx(v.angle), wy(v.angle), 'rgba(255,200,87,.5)', 1.5, [5, 5]);
+      dot(px, py, 8, ACC, 18); dot(wx(v.angle), wy(v.angle), 7, ACC2, 16);
+      text('unit circle', cx, cy - r - 26, MUTED, 12, 'center'); text('y = sin θ', (x0 + x1) / 2, cy - r - 26, MUTED, 12, 'center');
+    }
+  };
+
+  /* =====================================================
+     TOOL 5: Trigonometry triangle
+     ===================================================== */
+  const trig = {
+    id: 'trig', name: 'Trigonometry triangle', sub: 'Mathematics',
+    blurb: 'Change the angle θ and watch sin, cos and tan as ratios of the sides.',
+    task: 'Set θ = 45°. What do you notice about sin θ and cos θ? What happens at 85°?',
+    v: {angle: 35},
+    sliders: [{id: 'angle', label: 'Angle θ', min: 5, max: 85, step: 1, unit: '°'}],
+    read(v) {
+      const t = v.angle * Math.PI / 180, opp = Math.sin(t), adj = Math.cos(t);
+      return [['Angle θ', n(v.angle, 0) + '°'], ['sin θ = opp/hyp', n(opp, 3)], ['cos θ = adj/hyp', n(adj, 3)], ['tan θ = opp/adj', n(opp / adj, 3)]];
+    },
+    draw(t, v, dt) {
+      const t2 = v.angle * Math.PI / 180, cx = 90, cy = H - 60;
+      const L = Math.min(W - cx - 60, H - 140);
+      const bx = cx + L * Math.cos(t2), by = cy, dx = cx, dy = cy - L * Math.sin(t2);
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(bx, by); ctx.lineTo(dx, dy); ctx.closePath();
+      ctx.fillStyle = 'rgba(255,138,91,.14)'; ctx.fill(); ctx.strokeStyle = ACC; ctx.lineWidth = 3; ctx.lineJoin = 'round'; ctx.stroke();
+      line(bx - 16, by, bx - 16, by - 16, ACC2, 2); line(bx - 16, by - 16, bx, by - 16, ACC2, 2);
+      ctx.beginPath(); ctx.arc(cx, cy, 44, -t2, 0); ctx.strokeStyle = ACC2; ctx.lineWidth = 2.5; ctx.stroke();
+      text('θ = ' + v.angle + '°', cx + 58 * Math.cos(t2 / 2), cy - 58 * Math.sin(t2 / 2) + 4, ACC2, 15);
+      text('hypotenuse', (bx + dx) / 2 + 10, (by + dy) / 2 - 8, INK, 14);
+      text('opposite', dx - 12, (cy + dy) / 2, ACC2, 14, 'right');
+      text('adjacent', (cx + bx) / 2, by + 26, GREEN, 14, 'center');
+      dot(dx, dy, 7, ACC, 14); dot(bx, by, 7, ACC, 14); dot(cx, cy, 7, ACC2, 14);
+      text('SOH-CAH-TOA', W - 20, 34, MUTED, 14, 'right');
+    }
+  };
+
+  /* =====================================================
+     TOOL 6: Pendulum (SHM)
+     ===================================================== */
+  const pend = {
+    id: 'pend', name: 'Pendulum (SHM)', sub: 'Physics',
+    blurb: 'A longer pendulum swings slower. Gravity changes how fast it swings.',
+    task: 'Double the length. What happens to the period? Then try Moon gravity.',
+    v: {L: 1.5, g: 9.8, amp: 25, t: 0},
+    sliders: [{id: 'L', label: 'Length', min: 0.2, max: 3, step: 0.1, unit: ' m'}, {id: 'amp', label: 'Swing angle', min: 5, max: 45, step: 1, unit: '°'}],
+    choices: [{id: 'g', label: 'Gravity', opts: [[9.8, 'Earth'], [1.62, 'Moon'], [3.71, 'Mars']]}],
+    read(v) {
+      const T = 2 * Math.PI * Math.sqrt(v.L / v.g);
+      return [['Length L', n(v.L, 1) + ' m'], ['Gravity g', n(v.g, 2) + ' m/s²'], ['Period T = 2π√(L/g)', n(T, 2) + ' s'], ['Frequency f = 1/T', n(1 / T, 2) + ' Hz']];
+    },
+    draw(t, v, dt) {
+      v.t += dt / 1000;
+      const T = 2 * Math.PI * Math.sqrt(v.L / v.g), w = 2 * Math.PI / T;
+      const A = v.amp * Math.PI / 180, th = A * Math.cos(w * v.t);
+      const px = W / 2, py = 60, lenPx = (H - 140) * (v.L / 3);
+      const bx = px + lenPx * Math.sin(th), by = py + lenPx * Math.cos(th);
+      for (let i = -3; i <= 3; i++) line(px - 70 + (i + 3) * 20, py - 12, px - 50 + (i + 3) * 20, py, '#6d7fc7', 2);
+      line(px - 70, py, px + 70, py, '#8ea2e8', 4);
+      ctx.beginPath(); ctx.arc(px, py, lenPx, Math.PI / 2 - A, Math.PI / 2 + A);
+      ctx.strokeStyle = 'rgba(255,200,87,.3)'; ctx.setLineDash([5, 5]); ctx.lineWidth = 1.5; ctx.stroke(); ctx.setLineDash([]);
+      line(px, py, px, py + lenPx, 'rgba(150,170,240,.25)', 1, [3, 5]);
+      line(px, py, bx, by, '#8ea2e8', 3);
+      dot(px, py, 5, INK); dot(bx, by, 18, ACC, 22);
+      text('θ = ' + n(th * 180 / Math.PI, 1) + '°', px + 100, py + 26, ACC2, 14);
+      text('T = ' + n(T, 2) + ' s', W - 20, 34, ACC2, 15, 'right');
+      text('f = ' + n(1 / T, 2) + ' Hz', W - 20, 56, GREEN, 14, 'right');
+    }
+  };
+
+  /* =====================================================
+     TOOL 7: DNA base pairing
+     ===================================================== */
+  const dna = {
+    id: 'dna', name: 'DNA base pairing', sub: 'Biology',
+    blurb: 'A always pairs with T, G always pairs with C. Mutate a base to see the effect.',
+    task: 'If one strand reads A-T-G-C, what does the other strand read?',
+    v: {seq: 'ATGC'},
+    buttons: [
+      {label: 'Mutate base 1', run() { dna.mut(0); }},
+      {label: 'Mutate base 2', run() { dna.mut(1); }},
+      {label: 'Mutate base 3', run() { dna.mut(2); }},
+      {label: 'Mutate base 4', run() { dna.mut(3); }},
+      {label: 'Reset to ATGC', run() { dna.v.seq = 'ATGC'; renderRead(); }}
+    ],
+    mut(i) {
+      const order = 'ATGC', idx = order.indexOf(this.v.seq[i]);
+      this.v.seq = this.v.seq.slice(0, i) + order[(idx + 1) % 4] + this.v.seq.slice(i + 1);
+      renderRead();
+    },
+    read(v) {
+      const p = {A: 'T', T: 'A', G: 'C', C: 'G'};
+      const top = v.seq, bot = top.split('').map(b => p[b]).join('');
+      const hb = top.split('').reduce((s, b) => s + (b === 'G' || b === 'C' ? 3 : 2), 0);
+      return [['Strand 1', top], ['Strand 2', bot], ['Length', top.length + ' bp'], ['H-bonds total', hb]];
+    },
+    draw(t, v, dt) {
+      const p = {A: 'T', T: 'A', G: 'C', C: 'G'};
+      const col = {A: ACC, T: BLUE, G: GREEN, C: ACC2};
+      const seq = v.seq, cw = Math.min(W * 0.85 / seq.length, 110), totalW = cw * seq.length;
+      const sx = (W - totalW) / 2, my = H / 2;
+      line(sx - 18, my - 52, sx + totalW + 18, my - 52, '#8ea2e8', 4);
+      line(sx - 18, my + 52, sx + totalW + 18, my + 52, '#8ea2e8', 4);
+      for (let i = 0; i < seq.length; i++) {
+        const x = sx + cw * i + cw / 2, top = seq[i], bot = p[top] || '?', bw = 32;
+        ctx.fillStyle = col[top]; ctx.fillRect(x - bw / 2, my - 46, bw, 30);
+        text(top, x, my - 24, '#0a1029', 20, 'center');
+        ctx.fillStyle = col[bot]; ctx.fillRect(x - bw / 2, my + 16, bw, 30);
+        text(bot, x, my + 38, '#0a1029', 20, 'center');
+        const hb = (top === 'G' || top === 'C') ? 3 : 2;
+        for (let h = 0; h < hb; h++) { const hx = x - 10 + h * 10; line(hx, my - 14, hx, my + 14, MUTED, 1.5, [3, 3]); }
+      }
+      text("Strand 1  (5' → 3')", sx - 18, my - 66, MUTED, 13);
+      text("Strand 2  (3' → 5')", sx - 18, my + 82, MUTED, 13);
+      text('● A–T  (2 H-bonds)', W - 20, 34, ACC, 13, 'right');
+      text('● G–C  (3 H-bonds)', W - 20, 56, GREEN, 13, 'right');
+    }
+  };
+
+  /* =====================================================
+     TOOL 8: Punnett square  (was missing from TOOLS array)
+     ===================================================== */
+  const punn = {
+    id: 'punn', name: 'Punnett square', sub: 'Biology',
+    blurb: 'Cross two parents and see how the offspring genotypes and phenotypes turn out.',
+    task: 'Cross Aa × Aa. What fraction of the offspring show the recessive trait?',
+    v: {p1: 'Aa', p2: 'Aa'},
+    choices: [
+      {id: 'p1', label: 'Parent 1', opts: [['AA', 'AA'], ['Aa', 'Aa'], ['aa', 'aa']], text: true},
+      {id: 'p2', label: 'Parent 2', opts: [['AA', 'AA'], ['Aa', 'Aa'], ['aa', 'aa']], text: true}
+    ],
+    read(v) {
+      const g = []; for (const a of v.p1) for (const b of v.p2) g.push(a + b);
+      const cnt = {AA: 0, Aa: 0, aa: 0};
+      g.forEach(x => { const k = (x[0] === 'A' && x[1] === 'A') ? 'AA' : (x === 'aa') ? 'aa' : 'Aa'; cnt[k]++; });
+      return [['Parent 1 × 2', v.p1 + ' × ' + v.p2], ['AA : Aa : aa', cnt.AA + ' : ' + cnt.Aa + ' : ' + cnt.aa], ['Dominant phenotype', (cnt.AA + cnt.Aa) + '/4'], ['Recessive phenotype', cnt.aa + '/4']];
+    },
+    draw(t, v, dt) {
+      const padX = 120, padY = 100;
+      const cw = Math.min((W - padX - 40) / 2, (H - padY - 40) / 2);
+      const sx = (W - cw * 2) / 2 + 40, sy = (H - cw * 2) / 2 + 30;
+      for (let j = 0; j < 2; j++) {
+        ctx.fillStyle = 'rgba(94,194,255,.25)'; ctx.fillRect(sx + j * cw, sy - 44, cw, 40);
+        text(v.p2[j], sx + j * cw + cw / 2, sy - 16, BLUE, 22, 'center');
+      }
+      for (let i = 0; i < 2; i++) {
+        ctx.fillStyle = 'rgba(255,138,91,.25)'; ctx.fillRect(sx - 48, sy + i * cw, 44, cw);
+        text(v.p1[i], sx - 26, sy + i * cw + cw / 2 + 8, ACC, 22, 'center');
+      }
+      for (let i = 0; i < 2; i++) for (let j = 0; j < 2; j++) {
+        const a = v.p1[i], b = v.p2[j], g = a + b, isDom = !(a === 'a' && b === 'a');
+        ctx.fillStyle = isDom ? 'rgba(110,231,183,.18)' : 'rgba(255,92,138,.18)';
+        ctx.fillRect(sx + j * cw, sy + i * cw, cw, cw);
+        ctx.strokeStyle = isDom ? GREEN : '#ff5c8a'; ctx.lineWidth = 2;
+        ctx.strokeRect(sx + j * cw + 1, sy + i * cw + 1, cw - 2, cw - 2);
+        text((g === 'aA') ? 'Aa' : g, sx + j * cw + cw / 2, sy + i * cw + cw / 2 + 10, INK, Math.min(30, cw * 0.3), 'center');
+      }
+      text('Punnett square', W / 2, 30, MUTED, 14, 'center');
+    }
+  };
+
+  /* =====================================================
+     TOOL 9: Demand & supply
+     ===================================================== */
+  const econ = {
+    id: 'econ', name: 'Demand & supply', sub: 'Economics',
+    blurb: 'Move the curves and watch the equilibrium price and quantity change.',
+    task: 'Shift demand right. What happens to price and quantity? Then shift supply right.',
+    v: {demand: 0, supply: 0},
+    sliders: [{id: 'demand', label: 'Shift demand', min: -30, max: 30, step: 1}, {id: 'supply', label: 'Shift supply', min: -30, max: 30, step: 1}],
+    read(v) {
+      const P = (100 + v.demand - v.supply) / 2, Q = P + v.supply;
+      return [['Equilibrium price', n(P, 1)], ['Equilibrium quantity', n(Q, 1)], ['Demand line', 'Qd = 100 − P + ' + v.demand], ['Supply line', 'Qs = P + ' + v.supply]];
+    },
+    draw(t, v, dt) {
+      const padL = 60, padR = 40, padT = 50, padB = 60, X1 = 140, Y1 = 140;
+      const gx = q => padL + q / X1 * (W - padL - padR), gy = p => H - padB - p / Y1 * (H - padT - padB);
+      line(padL, padT, padL, H - padB, '#6d7fc7', 2); line(padL, H - padB, W - padR, H - padB, '#6d7fc7', 2);
+      for (let i = 20; i < X1; i += 20) { line(gx(i), padT, gx(i), H - padB, GRID, 1); text(i, gx(i), H - padB + 18, MUTED, 11, 'center'); }
+      for (let i = 20; i < Y1; i += 20) { line(padL, gy(i), W - padR, gy(i), GRID, 1); text(i, padL - 8, gy(i) + 4, MUTED, 11, 'right'); }
+      const Pd = q => 100 + v.demand - q, Ps = q => q - v.supply;
+      ctx.beginPath(); let first = true;
+      for (let q = 0; q <= X1; q += 2) { const p = Pd(q); if (p < 0 || p > Y1) continue; first ? ctx.moveTo(gx(q), gy(p)) : ctx.lineTo(gx(q), gy(p)); first = false; }
+      ctx.strokeStyle = BLUE; ctx.lineWidth = 3.5; ctx.stroke();
+      ctx.beginPath(); first = true;
+      for (let q = 0; q <= X1; q += 2) { const p = Ps(q); if (p < 0 || p > Y1) continue; first ? ctx.moveTo(gx(q), gy(p)) : ctx.lineTo(gx(q), gy(p)); first = false; }
+      ctx.strokeStyle = ACC; ctx.lineWidth = 3.5; ctx.stroke();
+      const P = (100 + v.demand - v.supply) / 2, Q = P + v.supply;
+      if (P >= 0 && P <= Y1 && Q >= 0 && Q <= X1) {
+        dot(gx(Q), gy(P), 9, ACC2, 20);
+        line(gx(Q), gy(P), gx(Q), H - padB, 'rgba(255,200,87,.5)', 2, [5, 5]);
+        line(padL, gy(P), gx(Q), gy(P), 'rgba(255,200,87,.5)', 2, [5, 5]);
+        text('E  (' + n(Q, 0) + ', ' + n(P, 0) + ')', gx(Q) + 12, gy(P) - 12, ACC2, 14);
+      }
+      text('Quantity', W - 20, H - padB + 34, MUTED, 13, 'right');
+      text('Price', padL - 8, padT - 8, MUTED, 13, 'right');
+      text('Demand', W - 60, gy(Pd(X1 - 10)) + 20, BLUE, 14, 'right');
+      text('Supply', W - 60, gy(Ps(X1 - 10)) - 8, ACC, 14, 'right');
+    }
+  };
+
+  /* =====================================================
+     TOOL 10: Plate tectonics
+     ===================================================== */
+  const plate = {
+    id: 'plate', name: 'Plate tectonics', sub: 'Geography',
+    blurb: 'See what happens at divergent, convergent and transform plate boundaries.',
+    task: 'Which boundary creates fold mountains? Which one creates a rift valley?',
+    v: {type: 'convergent', t: 0},
+    choices: [{id: 'type', label: 'Boundary type', opts: [['divergent', 'Divergent'], ['convergent', 'Convergent'], ['transform', 'Transform']], text: true}],
+    read(v) {
+      const info = {divergent: ['Moving apart', 'Rift valley, mid-ocean ridge', 'East African Rift'], convergent: ['Colliding', 'Fold mountains, trench, volcano', 'Himalayas, Andes'], transform: ['Sliding past', 'Earthquakes only', 'San Andreas Fault']}[v.type];
+      return [['Motion', info[0]], ['Landform', info[1]], ['Example', info[2]], ['Magma', v.type === 'convergent' ? 'often rises' : (v.type === 'divergent' ? 'rises at rift' : 'none')]];
+    },
+    draw(t, v, dt) {
+      v.t += dt / 1000;
+      const my = H / 2 + 20, sep = 30 + 10 * Math.sin(v.t * (v.type === 'transform' ? 3 : 1)), cx = W / 2;
+      const g = ctx.createLinearGradient(0, my + 40, 0, H); g.addColorStop(0, 'rgba(255,138,91,.4)'); g.addColorStop(1, 'rgba(255,138,91,0)');
+      ctx.fillStyle = g; ctx.fillRect(0, my + 40, W, H - my - 40);
+      const thick = 70;
+      if (v.type === 'divergent') {
+        const lx = cx - 60 - sep, rx = cx + 60 + sep;
+        ctx.fillStyle = '#5c4a2e';
+        ctx.beginPath(); ctx.moveTo(30, my); ctx.lineTo(lx, my); ctx.lineTo(lx - 15, my + thick); ctx.lineTo(30, my + thick); ctx.closePath(); ctx.fill();
+        ctx.strokeStyle = '#8a7550'; ctx.lineWidth = 2; ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(W - 30, my); ctx.lineTo(rx, my); ctx.lineTo(rx + 15, my + thick); ctx.lineTo(W - 30, my + thick); ctx.closePath(); ctx.fill(); ctx.stroke();
+        const rg = ctx.createLinearGradient(cx - 40, 0, cx + 40, 0); rg.addColorStop(0, 'rgba(255,92,138,0)'); rg.addColorStop(0.5, 'rgba(255,92,138,.7)'); rg.addColorStop(1, 'rgba(255,92,138,0)');
+        ctx.fillStyle = rg; ctx.fillRect(cx - 40, my + thick, 80, 12);
+        text('Rift valley forming', cx, my - 22, ACC2, 15, 'center');
+        arrow(cx - 80, my + thick + 30, cx - 130, my + thick + 30, BLUE); arrow(cx + 80, my + thick + 30, cx + 130, my + thick + 30, BLUE);
+        text('← moving apart →', cx, my + thick + 55, BLUE, 13, 'center');
+      } else if (v.type === 'convergent') {
+        const lx = cx - 20 + sep, rx = cx + 20 - sep;
+        ctx.fillStyle = '#5c4a2e';
+        ctx.beginPath(); ctx.moveTo(30, my); ctx.lineTo(lx, my); ctx.lineTo(rx - 20, my - 60); ctx.lineTo(rx, my - 60); ctx.lineTo(rx + 30, my + thick); ctx.lineTo(30, my + thick); ctx.closePath();
+        ctx.fill(); ctx.strokeStyle = '#8a7550'; ctx.lineWidth = 2; ctx.stroke();
+        ctx.fillStyle = '#a89068'; ctx.beginPath(); ctx.moveTo(rx - 20, my - 60); ctx.lineTo(rx + 20, my - 60); ctx.lineTo(rx, my - 95); ctx.closePath(); ctx.fill();
+        ctx.fillStyle = '#eef1ff'; ctx.beginPath(); ctx.moveTo(rx - 8, my - 75); ctx.lineTo(rx + 8, my - 75); ctx.lineTo(rx, my - 95); ctx.closePath(); ctx.fill();
+        dot(rx + 60, my + thick, 8, ACC, 18);
+        text('Fold mountains + volcano', cx + 40, my - 110, ACC2, 14, 'center');
+        arrow(cx - 80, my + thick + 30, cx - 30, my + thick + 30, BLUE); arrow(cx + 80, my + thick + 30, cx + 30, my + thick + 30, BLUE);
+        text('→ colliding ←', cx, my + thick + 55, BLUE, 13, 'center');
+      } else {
+        ctx.fillStyle = '#5c4a2e'; ctx.fillRect(0, my - 45, W, thick);
+        ctx.strokeStyle = '#8a7550'; ctx.lineWidth = 2; ctx.strokeRect(0, my - 45, W, thick);
+        line(0, my - 45 + thick, W, my - 45 + thick, '#ff5c8a', 3, [8, 6]);
+        const off = 40 * Math.sin(v.t * 2);
+        arrow(60 + off, my - 45 + thick + 30, 160 + off, my - 45 + thick + 30, BLUE);
+        arrow(W - 60 - off, my - 45 + thick + 30, W - 160 - off, my - 45 + thick + 30, BLUE);
+        text('Slide past → earthquakes', cx, my - 100, ACC2, 15, 'center');
+      }
+      text(v.type.toUpperCase() + ' boundary', 30, 34, ACC2, 15);
+    }
+  };
+
+  /* =====================================================
+     TOOL 11: Slope & line
+     ===================================================== */
+  const slope = {
+    id: 'slope', name: 'Slope & line', sub: 'Mathematics',
+    blurb: 'Move m and c to see how slope and intercept shape a line. Compare with a perpendicular line.',
+    task: 'Set m = 2, c = 4. What is the x-intercept? Now try m = -0.5 — is that perpendicular to m = 2?',
+    v: {m: 1, c: 1},
+    sliders: [{id: 'm', label: 'Slope m', min: -3, max: 3, step: 0.1}, {id: 'c', label: 'Intercept c', min: -6, max: 6, step: 0.5}],
+    read(v) {
+      const m = v.m, c = v.c, xi = Math.abs(m) < 0.001 ? 'none' : n(-c / m, 2), perp = Math.abs(m) < 0.001 ? 'vertical' : n(-1 / m, 2);
+      return [['Equation', 'y = ' + n(m, 2) + 'x ' + (c < 0 ? '− ' : '+ ') + n(Math.abs(c), 2)], ['Slope', n(m, 2)], ['y-intercept', n(c, 2)], ['x-intercept', xi], ['Perpendicular slope', perp]];
+    },
+    draw(t, v, dt) {
+      const X0 = -8, X1 = 8, Y0 = -8, Y1 = 8;
+      const px = x => (x - X0) / (X1 - X0) * W, py = y => H - (y - Y0) / (Y1 - Y0) * H;
+      for (let x = X0; x <= X1; x += 2) line(px(x), 0, px(x), H, x === 0 ? '#6d7fc7' : GRID, x === 0 ? 1.6 : 1);
+      for (let y = Y0; y <= Y1; y += 2) line(0, py(y), W, py(y), y === 0 ? '#6d7fc7' : GRID, y === 0 ? 1.6 : 1);
+      if (Math.abs(v.m) > 0.001) {
+        const mp = -1 / v.m;
+        ctx.beginPath(); ctx.strokeStyle = 'rgba(110,231,183,.55)'; ctx.lineWidth = 2; ctx.setLineDash([6, 6]);
+        ctx.moveTo(px(X0), py(mp * X0 + v.c)); ctx.lineTo(px(X1), py(mp * X1 + v.c)); ctx.stroke(); ctx.setLineDash([]);
+      }
+      ctx.beginPath(); ctx.strokeStyle = ACC; ctx.lineWidth = 3.5; ctx.shadowColor = ACC; ctx.shadowBlur = 12;
+      ctx.moveTo(px(X0), py(v.m * X0 + v.c)); ctx.lineTo(px(X1), py(v.m * X1 + v.c)); ctx.stroke(); ctx.shadowBlur = 0;
+      dot(px(0), py(v.c), 7, ACC2, 14); text('(0, ' + n(v.c, 1) + ')', px(0) + 10, py(v.c) - 8, ACC2, 13);
+      if (Math.abs(v.m) > 0.001) {
+        const xi = -v.c / v.m;
+        if (xi > X0 && xi < X1) { dot(px(xi), py(0), 7, GREEN, 14); text('(' + n(xi, 1) + ', 0)', px(xi) + 10, py(0) + 20, GREEN, 13); }
+      }
+      text('y = mx + c', W - 20, 30, INK, 14, 'right');
+      text('dashed = perpendicular', W - 20, 52, GREEN, 12, 'right');
+    }
+  };
+
+  /* =====================================================
+     TOOL 12: Vector adder
+     ===================================================== */
+  const vec = {
+    id: 'vec', name: 'Vector adder', sub: 'Mathematics',
+    blurb: 'Add two vectors graphically. See the resultant, its magnitude and its direction.',
+    task: 'Make A + B point straight up with length 10. What combination of components gives that?',
+    v: {ax: 4, ay: 3, bx: 2, by: -2},
+    sliders: [
+      {id: 'ax', label: 'A: x-component', min: -8, max: 8, step: 0.5}, {id: 'ay', label: 'A: y-component', min: -8, max: 8, step: 0.5},
+      {id: 'bx', label: 'B: x-component', min: -8, max: 8, step: 0.5}, {id: 'by', label: 'B: y-component', min: -8, max: 8, step: 0.5}
+    ],
+    read(v) {
+      const rx = v.ax + v.bx, ry = v.ay + v.by, mag = Math.hypot(rx, ry), dir = Math.atan2(ry, rx) * 180 / Math.PI, dt2 = v.ax * v.bx + v.ay * v.by;
+      return [['A', '(' + n(v.ax, 1) + ', ' + n(v.ay, 1) + ')'], ['B', '(' + n(v.bx, 1) + ', ' + n(v.by, 1) + ')'], ['A + B', '(' + n(rx, 1) + ', ' + n(ry, 1) + ')'], ['|A + B|', n(mag, 2)], ['Direction', n(dir, 1) + '°'], ['A · B', n(dt2, 2)]];
+    },
+    draw(t, v, dt) {
+      const X0 = -10, X1 = 10, Y0 = -10, Y1 = 10;
+      const px = x => (x - X0) / (X1 - X0) * W, py = y => H - (y - Y0) / (Y1 - Y0) * H;
+      for (let x = X0; x <= X1; x += 2) line(px(x), 0, px(x), H, x === 0 ? '#6d7fc7' : GRID, x === 0 ? 1.6 : 1);
+      for (let y = Y0; y <= Y1; y += 2) line(0, py(y), W, py(y), y === 0 ? '#6d7fc7' : GRID, y === 0 ? 1.6 : 1);
+      const ox = px(0), oy = py(0);
+      arrow(ox, oy, px(v.bx), py(v.by), GREEN); text('B', px(v.bx / 2) + 12, py(v.by / 2) + 14, GREEN, 15);
+      arrow(px(v.ax), py(v.ay), px(v.ax + v.bx), py(v.ay + v.by), 'rgba(110,231,183,.55)');
+      arrow(ox, oy, px(v.ax), py(v.ay), BLUE); text('A', px(v.ax / 2) + 12, py(v.ay / 2) - 8, BLUE, 15);
+      arrow(ox, oy, px(v.ax + v.bx), py(v.ay + v.by), ACC2);
+      text('A+B', px((v.ax + v.bx) / 2) - 12, py((v.ay + v.by) / 2) - 10, ACC2, 15, 'right');
+      dot(px(v.ax + v.bx), py(v.ay + v.by), 7, ACC2, 16);
+      ctx.beginPath(); ctx.strokeStyle = 'rgba(255,200,87,.3)'; ctx.lineWidth = 1; ctx.setLineDash([4, 4]);
+      ctx.moveTo(px(v.ax), py(v.ay)); ctx.lineTo(px(v.ax + v.bx), py(v.ay + v.by));
+      ctx.moveTo(px(v.bx), py(v.by)); ctx.lineTo(px(v.ax + v.bx), py(v.ay + v.by)); ctx.stroke(); ctx.setLineDash([]);
+    }
+  };
+
+  /* =====================================================
+     TOOL 13: Wave interference
+     ===================================================== */
+  const waveint = {
+    id: 'waveint', name: 'Wave interference', sub: 'Physics',
+    blurb: 'Two waves meet. If crests line up they reinforce; if crest meets trough they cancel.',
+    task: "Set both amplitudes to 1, then change B's phase to 180°. The sum should be flat — that's destructive interference.",
+    v: {a1: 1, a2: 1, phase: 0, freq: 1},
+    sliders: [
+      {id: 'a1', label: 'Wave A amplitude', min: 0, max: 2, step: 0.1}, {id: 'a2', label: 'Wave B amplitude', min: 0, max: 2, step: 0.1},
+      {id: 'phase', label: 'Phase shift of B', min: 0, max: 360, step: 5, unit: '°'}, {id: 'freq', label: 'Frequency', min: 0.5, max: 3, step: 0.1}
+    ],
+    read(v) {
+      const max = v.a1 + v.a2, min = Math.abs(v.a1 - v.a2), p = v.phase;
+      const type = (p < 20 || p > 340) ? 'Constructive' : (Math.abs(p - 180) < 20 ? 'Destructive' : 'Mixed');
+      return [['A amplitude', n(v.a1, 1)], ['B amplitude', n(v.a2, 1)], ['Phase shift', n(p, 0) + '°'], ['Sum: max amplitude', n(max, 2)], ['Sum: min amplitude', n(min, 2)], ['Interference', type]];
+    },
+    draw(t, v, dt) {
+      const midY = H / 2, scaleY = Math.min(60, H * 0.14), ph = v.phase * Math.PI / 180, k = v.freq * 2 * Math.PI / (W - 40);
+      ctx.beginPath(); ctx.strokeStyle = BLUE; ctx.lineWidth = 2.5;
+      for (let x = 20; x <= W - 20; x += 3) { const y = midY - v.a1 * scaleY * Math.sin(k * (x - 20)); x === 20 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); }
+      ctx.stroke();
+      ctx.beginPath(); ctx.strokeStyle = GREEN; ctx.lineWidth = 2.5; ctx.setLineDash([6, 5]);
+      for (let x = 20; x <= W - 20; x += 3) { const y = midY - v.a2 * scaleY * Math.sin(k * (x - 20) + ph); x === 20 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); }
+      ctx.stroke(); ctx.setLineDash([]);
+      ctx.beginPath(); ctx.strokeStyle = ACC; ctx.lineWidth = 3.5; ctx.shadowColor = ACC; ctx.shadowBlur = 12;
+      for (let x = 20; x <= W - 20; x += 3) {
+        const y1 = v.a1 * scaleY * Math.sin(k * (x - 20)), y2 = v.a2 * scaleY * Math.sin(k * (x - 20) + ph), y = midY + (y1 + y2) * 0.55;
+        x === 20 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke(); ctx.shadowBlur = 0;
+      text('A', 26, 30, BLUE, 14); text('B (dashed)', 46, 30, GREEN, 14); text('A + B (bottom half)', W - 20, H - 14, ACC, 13, 'right');
+    }
+  };
+
+  /* =====================================================
+     TOOL 14: Lens ray diagram
+     ===================================================== */
+  const lens = {
+    id: 'lens', name: 'Lens ray diagram', sub: 'Physics',
+    blurb: 'Move the object and see where the image forms. Try u > f, then u < f.',
+    task: 'Set f = 15, u = 45. Where is the image? Then set u = 10 (inside the focus). What changes?',
+    v: {u: 45, f: 15},
+    sliders: [{id: 'u', label: 'Object distance u', min: 5, max: 60, step: 1}, {id: 'f', label: 'Focal length f', min: 5, max: 30, step: 1}],
+    read(v) {
+      const u = v.u, f = v.f, vv = Math.abs(u - f) < 0.5 ? null : u * f / (u - f), m = vv === null ? null : -vv / u;
+      if (vv === null) return [['f', f], ['u', u], ['Image', 'at infinity'], ['Because', 'object is exactly at F']];
+      const real = vv > 0;
+      return [['f', f], ['u', u], ['v = uf /(u−f)', n(vv, 1)], ['Magnification |m|', n(Math.abs(m), 2)], ['Image', real ? 'Real, inverted' : 'Virtual, upright'], ['Size', Math.abs(m) > 1 ? 'Enlarged' : Math.abs(m) < 1 ? 'Diminished' : 'Same size']];
+    },
+    draw(t, v, dt) {
+      const cy = H / 2 + 10, h = 45, scale = Math.min(W / 130, 5), cx = W * 0.55;
+      const u = v.u, f = v.f, vv = Math.abs(u - f) < 0.5 ? null : u * f / (u - f), hp = vv === null ? null : h * f / (f - u), ox = cx - u * scale;
+      line(10, cy, W - 10, cy, 'rgba(150,170,240,.5)', 1.5);
+      line(cx, cy - H * 0.4, cx, cy + H * 0.4, 'rgba(150,170,240,.75)', 2.5);
+      if (f * scale < W / 2) { dot(cx - f * scale, cy, 4, ACC2, 8); dot(cx + f * scale, cy, 4, ACC2, 8); text('F', cx - f * scale - 14, cy - 6, ACC2, 12); text("F'", cx + f * scale + 6, cy - 6, ACC2, 12); }
+      arrow(ox, cy, ox, cy - h, ACC); text('object', ox, cy + 20, ACC, 12, 'center');
+      if (vv === null) {
+        ctx.beginPath(); ctx.strokeStyle = 'rgba(255,200,87,.7)'; ctx.lineWidth = 1.5;
+        ctx.moveTo(ox, cy - h); ctx.lineTo(cx, cy - h); ctx.lineTo(W - 10, cy + (W - 10 - cx) * h / (f * scale)); ctx.stroke();
+        text('image at infinity', W - 20, 34, ACC2, 14, 'right'); return;
+      }
+      const ix = cx + vv * scale, iy = cy - hp, isReal = vv > 0;
+      ctx.beginPath(); ctx.strokeStyle = 'rgba(255,200,87,.7)'; ctx.lineWidth = 1.5;
+      ctx.moveTo(ox, cy - h); ctx.lineTo(cx, cy - h);
+      const s = vv / f; ctx.lineTo(cx + s * f * scale, cy - h + s * h); ctx.stroke();
+      ctx.beginPath(); ctx.strokeStyle = 'rgba(94,194,255,.7)'; ctx.lineWidth = 1.5;
+      ctx.moveTo(ox, cy - h); ctx.lineTo(ix, iy); ctx.stroke();
+      if (ix > 5 && ix < W - 5) { arrow(ix, cy, ix, iy, isReal ? GREEN : BLUE); text(isReal ? 'real, inverted' : 'virtual, upright', ix, cy + 22, isReal ? GREEN : BLUE, 12, 'center'); }
+    }
+  };
+
+  /* =====================================================
+     TOOL 15: Atomic structure builder
+     ===================================================== */
+  const atom = {
+    id: 'atom', name: 'Atomic structure', sub: 'Chemistry',
+    blurb: 'Change the atomic number and watch electrons fill the shells (2, 8, 8, 2).',
+    task: 'Which element has 2, 8, 1 as its electron arrangement? Which group of the periodic table?',
+    v: {z: 11},
+    sliders: [{id: 'z', label: 'Atomic number Z', min: 1, max: 20, step: 1}],
+    read(v) {
+      const el = [['', ''], ['H', 'Hydrogen'], ['He', 'Helium'], ['Li', 'Lithium'], ['Be', 'Beryllium'], ['B', 'Boron'], ['C', 'Carbon'], ['N', 'Nitrogen'], ['O', 'Oxygen'], ['F', 'Fluorine'], ['Ne', 'Neon'], ['Na', 'Sodium'], ['Mg', 'Magnesium'], ['Al', 'Aluminium'], ['Si', 'Silicon'], ['P', 'Phosphorus'], ['S', 'Sulfur'], ['Cl', 'Chlorine'], ['Ar', 'Argon'], ['K', 'Potassium'], ['Ca', 'Calcium']][v.z] || ['?', 'Unknown'];
+      const caps = [2, 8, 8, 2]; let left = v.z; const shells = [];
+      for (const cap of caps) { const take = Math.min(cap, left); shells.push(take); left -= take; if (left === 0) break; }
+      return [['Element', el[0] + ' — ' + el[1]], ['Atomic number', v.z], ['Protons', v.z], ['Electrons', v.z], ['Shell arrangement', shells.join(', ')], ['Valence electrons', shells[shells.length - 1]]];
+    },
+    draw(t, v, dt) {
+      const cx = W / 2, cy = H / 2 + 10;
+      dot(cx, cy, 18, ACC, 22); text('+' + v.z, cx, cy + 5, '#0a1029', 14, 'center');
+      const caps = [2, 8, 8, 2]; let left = v.z; const shells = [];
+      for (const cap of caps) { const take = Math.min(cap, left); shells.push(take); left -= take; if (left === 0) break; }
+      const maxR = Math.min(W, H) * 0.4;
+      shells.forEach((count, i) => {
+        const r = 42 + (i + 1) * ((maxR - 42) / Math.max(shells.length, 1));
+        ctx.beginPath(); ctx.strokeStyle = 'rgba(150,170,240,' + (0.25 + 0.15 * i) + ')'; ctx.lineWidth = 1.5; ctx.arc(cx, cy, r, 0, TAU); ctx.stroke();
+        for (let e = 0; e < count; e++) {
+          const ang = (e / count) * TAU + t / 2500 * (1 + i * 0.3);
+          dot(cx + r * Math.cos(ang), cy + r * Math.sin(ang), 6, BLUE, 10);
+        }
+        text(count, cx + r + 6, cy + 4, ACC2, 12);
+      });
+      text('shells: ' + shells.join(' · '), W / 2, H - 16, ACC2, 13, 'center');
+    }
+  };
+
+  /* =====================================================
+     TOOL 16: Molarity mixer
+     ===================================================== */
+  const molar = {
+    id: 'molar', name: 'Molarity mixer', sub: 'Chemistry',
+    blurb: 'Add solute or more solvent and watch the concentration change. Dilution = adding solvent.',
+    task: 'You have 1 mol in 1 L → 1 M. Double the volume. What happens to the molarity?',
+    v: {moles: 1, volume: 1},
+    sliders: [{id: 'moles', label: 'Moles of solute (n)', min: 0, max: 5, step: 0.1}, {id: 'volume', label: 'Volume of solution (L)', min: 0.1, max: 5, step: 0.1}],
+    read(v) {
+      const M = v.moles / v.volume;
+      return [['Moles n', n(v.moles, 2) + ' mol'], ['Volume V', n(v.volume, 2) + ' L'], ['Molarity M = n / V', n(M, 3) + ' mol/L'], ['Millimolar', n(M * 1000, 1) + ' mM'], ['If diluted to 2V', n(v.moles / (2 * v.volume), 3) + ' M'], ['Dilution rule', 'M₁V₁ = M₂V₂']];
+    },
+    draw(t, v, dt) {
+      const cx = W / 2, cy = H / 2 + 10, bw = Math.min(W * 0.35, 220), bh = H * 0.62, bx = cx - bw / 2, by = cy - bh / 2;
+      const liquidH = bh * (v.volume / 5), liquidY = by + bh - liquidH;
+      ctx.strokeStyle = 'rgba(150,170,240,.75)'; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx, by + bh); ctx.lineTo(bx + bw, by + bh); ctx.lineTo(bx + bw, by); ctx.stroke();
+      ctx.fillStyle = 'rgba(94,194,255,.32)'; ctx.fillRect(bx + 3, liquidY, bw - 6, bh - (liquidY - by) - 3);
+      const N = Math.floor(v.moles * 45);
+      for (let i = 0; i < N; i++) {
+        const px = bx + 10 + ((i * 67) % (bw - 20)), py = liquidY + 8 + ((i * 103) % Math.max(10, liquidH - 16));
+        dot(px, py, 4, ACC2, 6);
+      }
+      text(n(v.moles, 1) + ' mol solute', cx, by - 14, ACC2, 14, 'center');
+      text(n(v.volume, 1) + ' L', cx, by + bh + 22, BLUE, 14, 'center');
+      text('M = ' + n(v.moles / v.volume, 2) + ' mol/L', cx, H - 14, INK, 15, 'center');
+    }
+  };
+
+  /* =====================================================
+     NEW TOOL: Quantum Mechanical Model of the Atom
+     ===================================================== */
+  const quantum = {
+    id: 'quantum', name: 'Quantum atom', sub: 'Chemistry',
+    blurb: 'Quantum numbers describe where an electron can be. n sets the shell, l the orbital shape, m the orientation.',
+    task: 'Set n = 3. How many subshells? Set l = 2 (d). How many orbitals, and how many electrons can that subshell hold?',
+    v: {n: 2, l: 1, m: 0, view: 0},
+    sliders: [{id: 'n', label: 'Principal n', min: 1, max: 4, step: 1}, {id: 'l', label: 'Angular l', min: 0, max: 3, step: 1}, {id: 'm', label: 'Magnetic m', min: -3, max: 3, step: 1}],
+    choices: [{id: 'view', label: 'Show', opts: [[0, 'Orbital shape'], [1, 'Bohr shells']]}],
+    clamp() { const v = this.v; v.l = Math.max(0, Math.min(v.l, v.n - 1)); v.m = Math.max(-v.l, Math.min(v.m, v.l)); },
+    onChange() { this.clamp(); syncSlider('l'); syncSlider('m'); },
+    read(v) {
+      const names = ['s', 'p', 'd', 'f'], orbitals = 2 * v.l + 1, maxE = 2 * orbitals, cap = [2, 8, 18, 32][v.n - 1];
+      return [['Shell n', v.n], ['Subshell', v.n + names[v.l]], ['Shape l', names[v.l]], ['Orientation m', v.m], ['Orbitals in subshell', orbitals], ['Max electrons (subshell)', maxE], ['Max electrons (shell)', cap]];
+    },
+    draw(t, v, dt) {
+      const cx = W / 2, cy = H / 2 + 6;
+      if (+v.view === 1) {
+        dot(cx, cy, 14, ACC, 18); text('+' + v.n, cx, cy + 5, '#0a1029', 12, 'center');
+        for (let s = 1; s <= v.n; s++) {
+          const r = 40 + s * Math.min(48, (Math.min(W, H) * 0.4 - 40) / v.n);
+          ctx.beginPath(); ctx.strokeStyle = s === v.n ? 'rgba(255,200,87,.9)' : 'rgba(150,170,240,.35)'; ctx.lineWidth = s === v.n ? 2.5 : 1.5; ctx.arc(cx, cy, r, 0, TAU); ctx.stroke();
+          text(s + ': ' + (2 * s * s) + 'e⁻', cx + r * 0.72, cy - r * 0.72, s === v.n ? ACC2 : MUTED, 12, 'center');
+        }
+        text('shell n = ' + v.n + ' holds up to ' + 2 * v.n * v.n + ' electrons', cx, H - 16, ACC2, 13, 'center');
+        return;
+      }
+      const l = v.l, m = v.m, R = Math.min(W, H) * 0.36;
+      if (l === 0) {
+        const g = ctx.createRadialGradient(cx, cy, 4, cx, cy, R);
+        g.addColorStop(0, 'rgba(255,200,87,.85)'); g.addColorStop(0.6, 'rgba(94,194,255,.35)'); g.addColorStop(1, 'rgba(94,194,255,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, R * 0.85, 0, TAU); ctx.fill();
+        for (let i = 0; i < 40; i++) { const a = i * 2.399, rr = R * 0.8 * Math.sqrt((i + 0.5) / 40); dot(cx + rr * Math.cos(a + t / 3000), cy + rr * Math.sin(a + t / 3000), 2, 'rgba(255,255,255,.5)'); }
+        text('s orbital — spherical', cx, cy + R + 22, ACC2, 14, 'center');
+      } else if (l === 1) {
+        const ang = m === 0 ? -Math.PI / 2 : (m === 1 ? 0 : Math.PI / 4);
+        drawLobes(cx, cy, ang, R, 2, '94,194,255');
+        text('p orbital — dumbbell (m = ' + m + ')', cx, H - 16, ACC2, 14, 'center');
+      } else if (l === 2) {
+        drawLobes(cx, cy, (m === 0) ? 0 : Math.PI / 4, R, 4, '110,231,183');
+        text('d orbital — clover (m = ' + m + ')', cx, H - 16, ACC2, 14, 'center');
+      } else {
+        drawLobes(cx, cy, 0, R, 6, '255,138,91');
+        text('f orbital — multi-lobed (m = ' + m + ')', cx, H - 16, ACC2, 14, 'center');
+      }
+      text('n=' + v.n + '   l=' + v.l + '   m=' + v.m, 14, 26, MUTED, 13);
+    }
+  };
+
+  /* =====================================================
+     NEW TOOL: Newton's 2nd law on a ramp
+     ===================================================== */
+  const incline = {
+    id: 'incline', name: "Newton's 2nd law on a ramp", sub: 'Physics',
+    blurb: 'A block slides down a ramp. See how angle, mass and friction change the acceleration.',
+    task: 'Set friction μ = 0.5. At what angle does the block stop accelerating? (Hint: tan θ = μ.)',
+    v: {m: 5, angle: 25, mu: 0.3},
+    sliders: [{id: 'm', label: 'Mass m', min: 1, max: 20, step: 1, unit: ' kg'}, {id: 'angle', label: 'Ramp angle θ', min: 0, max: 60, step: 1, unit: '°'}, {id: 'mu', label: 'Friction μ', min: 0, max: 0.9, step: 0.05}],
+    calc(v) { const th = v.angle * Math.PI / 180, g = 9.8; const par = v.m * g * Math.sin(th), perp = v.m * g * Math.cos(th), fmax = v.mu * perp, net = Math.max(0, par - fmax); return {par, perp, fmax, net, a: net / v.m}; },
+    read(v) { const c = this.calc(v); return [['Weight', n(v.m * 9.8, 1) + ' N'], ['Down-slope force', n(c.par, 1) + ' N'], ['Normal force', n(c.perp, 1) + ' N'], ['Friction', n(c.fmax, 1) + ' N'], ['Net force', n(c.net, 1) + ' N'], ['Acceleration', n(c.a, 2) + ' m/s²']]; },
+    draw(t, v, dt) {
+      const c = this.calc(v), th = v.angle * Math.PI / 180, pad = 58;
+      const baseY = H - pad, leftX = pad + 10;
+      const L = Math.max(120, Math.min(W - leftX - pad, (H - 2 * pad) / Math.max(Math.sin(th), 0.18)));
+      const topX = leftX + L * Math.cos(th), topY = baseY - L * Math.sin(th);
+      line(leftX - 25, baseY, W - 20, baseY, '#6d7fc7', 2);
+      ctx.beginPath(); ctx.moveTo(leftX, baseY); ctx.lineTo(topX, topY); ctx.lineTo(topX, baseY); ctx.closePath();
+      ctx.fillStyle = 'rgba(92,74,46,.55)'; ctx.fill(); ctx.strokeStyle = '#8a7550'; ctx.lineWidth = 2; ctx.stroke();
+      ctx.beginPath(); ctx.arc(leftX, baseY, 44, -th, 0); ctx.strokeStyle = ACC2; ctx.lineWidth = 2.5; ctx.stroke();
+      text('θ = ' + v.angle + '°', leftX + 56, baseY - 16, ACC2, 14);
+      const f = 0.55, bx = leftX + L * Math.cos(th) * f, by = baseY - L * Math.sin(th) * f;
+      const ux = Math.cos(th), uy = -Math.sin(th), nx = -Math.sin(th), ny = -Math.cos(th);
+      ctx.save(); ctx.translate(bx, by); ctx.rotate(-th);
+      ctx.fillStyle = '#5ec2ff'; ctx.fillRect(-22, -14, 44, 28); ctx.strokeStyle = '#eef1ff'; ctx.lineWidth = 1.5; ctx.strokeRect(-22, -14, 44, 28);
+      ctx.restore();
+      const k = 70 / (v.m * 9.8);
+      arrow(bx, by, bx, by + 70, '#ff5c8a'); text('mg', bx + 6, by + 80, '#ff5c8a', 12);
+      arrow(bx, by, bx + nx * c.perp * k, by + ny * c.perp * k, BLUE); text('N', bx + nx * c.perp * k - 14, by + ny * c.perp * k - 6, BLUE, 12);
+      if (c.fmax * k > 4) { arrow(bx, by, bx + ux * c.fmax * k, by + uy * c.fmax * k, GREEN); text('f', bx + ux * c.fmax * k + 6, by + uy * c.fmax * k, GREEN, 12); }
+      if (c.net * k > 4) { arrow(bx, by, bx - ux * c.net * k, by - uy * c.net * k, ACC); text('F_net', bx - ux * c.net * k + 6, by - uy * c.net * k + 16, ACC, 12); }
+      text('a = ' + n(c.a, 2) + ' m/s²', 16, 26, ACC2, 15);
+    }
+  };
+
+  /* =====================================================
+     NEW TOOL: Circular motion
+     ===================================================== */
+  const circular = {
+    id: 'circular', name: 'Circular motion', sub: 'Physics',
+    blurb: 'An object moving in a circle needs a centripetal force toward the centre.',
+    task: 'Double the speed. What happens to the required force? (Hint: F depends on v².)',
+    v: {r: 2, speed: 6, mass: 1.5, t: 0},
+    sliders: [{id: 'r', label: 'Radius r', min: 0.5, max: 5, step: 0.1, unit: ' m'}, {id: 'speed', label: 'Speed v', min: 1, max: 15, step: 0.5, unit: ' m/s'}, {id: 'mass', label: 'Mass m', min: 0.1, max: 5, step: 0.1, unit: ' kg'}],
+    read(v) {
+      const a = v.speed * v.speed / v.r, F = v.mass * a, T = TAU * v.r / v.speed;
+      return [['Radius r', n(v.r, 1) + ' m'], ['Speed v', n(v.speed, 1) + ' m/s'], ['Centripetal a = v²/r', n(a, 2) + ' m/s²'], ['Centripetal F = mv²/r', n(F, 2) + ' N'], ['Period T = 2πr/v', n(T, 2) + ' s'], ['Frequency f', n(1 / T, 2) + ' Hz']];
+    },
+    draw(t, v, dt) {
+      v.t += dt / 1000;
+      const cx = W / 2, cy = H / 2 + 6, R = Math.min(W, H) * 0.32;
+      ctx.beginPath(); ctx.strokeStyle = 'rgba(150,170,240,.4)'; ctx.setLineDash([6, 6]); ctx.lineWidth = 2; ctx.arc(cx, cy, R, 0, TAU); ctx.stroke(); ctx.setLineDash([]);
+      dot(cx, cy, 4, MUTED);
+      const w = v.speed / v.r, ang = w * v.t, px = cx + R * Math.cos(ang), py = cy + R * Math.sin(ang);
+      for (let i = 1; i <= 18; i++) { const a2 = ang - i * 0.12; dot(cx + R * Math.cos(a2), cy + R * Math.sin(a2), 3, 'rgba(255,138,91,' + Math.max(0, 0.5 - i * 0.025) + ')'); }
+      const tvx = -Math.sin(ang), tvy = Math.cos(ang);
+      arrow(px, py, px + tvx * 70, py + tvy * 70, GREEN); text('v', px + tvx * 84, py + tvy * 84 + 4, GREEN, 14, 'center');
+      const fx = cx - px, fy = cy - py, fl = Math.hypot(fx, fy) || 1;
+      arrow(px, py, px + fx / fl * 70, py + fy / fl * 70, ACC); text('F', px + fx / fl * 84, py + fy / fl * 84 + 4, ACC, 14, 'center');
+      dot(px, py, 11, BLUE, 20);
+      text('F = ' + n(v.mass * v.speed * v.speed / v.r, 1) + ' N', 16, 28, ACC2, 14);
+    }
+  };
+
+  /* =====================================================
+     NEW TOOL: Energy profile (ΔH)
+     ===================================================== */
+  const hess = {
+    id: 'hess', name: 'Energy profile (ΔH)', sub: 'Chemistry',
+    blurb: 'Reactants gain activation energy to reach the transition state, then release energy as products form.',
+    task: 'Make products higher than reactants. Is the reaction exothermic or endothermic? When is ΔH negative?',
+    v: {er: 20, ep: 10, ea: 40},
+    sliders: [{id: 'er', label: 'Reactant energy', min: 0, max: 80, step: 1, unit: ' kJ'}, {id: 'ep', label: 'Product energy', min: 0, max: 80, step: 1, unit: ' kJ'}, {id: 'ea', label: 'Activation energy Ea', min: 5, max: 80, step: 1, unit: ' kJ'}],
+    read(v) {
+      const dH = v.ep - v.er;
+      return [['Reactants', v.er + ' kJ'], ['Products', v.ep + ' kJ'], ['ΔH = products − reactants', n(dH, 1) + ' kJ'], ['Type', dH < 0 ? 'Exothermic' : (dH > 0 ? 'Endothermic' : 'No change')], ['Ea (forward)', v.ea + ' kJ'], ['Ea (reverse)', n(v.ea - dH, 1) + ' kJ']];
+    },
+    draw(t, v, dt) {
+      const padL = 56, padR = 30, padT = 40, padB = 44;
+      const maxE = Math.max(v.er + v.ea, v.ep) + 8;
+      const gx = x => padL + x * (W - padL - padR), gy = e => H - padB - (e / maxE) * (H - padT - padB);
+      line(padL, padT, padL, H - padB, '#6d7fc7', 2); line(padL, H - padB, W - padR, H - padB, '#6d7fc7', 2);
+      for (let e = 0; e <= maxE; e += Math.ceil(maxE / 6)) line(padL, gy(e), W - padR, gy(e), GRID, 1);
+      text('reaction progress', W - padR, H - padB + 24, MUTED, 12, 'right');
+      text('energy', padL - 6, padT - 10, MUTED, 12, 'right');
+      const smooth = s => s * s * (3 - 2 * s);
+      ctx.beginPath(); ctx.strokeStyle = ACC; ctx.lineWidth = 3.5; ctx.shadowColor = ACC; ctx.shadowBlur = 10;
+      for (let i = 0; i <= 100; i++) {
+        const x = i / 100; let e;
+        if (x < 0.5) e = v.er + v.ea * smooth(x / 0.5);
+        else e = v.er + v.ea - (v.er + v.ea - v.ep) * smooth((x - 0.5) / 0.5);
+        const X = gx(0.08 + 0.84 * x), Y = gy(e); i ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y);
+      }
+      ctx.stroke(); ctx.shadowBlur = 0;
+      line(gx(0.08), gy(v.er), gx(0.5), gy(v.er), 'rgba(255,200,87,.5)', 1.5, [5, 5]);
+      line(gx(0.5), gy(v.ep), gx(0.92), gy(v.ep), 'rgba(110,231,183,.5)', 1.5, [5, 5]);
+      text('reactants', gx(0.08), gy(v.er) - 8, ACC2, 12);
+      text('products', gx(0.92), gy(v.ep) - 8, GREEN, 12, 'right');
+      dot(gx(0.5), gy(v.er + v.ea), 7, ACC, 16);
+      text('transition state', gx(0.5), gy(v.er + v.ea) - 12, ACC, 12, 'center');
+      const dH = v.ep - v.er, bx = gx(0.965);
+      line(bx, gy(v.er), bx, gy(v.ep), '#ff5c8a', 2.5);
+      text('ΔH = ' + n(dH, 1) + ' kJ', bx - 6, (gy(v.er) + gy(v.ep)) / 2, '#ff5c8a', 13, 'right');
+      text(dH < 0 ? 'Exothermic' : (dH > 0 ? 'Endothermic' : 'No change'), 16, 26, dH < 0 ? GREEN : ACC2, 15);
+    }
+  };
+
+  /* =====================================================
+     NEW TOOL: Acid–base titration
+     ===================================================== */
+  const titr = {
+    id: 'titr', name: 'Acid–base titration', sub: 'Chemistry',
+    blurb: 'Add base to acid and watch pH change. The steep jump marks the equivalence point.',
+    task: 'Set Ca = Cb = 0.1 M, Va = 25 mL. At what volume added does pH = 7?',
+    v: {ca: 0.1, cb: 0.1, va: 25, vb: 0},
+    sliders: [{id: 'ca', label: 'Acid conc. Ca (M)', min: 0.01, max: 0.5, step: 0.01}, {id: 'cb', label: 'Base conc. Cb (M)', min: 0.01, max: 0.5, step: 0.01}, {id: 'va', label: 'Acid volume Va (mL)', min: 5, max: 50, step: 1, unit: ' mL'}, {id: 'vb', label: 'Base added (mL)', min: 0, max: 60, step: 0.5, unit: ' mL'}],
+    pH(vb, v) {
+      const Va = v.va / 1000, Vb = vb / 1000, Vt = Va + Vb, nA = v.ca * Va, nB = v.cb * Vb;
+      if (Math.abs(nA - nB) < 1e-12) return 7;
+      if (nA > nB) return -Math.log10(Math.max(1e-14, (nA - nB) / Vt));
+      return 14 + Math.log10(Math.max(1e-14, (nB - nA) / Vt));
+    },
+    read(v) {
+      const eq = v.ca * v.va / v.cb, ph = this.pH(v.vb, v);
+      return [['Equivalence volume', n(eq, 1) + ' mL'], ['Base added', n(v.vb, 1) + ' mL'], ['pH now', n(ph, 2)], ['Region', v.vb < eq - 0.3 ? 'Acidic (excess acid)' : (v.vb > eq + 0.3 ? 'Basic (excess base)' : 'Near equivalence')]];
+    },
+    draw(t, v, dt) {
+      const padL = 56, padR = 30, padT = 40, padB = 48, maxVb = 60;
+      const gx = x => padL + x / maxVb * (W - padL - padR), gy = p => H - padB - p / 14 * (H - padT - padB);
+      line(padL, padT, padL, H - padB, '#6d7fc7', 2); line(padL, H - padB, W - padR, H - padB, '#6d7fc7', 2);
+      for (let p = 0; p <= 14; p += 2) { line(padL, gy(p), W - padR, gy(p), GRID, 1); text(p, padL - 8, gy(p) + 4, MUTED, 11, 'right'); }
+      for (let x = 0; x <= maxVb; x += 10) { line(gx(x), padT, gx(x), H - padB, GRID, 1); text(x, gx(x), H - padB + 18, MUTED, 11, 'center'); }
+      text('base added (mL)', W - padR, H - padB + 36, MUTED, 12, 'right');
+      text('pH', padL - 6, padT - 10, MUTED, 12, 'right');
+      ctx.beginPath(); ctx.strokeStyle = ACC; ctx.lineWidth = 3; ctx.shadowColor = ACC; ctx.shadowBlur = 10;
+      for (let i = 0; i <= 240; i++) {
+        const vb = i / 240 * maxVb, p = Math.max(0, Math.min(14, this.pH(vb, v)));
+        const X = gx(vb), Y = gy(p); i ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y);
+      }
+      ctx.stroke(); ctx.shadowBlur = 0;
+      const eq = v.ca * v.va / v.cb;
+      if (eq <= maxVb) { line(gx(eq), padT, gx(eq), H - padB, 'rgba(110,231,183,.6)', 1.5, [6, 6]); text('equivalence', gx(eq) + 6, padT + 14, GREEN, 12); }
+      const pnow = Math.max(0, Math.min(14, this.pH(v.vb, v)));
+      dot(gx(Math.min(v.vb, maxVb)), gy(pnow), 9, ACC2, 18);
+      text('pH = ' + n(pnow, 2), 16, 26, ACC2, 16);
+      text('V = ' + n(v.vb, 1) + ' mL', 16, 48, MUTED, 13);
+    }
+  };
+
+  /* =====================================================
+     NEW TOOL: Mitosis stages
+     ===================================================== */
+  const mitosis = {
+    id: 'mitosis', name: 'Mitosis stages', sub: 'Biology',
+    blurb: 'One cell divides into two identical cells. Walk through interphase, prophase, metaphase, anaphase and telophase.',
+    task: 'Which stage has chromosomes lined up at the middle? Which stage separates the chromatids?',
+    v: {stage: 0},
+    choices: [{id: 'stage', label: 'Stage', opts: [[0, 'Interphase'], [1, 'Prophase'], [2, 'Metaphase'], [3, 'Anaphase'], [4, 'Telophase']]}],
+    read(v) {
+      const stages = [
+        {n: 'Interphase', e: 'DNA replicates; cell grows', c: 'chromatin (thread-like)', m: 'intact'},
+        {n: 'Prophase', e: 'Chromosomes condense; spindle forms', c: 'X-shaped chromosomes', m: 'breaking down'},
+        {n: 'Metaphase', e: 'Chromosomes line up at the equator', c: 'aligned at middle', m: 'gone'},
+        {n: 'Anaphase', e: 'Sister chromatids pull to opposite poles', c: 'separating', m: 'gone'},
+        {n: 'Telophase', e: 'Two nuclei form; cell divides', c: 'two sets', m: 'reforming'}
+      ];
+      const s = stages[+v.stage];
+      return [['Stage', s.n], ['Key event', s.e], ['Chromosomes', s.c], ['Nuclear membrane', s.m], ['Result', +v.stage === 4 ? '2 identical diploid cells' : 'one cell']];
+    },
+    draw(t, v, dt) {
+      const st = +v.stage, cx = W / 2, cy = H / 2 + 6, R = Math.min(W, H) * 0.33;
+      ctx.beginPath(); ctx.strokeStyle = 'rgba(150,170,240,.7)'; ctx.lineWidth = 3; ctx.arc(cx, cy, R, 0, TAU); ctx.stroke();
+      const chrom = (x, y, ang, col) => {
+        ctx.save(); ctx.translate(x, y); ctx.rotate(ang); ctx.strokeStyle = col; ctx.lineWidth = 6; ctx.lineCap = 'round';
+        ctx.beginPath(); ctx.moveTo(-12, -12); ctx.lineTo(12, 12); ctx.moveTo(12, -12); ctx.lineTo(-12, 12); ctx.stroke(); ctx.restore();
+      };
+      if (st === 0) {
+        ctx.beginPath(); ctx.strokeStyle = 'rgba(94,194,255,.6)'; ctx.setLineDash([5, 5]); ctx.lineWidth = 2; ctx.arc(cx, cy, R * 0.55, 0, TAU); ctx.stroke(); ctx.setLineDash([]);
+        for (let i = 0; i < 7; i++) { const a = i * TAU / 7 + t / 2500, rr = R * 0.4; ctx.beginPath(); ctx.strokeStyle = 'rgba(255,138,91,.5)'; ctx.lineWidth = 2.5; ctx.arc(cx + rr * Math.cos(a) * 0.6, cy + rr * Math.sin(a) * 0.6, 14, 0, TAU); ctx.stroke(); }
+      } else if (st === 1) {
+        ctx.beginPath(); ctx.strokeStyle = 'rgba(94,194,255,.4)'; ctx.setLineDash([5, 5]); ctx.lineWidth = 2; ctx.arc(cx, cy, R * 0.7, 0, TAU); ctx.stroke(); ctx.setLineDash([]);
+        [[-0.35, -0.35], [0.35, -0.2], [-0.25, 0.35], [0.3, 0.35]].forEach((p, i) => chrom(cx + p[0] * R, cy + p[1] * R, i * 0.6, i % 2 ? GREEN : ACC));
+      } else if (st === 2) {
+        [-0.4, -0.13, 0.13, 0.4].forEach((yy, i) => chrom(cx, cy + yy * R, 0, i % 2 ? GREEN : ACC));
+        line(cx, cy - R * 0.75, cx, cy + R * 0.75, 'rgba(255,200,87,.5)', 1.5, [5, 5]);
+      } else if (st === 3) {
+        const sep = R * 0.55;
+        [-1, 1].forEach(sgn => { [-0.12, 0.12].forEach((yy, i) => chrom(cx + sgn * sep, cy + yy * R, sgn * 0.5, i % 2 ? GREEN : ACC)); });
+        arrow(cx - sep * 0.3, cy, cx - sep, cy, BLUE); arrow(cx + sep * 0.3, cy, cx + sep, cy, BLUE);
+      } else {
+        const dx = R * 0.55;
+        [-1, 1].forEach(sgn => {
+          const x = cx + sgn * dx;
+          ctx.beginPath(); ctx.strokeStyle = 'rgba(150,170,240,.7)'; ctx.lineWidth = 2.5; ctx.arc(x, cy, R * 0.5, 0, TAU); ctx.stroke();
+          chrom(x - 10, cy, 0.4, ACC); chrom(x + 10, cy, -0.4, GREEN);
+        });
+        ctx.beginPath(); ctx.strokeStyle = 'rgba(255,92,138,.7)'; ctx.lineWidth = 3;
+        ctx.moveTo(cx, cy - R * 0.9); ctx.quadraticCurveTo(cx + 10, cy, cx, cy + R * 0.9); ctx.stroke();
+      }
+      text(['Interphase', 'Prophase', 'Metaphase', 'Anaphase', 'Telophase'][st], 16, 28, ACC2, 16);
+    }
+  };
+
+  /* =====================================================
+     NEW TOOL: Graph transformations
+     ===================================================== */
+  const transform = {
+    id: 'transform', name: 'Graph transformations', sub: 'Mathematics',
+    blurb: 'y = a·f(x − h) + k stretches, reflects and shifts the parent graph.',
+    task: 'Start with x². Set h = 2 and k = −3. Where is the vertex now? Then set a = −1.',
+    v: {base: 0, a: 1, h: 0, k: 0},
+    sliders: [{id: 'a', label: 'a (stretch / reflect)', min: -2, max: 2, step: 0.1}, {id: 'h', label: 'h (horizontal shift)', min: -5, max: 5, step: 0.5}, {id: 'k', label: 'k (vertical shift)', min: -5, max: 5, step: 0.5}],
+    choices: [{id: 'base', label: 'Parent function', opts: [[0, 'x²'], [1, 'sin x'], [2, '|x|'], [3, '√x']]}],
+    f(base, x) { return base === 0 ? x * x : base === 1 ? Math.sin(x) : base === 2 ? Math.abs(x) : (x < 0 ? NaN : Math.sqrt(x)); },
+    read(v) {
+      const base = +v.base, a = +v.a, h = +v.h, k = +v.k, names = ['x²', 'sin x', '|x|', '√x'];
+      const eq = 'y = ' + (a === 1 ? '' : n(a, 2) + '·') + names[base].replace('x', '(x − ' + n(h, 1) + ')') + (k >= 0 ? ' + ' + n(k, 1) : ' − ' + n(-k, 1));
+      const rows = [['Parent function', names[base]], ['Equation', eq], ['a', n(a, 2)], ['h', n(h, 1)], ['k', n(k, 1)]];
+      if (base === 0) rows.push(['Vertex', '(' + n(h, 1) + ', ' + n(k, 1) + ')']);
+      if (base === 1) rows.push(['Amplitude', n(Math.abs(a), 2)]);
+      rows.push(['Reflection', a < 0 ? 'reflected across x-axis' : 'none']);
+      return rows;
+    },
+    draw(t, v, dt) {
+      const base = +v.base, a = +v.a, h = +v.h, k = +v.k, X0 = -8, X1 = 8, Y0 = -8, Y1 = 8;
+      const px = x => (x - X0) / (X1 - X0) * W, py = y => H - (y - Y0) / (Y1 - Y0) * H;
+      for (let x = X0; x <= X1; x += 2) line(px(x), 0, px(x), H, x === 0 ? '#6d7fc7' : GRID, x === 0 ? 1.6 : 1);
+      for (let y = Y0; y <= Y1; y += 2) line(0, py(y), W, py(y), y === 0 ? '#6d7fc7' : GRID, y === 0 ? 1.6 : 1);
+      const drawFn = (fn, col, wd, dash) => {
+        ctx.save(); ctx.beginPath(); ctx.strokeStyle = col; ctx.lineWidth = wd; ctx.setLineDash(dash || []); ctx.lineJoin = 'round';
+        let started = false;
+        for (let i = 0; i <= 400; i++) {
+          const x = X0 + (X1 - X0) * i / 400, y = fn(x);
+          if (!isFinite(y) || y < Y0 - 4 || y > Y1 + 4) { started = false; continue; }
+          const X = px(x), Y = py(y);
+          if (!started) { ctx.moveTo(X, Y); started = true; } else ctx.lineTo(X, Y);
+        }
+        ctx.stroke(); ctx.restore();
+      };
+      drawFn(x => this.f(base, x), 'rgba(150,170,240,.55)', 2, [6, 6]);
+      drawFn(x => a * this.f(base, x - h) + k, ACC, 3.5);
+      text('parent (dashed)  →  transformed', 14, 26, MUTED, 13);
+      if (base === 0) { dot(px(h), py(k), 7, ACC2, 14); text('vertex (' + n(h, 1) + ', ' + n(k, 1) + ')', px(h) + 10, py(k) - 10, ACC2, 12); }
+    }
+  };
+
+  /* =====================================================
+     NEW TOOL: Magnetic field of a wire
+     ===================================================== */
+  const magnet = {
+    id: 'magnet', name: 'Magnetic field of a wire', sub: 'Physics',
+    blurb: 'Current in a straight wire creates circular magnetic field lines. Reverse the current and the field reverses.',
+    task: 'Double the current. Does the field at the same distance double or quadruple?',
+    v: {I: 5, r: 0.05, dir: 1},
+    sliders: [{id: 'I', label: 'Current I', min: 0.5, max: 20, step: 0.5, unit: ' A'}, {id: 'r', label: 'Distance r', min: 0.01, max: 0.2, step: 0.01, unit: ' m'}],
+    choices: [{id: 'dir', label: 'Current direction', opts: [[1, 'Up the page'], [0, 'Down the page']]}],
+    read(v) {
+      const B = 4 * Math.PI * 1e-7 * v.I / (TAU * v.r);
+      return [['Current I', n(v.I, 1) + ' A'], ['Distance r', n(v.r * 100, 1) + ' cm'], ['B = μ₀I / (2πr)', B.toExponential(2) + ' T'], ['Direction', +v.dir ? 'anticlockwise (out of page)' : 'clockwise (into page)']];
+    },
+    draw(t, v, dt) {
+      const cx = W / 2, cy = H / 2 + 6, dir = +v.dir;
+      line(cx, 30, cx, H - 40, '#8ea2e8', 5);
+      const ay = dir ? cy - 70 : cy + 70, ay2 = dir ? cy - 110 : cy + 110;
+      arrow(cx, ay, cx, ay2, ACC2); text('I', cx + 12, ay2 + (dir ? 8 : 18), ACC2, 16);
+      if (dir) { dot(cx, 22, 9, '#0a1029'); dot(cx, 22, 6, ACC2); }
+      else { ctx.strokeStyle = ACC2; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(cx - 8, 14); ctx.lineTo(cx + 8, 30); ctx.moveTo(cx + 8, 14); ctx.lineTo(cx - 8, 30); ctx.stroke(); }
+      [40, 80, 120, 160].filter(r => r < Math.min(W, H) / 2 - 20).forEach((r, i) => {
+        ctx.beginPath(); ctx.strokeStyle = 'rgba(94,194,255,' + (0.5 - i * 0.09) + ')'; ctx.lineWidth = 2; ctx.arc(cx, cy, r, 0, TAU); ctx.stroke();
+        const na = 4 + i * 2;
+        for (let j = 0; j < na; j++) {
+          const ang = j * TAU / na + (dir ? 1 : -1) * t / 2000;
+          const ax = cx + r * Math.cos(ang), ayy = cy + r * Math.sin(ang);
+          const tang = ang + (dir ? Math.PI / 2 : -Math.PI / 2);
+          arrow(ax - 6 * Math.cos(tang), ayy - 6 * Math.sin(tang), ax + 10 * Math.cos(tang), ayy + 10 * Math.sin(tang), 'rgba(94,194,255,.8)');
+        }
+      });
+      const pr = 30 + (v.r / 0.2) * 140;
+      dot(cx + pr, cy, 6, ACC2, 12); text('B here', cx + pr + 8, cy - 8, ACC2, 12);
+      text('I = ' + n(v.I, 1) + ' A', 16, 26, ACC2, 14);
+      text('B = ' + (4 * Math.PI * 1e-7 * v.I / (TAU * v.r)).toExponential(2) + ' T', 16, 48, BLUE, 13);
+    }
+  };
+
+  /* =====================================================
+     NEW TOOL: Ideal gas law
+     ===================================================== */
+  const gas = {
+    id: 'gas', name: 'Ideal gas law', sub: 'Chemistry',
+    blurb: 'Particles bounce inside a container. Heat raises their speed; adding moles raises the pressure.',
+    task: 'Double the temperature (in K). What happens to pressure if volume stays the same?',
+    v: {n: 1, T: 300, V: 22.4},
+    sliders: [{id: 'n', label: 'Moles n', min: 0.1, max: 5, step: 0.1, unit: ' mol'}, {id: 'T', label: 'Temperature T', min: 100, max: 800, step: 10, unit: ' K'}, {id: 'V', label: 'Volume V', min: 2, max: 50, step: 1, unit: ' L'}],
+    parts: null,
+    initParts() { this.parts = []; for (let i = 0; i < 120; i++) this.parts.push({x: Math.random(), y: Math.random(), vx: (Math.random() * 2 - 1) || 0.3, vy: (Math.random() * 2 - 1) || 0.3}); },
+    read(v) {
+      const R = 0.0821, P = v.n * R * v.T / v.V;
+      return [['Moles n', n(v.n, 2) + ' mol'], ['Temperature T', n(v.T, 0) + ' K'], ['Volume V', n(v.V, 1) + ' L'], ['P = nRT / V', n(P, 2) + ' atm'], ['P in kPa', n(P * 101.3, 0) + ' kPa'], ['Gas constant R', '0.0821 L·atm/mol·K']];
+    },
+    draw(t, v, dt) {
+      if (!this.parts) this.initParts();
+      const gy = H - 46, bw = Math.min(W * 0.42, 240), bh = 50 + (H * 0.45) * (v.V / 50), bx = (W - bw) / 2, by = gy - bh;
+      ctx.strokeStyle = 'rgba(150,170,240,.8)'; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx, gy); ctx.lineTo(bx + bw, gy); ctx.lineTo(bx + bw, by); ctx.stroke();
+      ctx.fillStyle = '#26346a'; ctx.fillRect(bx - 4, by - 12, bw + 8, 14); ctx.strokeStyle = '#8ea2e8'; ctx.lineWidth = 2; ctx.strokeRect(bx - 4, by - 12, bw + 8, 14);
+      line(bx + bw / 2, by - 12, bx + bw / 2, 24, '#8ea2e8', 4);
+      const shown = Math.min(this.parts.length, Math.round(20 + v.n * 20)), step = Math.sqrt(v.T / 300) * dt / 900;
+      for (let i = 0; i < shown; i++) {
+        const p = this.parts[i];
+        p.x += p.vx * step; p.y += p.vy * step;
+        if (p.x < 0.02) { p.x = 0.02; p.vx *= -1; } if (p.x > 0.98) { p.x = 0.98; p.vx *= -1; }
+        if (p.y < 0.02) { p.y = 0.02; p.vy *= -1; } if (p.y > 0.98) { p.y = 0.98; p.vy *= -1; }
+        dot(bx + p.x * bw, by + p.y * bh, 3.2, 'rgba(255,200,87,.85)');
+      }
+      text('n = ' + n(v.n, 1) + ' mol', bx, by - 24, ACC2, 13);
+      text('V = ' + n(v.V, 1) + ' L', bx + bw, gy + 22, BLUE, 13, 'right');
+      text('T = ' + n(v.T, 0) + ' K', bx + bw, gy + 40, GREEN, 13, 'right');
+      text('P = ' + n(v.n * 0.0821 * v.T / v.V, 2) + ' atm', 16, 26, ACC2, 15);
+    }
+  };
+
+  /* ---------- tool registry (all tools defined; no holes) ---------- */
+  const TOOLS = [quad, proj, circ, wave, trig, pend, dna, punn, econ, plate, slope, vec, waveint, lens, atom, molar, quantum, incline, circular, hess, titr, mitosis, transform, magnet, gas];
+
+  /* ---------- Amharic metadata ---------- */
+  const VAM = {
+    quad: {name: 'የሁለተኛ ደረጃ ተስተካካሪ ላብ', sub: 'ሒሳብ', blurb: 'a፣ b እና c ይቀይሩ፤ ፓራቦላው፣ ጫፉና ሥሮቹ ሲንቀሳቀሱ ይመልከቱ።', task: 'ኩርባው የx-ዘንጉን በአንድ ነጥብ ብቻ እንዲነካ ያድርጉ። የልዩነት መጠኑ ስንት ነው?', reads: {Equation: 'ቀመር', Discriminant: 'የልዩነት መጠን', Roots: 'ሥሮች', Vertex: 'ጫፍ ነጥብ', Opens: 'አቅጣጫ'}},
+    proj: {name: 'የፕሮጀክታይል ላብ', sub: 'ፊዚክስ', blurb: 'ኳስ ይወርውሩና በምድር፣ በጨረቃና በማርስ የሚበርበትን መንገድ ያነጻጽሩ።', task: 'በምድር ላይ ረጅሙን ርቀት የሚያስገኘው የትኛው የመወርወሪያ አንግል ነው? 30°፣ 45° እና 60° ይሞክሩ፤ ከዚያ የጨረቃን ስበት ይምረጡ።', controls: {speed: 'የመወርወር ፍጥነት', angle: 'አንግል', g: 'ስበት'}, choices: {Earth: 'ምድር', Moon: 'ጨረቃ', Mars: 'ማርስ'}, buttons: {'Launch again': 'እንደገና ወርውር'}},
+    circ: {name: 'የወረዳ ፍሰት', sub: 'ፊዚክስ', blurb: 'ነጥቦቹ የኤሌክትሪክ ፍሰቱን ያሳያሉ። በፍጥነት ሲንቀሳቀሱ በዚያ ሽቦ ያለው ፍሰት ይጨምራል።', task: 'በተመሳሳይ ተቋቋሚዎች ተከታታይና ትይዩ ግንኙነትን ይቀያይሩ። የትኛው ከፍተኛ ጠቅላላ ፍሰት ይሰጣል?', controls: {volts: 'ባትሪ', r1: 'ተቋቋሚ R1', r2: 'ተቋሚ R2', mode: 'ግንኙነት'}, choices: {Series: 'ተከታታይ', Parallel: 'ትይዩ'}},
+    wave: {name: 'የክብ መለኪያና ሞገዶች', sub: 'ሒሳብ', blurb: 'አንድ ነጥብ በክቡ ዙሪያ ይሽከረከራል። ቁመቱ የሳይን ሞገድን ይስላል፤ ስፋቱ ደግሞ ኮሳይንን ይሰጣል።', task: 'በ30°፣ 45° እና 60° ላይ ያቁሙ። ሳይንና ኮሳይን በየትኛው አንግል እኩል ናቸው? በ90° ላይ ታንጀንት ምን ይሆናል?', controls: {angle: 'አንግል', speed: 'የሽክርክሪት ፍጥነት', auto: 'ሽክርክሪት'}, choices: {Spinning: 'እየተሽከረከረ', Paused: 'ቆሟል'}},
+    trig: {name: 'የትሪጎኖሜትሪ ሶስት ማዕዘን', sub: 'ሒሳብ', blurb: 'አንግል θ ይቀይሩና ሳይን፣ ኮሳይንና ታንጀንት እንደ ጎኖች ሬሾ ይመልከቱ።', task: 'θ = 45° ያድርጉ። ስለ ሳይን θ እና ኮሳይን θ ምን ያስተውላሉ? በ85° ምን ይሆናል?', controls: {angle: 'አንግል θ'}},
+    pend: {name: 'ፔንዱለም (SHM)', sub: 'ፊዚክስ', blurb: 'ረጅም ፔንዱለም በዝግታ ይወዛወዛል። ስበት የመወዛወዙን ፍጥነት ይቀይራል።', task: 'ርዝመቱን ሁለት እጥፍ ያድርጉ። የዑደት ጊዜው ምን ይሆናል? (ፍንጭ፦ ሁለት እጥፍ አይሆንም።) ከዚያ የጨረቃ ስበትን ይሞክሩ።', controls: {L: 'ርዝመት', amp: 'የመወዛወዝ አንግል', g: 'ስበት'}, choices: {Earth: 'ምድር', Moon: 'ጨረቃ', Mars: 'ማርስ'}},
+    dna: {name: 'የDNA መሠረት ጥንድ', sub: 'ባዮሎጂ', blurb: 'A ሁልጊዜ ከT ጋር፣ G ደግሞ ከC ጋር ይጣመራል። ውጤቱን ለማየት መሠረት ይቀይሩ።', task: 'አንድ ክር A-T-G-C ከሆነ፣ ሌላው ክር ምን ይሆናል?', buttons: {'Mutate base 1': 'መሠረት 1 ቀይር', 'Mutate base 2': 'መሠረት 2 ቀይር', 'Mutate base 3': 'መሠረት 3 ቀይር', 'Mutate base 4': 'መሠረት 4 ቀይር', 'Reset to ATGC': 'ወደ ATGC መልስ'}},
+    punn: {name: 'የፓኔት ሰንጠረዥ', sub: 'ባዮሎጂ', blurb: 'ሁለት ወላጆችን ያዳቅሉና የዘሮቹን ጂኖታይፕና ፌኖታይፕ ይመልከቱ።', task: 'Aa × Aa ያዳቅሉ። ከዘሮቹ ስንት ክፍል የሪሴሲቭ ባህሪውን ያሳያል?', controls: {p1: 'ወላጅ 1', p2: 'ወላጅ 2'}},
+    econ: {name: 'ፍላጎትና አቅርቦት', sub: 'ኢኮኖሚክስ', blurb: 'ኩርባዎቹን ያንቀሳቅሱና የሚዛን ዋጋና መጠን ሲቀየሩ ይመልከቱ።', task: 'ፍላጎትን ወደ ቀኝ ያንቀሳቅሱ። ዋጋና መጠን ምን ይሆናሉ? ከዚያ አቅርቦትን ወደ ቀኝ ያንቀሳቅሱ።', controls: {demand: 'ፍላጎትን አንቀሳቅስ', supply: 'አቅርቦትን አንቀሳቅስ'}},
+    plate: {name: 'የሰሌዳ ቴክቶኒክስ', sub: 'ጂኦግራፊ', blurb: 'በሚራራቁ፣ በሚጋጩና በሚንሸራተቱ የሰሌዳ ድንበሮች ላይ የሚፈጠረውን ይመልከቱ።', task: 'የታጠፉ ተራሮችን የሚፈጥረው የትኛው ድንበር ነው? የስንጥቅ ሸለቆንስ?', controls: {type: 'የድንበር ዓይነት'}, choices: {Divergent: 'የመራራቅ', Convergent: 'የመጋጨት', Transform: 'የመንሸራተት'}},
+    slope: {name: 'ተዳፋትና መስመር', sub: 'ሒሳብ', blurb: 'ተዳፋትና መጥለፍ መስመርን እንዴት እንደሚቀርጹ ለማየት m እና c ይቀይሩ።', task: 'm = 2፣ c = 4 ያድርጉ። የx-መጥለፉ ስንት ነው? አሁን m = -0.5 ይሞክሩ፤ ከm = 2 ጋር ቀጥ ያለ ነው?', controls: {m: 'ተዳፋት m', c: 'መጥለፍ c'}},
+    vec: {name: 'የቬክተር ድምር', sub: 'ሒሳብ', blurb: 'ሁለት ቬክተሮችን በስዕል ይደምሩ። ውጤቱን፣ መጠኑንና አቅጣጫውን ይመልከቱ።', task: 'A + B ርዝመቱ 10 ሆኖ ቀጥ ወደ ላይ እንዲያመለክት ያድርጉ።', controls: {ax: 'A፦ x-ክፍል', ay: 'A፦ y-ክፍል', bx: 'B፦ x-ክፍል', by: 'B፦ y-ክፍል'}},
+    waveint: {name: 'የሞገድ ጣልቃ ገብነት', sub: 'ፊዚክስ', blurb: 'ሁለት ሞገዶች ይገናኛሉ። ጫፎች ሲደራረቡ ይጠናከራሉ፤ ጫፍና ሸለቆ ሲገናኙ ይሰረዛሉ።', task: 'ሁለቱንም ስፋት 1 ያድርጉ፤ ከዚያ የB ደረጃን ወደ 180° ይቀይሩ። ድምሩ ጠፍጣፋ መሆን አለበት፤ ይህ አፍራሽ ጣልቃ ገብነት ነው።', controls: {a1: 'የሞገድ A ስፋት', a2: 'የሞገድ B ስፋት', phase: 'የB ደረጃ ለውጥ', freq: 'ድግግሞሽ'}},
+    lens: {name: 'የሌንስ ጨረር ሥዕል', sub: 'ፊዚክስ', blurb: 'ነገሩን ያንቀሳቅሱና ምስሉ የት እንደሚፈጠር ይመልከቱ። u > f፣ ከዚያ u < f ይሞክሩ።', task: 'f = 15፣ u = 45 ያድርጉ። ምስሉ የት ነው? ከዚያ u = 10 ያድርጉ። ምን ይቀየራል?', controls: {u: 'የነገር ርቀት u', f: 'የትኩረት ርዝመት f'}},
+    atom: {name: 'የአቶም መዋቅር', sub: 'ኬሚስትሪ', blurb: 'የአቶም ቁጥሩን ይቀይሩና ኤሌክትሮኖች ቅርፊቶቹን ሲሞሉ ይመልከቱ (2፣ 8፣ 8፣ 2)።', task: '2፣ 8፣ 1 የኤሌክትሮን አደረጃጀት ያለው የትኛው ንጥረ ነገር ነው?', controls: {z: 'የአቶም ቁጥር Z'}},
+    molar: {name: 'የሞላሪቲ ድብልቅ', sub: 'ኬሚስትሪ', blurb: 'ፈሳሽ ወይም የሚሟሟ ንጥረ ነገር ይጨምሩና ክምችቱ ሲቀየር ይመልከቱ። ማቅለጥ = ፈሳሽ መጨመር።', task: 'በ1 L ውስጥ 1 mol አለ፤ ይህ 1 M ነው። መጠኑን ሁለት እጥፍ ያድርጉ። ሞላሪቲው ምን ይሆናል?', controls: {moles: 'የሚሟሟ ንጥረ ነገር ሞሎች (n)', volume: 'የመፍትሄ መጠን (L)'}},
+    quantum: {name: 'የኳንተም አቶም ሞዴል', sub: 'ኬሚስትሪ', blurb: 'ኳንተም ቁጥሮች ኤሌክትሮን የት ሊኖር እንደሚችል ይገልጻሉ። n ቅርፊቱን፣ l የኦርቢታል ቅርጹን፣ m አቅጣጫውን ይወስናል።', task: 'n = 3 ያድርጉ። ስንት ንዑስ ቅርፊቶች አሉ? l = 2 (d) ያድርጉ። ስንት ኦርቢታሎች? ያ ንዑስ ቅርፊት ስንት ኤሌክትሮን ይይዛል?', controls: {n: 'ዋና n', l: 'አንግላር l', m: 'ማግኔቲክ m', view: 'አሳይ'}, choices: {'Orbital shape': 'የኦርቢታል ቅርጽ', 'Bohr shells': 'የቦር ቅርፊቶች'}},
+    incline: {name: 'የኒውተን 2ኛ ህግ በተዳፋት ላይ', sub: 'ፊዚክስ', blurb: 'ብሎክ በተዳፋት ላይ ይንሸራተታል። አንግል፣ ስብዕናና ግጭት ማጣደፉን እንዴት እንደሚቀይሩ ይመልከቱ።', task: 'ግጭት μ = 0.5 ያድርጉ። ብሎኩ ማጣደፍ የሚያቆምበት አንግል ስንት ነው? (ፍንጭ፦ tan θ = μ።)', controls: {m: 'ስብዕና m', angle: 'የተዳፋት አንግል θ', mu: 'ግጭት μ'}},
+    circular: {name: 'ክብ እንቅስቃሴ', sub: 'ፊዚክስ', blurb: 'በክብ የሚንቀሳቀስ ነገር ወደ መሃል የሚመራ ሴንትሪፔታል ኃይል ይፈልጋል።', task: 'ፍጥነቱን ሁለት እጥፍ ያድርጉ። የሚያስፈልገው ኃይል ምን ይሆናል? (ፍንጭ፦ F በv² ላይ ይመሰረታል።)', controls: {r: 'ራዲየስ r', speed: 'ፍጥነት v', mass: 'ስብዕና m'}},
+    hess: {name: 'የኃይል መገለጫ (ΔH)', sub: 'ኬሚስትሪ', blurb: 'ምላሽ ሰጪዎች ወደ ሽግግር ሁኔታ ለመድረስ የማግበሪያ ኃይል ይወስዳሉ፣ ከዚያ ምርቶች ሲፈጠሩ ኃይል ይለቃሉ።', task: 'ምርቶች ከምላሽ ሰጪዎች ከፍ እንዲሉ ያድርጉ። ምላሹ ኤግዞተርሚክ ነው ወይስ ኢንዶተርሚክ? ΔH መቼ አሉታዊ ነው?', controls: {er: 'የምላሽ ሰጪ ኃይል', ep: 'የምርት ኃይል', ea: 'የማግበሪያ ኃይል Ea'}},
+    titr: {name: 'የአሲድ–ቤዝ ታይትሬሽን', sub: 'ኬሚስትሪ', blurb: 'ወደ አሲድ ቤዝ ይጨምሩና pH ሲቀየር ይመልከቱ። ገደላማው መዝለል የእኩልነት ነጥቡን ያሳያል።', task: 'Ca = Cb = 0.1 M፣ Va = 25 mL ያድርጉ። pH = 7 የሚሆነው በስንት መጠን ሲጨመር ነው?', controls: {ca: 'የአሲድ ክምችት Ca (M)', cb: 'የቤዝ ክምችት Cb (M)', va: 'የአሲድ መጠን Va (mL)', vb: 'የተጨመረ ቤዝ (mL)'}},
+    mitosis: {name: 'የሚቶሲስ ደረጃዎች', sub: 'ባዮሎጂ', blurb: 'አንድ ሴል ወደ ሁለት ተመሳሳይ ሴሎች ይከፈላል። በኢንተርፌዝ፣ ፕሮፌዝ፣ ሜታፌዝ፣ አናፌዝና ቴሎፌዝ ያልፉ።', task: 'ክሮሞሶሞች በመሃል የሚሰለፉበት ደረጃ የትኛው ነው? ክሮማቲዶች የሚለያዩበትስ?', controls: {stage: 'ደረጃ'}, choices: {Interphase: 'ኢንተርፌዝ', Prophase: 'ፕሮፌዝ', Metaphase: 'ሜታፌዝ', Anaphase: 'አናፌዝ', Telophase: 'ቴሎፌዝ'}},
+    transform: {name: 'የግራፍ ለውጦች', sub: 'ሒሳብ', blurb: 'y = a·f(x − h) + k የመሠረት ግራፉን ይዘረጋል፣ ያንጸባርቃልና ያንቀሳቅሳል።', task: 'በx² ይጀምሩ። h = 2 እና k = −3 ያድርጉ። ጫፉ አሁን የት ነው? ከዚያ a = −1 ያድርጉ።', controls: {a: 'a (መዘርጋት / ነጸብራቅ)', h: 'h (አግድም መንቀሳቀስ)', k: 'k (ቁመት መንቀሳቀስ)', base: 'የመሠረት ተግባር'}, choices: {'x²': 'x²', 'sin x': 'ሳይን x', '|x|': '|x|', '√x': '√x'}},
+    magnet: {name: 'የሽቦ ማግኔቲክ መስክ', sub: 'ፊዚክስ', blurb: 'በቀጥተኛ ሽቦ ውስጥ ያለ ፍሰት ክብ የማግኔት መስክ መስመሮችን ይፈጥራል። ፍሰቱን ይቀይሩ፤ መስኩም ይቀየራል።', task: 'ፍሰቱን ሁለት እጥፍ ያድርጉ። በተመሳሳይ ርቀት ያለው መስክ ሁለት እጥፍ ይሆናል ወይስ አራት እጥፍ?', controls: {I: 'ፍሰት I', r: 'ርቀት r', dir: 'የፍሰት አቅጣጫ'}, choices: {'Up the page': 'ወደ ገጹ ላይ', 'Down the page': 'ወደ ገጹ ታች'}},
+    gas: {name: 'የተስማሚ ጋዝ ህግ', sub: 'ኬሚስትሪ', blurb: 'ቅንጣቶች በመያዣ ውስጥ ይመላለሳሉ። ሙቀት ፍጥነታቸውን ይጨምራል፤ ሞሎች መጨመር ግፊቱን ይጨምራል።', task: 'ሙቀቱን (በK) ሁለት እጥፍ ያድርጉ። መጠኑ ቋሚ ከሆነ ግፊቱ ምን ይሆናል?', controls: {n: 'ሞሎች n', T: 'ሙቀት T', V: 'መጠን V'}}
+  };
+  const VAM_VALUES = {
+    'Equation': 'ቀመር', 'Discriminant': 'የልዩነት መጠን', 'Roots': 'ሥሮች', 'Vertex': 'ጫፍ ነጥብ', 'Opens': 'አቅጣጫ',
+    'Flight time': 'የበረራ ጊዜ', 'Range': 'ክልል', 'Max height': 'ከፍተኛ ከፍታ', 'Horizontal speed': 'አግድም ፍጥነት',
+    'Total resistance': 'ጠቅላላ ተቋቋሚነት', 'Total current': 'ጠቅላላ ፍሰት', 'Power used': 'የተጠቀመ ሃይል',
+    'Angle': 'አንግል', 'Length': 'ርዝመት', 'Gravity g': 'ስበት g', 'Period T = 2π√(L/g)': 'ዑደት T = 2π√(L/g)', 'Frequency f = 1/T': 'ድግግሞሽ f = 1/T',
+    'Strand 1': 'ክር 1', 'Strand 2': 'ክር 2', 'H-bonds total': 'ጠቅላላ H-ትስስሮች',
+    'Equilibrium price': 'የሚዛን ዋጋ', 'Equilibrium quantity': 'የሚዛን መጠን',
+    'Slope': 'ተዳፋት', 'y-intercept': 'የy-መጥለፍ', 'x-intercept': 'የx-መጥለፍ', 'Perpendicular slope': 'ቀጥ ያለ ተዳፋት',
+    '|A + B|': '|A + B|', 'Direction': 'አቅጣጫ', 'A · B': 'A · B',
+    'Subshell': 'ንዑስ ቅርፊት', 'Shape l': 'ቅርጽ l', 'Orientation m': 'አቅጣጫ m', 'Shell n': 'ቅርፊት n',
+    'Orbitals in subshell': 'ኦርቢታሎች በንዑስ ቅርፊት', 'Max electrons (subshell)': 'ከፍተኛ ኤሌክትሮኖች (ንዑስ ቅርፊት)', 'Max electrons (shell)': 'ከፍተኛ ኤሌክትሮኖች (ቅርፊት)',
+    'Weight': 'ክብደት', 'Down-slope force': 'ወደ ቁልቁል ኃይል', 'Normal force': 'መደበኛ ኃይል', 'Friction': 'ግጭት', 'Net force': 'የተጣራ ኃይል', 'Acceleration': 'ማጣደፍ',
+    'Radius r': 'ራዲየስ r', 'Speed v': 'ፍጥነት v', 'Centripetal a = v²/r': 'ሴንትሪፔታል a = v²/r', 'Centripetal F = mv²/r': 'ሴንትሪፔታል F = mv²/r', 'Period T = 2πr/v': 'ዑደት T = 2πr/v',
+    'Reactants': 'ምላሽ ሰጪዎች', 'Products': 'ምርቶች', 'Type': 'ዓይነት', 'Ea (forward)': 'Ea (ወደፊት)', 'Ea (reverse)': 'Ea (ወደኋላ)',
+    'Equivalence volume': 'የእኩልነት መጠን', 'Base added': 'የተጨመረ ቤዝ', 'pH now': 'አሁን pH', 'Region': 'ክልል',
+    'Stage': 'ደረጃ', 'Key event': 'ዋና ክስተት', 'Chromosomes': 'ክሮሞሶሞች', 'Nuclear membrane': 'ኒውክሌያር ሽፋን', 'Result': 'ውጤት',
+    'Parent function': 'የመሠረት ተግባር', 'Amplitude': 'ስፋት', 'Reflection': 'ነጸብራቅ',
+    'Current I': 'ፍሰት I', 'Distance r': 'ርቀት r', 'B = μ₀I / (2πr)': 'B = μ₀I / (2πr)',
+    'Moles n': 'ሞሎች n', 'Temperature T': 'ሙቀት T', 'Volume V': 'መጠን V', 'P = nRT / V': 'P = nRT / V', 'P in kPa': 'P በkPa', 'Gas constant R': 'የጋዝ ቋሚ R'
+  };
+
+  let cur = TOOLS[0];
+  const toolText = (key, value) => {
+    if (locale !== 'am') return value;
+    const tx = VAM[cur.id] || {};
+    return (tx[key] || {})[value] || (tx.values || {})[value] || (tx.choices || {})[value] || (tx.buttons || {})[value] || VAM_VALUES[value] || value;
+  };
+  function renderRead() { $('#read').innerHTML = cur.read(cur.v).map(r => '<div><small>' + toolText('reads', r[0]) + '</small><b>' + toolText('values', r[1]) + '</b></div>').join(''); }
+  function fmt(s, val) { return (+val % 1 ? n(+val, 1) : val) + (s.unit || ''); }
+  function syncSlider(id) {
+    const inp = document.getElementById('c_' + id), out = document.getElementById('o_' + id);
+    if (!inp) return;
+    const s = (cur.sliders || []).find(x => x.id === id);
+    inp.value = cur.v[id];
+    if (out && s) out.textContent = fmt(s, inp.value);
+  }
+  function syncChoice(id) { document.querySelectorAll('[data-ch="' + id + '"]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.val) === String(cur.v[id]))); }
+  function buildControls() {
+    const box = $('#controls'); box.innerHTML = '';
+    (cur.sliders || []).forEach(s => {
+      const l = document.createElement('label'); l.className = 'ctl';
+      l.innerHTML = '<span>' + toolText('controls', s.id) + '<output id="o_' + s.id + '"></output></span><input type="range" id="c_' + s.id + '" min="' + s.min + '" max="' + s.max + '" step="' + s.step + '" value="' + cur.v[s.id] + '">';
+      box.append(l);
+      const inp = l.querySelector('input'), out = l.querySelector('output');
+      out.textContent = fmt(s, inp.value);
+      inp.addEventListener('input', () => {
+        cur.v[s.id] = +inp.value;
+        out.textContent = fmt(s, inp.value);
+        if (s.id === 'angle' && cur.id === 'wave') { cur.v.auto = 0; syncChoice('auto'); }
+        if (cur.onChange) cur.onChange();
+        renderRead();
+      });
+    });
+    (cur.choices || []).forEach(ch => {
+      const g = document.createElement('div'); g.className = 'grp'; g.innerHTML = '<b>' + toolText('controls', ch.label) + '</b><div class="opts"></div>'; box.append(g);
+      ch.opts.forEach(o => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'opt'; b.textContent = toolText('choices', o[1]); b.dataset.ch = ch.id; b.dataset.val = o[0];
+        b.addEventListener('click', () => {
+          cur.v[ch.id] = ch.text ? o[0] : +o[0];
+          syncChoice(ch.id);
+          if (cur.onChange) cur.onChange();
+          renderRead();
+        });
+        g.querySelector('.opts').append(b);
+      });
+      syncChoice(ch.id);
+    });
+    (cur.buttons || []).forEach(bt => { const b = document.createElement('button'); b.type = 'button'; b.className = 'act'; b.textContent = toolText('buttons', bt.label); b.addEventListener('click', bt.run); box.append(b); });
+  }
+  function updateToolText(tool) {
+    const tx = VAM[tool.id] || {};
+    $('#tname').textContent = locale === 'am' ? tx.name || tool.name : tool.name;
+    $('#tsub').textContent = locale === 'am' ? tx.sub || ({Mathematics: 'ሒሳብ', Physics: 'ፊዚክስ', Chemistry: 'ኬሚስትሪ', Biology: 'ባዮሎጂ', Economics: 'ኢኮኖሚክስ', Geography: 'ጂኦግራፊ'}[tool.sub] || tool.sub) : tool.sub;
+    $('#tblurb').textContent = locale === 'am' ? tx.blurb || tool.blurb : tool.blurb;
+    $('#ttask').textContent = locale === 'am' ? tx.task || tool.task : tool.task;
+    cv.setAttribute('aria-label', (locale === 'am' ? tx.name || tool.name : tool.name) + (locale === 'am' ? ' እነማ' : ' animation'));
+    document.querySelectorAll('#tabs .tab').forEach(b => {
+      const t = TOOLS.find(x => x && x.id === b.dataset.id);
+      if (t) b.textContent = locale === 'am' ? (VAM[t.id] || {}).name || t.name : t.name;
+    });
+  }
+  function select(tool) {
+    if (!tool) return;
+    cur = tool;
+    document.querySelectorAll('#tabs .tab').forEach(b => b.setAttribute('aria-selected', b.dataset.id === tool.id));
+    updateToolText(tool);
+    buildControls(); renderRead();
+    if (tool.reset) tool.reset();
+    if (tool.id === 'quad') tool.reveal = 0;
+  }
+  $('#tabs').innerHTML = TOOLS.filter(Boolean).map(t => '<button type="button" class="tab" role="tab" data-id="' + t.id + '">' + t.name + '</button>').join('');
+  $('#tabs').addEventListener('click', e => {
+    const b = e.target.closest('.tab'); if (!b) return;
+    const t = TOOLS.find(x => x && x.id === b.dataset.id);
+    if (t) select(t);
+  });
+
+  let last = performance.now();
+  function frame(now) {
+    const dt = Math.min(50, now - last); last = now;
+    background(); cur.draw(now, cur.v, dt);
+    requestAnimationFrame(frame);
+  }
+  window.addEventListener('resize', resize);
+  resize(); select(quad); frame(performance.now());
+  document.addEventListener('site-language-change', e => {
+    locale = e.detail && e.detail.language === 'am' ? 'am' : 'en';
+    try { localStorage.setItem('site_lang', locale); localStorage.setItem('lv_lang', locale); } catch (x) {}
+    updateToolText(cur); buildControls(); renderRead();
+  });
+})();
+</script>
+</body></html>

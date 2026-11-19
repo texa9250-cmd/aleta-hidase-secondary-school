@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-en="Discussion board | አለታ ህዳሴ" data-am="የውይይት መድረክ | አለታ ህዳሴ">Discussion board | አለታ ህዳሴ</title>
+  <link rel="icon" type="image/svg+xml" href="/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Playfair+Display:wght@600&display=swap">
+  <link rel="stylesheet" href="/levels.css">
+  <link rel="stylesheet" href="/discuss.css">
+  <script src="/site-effects.js"></script>
+
+  <!-- Added styles for the Back button -->
+  <style>
+    .qa-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 1.5rem;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .qa-back-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: #ffffff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body class="lv-page qa-page" data-page="discuss" data-build="qa-nav-2026-10-15">
+<div id="site-header"></div>
+<script src="/site-nav.js"></script>
+<script>
+  /* Match students.html portal nav: main school bar + portal sub-bar */
+  mountSiteNav('#site-header', {active: 'discuss'});
+</script>
+
+<div class="qa-hero">
+  <div class="lv-wrap">
+    <!-- Added Back Button -->
+    <a href="./index.html" onclick="if (history.length > 1) { event.preventDefault(); history.back(); }" class="qa-back-btn" data-en="&larr; Back" data-am="&larr; ተመለስ">&larr; Back</a>
+    
+    <p class="qa-kicker" data-en="Student community" data-am="የተማሪዎች ማኅበረሰብ">Student community</p>
+    <h1 data-en="Discussion board" data-am="የውይይት መድረክ">Discussion board</h1>
+    <div class="qa-hero-actions">
+      <a class="lv-btn" href="#ask-section" data-en="Ask a question" data-am="ጥያቄ ይጠይቁ">Ask a question</a>
+      <a class="lv-btn ghost qa-hero-ghost" href="#questions-section" data-en="Browse questions" data-am="ጥያቄዎችን ይመልከቱ">Browse questions</a>
+    </div>
+  </div>
+</div>
+
+<main class="lv-wrap qa-main">
+  <div id="mode"></div>
+
+  <section id="ask-section" class="qa-panel">
+    <div class="qa-panel-head">
+      <h2 data-en="Ask a question" data-am="ጥያቄ ይጠይቁ">Ask a question</h2>
+    </div>
+    <form class="qa-ask-form" id="ask">
+      <label class="qa-label"><span data-en="Title" data-am="ርዕስ">Title</span>
+        <input type="text" id="n-title" maxlength="120" required placeholder="e.g. How do I find the maximum of a quadratic function?">
+      </label>
+      <label class="qa-label"><span data-en="Details" data-am="ዝርዝር መረጃ">Details</span>
+        <textarea id="n-body" rows="5" maxlength="2000" required placeholder="What have you tried?"></textarea>
+      </label>
+      <div class="qa-form-grid">
+        <label class="qa-label"><span data-en="Subject" data-am="ትምህርት ዓይነት">Subject</span><select id="n-subject"></select></label>
+        <label class="qa-label"><span data-en="Path" data-am="የትምህርት መንገድ">Path</span><select id="n-level"></select></label>
+        <label class="qa-label"><span data-en="Your name (optional)" data-am="ስምዎ (አማራጭ)">Your name (optional)</span><input type="text" id="n-name" maxlength="40" placeholder=""></label>
+      </div>
+      <label class="qa-check"><input type="checkbox" id="n-anon"> <span data-en="Show me as Anonymous to other students" data-am="ለሌሎች ተማሪዎች ስሜን ስም-አልባ አድርጉ">Show me as Anonymous to other students</span></label>
+      <div class="qa-form-actions">
+        <button class="lv-btn" type="submit" data-en="Post question" data-am="ጥያቄውን አትም">Post question</button>
+        <p class="lv-err" id="ask-err" role="alert"></p>
+        <p class="lv-ok" id="ask-ok" role="status"></p>
+      </div>
+    </form>
+  </section>
+
+  <section id="questions-section" class="qa-panel">
+    <div class="qa-panel-head">
+      <h2 data-en="Questions" data-am="ጥያቄዎች">Questions</h2>
+    </div>
+    <div class="qa-filters">
+      <label class="qa-label"><span data-en="Subject" data-am="ትምህርት ዓይነት">Subject</span><select id="f-subject"></select></label>
+      <label class="qa-label"><span data-en="Path" data-am="የትምህርት መንገድ">Path</span><select id="f-level"></select></label>
+      <label class="qa-label"><span data-en="Search" data-am="ፈልግ">Search</span>
+        <input type="search" id="f-search" placeholder="Search…">
+      </label>
+    </div>
+    <div id="qlist" class="qa-list"></div>
+  </section>
+
+  <details id="teacher-box" class="qa-teacher">
+    <summary data-en="Teacher tools" data-am="የመምህራን መሣሪያዎች">Teacher tools</summary>
+    <form class="qa-teacher-form" id="teacher-form">
+      <label class="qa-label"><span data-en="Teacher code" data-am="የመምህር ኮድ">Teacher code</span>
+        <input type="password" id="t-code" autocomplete="off" placeholder="Subject teacher code">
+      </label>
+      <button class="lv-btn" type="submit" data-en="Turn on teacher mode" data-am="የመምህር ሁነታን አብራ">Turn on teacher mode</button>
+      <p id="t-msg" role="status"></p>
+    </form>
+  </details>
+</main>
+
+<footer class="lv-foot" id="lv-footer"></footer>
+<script src="/levels-data.js"></script>
+<script src="/levels.js"></script>
+</body>
+</html>

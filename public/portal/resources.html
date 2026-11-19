@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-en="Question sources | አለታ ህዳሴ Grade 12 Prep" data-am="የጥያቄ ምንጮች | አለታ ህዳሴ 12ኛ ክፍል ዝግጅት">Question sources | አለታ ህዳሴ Grade 12 Prep</title>
+  <script src="/site-effects.js"></script>
+  <link rel="stylesheet" href="css/portal.css">
+  <link rel="stylesheet" href="css/portal-extra.css">
+  <style>
+    /* =========================================
+       BASE LAYOUT & CARDS
+       ========================================= */
+    .grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); 
+      gap: 1.2rem; 
+      margin-top: 1.5rem; 
+    }
+    
+    .card { 
+      background: #fff; 
+      border: 1px solid #d9e1ef; 
+      border-radius: 14px; 
+      padding: 1.2rem; 
+      box-shadow: 0 4px 12px rgba(16,23,51,.04); 
+      display: flex; 
+      flex-direction: column; 
+      transition: transform 0.2s, box-shadow 0.2s; 
+    }
+    
+    .card:hover { 
+      transform: translateY(-3px); 
+      box-shadow: 0 8px 24px rgba(16,23,51,.08); 
+    }
+    
+    .card .meta { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+    .card .tag { font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.6rem; border-radius: 99px; background: #e2e8f0; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; }
+    .card .tag.hot { background: #ffedd5; color: #9a3412; }
+    .card .tag.date { background: #e0f2fe; color: #0369a1; }
+    .card .tag.grade-tag { background: #dcfce7; color: #166534; }
+    
+    .card h3 { margin: 0 0 0.5rem; font-size: 1.1rem; color: #101733; line-height: 1.3; }
+    .card p { margin: 0 0 1rem; font-size: 0.9rem; color: #55607f; flex: 1; }
+    
+    .card .res-actions { display: flex; gap: 0.5rem; margin-top: auto; flex-wrap: wrap; }
+    .card .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.6rem 1rem; border-radius: 8px; background: #0b1f8a; color: #fff; font-weight: 600; font-size: 0.85rem; text-decoration: none; transition: background 0.2s; white-space: nowrap; }
+    .card .btn:hover { background: #1e3a8a; }
+    .card .btn.alt { background: #f1f5f9; color: #0b1f8a; border: 1px solid #cbd5e1; }
+    .card .btn.alt:hover { background: #e2e8f0; }
+    .card .pending { font-size: 0.85rem; color: #b45309; font-weight: 600; font-style: italic; }
+    
+    /* =========================================
+       FILTERS & SEARCH
+       ========================================= */
+    .filters { background: #fff; border: 1px solid #d9e1ef; border-radius: 14px; padding: 1rem; display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1rem; }
+    .filters input[type="search"] { width: 100%; padding: 12px 16px; border: 2px solid #cbd5e1; border-radius: 99px; font: inherit; }
+    
+    .row-filters { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+    .row-filters select { padding: 10px 14px; border: 2px solid #cbd5e1; border-radius: 8px; font: inherit; background: #fff; }
+    
+    .chips { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .chip { font: inherit; font-weight: 600; font-size: 0.85rem; padding: 0.4rem 0.8rem; border-radius: 99px; border: 2px solid #cbd5e1; background: #fff; color: #475569; cursor: pointer; transition: all 0.2s; }
+    .chip:hover { border-color: #94a3b8; }
+    .chip[aria-pressed="true"] { background: #0b1f8a; border-color: #0b1f8a; color: #fff; }
+    
+    .empty { text-align: center; padding: 3rem 1rem; background: #f8fafc; border-radius: 12px; color: #64748b; font-size: 1.1rem; margin-top: 1rem; }
+
+
+    /* =========================================
+       BACK BUTTON STYLE
+       ========================================= */
+    .back-link { 
+      display: inline-flex; 
+      align-items: center; 
+      text-decoration: none; 
+      font-weight: 600; 
+      color: #55607f; 
+      margin-bottom: 1rem; 
+      font-size: 0.95rem; 
+      transition: color 0.2s; 
+    }
+    .back-link:hover { 
+      color: #101733; 
+    }
+    .back-link svg { 
+      margin-right: 6px; 
+      margin-top: -2px; 
+    }
+
+    /* =========================================
+       MOBILE RESPONSIVENESS (Media Queries)
+       ========================================= */
+    @media (max-width: 600px) {
+      
+      .row-filters { flex-direction: column; align-items: stretch; }
+      .row-filters label { margin-left: 0 !important; display: flex; flex-direction: column; gap: 0.4rem; }
+      .row-filters select { width: 100%; }
+      
+      .card .res-actions { flex-direction: column; }
+      .card .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body data-page="resources">
+  <div id="site-header"></div>
+
+  <div class="pagehead">
+    <div class="wrap">
+      
+      <!-- BACK BUTTON ADDED HERE -->
+      <a href="javascript:history.back()" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        back
+      </a>
+
+      <h1 data-en="Question sources" data-am="የጥያቄ ምንጮች">Question sources</h1>
+      <p data-en="Past national exams, textbooks and practice material for both streams. Open a PDF in your browser or download it to study offline." data-am="ያለፉ ብሔራዊ ፈተናዎች፣ የመማሪያ መጻሕፍትና የልምምድ ግብዓቶች ለሁለቱም ዘርፎች።">Past national exams, textbooks and practice material for both streams.</p>
+      
+    </div>
+  </div>
+
+  <main>
+    <div class="wrap">
+
+      <!-- Filters -->
+      <div class="filters">
+        <input id="q" type="search" placeholder="Search sources, for example: calculus, 2016" aria-label="Search">
+        
+        <div class="row-filters">
+          <div id="streamchips" class="chips" role="group" aria-label="Stream">
+            <button class="chip" data-stream="all" aria-pressed="true">All Streams</button>
+            <button class="chip" data-stream="natural" aria-pressed="false">Natural</button>
+            <button class="chip" data-stream="social" aria-pressed="false">Social</button>
+            <button class="chip" data-stream="both" aria-pressed="false">Both</button>
+          </div>
+          
+          <label style="font-weight:600;font-size:.9rem;">
+            <span data-en="Type" data-am="ዓይነት">Type</span> 
+            <select id="typesel">
+              <option value="all">All Types</option>
+              <option value="Past exam">Past exam</option>
+              <option value="Textbook">Textbook</option>
+              <option value="Practice">Practice</option>
+              <option value="Video">Video</option>
+              <option value="Reference">Reference</option>
+              <option value="Notes">Notes</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="chips" class="chips" role="group" aria-label="Filter by subject">
+          <!-- Subject chips will be injected here by JS -->
+        </div>
+      </div>
+
+      <p class="count" id="count" style="font-weight:600;color:#64748b;margin-bottom:1rem;"></p>
+      <div id="list" class="grid"></div>
+      <div id="empty" class="empty" hidden>No sources found matching your filters.</div>
+
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="/site-nav.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/portal-config.js"></script>
+
+  <script>
+    /* ========================================================
+       RESOURCES RENDERING SCRIPT
+       ======================================================== */
+    (function () {
+      const ALL_SUBJECTS = [
+        'Mathematics', 'English', 'Physics', 'Chemistry', 'Biology', 
+        'Aptitude', 'Geography', 'History', 'Economics', 'Civics', 
+        'Information Technology'
+      ];
+
+      let allResources = [];
+      let filteredResources = [];
+      
+      let currentSubject = 'all';
+      let currentStream = 'all';
+      let currentType = 'all';
+      let currentSearch = '';
+
+      const listEl = document.getElementById('list');
+      const emptyEl = document.getElementById('empty');
+      const countEl = document.getElementById('count');
+      const chipsEl = document.getElementById('chips');
+      const streamChipsEl = document.getElementById('streamchips');
+      const typeSel = document.getElementById('typesel');
+      const searchInput = document.getElementById('q');
+
+      const fmtSize = (b) => {
+        if (!b) return '';
+        return b >= 1048576 ? (b / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(b / 1024)) + ' KB';
+      };
+
+      async function loadResources() {
+        try {
+          const res = await fetch('/api/portal/resources');
+          if (!res.ok) throw new Error('Failed to load');
+          allResources = await res.json();
+          
+          buildSubjectChips();
+          applyFilters();
+        } catch (err) {
+          listEl.innerHTML = `<p style="color:red; grid-column: 1 / -1;">Error loading resources. Please try again later.</p>`;
+        }
+      }
+
+      function buildSubjectChips() {
+        const subjects = ['all', ...ALL_SUBJECTS];
+        
+        chipsEl.innerHTML = subjects.map(sub => `
+          <button class="chip" data-subject="${sub}" aria-pressed="${sub === 'all'}">
+            ${sub === 'all' ? 'All Subjects' : sub}
+          </button>
+        `).join('');
+      }
+
+      function applyFilters() {
+        filteredResources = allResources.filter(r => {
+          const matchSubject = currentSubject === 'all' || r.subject === currentSubject;
+          const matchStream = currentStream === 'all' || r.stream === currentStream || r.stream === 'both';
+          const matchType = currentType === 'all' || r.type === currentType;
+          
+          const text = (r.title + ' ' + r.subject + ' ' + (r.description || '') + ' ' + (r.year || '')).toLowerCase();
+          const matchSearch = currentSearch === '' || text.includes(currentSearch);
+
+          return matchSubject && matchStream && matchType && matchSearch;
+        });
+
+        renderCards();
+      }
+
+      function renderCards() {
+        if (filteredResources.length === 0) {
+          listEl.innerHTML = '';
+          emptyEl.hidden = false;
+          countEl.textContent = '0 sources found';
+          return;
+        }
+
+        emptyEl.hidden = true;
+        countEl.textContent = `Showing ${filteredResources.length} source${filteredResources.length === 1 ? '' : 's'}`;
+
+        listEl.innerHTML = filteredResources.map(r => {
+          let actionBtn = '';
+          if (r.file_url) {
+            actionBtn = `
+              <a class="btn" href="${r.file_url}" target="_blank">Open PDF</a>
+              <a class="btn alt" href="${r.file_url}?download=1">Download ${r.file_size ? '(' + fmtSize(r.file_size) + ')' : ''}</a>
+            `;
+          } else if (r.url) {
+            actionBtn = `<a class="btn" href="${r.url}" target="_blank" rel="noopener">Open Link</a>`;
+          } else {
+            actionBtn = `<span class="pending">Link not added yet</span>`;
+          }
+
+          const gradeDisplay = r.grade === 'all' ? 'All Grades' : `Grade ${r.grade}`;
+
+          return `
+            <article class="card">
+              <div class="meta">
+                <span class="tag">${r.subject}</span>
+                <span class="tag hot">${r.type}</span>
+                ${r.year ? `<span class="tag date">${r.year}</span>` : ''}
+                <span class="tag grade-tag">${gradeDisplay}</span>
+              </div>
+              <h3>${r.title}</h3>
+              ${r.description ? `<p>${r.description}</p>` : '<p style="flex:1"></p>'}
+              <div class="res-actions">
+                ${actionBtn}
+              </div>
+            </article>
+          `;
+        }).join('');
+      }
+
+      searchInput.addEventListener('input', (e) => {
+        currentSearch = e.target.value.toLowerCase().trim();
+        applyFilters();
+      });
+
+      chipsEl.addEventListener('click', (e) => {
+        const btn = e.target.closest('.chip');
+        if (!btn) return;
+        currentSubject = btn.dataset.subject;
+        chipsEl.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', 'false'));
+        btn.setAttribute('aria-pressed', 'true');
+        applyFilters();
+      });
+
+      streamChipsEl.addEventListener('click', (e) => {
+        const btn = e.target.closest('.chip');
+        if (!btn) return;
+        currentStream = btn.dataset.stream;
+        streamChipsEl.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', 'false'));
+        btn.setAttribute('aria-pressed', 'true');
+        applyFilters();
+      });
+
+      typeSel.addEventListener('change', (e) => {
+        currentType = e.target.value;
+        applyFilters();
+      });
+
+      loadResources();
+    })();
+  </script>
+</body>
+</html>

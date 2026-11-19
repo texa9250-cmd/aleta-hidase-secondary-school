@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<script src="./site-effects.js"></script>
+<title>Staff area | Your High School</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F7FB;--surface:#fff;--ink:#14213D;--muted:#5B6783;--line:#DCE2EE;--brand:#1F3FBF;--bad:#C62828;--ok:#0E8F6E;
+--display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;--body:"Public Sans",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root{--bg:#0E1424;--surface:#172038;--ink:#EEF1FA;--muted:#A3AECB;--line:#2A3556;--brand:#7C95FF;--bad:#FF8A8A;--ok:#4CD3A8}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.5 var(--body)}
+:focus-visible{outline:3px solid #FFC93C;outline-offset:2px}
+.wrap{max-width:56rem;margin:0 auto;padding:1.5rem 1.25rem 4rem}
+h1,h2{font-family:var(--display);margin:0}
+h1{font-size:1.8rem}h2{font-size:1.3rem;margin-bottom:.8rem}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem}
+label{display:block;font-weight:600;font-size:.9rem;margin:.8rem 0 .25rem}
+input,select,textarea{width:100%;padding:.6rem .75rem;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+textarea{min-height:7rem;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.check{display:flex;align-items:center;gap:.5rem;font-weight:500;margin:.8rem 1.5rem 0 0}
+.check input{width:auto}
+.checks{display:flex;flex-wrap:wrap}
+button{font:600 .95rem var(--body);padding:.6rem 1.1rem;border-radius:8px;border:1px solid var(--brand);background:var(--brand);color:#fff;cursor:pointer}
+@media (prefers-color-scheme:dark){button.primary{color:#0E1424}}
+button.ghost{background:transparent;color:var(--brand)}
+button.danger{background:transparent;color:var(--bad);border-color:var(--bad)}
+.actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}
+.item{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;padding:.9rem 0;border-top:1px solid var(--line)}
+.item:first-of-type{border-top:0}
+.item h3{margin:0;font-size:1.05rem}
+.meta{color:var(--muted);font-size:.88rem}
+.badge{font-size:.78rem;font-weight:600;border:1px solid var(--line);border-radius:6px;padding:.05rem .4rem;margin-left:.3rem}
+.tabs{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.hint{color:var(--muted);font-size:.85rem;margin:.3rem 0 0}
+.media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(10rem,1fr));gap:.8rem;margin-top:1rem}
+.media-card{border:1px solid var(--line);border-radius:10px;padding:.65rem;min-width:0}
+.media-card img{display:block;width:100%;height:8rem;object-fit:cover;border-radius:6px;background:var(--bg)}
+.media-card h3{font-size:.9rem;overflow-wrap:anywhere;margin:.55rem 0 .15rem}
+.media-card .actions{margin-top:.55rem}
+.media-card button{padding:.45rem .6rem;font-size:.82rem}
+.msg{margin-top:.8rem;font-weight:600;min-height:1.4em}
+.msg.err{color:var(--bad)}.msg.good{color:var(--ok)}
+.login{max-width:24rem;margin:12vh auto 0}
+[hidden]{display:none!important}
+@media (max-width:34rem){.row{grid-template-columns:1fr}}
+  /* School funding tab: roomier rows on phones */
+  @media (max-width: 640px){
+    #fundingTab .item{display:flex;flex-direction:column;align-items:stretch;gap:.6rem}
+    #fundingTab .item .actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:0}
+    #fundingTab .item .actions input{flex:1 1 100%;width:100% !important}
+    #fundingTab .item .actions button{flex:1 1 auto}
+    #fundingTab .item > button{align-self:flex-start}
+  }
+
+/* Responsive layout improvements for phones and small tablets */
+html{width:100%;-webkit-text-size-adjust:100%;}
+body{min-width:320px;overflow-x:hidden;}
+.wrap{width:100%;max-width:56rem;}
+.panel,.item,.media-card{min-width:0;}
+.item > div:first-child{min-width:0;flex:1 1 18rem;}
+.meta,.hint,h3,p{overflow-wrap:anywhere;}
+input,select,textarea,button{max-width:100%;}
+button{min-height:42px;touch-action:manipulation;}
+
+@media (max-width:640px){
+  .wrap{padding:1rem .75rem 2.5rem;}
+  h1{font-size:1.45rem;line-height:1.2;}
+  h2{font-size:1.15rem;line-height:1.3;}
+  .bar{align-items:flex-start;gap:.75rem;margin-bottom:1rem;}
+  .bar > div{min-width:0;}
+  .bar .actions{width:100%;display:grid;grid-template-columns:1fr 1fr;}
+  .bar .actions button{width:100%;padding:.65rem .45rem;font-size:.85rem;}
+  .panel{padding:.9rem;border-radius:10px;margin-bottom:1rem;}
+  .tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.45rem;}
+  .tabs button{width:100%;min-width:0;white-space:normal;line-height:1.25;padding:.65rem .4rem;font-size:.82rem;}
+  .row{grid-template-columns:minmax(0,1fr);gap:.2rem;}
+  label{font-size:.88rem;margin:.7rem 0 .25rem;}
+  input,select,textarea{font-size:16px;padding:.7rem .75rem;min-height:44px;}
+  textarea{min-height:7rem;}
+  .actions{gap:.5rem;}
+  .actions button{flex:1 1 100%;width:100%;}
+  .item{flex-direction:column;align-items:stretch;gap:.65rem;padding:.85rem 0;}
+  .item > div:first-child{width:100%;}
+  .item .actions{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem;}
+  .item .actions button{width:100%;min-width:0;padding:.65rem .45rem;}
+  #fundingTab .item > button{width:100%;align-self:stretch;}
+  #fundingTab #pendingDonList .item .actions button{min-height:46px;}
+  #fundingTab #pendingDonList .item .actions button:first-child{grid-column:1/-1;}
+  #fundingTab #donList .item > button{width:100%;}
+  .checks{display:flex;flex-direction:column;gap:.25rem;}
+  .check{margin:.55rem 0 0;align-items:flex-start;}
+  .check input{width:18px;height:18px;min-height:18px;margin-top:.15rem;flex:0 0 auto;}
+  .media-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem;}
+  .media-card{padding:.5rem;}
+  .media-card .actions{display:grid;grid-template-columns:1fr;}
+  .media-card button{width:100%;}
+  .login{width:100%;max-width:24rem;margin:7vh auto 0;}
+  #pendingDonList,#donList,#accList,#fundList,#updList{min-width:0;max-width:100%;}
+}
+@media (max-width:360px){
+  .wrap{padding-left:.55rem;padding-right:.55rem;}
+  .panel{padding:.75rem;}
+  .tabs{grid-template-columns:1fr 1fr;}
+  .bar .actions{grid-template-columns:1fr;}
+  .media-grid{grid-template-columns:1fr;}
+}
+
+/* Phone fixes: Ethiopian date pickers, header, safe areas */
+.eth-date{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1fr);gap:.4rem;align-items:center}
+.eth-date input,.eth-date select{min-width:0}
+@media (max-width:640px){
+  .eth-date{grid-template-columns:minmax(0,1fr) minmax(0,1.6fr) minmax(0,1fr);gap:.35rem}
+  .eth-date input,.eth-date select{padding-left:.5rem;padding-right:.4rem}
+  .wrap{padding-left:max(.75rem,env(safe-area-inset-left));padding-right:max(.75rem,env(safe-area-inset-right));padding-bottom:max(2.5rem,env(safe-area-inset-bottom))}
+  .item h3,.item .meta{overflow-wrap:anywhere}
+  .badge{display:inline-block;margin:.2rem .3rem 0 0}
+  img,video,iframe{max-width:100%;height:auto}
+}
+@media (max-width:360px){
+  .eth-date{grid-template-columns:1fr}
+}
+
+/* Keep cards compact: stop buttons from stacking into tall blocks at the card bottom */
+.media-grid{align-items:start}
+.media-card{display:flex;flex-direction:column;height:auto}
+.media-card .actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(4.5rem,1fr));gap:.35rem;margin-top:.5rem}
+.media-card button{min-height:34px;width:100%;padding:.35rem .4rem;font-size:.8rem;line-height:1.2}
+@media (max-width:640px){
+  .media-card .actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .media-card button{min-height:36px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .media-card img{height:6.5rem}
+}
+@media (max-width:360px){
+  .media-card .actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* ROOT-CAUSE FIX: on phones .item is a column, so flex-basis:18rem became a 288px minimum HEIGHT,
+   leaving empty space at the bottom of every card. Reset it to content height. */
+@media (max-width:640px){
+  .item > div:first-child{flex:0 0 auto;height:auto;min-height:0}
+  .item{height:auto;min-height:0}
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+<!-- Login -->
+<section id="loginView" class="login panel">
+  <h1 data-en="Staff login" data-am="የሰራተኛ መግቢያ">Staff login</h1>
+  <form id="loginForm">
+    <label for="lu"><span data-en="Username" data-am="የተጠቃሚ ስም">Username</span></label><input id="lu" autocomplete="username" required>
+    <label for="lp"><span data-en="Password" data-am="የይለፍ ቃል">Password</span></label><input id="lp" type="password" autocomplete="current-password" required>
+    <label class="check" for="showLp"><input id="showLp" type="checkbox" onchange="document.getElementById('lp').type = this.checked ? 'text' : 'password'"><span data-en="Show password" data-am="የይለፍ ቃል አሳይ">Show password</span></label>
+    <div class="actions"><button class="primary" type="submit" data-en="Log in" data-am="ግባ">Log in</button></div>
+    <p class="msg err" id="loginMsg" role="alert"></p>
+  </form>
+</section>
+
+<!-- App -->
+<section id="appView" hidden>
+  <div class="bar">
+    <div><h1 data-en="Staff area" data-am="የሰራተኞች ክፍል">Staff area</h1><div class="meta" id="who"></div></div>
+    <div class="actions" style="margin:0">
+      <button class="ghost" id="pwBtn" type="button" data-en="Change password" data-am="የይለፍ ቃል ቀይር">Change password</button>
+      <button class="ghost" id="logoutBtn" type="button" data-en="Log out" data-am="ውጣ">Log out</button>
+    </div>
+  </div>
+  <p class="msg" id="topMsg" role="status"></p>
+
+  <div class="tabs" id="tabs" hidden>
+    <button class="primary" data-tab="posts" type="button" data-en="Announcements" data-am="ማስታወቂያዎች">Announcements</button>
+    <button class="ghost" data-tab="news" type="button" data-en="Exam news" data-am="የፈተና ዜና">Exam news</button>
+    <button class="ghost" data-tab="sources" type="button" data-en="Question sources" data-am="የጥያቄ ምንጮች">Question sources</button>
+    <button class="ghost" data-tab="uploads" type="button" data-en="Page uploads" data-am="የገጽ ፋይሎች">Page uploads</button>
+    <button class="ghost" data-tab="notes" type="button" data-en="Short notes" data-am="አጭር ማስታወሻ">Short notes</button>
+    <button class="ghost" data-tab="pageContent" type="button" id="pageContentTabBtn" data-en="Page content" data-am="የገጽ ይዘት">Page content</button>
+    <button class="ghost" data-tab="stories" type="button" id="storiesTabBtn" data-en="Student stories" data-am="የተማሪዎች ታሪኮች">Student stories</button>
+    <button class="ghost" data-tab="funding" type="button" id="fundingTabBtn" data-en="School funding" data-am="የትምህርት ቤት ድጋፍ">School funding</button>
+    <button class="ghost" data-tab="staff" type="button" data-en="Staff accounts" data-am="የሰራተኛ መለያዎች">Staff accounts</button>
+  </div>
+
+  <!-- ANNOUNCEMENTS TAB -->
+  <div id="postsTab">
+    <div class="panel">
+      <h2 id="formTitle" data-en="New announcement" data-am="አዲስ ማስታወቂያ">New announcement</h2>
+      <form id="postForm">
+        <label for="t"><span data-en="Title" data-am="ርዕስ">Title</span></label><input id="t" maxlength="120" required>
+        <label for="ta"><span data-en="Amharic title" data-am="የአማርኛ ርዕስ">Amharic title</span></label><input id="ta" maxlength="120">
+        <div class="row">
+          <div><label for="c"><span data-en="Category" data-am="ምድብ">Category</span></label>
+            <select id="c"><option value="Academic" data-en="Academic" data-am="ትምህርታዊ">Academic</option><option value="Events" data-en="Events" data-am="ዝግጅቶች">Events</option><option value="Sports" data-en="Sports" data-am="ስፖርት">Sports</option><option value="General" data-en="General" data-am="አጠቃላይ">General</option></select></div>
+          <div>
+            <label><span data-en="Ethiopian date" data-am="የኢትዮጵያ ቀን">የኢትዮጵያ ቀን</span></label>
+            <div class="eth-date">
+              <input id="announcementEthYear" type="number" min="1" step="1" inputmode="numeric" placeholder="ዓመት" aria-label="ዓመት" required>
+              <select id="announcementEthMonth" aria-label="ወር" required>
+                <option value="">ወር ይምረጡ</option>
+                <option value="1">መስከረም</option><option value="2">ጥቅምት</option><option value="3">ኅዳር</option>
+                <option value="4">ታኅሣሥ</option><option value="5">ጥር</option><option value="6">የካቲት</option>
+                <option value="7">መጋቢት</option><option value="8">ሚያዝያ</option><option value="9">ግንቦት</option>
+                <option value="10">ሰኔ</option><option value="11">ሐምሌ</option><option value="12">ነሐሴ</option><option value="13">ጳጉሜ</option>
+              </select>
+              <select id="announcementEthDay" aria-label="ቀን" required><option value="">ቀን</option></select>
+            </div>
+            <input id="d" type="hidden">
+          </div>
+        </div>
+        <label for="b"><span data-en="Message" data-am="መልእክት">Message</span></label><textarea id="b" maxlength="5000" required></textarea>
+        <label for="ba"><span data-en="Amharic message" data-am="የአማርኛ መልእክት">Amharic message</span></label><textarea id="ba" maxlength="5000"></textarea>
+        <div class="checks">
+          <label class="check"><input type="checkbox" id="pub" checked> <span data-en="Visible on the website" data-am="በድረ ገጹ ላይ ይታይ">Visible on the website</span></label>
+          <label class="check"><input type="checkbox" id="pin"> <span data-en="Pin as important notice" data-am="እንደ አስፈላጊ ማስታወቂያ ሰክት">Pin as important notice</span></label>
+        </div>
+        <div class="actions">
+          <button class="primary" type="submit" id="saveBtn" data-en="Publish" data-am="አትም">Publish</button>
+          <button class="ghost" type="button" id="cancelBtn" hidden data-en="Cancel edit" data-am="ማስተካከያውን ሰርዝ">Cancel edit</button>
+        </div>
+      </form>
+    </div>
+    <div class="panel"><h2 data-en="Announcements" data-am="ማስታወቂያዎች">Announcements</h2><div id="posts"></div></div>
+  </div>
+
+  <!-- EXAM NEWS TAB -->
+  <div id="newsTab" hidden>
+    <div class="panel">
+      <h2 id="newsFormTitle" data-en="New exam news" data-am="አዲስ የፈተና ዜና">New exam news</h2>
+      <p class="hint" data-en="Shown on the Grade 12 students portal (home page and Exam news page)." data-am="በ12ኛ ክፍል ተማሪዎች ፖርታል (መነሻ ገጽና የፈተና ዜና ገጽ) ላይ ይታያል።">Shown on the Grade 12 students portal (home page and Exam news page).</p>
+      <form id="newsForm">
+        <label for="nt"><span data-en="Title" data-am="ርዕስ">Title</span></label><input id="nt" maxlength="150" required>
+        <div class="row">
+          <div><label for="ng"><span data-en="Type" data-am="ዓይነት">Type</span></label><select id="ng"></select></div>
+          <div><label for="nd"><span data-en="Date" data-am="ቀን">Date</span></label><input id="nd" type="date" required></div>
+        </div>
+        <label for="nb"><span data-en="Message" data-am="መልእክት">Message</span></label><textarea id="nb" maxlength="5000" required></textarea>
+        <div class="checks">
+          <label class="check"><input type="checkbox" id="npub" checked> <span data-en="Visible on the students portal" data-am="በተማሪዎች ፖርታል ላይ ይታይ">Visible on the students portal</span></label>
+          <label class="check"><input type="checkbox" id="npin"> <span data-en="Pin to the top" data-am="ከላይ ሰክት">Pin to the top</span></label>
+        </div>
+        <div class="actions">
+          <button class="primary" type="submit" id="newsSave" data-en="Publish" data-am="አትም">Publish</button>
+          <button class="ghost" type="button" id="newsCancel" hidden data-en="Cancel edit" data-am="ማስተካከያውን ሰርዝ">Cancel edit</button>
+        </div>
+      </form>
+    </div>
+    <div class="panel"><h2 data-en="Exam news" data-am="የፈተና ዜና">Exam news</h2><div id="newsList"></div></div>
+  </div>
+
+  <!-- QUESTION SOURCES TAB -->
+  <div id="sourcesTab" hidden>
+    <div class="panel">
+      <h2 id="srcFormTitle" data-en="Add a question source" data-am="የጥያቄ ምንጭ ጨምር">Add a question source</h2>
+      <p class="hint" data-en="Upload a PDF (past exam, textbook, practice set) or link to another website. Select Grade 9–12 or all grades to choose exactly which students see it." data-am="የPDF ፋይል (ያለፈ ፈተና፣ የመማሪያ መጽሐፍ ወይም የልምምድ ስብስብ) ይጫኑ ወይም ወደ ሌላ ድረ ገጽ አገናኝ ያስገቡ። የትኞቹ ተማሪዎች እንደሚያዩት ለመወሰን ከ9ኛ እስከ 12ኛ ክፍል ወይም ሁሉም ክፍሎች ይምረጡ።">Upload a PDF (past exam, textbook, practice set) or link to another website. Select Grade 9–12 or all grades to choose exactly which students see it.</p>
+      <form id="srcForm">
+        <label for="stt"><span data-en="Title" data-am="ርዕስ">Title</span></label><input id="stt" maxlength="150" required placeholder="For example: Mathematics national exam 2016 E.C" data-en-placeholder="For example: Mathematics national exam 2016 E.C" data-am-placeholder="ለምሳሌ፦ የሂሳብ አገር አቀፍ ፈተና 2016 ዓ.ም.">
+        <div class="row">
+          <div><label for="ss"><span data-en="Subject" data-am="ትምህርት ዓይነት">Subject</span></label><select id="ss"></select></div>
+          <div><label for="sst"><span data-en="Stream" data-am="የትምህርት ክፍል">Stream</span></label><select id="sst"></select></div>
+        </div>
+        <label for="sg"><span data-en="Student destination" data-am="የተማሪዎች መዳረሻ">Student destination</span></label>
+        <select id="sg">
+          <option value="12" data-en="Grade 12 students" data-am="12ኛ ክፍል ተማሪዎች">Grade 12 students</option>
+          <option value="9" data-en="Grade 9" data-am="9ኛ ክፍል">Grade 9</option>
+          <option value="10" data-en="Grade 10" data-am="10ኛ ክፍል">Grade 10</option>
+          <option value="11" data-en="Grade 11" data-am="11ኛ ክፍል">Grade 11</option>
+          <option value="all" data-en="All grades (9–12)" data-am="ሁሉም ክፍሎች (9–12)">All grades (9–12)</option>
+        </select>
+        <div class="row">
+          <div><label for="sty"><span data-en="Type" data-am="ዓይነት">Type</span></label><select id="sty"></select></div>
+          <div><label for="syr"><span data-en="Year (optional)" data-am="ዓመት (አማራጭ)">Year (optional)</span></label><input id="syr" maxlength="20" placeholder="2016 E.C" data-en-placeholder="2016 E.C" data-am-placeholder="2016 ዓ.ም."></div>
+        </div>
+        <label for="sde"><span data-en="Short description (optional)" data-am="አጭር መግለጫ (አማራጭ)">Short description (optional)</span></label><input id="sde" maxlength="500">
+        <label for="sk"><span data-en="How do students get it?" data-am="ተማሪዎች እንዴት ያገኙታል?">How do students get it?</span></label>
+        <select id="sk"><option value="file" data-en="Upload a PDF" data-am="PDF ይጫኑ">Upload a PDF</option><option value="link" data-en="Link to a website or file" data-am="ወደ ድረ ገጽ ወይም ፋይል የሚወስድ አገናኝ">Link to a website or file</option></select>
+        <div id="fileRow"><label for="sf"><span data-en="PDF file (25 MB at most)" data-am="PDF ፋይል (ከ25 MB አይበልጥ)">PDF file (25 MB at most)</span></label><input id="sf" type="file" accept="application/pdf,.pdf">
+          <p class="hint" id="fileHint"></p></div>
+        <div id="linkRow" hidden><label for="su"><span data-en="Link" data-am="አገናኝ">Link</span></label><input id="su" type="url" maxlength="500" placeholder="https://"></div>
+        <div class="checks"><label class="check"><input type="checkbox" id="spub" checked> <span data-en="Visible on the students portal" data-am="በተማሪዎች ፖርታል ላይ ይታይ">Visible on the students portal</span></label></div>
+        <div class="actions">
+          <button class="primary" type="submit" id="srcSave" data-en="Add source" data-am="ምንጭ ጨምር">Add source</button>
+          <button class="ghost" type="button" id="srcCancel" hidden data-en="Cancel edit" data-am="ማስተካከያውን ሰርዝ">Cancel edit</button>
+        </div>
+      </form>
+    </div>
+    <div class="panel"><h2 data-en="Question sources" data-am="የጥያቄ ምንጮች">Question sources</h2><div id="srcList"></div></div>
+  </div>
+
+  <!-- PAGE UPLOADS TAB -->
+  <div id="uploadsTab" hidden>
+    <div class="panel">
+      <h2 data-en="Page uploads and achievements" data-am="የገጽ ሰቀላዎችና ስኬቶች">Page uploads and achievements</h2>
+      <p class="hint" data-en="Use this one form to add achievement details and upload the image directly to that record, or continue using it for facility uploads." data-am="ዝርዝር የስኬት መረጃን ለማከልና ምስሉን በቀጥታ ከመረጃው ጋር ለመጫን ይህንኑ ቅጽ ይጠቀሙ፤ ለመገልገያ ሰቀላም ይጠቀሙበት።">Use this one form to add achievement details and upload the image directly to that record, or continue using it for facility uploads.</p>
+      <form id="pageUploadForm">
+        <label for="uploadType"><span data-en="Page section" data-am="የገጽ ክፍል">Page section</span></label>
+        <select id="uploadType">
+          <option value="hero-slider" data-en="Home Page — Hero Slider" data-am="መነሻ ገጽ — የስላይድ ምስሎች">Home Page — Hero Slider</option>
+          <option value="achievement-photo" data-en="Achievements — student or award photo" data-am="ስኬቶች — የተማሪ ወይም የሽልማት ፎቶ">Achievements — student or award photo</option>
+          <option value="achievement-cover" data-en="Achievements — main page cover image" data-am="ስኬቶች — የዋና ገጽ ሽፋን ምስል">Achievements — main page cover image</option>
+          <option value="facility-photo" data-en="Facilities — page/card image or gallery photo" data-am="መገልገያዎች — የገጽ/ካርድ ወይም የጋለሪ ፎቶ">Facilities — page/card image or gallery photo</option>
+          <option value="about-page-image" data-en="About Page — Main Image" data-am="ስለ እኛ ገጽ — ዋና ምስል">About Page — Main Image</option>
+        </select>
+        <div id="uploadTargetField"><label for="uploadTarget"><span data-en="Destination card or topic" data-am="የመዳረሻ ካርድ ወይም ርዕስ">Destination card or topic</span></label>
+        <select id="uploadTarget"></select></div>
+        
+        <div id="achievementUploadFields" hidden>
+          <label for="achievementMode"><span data-en="What do you want to do?" data-am="ምን ማድረግ ይፈልጋሉ?">What do you want to do?</span></label>
+          <select id="achievementMode">
+            <option value="existing" data-en="Add or replace the photo on an existing card" data-am="በነባር ካርድ ላይ ፎቶ ጨምር ወይም ቀይር">Add or replace the photo on an existing card</option>
+            <option value="new" data-en="Create a new achievement record" data-am="አዲስ የስኬት መረጃ ፍጠር">Create a new achievement record</option>
+          </select>
+
+          <label for="achievementGroup"><span data-en="Achievement section" data-am="የስኬት ክፍል">Achievement section</span></label>
+          <select id="achievementGroup"></select>
+
+          <div id="achievementCardField">
+            <label for="achievementCard"><span data-en="Exact achievement card" data-am="ትክክለኛው የስኬት ካርድ">Exact achievement card</span></label>
+            <select id="achievementCard"></select>
+          </div>
+
+          <div id="achievementNewFields" hidden>
+            <div class="row">
+              <div><label for="achievementEntryYear"><span data-en="Year" data-am="ዓመት">Year</span></label><input id="achievementEntryYear" maxlength="20" placeholder="For example: 2018 E.C"></div>
+              <div><label for="achievementEntryName"><span data-en="Student, award, or project name" data-am="የተማሪ፣ የሽልማት ወይም የፕሮጀክት ስም">Student, award, or project name</span></label><input id="achievementEntryName" maxlength="120"></div>
+            </div>
+            <div id="achievementScoreFields" class="row">
+              <div><label for="achievementEntryStream"><span data-en="Student stream" data-am="የተማሪ የትምህርት ክፍል">Student stream</span></label>
+                <select id="achievementEntryStream"><option value="natural" data-en="Natural Science" data-am="ተፈጥሮ ሳይንስ">Natural Science</option><option value="social" data-en="Social Science" data-am="ማህበራዊ ሳይንስ">Social Science</option></select></div>
+              <div class="row">
+                <div><label for="achievementEntryScore"><span data-en="Score" data-am="ውጤት">Score</span></label><input id="achievementEntryScore" type="number" min="0" max="9999" step="1"></div>
+                <div><label for="achievementEntryOutOf"><span data-en="Out of" data-am="ከ">Out of</span></label><input id="achievementEntryOutOf" type="number" min="1" max="9999" step="1" value="700"></div>
+              </div>
+            </div>
+            <label for="achievementEntrySubtitle"><span id="achievementSubtitleLabel" data-en="Details (optional)" data-am="ዝርዝር (አማራጭ)">Details (optional)</span></label>
+            <input id="achievementEntrySubtitle" maxlength="200">
+            <div id="achievementResultField" hidden><label for="achievementEntryResult"><span data-en="Result (optional)" data-am="ውጤት (አማራጭ)">Result (optional)</span></label><input id="achievementEntryResult" maxlength="120"></div>
+            <label for="achievementEntryNote"><span data-en="Description (optional)" data-am="መግለጫ (አማራጭ)">Description (optional)</span></label><textarea id="achievementEntryNote" maxlength="1000"></textarea>
+            <p class="hint" data-en="When the section is Top exam scores, choose the student's stream and enter their score. The image below is attached to this new record." data-am="ከፍተኛ የፈተና ውጤቶች ሲመረጥ የተማሪውን የትምህርት ክፍልና ውጤት ያስገቡ። ከታች የሚጫነው ምስል ከዚህ መረጃ ጋር ይያያዛል።">When the section is Top exam scores, choose the student's stream and enter their score. The image below is attached to this new record.</p>
+          </div>
+
+
+        </div>
+
+        <div id="facilitySlotField" hidden>
+          <label for="facilityPhotoSlot"><span data-en="Image location in the facility page" data-am="በመገልገያ ገጹ ያለው የምስል ቦታ">Image location in the facility page</span></label>
+          <select id="facilityPhotoSlot"></select>
+        </div>
+        
+        <label for="pageUploadFile"><span data-en="Image file (JPG/PNG/WebP, 10 MB max)" data-am="የምስል ፋይል (JPG/PNG/WebP፣ ከ10 MB አይበልጥ)">Image file (JPG/PNG/WebP, 10 MB max)</span></label><input id="pageUploadFile" type="file" accept="image/jpeg,image/png,image/webp">
+        <div id="pageUploadCaptionRow"><label for="pageUploadCaption"><span data-en="Photo caption (optional)" data-am="የፎቶ መግለጫ (አማራጭ)">Photo caption (optional)</span></label><input id="pageUploadCaption" maxlength="120"></div>
+        <label for="mediaTitle"><span data-en="Library title (optional)" data-am="የላይብረሪ ርዕስ (አማራጭ)">Library title (optional)</span></label><input id="mediaTitle" maxlength="120">
+        <p id="destinationSummary" class="hint" role="status">Choose a page section and its specific card to see the upload destination.</p>
+        <div class="actions">
+          <button type="submit" id="pageUploadSubmit" class="primary" data-en="Upload to selected place" data-am="ወደ የተመረጠው ቦታ ይጫኑ">Upload to selected place</button>
+        </div>
+        <p id="pageUploadMsg" class="msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    <div class="panel"><h2 data-en="Achievement records" data-am="የስኬት መረጃዎች">Achievement records</h2><div id="achievementEntryList"></div></div>
+    <div class="panel">
+      <h2 data-en="Image library" data-am="የምስል ላይብረሪ">Image library</h2>
+      <p class="hint" data-en="Search your uploaded images and use one at the selected destination. Reusing an image does not upload another copy." data-am="የተጫኑ ምስሎችን ይፈልጉና በተመረጠው መዳረሻ ይጠቀሙ። ምስልን እንደገና መጠቀም ሌላ ቅጂ አይጭንም።">Search your uploaded images and use one at the selected destination. Reusing an image does not upload another copy.</p>
+      <label for="mediaSearch"><span data-en="Search images" data-am="ምስሎችን ፈልግ">Search images</span></label>
+      <input id="mediaSearch" type="search" maxlength="100" placeholder="Search by title or file name">
+      <div id="mediaLibraryGrid" class="media-grid" aria-live="polite"></div>
+    </div>
+    <div class="panel"><h2 data-en="Files at this destination" data-am="በዚህ መዳረሻ ያሉ ፋይሎች">Files at this destination</h2><div id="pageUploadList"></div></div>
+  </div>
+
+  <!-- SHORT NOTES TAB -->
+  <div id="notesTab" hidden>
+    <div class="panel">
+      <h2 data-en="Add a text note" data-am="የጽሑፍ ማስታወሻ ጨምር">Add a text note</h2>
+      <p class="hint" data-en="Create a text note for students. It will appear on the Short notes page." data-am="ለተማሪዎች የጽሑፍ ማስታወሻ ይፍጠሩ። በአጭር ማስታወሻ ገጽ ላይ ይታያል።">Create a text note for students. It will appear on the Short notes page.</p>
+      <form id="noteForm">
+        <label for="pnTitle"><span data-en="Title" data-am="ርዕስ">Title</span></label><input id="pnTitle" maxlength="150" required>
+        <div class="row">
+          <div><label for="pnSubject"><span data-en="Subject" data-am="ትምህርት ዓይነት">Subject</span></label><select id="pnSubject"></select></div>
+          <div><label for="pnGrade"><span data-en="Grade" data-am="ክፍል">Grade</span></label><select id="pnGrade"></select></div>
+        </div>
+        <label for="pnDesc"><span data-en="Description (optional)" data-am="መግለጫ (አማራጭ)">Description (optional)</span></label><textarea id="pnDesc" maxlength="500"></textarea>
+        <label for="pnText"><span data-en="Note Content (Text)" data-am="የማስታወሻ ይዘት (ጽሑፍ)">Note Content (Text)</span></label><textarea id="pnText" rows="6" required placeholder="Type the short notes here..."></textarea>
+        <div class="checks"><label class="check"><input type="checkbox" id="pnPub" checked> <span data-en="Visible to students" data-am="ለተማሪዎች ይታይ">Visible to students</span></label></div>
+        <div class="actions"><button class="primary" type="submit" id="pnSave" data-en="Save text note" data-am="የጽሑፍ ማስታወሻ አስቀምጥ">Save text note</button></div>
+        <p id="pnMsg" class="msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    <div class="panel"><h2 data-en="Saved short notes" data-am="የተቀመጡ አጭር ማስታወሻዎች">Saved short notes</h2><div id="pnList"></div></div>
+  </div>
+
+  <!-- PAGE CONTENT TAB -->
+  <div id="pageContentTab" hidden>
+    <div class="panel">
+      <h2 id="eventFormTitle" data-en="Create a home page event card" data-am="በመነሻ ገጽ ላይ የክንውን ካርድ ፍጠር">Create a home page event card</h2>
+      <p class="hint" data-en="Events you create here appear in Upcoming events on the home page. To add an image or PDF, select that event in Page uploads after saving it." data-am="እዚህ የሚፈጥሯቸው ክንውኖች በመነሻ ገጽ ላይ ይታያሉ። ምስል ወይም PDF ለማከል ካስቀመጡ በኋላ በገጽ ፋይሎች ውስጥ ክንውኑን ይምረጡ።">Events you create here appear in Upcoming events on the home page. To add an image or PDF, select that event in Page uploads after saving it.</p>
+      <form id="homeEventForm">
+        <label for="homeEventTitle"><span data-en="Event title" data-am="የክንውን ርዕስ">Event title</span></label><input id="homeEventTitle" maxlength="120" required>
+        <div class="row">
+          <div>
+            <label><span data-en="Ethiopian date" data-am="የኢትዮጵያ ቀን">የኢትዮጵያ ቀን</span></label>
+            <div class="eth-date">
+              <input id="homeEventEthYear" type="number" min="1" step="1" inputmode="numeric" aria-label="ዓመት" placeholder="ዓመት" required>
+              <select id="homeEventEthMonth" aria-label="ወር" required>
+                <option value="">ወር ይምረጡ</option>
+                <option value="1">መስከረም</option><option value="2">ጥቅምት</option><option value="3">ኅዳር</option>
+                <option value="4">ታኅሣሥ</option><option value="5">ጥር</option><option value="6">የካቲት</option>
+                <option value="7">መጋቢት</option><option value="8">ሚያዝያ</option><option value="9">ግንቦት</option>
+                <option value="10">ሰኔ</option><option value="11">ሐምሌ</option><option value="12">ነሐሴ</option><option value="13">ጳጉሜ</option>
+              </select>
+              <select id="homeEventEthDay" aria-label="ቀን" required><option value="">ቀን</option></select>
+            </div>
+            <input id="homeEventDate" type="hidden" required>
+          </div>
+          <div><label for="homeEventLocation"><span data-en="Location (optional)" data-am="ቦታ (አማራጭ)">Location (optional)</span></label><input id="homeEventLocation" maxlength="120"></div>
+        </div>
+        <label for="homeEventDescription"><span data-en="Details (optional)" data-am="ዝርዝር (አማራጭ)">Details (optional)</span></label><textarea id="homeEventDescription" maxlength="500"></textarea>
+        <div class="actions">
+          <button type="submit" class="primary" id="homeEventSave" data-en="Create event card" data-am="የክንውት ካርድ ፍጠር">Create event card</button>
+          <button type="button" class="ghost" id="homeEventCancel" hidden data-en="Cancel edit" data-am="አስተካክልን ሰርዝ">Cancel edit</button>
+        </div>
+        <p id="homeEventMsg" class="msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    <div class="panel"><h2 data-en="Home page event cards" data-am="የመነሻ ገጽ የክንውን ካርዶች">Home page event cards</h2><div id="homeEventListAdmin"></div></div>
+  </div>
+
+  <!-- STUDENT STORIES TAB -->
+  <div id="storiesTab" hidden>
+    <div class="panel">
+      <h2 data-en="Student stories" data-am="የተማሪዎች ታሪኮች">Student stories</h2>
+      <p class="hint" data-en="Stories appear on the portal as soon as students send them. Hide or delete any story that should not be shown." data-am="ተማሪዎች እንደላኳቸው ታሪኮች በፖርታሉ ላይ ይታያሉ። መታየት የሌለበትን ታሪክ ይደብቁ ወይም ይሰርዙ።">Stories appear on the portal as soon as students send them. Hide or delete any story that should not be shown.</p>
+      <div id="storyList"></div>
+    </div>
+  </div>
+
+  <!-- STAFF TAB -->
+  <div id="staffTab" hidden>
+    <div class="panel">
+      <h2 data-en="Discussion board: teachers" data-am="የውይይት መድረክ፦ መምህራን">Discussion board: teachers</h2>
+      <p class="hint" data-en="Choose the teacher's subject and give a password. On the discussion board the teacher picks their name and types the password to answer as a teacher, attach photos, videos and PDFs, and manage the questions of their subject." data-am="የመምህሩን ትምህርት ዓይነት ይምረጡና የይለፍ ቃል ይስጡ። በውይይት መድረኩ ላይ መምህሩ ስሙን መርጦ የይለፍ ቃሉን በማስገባት እንደ መምህር መልስ ይሰጣል፣ ፎቶዎችን፣ ቪዲዮዎችንና PDF ፋይሎችን ያያይዛል፣ እንዲሁም የትምህርት ዓይነቱን ጥያቄዎች ያስተዳድራል።">Choose the teacher's subject and give a password. On the discussion board the teacher picks their name and types the password to answer as a teacher, attach photos, videos and PDFs, and manage the questions of their subject.</p>
+      <form id="tcForm">
+        <div class="row">
+          <div><label for="tcName"><span data-en="Teacher name" data-am="የመምህር ስም">Teacher name</span></label><input id="tcName" maxlength="60" placeholder="For example: Mr. Abebe" data-en-placeholder="For example: Mr. Abebe" data-am-placeholder="ለምሳሌ፦ Mr. Abebe"></div>
+          <div><label for="tcSubj"><span data-en="Subject" data-am="ትምህርት ዓይነት">Subject</span></label><select id="tcSubj"></select></div>
+        </div>
+        <label for="tcPass"><span data-en="Password (8+ characters)" data-am="የይለፍ ቃል (8+ ቁምፊዎች)">Password (8+ characters)</span></label>
+        <input id="tcPass" type="text" minlength="8" maxlength="100" autocomplete="off" required>
+        <div class="actions"><button class="primary" type="submit" data-en="Add teacher" data-am="መምህር ጨምር">Add teacher</button></div>
+      </form>
+      <div id="teacherList" style="margin-top:1rem"></div>
+    </div>
+    <div class="panel">
+      <h2 data-en="Add a staff member" data-am="የሰራተኛ አባል ጨምር">Add a staff member</h2>
+      <form id="userForm">
+        <div class="row">
+          <div><label for="uf"><span data-en="Full name" data-am="ሙሉ ስም">Full name</span></label><input id="uf" required maxlength="80"></div>
+          <div><label for="uu"><span data-en="Username" data-am="የተጠቃሚ ስም">Username</span></label><input id="uu" required pattern="[A-Za-z0-9._-]{3,30}"></div>
+        </div>
+        <div class="row">
+          <div><label for="up"><span data-en="Temporary password (10+ characters)" data-am="ጊዜያዊ የይለፍ ቃል (10+ ቁምፊዎች)">Temporary password (10+ characters)</span></label><input id="up" type="text" minlength="10" required autocomplete="off"></div>
+          <div><label for="ur"><span data-en="Role" data-am="ሚና">Role</span></label>
+            <select id="ur"><option value="publisher" data-en="Publisher (posts and edits own announcements)" data-am="አሳታሚ (የራሱን ማስታወቂያዎች ያትማልና ያስተካክላል)">Publisher (posts and edits own announcements)</option><option value="admin" data-en="Admin (everything)" data-am="አስተዳዳሪ (ሁሉም ፈቃዶች)">Admin (everything)</option></select></div>
+        </div>
+        <div class="actions"><button class="primary" type="submit" data-en="Create account" data-am="መለያ ፍጠር">Create account</button></div>
+      </form>
+    </div>
+    <div class="panel"><h2 data-en="Staff accounts" data-am="የሰራተኛ መለያዎች">Staff accounts</h2><div id="users"></div></div>
+  </div>
+
+  <!-- SCHOOL FUNDING TAB -->
+  <div id="fundingTab" hidden>
+    <div class="panel">
+      <h2 data-en="Payment accounts" data-am="የክፍያ አካውንቶች">Payment accounts</h2>
+      <p class="hint" data-en="When a donor presses “Fund it” they see only these accounts (owner name and account number or Telebirr phone), each with a Copy button. You can add as many accounts as you need, one for each bank." data-am="ለጋሽ «ይደግፉ» ሲጫን እነዚህን አካውንቶች ብቻ ያያል (የባለቤት ስም እና የአካውንት ቁጥር ወይም የቴሌብር ስልክ)፣ እያንዳንዱ ከኮፒ አዝራር ጋር። ለእያንዳንዱ ባንክ አንድ አካውንት በማድረግ የፈለጉትን ያህል ማከል ይችላሉ።">When a donor presses “Fund it” they see only these accounts (owner name and account number or Telebirr phone), each with a Copy button. You can add as many accounts as you need, one for each bank.</p>
+      <form id="accForm">
+        <div class="row">
+          <div><label for="acKind"><span data-en="Type" data-am="ዓይነት">Type</span></label><select id="acKind"><option value="telebirr">Telebirr</option><option value="bank">Bank account</option></select></div>
+          <div id="acBankWrap" hidden><label for="acBankSel"><span data-en="Bank" data-am="ባንክ">Bank</span></label><select id="acBankSel"></select><input id="acBank" maxlength="80" placeholder="Bank name" hidden style="margin-top:.5rem"></div>
+        </div>
+        <div class="row">
+          <div><label for="acNum"><span id="acNumLbl">Telebirr phone number</span></label><input id="acNum" maxlength="40" inputmode="tel" required></div>
+          <div><label for="acOwner"><span data-en="Account owner name" data-am="የአካውንት ባለቤት ስም">Account owner name</span></label><input id="acOwner" maxlength="100" required></div>
+        </div>
+        <label for="acNote"><span data-en="Note for donors (optional)" data-am="ለለጋሾች ማስታወሻ (አማራጭ)">Note for donors (optional)</span></label><input id="acNote" maxlength="150">
+        <div class="checks"><label class="check"><input type="checkbox" id="acPub" checked> <span data-en="Visible to donors" data-am="ለለጋሾች ይታይ">Visible to donors</span></label></div>
+        <div class="actions">
+          <button class="primary" type="submit" id="accSave" data-en="Add account" data-am="አካውንት ጨምር">Add account</button>
+          <button class="ghost" type="button" id="accCancel" hidden data-en="Cancel edit" data-am="ማስተካከያውን ሰርዝ">Cancel edit</button>
+        </div>
+      </form>
+      <div id="accList" style="margin-top:1rem"></div>
+    </div>
+    <div class="panel">
+      <h2 id="fundFormTitle" data-en="New project" data-am="አዲስ ፕሮጀክት">New project</h2>
+      <p class="hint" data-en="Projects appear on the public funding page. The percentage is calculated automatically from the goal and the amount raised." data-am="ፕሮጀክቶች በሕዝብ የድጋፍ ገጽ ላይ ይታያሉ። መቶኛው ከግቡ እና ከተሰበሰበው መጠን በራሱ ይሰላል።">Projects appear on the public funding page. The percentage is calculated automatically from the goal and the amount raised.</p>
+      <form id="fundForm">
+        <div class="row">
+          <div><label for="fpIcon"><span data-en="Icon (emoji)" data-am="አዶ (ኢሞጂ)">Icon (emoji)</span></label><input id="fpIcon" maxlength="4" placeholder="📚"></div>
+          <div><label for="fpTitle"><span data-en="Project name" data-am="የፕሮጀክት ስም">Project name</span></label><input id="fpTitle" maxlength="120" required></div>
+        </div>
+        <label for="fpTitleAm"><span data-en="Amharic name" data-am="የአማርኛ ስም">Amharic name</span></label><input id="fpTitleAm" maxlength="120">
+        <label for="fpDesc"><span data-en="Description" data-am="መግለጫ">Description</span></label><input id="fpDesc" maxlength="300">
+        <label for="fpDescAm"><span data-en="Amharic description" data-am="የአማርኛ መግለጫ">Amharic description</span></label><input id="fpDescAm" maxlength="300">
+        <label for="fpBen"><span data-en="Who benefits (English)" data-am="ተጠቃሚዎች ማን ናቸው (እንግሊዝኛ)">Who benefits (English)</span></label><input id="fpBen" maxlength="300" placeholder="All 1,200 students">
+        <label for="fpBenAm"><span data-en="Who benefits (Amharic)" data-am="ተጠቃሚዎች ማን ናቸው (አማርኛ)">Who benefits (Amharic)</span></label><input id="fpBenAm" maxlength="300">
+        <label for="fpPur"><span data-en="What the money buys (English)" data-am="ገንዘቡ ምን ይገዛል (እንግሊዝኛ)">What the money buys (English)</span></label><input id="fpPur" maxlength="300" placeholder="Books, shelves and reading tables">
+        <label for="fpPurAm"><span data-en="What the money buys (Amharic)" data-am="ገንዘቡ ምን ይገዛል (አማርኛ)">What the money buys (Amharic)</span></label><input id="fpPurAm" maxlength="300">
+        <div class="row">
+          <div><label for="fpGoal"><span data-en="Money needed (ETB)" data-am="የሚያስፈልገው ገንዘብ (ብር)">Money needed (ETB)</span></label><input id="fpGoal" type="number" min="1" required></div>
+          <div><label for="fpRaised"><span data-en="Raised so far (ETB)" data-am="እስካሁን የተሰበሰበ (ብር)">Raised so far (ETB)</span></label><input id="fpRaised" type="number" min="0" value="0"></div>
+        </div>
+        <p class="hint"><span data-en="Progress (calculated):" data-am="እድገት (የተሰላ)፦">Progress (calculated):</span> <b id="fpPct">0%</b></p>
+        <div class="checks"><label class="check"><input type="checkbox" id="fpPub" checked> <span data-en="Visible on the funding page" data-am="በድጋፍ ገጽ ላይ ይታይ">Visible on the funding page</span></label></div>
+        <div class="actions">
+          <button class="primary" type="submit" id="fundSave" data-en="Add project" data-am="ፕሮጀክት ጨምር">Add project</button>
+          <button class="ghost" type="button" id="fundCancel" hidden data-en="Cancel edit" data-am="ማስተካከያውን ሰርዝ">Cancel edit</button>
+        </div>
+      </form>
+    </div>
+    <div class="panel">
+      <h2 data-en="Record a donation received" data-am="የደረሰ ልገሳ መዝግብ">Record a donation received</h2>
+      <p class="hint" data-en="Adds the amount to the project's total and shows it in the public donations list. Copy the details from the Telebirr confirmation." data-am="መጠኑን ወደ ፕሮጀክቱ ጠቅላላ ይጨምራል፣ በሕዝብ የልገሳ ዝርዝር ውስጥም ይታያል። ዝርዝሩን ከቴሌብር ማረጋገጫ ይቅዱ።">Adds the amount to the project's total and shows it in the public donations list. Copy the details from the Telebirr confirmation.</p>
+      <form id="donForm">
+        <div class="row">
+          <div><label for="dnProj"><span data-en="Project" data-am="ፕሮጀክት">Project</span></label><select id="dnProj" required></select></div>
+          <div><label for="dnAmt"><span data-en="Amount (ETB)" data-am="መጠን (ብር)">Amount (ETB)</span></label><input id="dnAmt" type="number" min="1" required></div>
+        </div>
+        <div class="row">
+          <div><label for="dnName"><span data-en="Donor name" data-am="የለጋሽ ስም">Donor name</span></label><input id="dnName" maxlength="80"></div>
+          <div><label for="dnDate"><span data-en="Date" data-am="ቀን">Date</span></label><input id="dnDate" type="date" required></div>
+        </div>
+        <label for="dnRef"><span data-en="Telebirr reference number" data-am="የቴሌብር ማጣቀሻ ቁጥር">Telebirr reference number</span></label><input id="dnRef" maxlength="60">
+        <div class="checks"><label class="check"><input type="checkbox" id="dnAnon"> <span data-en="Hide the donor's name (Anonymous)" data-am="የለጋሹን ስም ደብቅ (ስም የለሽ)">Hide the donor's name (Anonymous)</span></label></div>
+        <div class="actions"><button class="primary" type="submit" data-en="Record donation" data-am="ልገሳ መዝግብ">Record donation</button></div>
+      </form>
+      <h3 style="margin:1.2rem 0 .4rem">Transfer submissions awaiting verification</h3>
+      <p class="hint">Only approve a submission after checking the transaction in the official bank or Telebirr account. Approval increases the project total.</p>
+      <div id="pendingDonList" style="margin-top:1rem"></div>
+      <h3 style="margin:1.2rem 0 .4rem">Verified donation history</h3>
+      <div id="donList" style="margin-top:1rem"></div>
+    </div>
+    <div class="panel">
+      <h2 data-en="Post a project update" data-am="የፕሮጀክት ዝመና አስፍር">Post a project update</h2>
+      <p class="hint" data-en="Show donors what was done with the money, for example “Books delivered”." data-am="ገንዘቡ ምን ላይ እንደዋለ ለለጋሾች ያሳዩ፣ ለምሳሌ «መጻሕፍት ደረሱ»።">Show donors what was done with the money, for example “Books delivered”.</p>
+      <form id="updForm">
+        <div class="row">
+          <div><label for="upProj"><span data-en="Project" data-am="ፕሮጀክት">Project</span></label><select id="upProj" required></select></div>
+          <div><label for="upDate"><span data-en="Date" data-am="ቀን">Date</span></label><input id="upDate" type="date" required></div>
+        </div>
+        <label for="upTitle"><span data-en="Update title" data-am="የዝመና ርዕስ">Update title</span></label><input id="upTitle" maxlength="120" required>
+        <label for="upBody"><span data-en="Details (what was bought or done, cost)" data-am="ዝርዝር (ምን ተገዛ ወይም ተሠራ፣ ወጪ)">Details (what was bought or done, cost)</span></label><textarea id="upBody" maxlength="1000" style="min-height:5rem"></textarea>
+        <label for="upPhoto"><span data-en="Photo link (optional, https://…)" data-am="የፎቶ አገናኝ (አማራጭ፣ https://…)">Photo link (optional, https://…)</span></label><input id="upPhoto" maxlength="500" placeholder="https://">
+        <div class="actions"><button class="primary" type="submit" data-en="Post update" data-am="ዝመና አስፍር">Post update</button></div>
+      </form>
+      <div id="updList" style="margin-top:1rem"></div>
+    </div>
+    <div class="panel"><h2 data-en="Funding projects" data-am="የድጋፍ ፕሮጀክቶች">Funding projects</h2><div id="fundList"></div></div>
+  </div>
+
+</section>
+</main>
+
+<script src="/achievements-data.js"></script>
+<script src="/portal/js/data.js"></script>
+<script src="/admin-content.js?v=6"></script>
+<script>
+const $ = id => document.getElementById(id);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+const setLocalized = (id, en, am) => { const e = $(id); e.dataset.en = en; e.dataset.am = am; let lang = 'en'; try { lang = localStorage.getItem('site_lang') === 'am' ? 'am' : 'en'; } catch {} e.textContent = lang === 'am' ? am : en; };
+
+const ANNOUNCEMENT_AM_MONTHS = ['መስከረም','ጥቅምት','ኅዳር','ታኅሣሥ','ጥር','የካቲት','መጋቢት','ሚያዝያ','ግንቦት','ሰኔ','ሐምሌ','ነሐሴ','ጳጉሜ'];
+const ANNOUNCEMENT_ETH_FORMAT = new Intl.DateTimeFormat('en-u-ca-ethiopic-nu-latn', {year:'numeric',month:'numeric',day:'numeric',timeZone:'UTC'});
+function announcementEthParts(iso){
+  const parts=ANNOUNCEMENT_ETH_FORMAT.formatToParts(new Date(`${iso}T00:00:00Z`));
+  const val=t=>Number(parts.find(p=>p.type===t)?.value||0);
+  return {year:val('year'),month:val('month'),day:val('day')};
+}
+function announcementEthLabel(iso){const p=announcementEthParts(iso);return `${p.day} ${ANNOUNCEMENT_AM_MONTHS[p.month-1]||''} ${p.year}`;}
+function announcementIsoFromEth(year,month,day){
+  year=Number(year);month=Number(month);day=Number(day);
+  if(!Number.isInteger(year)||year<1||!Number.isInteger(month)||month<1||month>13||!Number.isInteger(day))return '';
+  const max=month===13?(year%4===3?6:5):30;if(day<1||day>max)return '';
+  const start=Date.UTC(year+7,8,1);
+  for(let offset=0;offset<390;offset++){
+    const date=new Date(start+offset*86400000), parts=ANNOUNCEMENT_ETH_FORMAT.formatToParts(date);
+    const val=t=>Number(parts.find(p=>p.type===t)?.value||0);
+    if(val('year')===year&&val('month')===month&&val('day')===day)
+      return `${date.getUTCFullYear()}-${String(date.getUTCMonth()+1).padStart(2,'0')}-${String(date.getUTCDate()).padStart(2,'0')}`;
+  }
+  return '';
+}
+function refreshAnnouncementEthDays(selected=''){
+  const month=Number($('announcementEthMonth').value),year=Number($('announcementEthYear').value);
+  const max=month===13?(year%4===3?6:5):30, select=$('announcementEthDay');
+  select.replaceChildren(new Option('ቀን',''));
+  for(let d=1;d<=(month?max:30);d++)select.add(new Option(String(d),String(d)));
+  if(selected)select.value=String(selected);
+}
+function syncAnnouncementIsoDate(){ $('d').value=announcementIsoFromEth($('announcementEthYear').value,$('announcementEthMonth').value,$('announcementEthDay').value); }
+function setAnnouncementEthDate(iso){const p=announcementEthParts(iso);$('announcementEthYear').value=p.year||'';$('announcementEthMonth').value=p.month||'';refreshAnnouncementEthDays(p.day);syncAnnouncementIsoDate();}
+function initAnnouncementEthDate(){
+  $('announcementEthMonth').addEventListener('change',()=>{refreshAnnouncementEthDays();syncAnnouncementIsoDate();});
+  $('announcementEthYear').addEventListener('input',()=>{refreshAnnouncementEthDays($('announcementEthDay').value);syncAnnouncementIsoDate();});
+  $('announcementEthDay').addEventListener('change',syncAnnouncementIsoDate);
+  const now=new Date(),today=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;setAnnouncementEthDate(today);
+}
+
+function translatePlaceholders(){
+  let lang = 'en'; try { lang = localStorage.getItem('site_lang') === 'am' ? 'am' : 'en'; } catch {}
+  document.querySelectorAll('[data-en-placeholder][data-am-placeholder]').forEach(input => {
+    input.placeholder = input.getAttribute(`data-${lang}-placeholder`);
+  });
+}
+function connectPlaceholderTranslation(){
+  translatePlaceholders();
+  const langBtn = $('lang-toggle');
+  if (langBtn) langBtn.addEventListener('click', translatePlaceholders);
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', connectPlaceholderTranslation, {once: true});
+else connectPlaceholderTranslation();
+let me = null, editingId = null;
+
+async function api(method, url, body){
+  const token = sessionStorage.getItem('token');
+  const res = await fetch(url, {
+    method,
+    headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: 'Bearer ' + token } : {}) },
+    body: body ? JSON.stringify(body) : undefined
+  });
+  const data = await res.json().catch(() => ({}));
+  if (res.status === 401 && token) { logout(); }
+  if (!res.ok) throw new Error(data.error || 'Request failed.');
+  return data;
+}
+function say(id, text, ok){ const m = $(id); m.textContent = text; m.className = 'msg ' + (ok ? 'good' : 'err'); }
+
+/* ----- Login / logout ----- */
+$('loginForm').onsubmit = async e => {
+  e.preventDefault();
+  try{
+    const r = await api('POST', '/api/login', { username: $('lu').value, password: $('lp').value });
+    sessionStorage.setItem('token', r.token);
+    $('lp').value = '';
+    start(r.user);
+  }catch(err){ say('loginMsg', err.message); }
+};
+function logout(){ sessionStorage.removeItem('token'); me = null; $('appView').hidden = true; $('loginView').hidden = false; }
+$('logoutBtn').onclick = logout;
+
+$('pwBtn').onclick = async () => {
+  const current = prompt('Current password:'); if (!current) return;
+  const next = prompt('New password (at least 10 characters):'); if (!next) return;
+  try{ await api('PATCH', '/api/me/password', { current, next }); say('topMsg', 'Password changed.', true); }
+  catch(err){ say('topMsg', err.message); }
+};
+
+async function boot(){
+  if (!sessionStorage.getItem('token')) return;
+  try{ start(await api('GET', '/api/me')); }catch{ logout(); }
+}
+function start(user){
+  me = user;
+  $('loginView').hidden = true; $('appView').hidden = false;
+  $('who').textContent = `${user.full_name} · ${user.role === 'admin' ? 'Admin' : 'Publisher'}`;
+  $('tabs').hidden = false;
+  document.querySelector('#tabs [data-tab="staff"]').hidden = user.role !== 'admin';
+  $('pageContentTabBtn').hidden = user.role !== 'admin';
+  $('fundingTabBtn').hidden = user.role !== 'admin';
+  if (!$('announcementEthYear').dataset.initialized) { initAnnouncementEthDate(); $('announcementEthYear').dataset.initialized = '1'; }
+  initPortalForms();
+  window.initPageUploads(user.role === 'admin');
+  showTab('posts'); loadPosts(); loadNews(); loadSources(); loadNotes(); loadStories(); if (user.role === 'admin') { loadUsers(); loadTeachers(); loadFundingAll(); }
+}
+
+/* ----- School funding ----- */
+let editingFund = null, fundRows = [];
+const fnum = v => Math.max(0, Math.round(Number(v)) || 0);
+const fpct = (r, g) => Math.min(100, Math.round(fnum(r) / Math.max(1, fnum(g)) * 100));
+const updFundPct = () => { $('fpPct').textContent = fpct($('fpRaised').value, $('fpGoal').value) + '%'; };
+$('fpRaised').oninput = $('fpGoal').oninput = updFundPct;
+function resetFund(){
+  editingFund = null; $('fundForm').reset(); $('fpPub').checked = true; $('fpRaised').value = 0;
+  setLocalized('fundFormTitle', 'New project', 'አዲስ ፕሮጀክት'); setLocalized('fundSave', 'Add project', 'ፕሮጀክት ጨምር'); $('fundCancel').hidden = true; updFundPct();
+}
+$('fundCancel').onclick = resetFund;
+function editFund(p){
+  editingFund = p.id;
+  $('fpIcon').value = p.icon || ''; $('fpTitle').value = p.title || ''; $('fpTitleAm').value = p.title_am || '';
+  $('fpDesc').value = p.description || ''; $('fpDescAm').value = p.description_am || '';
+  $('fpBen').value = p.beneficiaries || ''; $('fpBenAm').value = p.beneficiaries_am || ''; $('fpPur').value = p.purpose || ''; $('fpPurAm').value = p.purpose_am || '';
+  $('fpGoal').value = p.goal; $('fpRaised').value = p.raised; $('fpPub').checked = !!p.published; updFundPct();
+  setLocalized('fundFormTitle', 'Edit project', 'ፕሮጀክት አስተካክል'); setLocalized('fundSave', 'Save changes', 'ለውጦቹን አስቀምጥ'); $('fundCancel').hidden = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+async function loadFunding(){
+  const box = $('fundList'); box.replaceChildren();
+  try {
+    fundRows = await api('GET', '/api/admin/funding/projects');
+  } catch(e) {
+    box.append(el('p', 'msg err', 'Could not load projects.'));
+    return;
+  }
+  fillFundSelects();
+  if (!fundRows.length) box.append(el('p', 'meta', 'No projects yet. Add a real project using the form above.'));
+  fundRows.forEach(p => {
+    const row = el('div', 'item'), info = el('div');
+    const pc = fpct(p.raised, p.goal), left = Math.max(0, fnum(p.goal) - fnum(p.raised));
+    const h = el('h3', '', `${p.icon || '🏫'} ${p.title}`);
+    if (!p.published) h.append(el('span', 'badge', 'Hidden'));
+    const bar = el('div');
+    bar.style.cssText = 'height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin:.45rem 0;max-width:22rem';
+    const fill = el('div'); fill.style.cssText = `height:100%;width:${pc}%;background:var(--brand)`;
+    bar.append(fill);
+    info.append(h, bar, el('div', 'meta', `${fnum(p.raised).toLocaleString()} / ${fnum(p.goal).toLocaleString()} ETB · ${pc}% · ${left.toLocaleString()} ETB still needed`));
+    const act = el('div', 'actions'); act.style.margin = '0'; act.style.alignItems = 'center';
+    const edit = el('button', 'ghost', 'Edit'); edit.type = 'button'; edit.onclick = () => editFund(p);
+    const del = el('button', 'danger', 'Delete'); del.type = 'button';
+    del.onclick = async () => {
+      if (!confirm('Delete this project and its linked donation records?')) return;
+      try { await api('DELETE', '/api/admin/funding/projects/' + p.id); say('topMsg', 'Project deleted.', true); loadFunding(); loadFundDonations(); }
+      catch(err) { say('topMsg', err.message); }
+    };
+    act.append(edit, del); row.append(info, act); box.append(row);
+  });
+}
+$('fundForm').onsubmit = async e => {
+  e.preventDefault();
+  const body = {
+    icon: $('fpIcon').value.trim() || '🏫', title: $('fpTitle').value.trim(), title_am: $('fpTitleAm').value.trim(),
+    description: $('fpDesc').value.trim(), description_am: $('fpDescAm').value.trim(),
+    beneficiaries: $('fpBen').value.trim(), beneficiaries_am: $('fpBenAm').value.trim(), purpose: $('fpPur').value.trim(), purpose_am: $('fpPurAm').value.trim(),
+    goal: Math.max(1, fnum($('fpGoal').value)), raised: fnum($('fpRaised').value), published: $('fpPub').checked
+  };
+  try{
+    if (editingFund) { await api('PUT', '/api/admin/funding/projects/' + editingFund, body); say('topMsg', 'Changes saved.', true); }
+    else { await api('POST', '/api/admin/funding/projects', body); say('topMsg', 'Project added.', true); }
+    resetFund(); loadFunding();
+  }catch(err){ say('topMsg', err.message); }
+};
+
+/* ----- Funding: payment accounts ----- */
+let editingAcc = null;
+const ET_BANKS = ['Commercial Bank of Ethiopia', 'Awash Bank', 'Dashen Bank', 'Bank of Abyssinia', 'Wegagen Bank', 'Cooperative Bank of Oromia', 'Hibret Bank', 'Nib International Bank', 'Zemen Bank', 'Bunna Bank', 'Berhan Bank', 'Abay Bank', 'Amhara Bank', 'Enat Bank', 'Lion International Bank', 'Oromia Bank', 'Global Bank Ethiopia', 'Siinqee Bank', 'Addis International Bank', 'Ahadu Bank', 'Tsehay Bank', 'Hijra Bank', 'ZamZam Bank', 'Goh Betoch Bank', 'Gadaa Bank'];
+(() => {
+  const sel = $('acBankSel');
+  [...ET_BANKS, 'Other bank…'].forEach((b, i) => { const o = el('option', '', b); o.value = i < ET_BANKS.length ? b : '__other'; sel.append(o); });
+})();
+const accBankValue = () => $('acBankSel').value === '__other' ? $('acBank').value.trim() : $('acBankSel').value;
+function accKindUI(){
+  const tb = $('acKind').value === 'telebirr', other = $('acBankSel').value === '__other';
+  $('acBankWrap').hidden = tb; $('acBank').hidden = tb || !other; $('acBank').required = !tb && other;
+  $('acNumLbl').textContent = tb ? 'Telebirr phone number' : 'Account number';
+}
+$('acKind').onchange = accKindUI; $('acBankSel').onchange = accKindUI;
+function resetAcc(){
+  editingAcc = null; $('accForm').reset(); $('acPub').checked = true; $('acBankSel').selectedIndex = 0; accKindUI();
+  setLocalized('accSave', 'Add account', 'አካውንት ጨምር'); $('accCancel').hidden = true;
+}
+$('accCancel').onclick = resetAcc;
+async function loadAccounts(){
+  const box = $('accList'); box.replaceChildren();
+  const rows = await api('GET', '/api/admin/funding/accounts');
+  if (!rows.length) { box.append(el('p', 'meta', 'No payment accounts yet.')); return; }
+  rows.forEach(a => {
+    const row = el('div', 'item'), info = el('div');
+    const h = el('h3', '', `${a.kind === 'telebirr' ? '📱 Telebirr' : '🏦 ' + a.bank_name}`); if (!a.published) h.append(el('span', 'badge', 'Hidden'));
+    info.append(h, el('div', 'meta', `${a.owner_name} · ${a.account_number}`));
+    if (a.note) info.append(el('div', 'meta', a.note));
+    const act = el('div', 'actions'); act.style.margin = '0';
+    const edit = el('button', 'ghost', 'Edit'); edit.type = 'button';
+    edit.onclick = () => {
+      editingAcc = a.id; $('acKind').value = a.kind; accKindUI();
+      const known = ET_BANKS.includes(a.bank_name); $('acBankSel').value = known ? a.bank_name : '__other'; $('acBank').value = known ? '' : (a.bank_name || ''); accKindUI();
+      $('acNum').value = a.account_number; $('acOwner').value = a.owner_name; $('acNote').value = a.note || ''; $('acPub').checked = !!a.published;
+      setLocalized('accSave', 'Save changes', 'ለውጦቹን አስቀምጥ'); $('accCancel').hidden = false; $('accForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+    const del = el('button', 'danger', 'Delete'); del.type = 'button';
+    del.onclick = async () => {
+      if (!confirm('Delete this payment account?')) return;
+      try{ await api('DELETE', '/api/admin/funding/accounts/' + a.id); say('topMsg', 'Account deleted.', true); loadAccounts(); }catch(err){ say('topMsg', err.message); }
+    };
+    act.append(edit, del); row.append(info, act); box.append(row);
+  });
+}
+$('accForm').onsubmit = async e => {
+  e.preventDefault();
+  const body = { kind: $('acKind').value, bank_name: accBankValue(), account_number: $('acNum').value.trim(), owner_name: $('acOwner').value.trim(), note: $('acNote').value.trim(), published: $('acPub').checked };
+  try{
+    if (editingAcc) { await api('PUT', '/api/admin/funding/accounts/' + editingAcc, body); say('topMsg', 'Account saved.', true); }
+    else {
+      await api('POST', '/api/admin/funding/accounts', body); say('topMsg', 'Account added. You can add another one now.', true);
+      $('acNum').value = ''; $('acNote').value = ''; $('acBankSel').focus(); loadAccounts(); return; // keep the owner name to make the next bank quicker
+    }
+    resetAcc(); loadAccounts();
+  }catch(err){ say('topMsg', err.message); }
+};
+
+/* ----- Funding: receiver details, donations, updates ----- */
+function fillFundSelects(){
+  ['dnProj', 'upProj'].forEach(id => {
+    const sel = $(id), cur = sel.value; sel.replaceChildren();
+    fundRows.forEach(p => { const o = el('option', '', `${p.icon || ''} ${p.title}`); o.value = p.id; sel.append(o); });
+    if (fundRows.some(p => p.id === cur)) sel.value = cur;
+  });
+}
+async function loadFundDonations(){
+  const box = $('donList'), pendingBox = $('pendingDonList');
+  box.replaceChildren(); pendingBox.replaceChildren();
+  const rows = await api('GET', '/api/admin/funding/donations');
+  const pending = rows.filter(d => d.status === 'pending');
+  const verified = rows.filter(d => d.status === 'approved' || d.status === 'rejected');
+
+  if (!pending.length) pendingBox.append(el('p', 'meta', 'No submissions waiting for verification.'));
+  pending.forEach(d => {
+    const row = el('div', 'item'), info = el('div');
+    info.append(el('h3', '', `${Number(d.amount).toLocaleString()} ETB · ${d.anonymous ? 'Anonymous' : (d.donor_name || 'No name')}`),
+      el('div', 'meta', `${d.project_title} · Transfer date: ${d.donated_at} · Ref: ${d.reference}`),
+      el('div', 'meta', `Submitted: ${d.created_at || '—'}`));
+    const act = el('div', 'actions'); act.style.margin = '0';
+    const approve = el('button', 'primary', 'Approve'); approve.type = 'button';
+    approve.onclick = async () => {
+      if (!confirm('Have you verified this exact transaction in the official bank or Telebirr account?')) return;
+      try { await api('PATCH', '/api/admin/funding/donations/' + d.id + '/review', { status: 'approved' }); say('topMsg', 'Transfer verified. Project total updated.', true); loadFunding(); loadFundDonations(); }
+      catch(err) { say('topMsg', err.message); }
+    };
+    const reject = el('button', 'danger', 'Reject'); reject.type = 'button';
+    reject.onclick = async () => {
+      const note = prompt('Optional reason for rejecting this submission:') || '';
+      if (!confirm('Reject this transfer submission? It will not change the project total.')) return;
+      try { await api('PATCH', '/api/admin/funding/donations/' + d.id + '/review', { status: 'rejected', review_note: note }); say('topMsg', 'Submission rejected.', true); loadFundDonations(); }
+      catch(err) { say('topMsg', err.message); }
+    };
+    act.append(approve, reject); row.append(info, act); pendingBox.append(row);
+  });
+
+  if (!verified.length) box.append(el('p', 'meta', 'No reviewed donations yet.'));
+  verified.forEach(d => {
+    const row = el('div', 'item'), info = el('div');
+    const state = d.status === 'approved' ? 'Verified' : 'Rejected';
+    info.append(el('h3', '', `${Number(d.amount).toLocaleString()} ETB · ${d.anonymous ? 'Anonymous' : (d.donor_name || 'No name')} · ${state}`),
+      el('div', 'meta', `${d.project_title} · ${d.donated_at}${d.reference ? ' · Ref ' + d.reference : ''}`));
+    if (d.review_note) info.append(el('div', 'meta', 'Review note: ' + d.review_note));
+    const del = el('button', 'danger', 'Delete'); del.type = 'button';
+    del.onclick = async () => {
+      if (!confirm('Delete this donation record? If verified, it will also be removed from the project total.')) return;
+      try { await api('DELETE', '/api/admin/funding/donations/' + d.id); say('topMsg', 'Donation record deleted.', true); loadFunding(); loadFundDonations(); }
+      catch(err) { say('topMsg', err.message); }
+    };
+    row.append(info, del); box.append(row);
+  });
+}
+$('donForm').onsubmit = async e => {
+  e.preventDefault();
+  try{
+    await api('POST', '/api/admin/funding/donations', { project_id: $('dnProj').value, amount: Number($('dnAmt').value), donor_name: $('dnName').value.trim(), donated_at: $('dnDate').value, reference: $('dnRef').value.trim(), anonymous: $('dnAnon').checked });
+    say('topMsg', 'Donation recorded and added to the project total.', true);
+    $('dnAmt').value = ''; $('dnName').value = ''; $('dnRef').value = ''; $('dnAnon').checked = false;
+    loadFunding(); loadFundDonations();
+  }catch(err){ say('topMsg', err.message); }
+};
+async function loadFundUpdates(){
+  const box = $('updList'); box.replaceChildren();
+  const rows = await api('GET', '/api/admin/funding/updates');
+  if (!rows.length) { box.append(el('p', 'meta', 'No updates posted yet.')); return; }
+  rows.forEach(u => {
+    const row = el('div', 'item'), info = el('div');
+    info.append(el('h3', '', u.title), el('div', 'meta', `${u.project_title} · ${u.update_date}`));
+    if (u.body) info.append(el('div', 'meta', u.body));
+    const del = el('button', 'danger', 'Delete'); del.type = 'button';
+    del.onclick = async () => {
+      if (!confirm('Delete this update?')) return;
+      try{ await api('DELETE', '/api/admin/funding/updates/' + u.id); say('topMsg', 'Update deleted.', true); loadFundUpdates(); }catch(err){ say('topMsg', err.message); }
+    };
+    row.append(info, del); box.append(row);
+  });
+}
+$('updForm').onsubmit = async e => {
+  e.preventDefault();
+  try{
+    await api('POST', '/api/admin/funding/updates', { project_id: $('upProj').value, update_date: $('upDate').value, title: $('upTitle').value.trim(), body: $('upBody').value.trim(), photo_url: $('upPhoto').value.trim() });
+    say('topMsg', 'Update posted.', true); $('upTitle').value = ''; $('upBody').value = ''; $('upPhoto').value = ''; loadFundUpdates();
+  }catch(err){ say('topMsg', err.message); }
+};
+function loadFundingAll(){
+  const today = new Date().toISOString().slice(0, 10); $('dnDate').value = today; $('upDate').value = today;
+  // FIX: Removed loadFundInfo from the array
+  [loadFunding, loadAccounts, loadFundDonations, loadFundUpdates].forEach(f => f().catch(err => say('topMsg', err.message)));
+}
+
+/* ----- Tabs ----- */
+function showTab(name){
+  ['posts', 'news', 'sources', 'uploads', 'notes', 'pageContent', 'stories', 'funding', 'staff'].forEach(n => $(n + 'Tab').hidden = name !== n);
+  document.querySelectorAll('#tabs button').forEach(b => b.className = b.dataset.tab === name ? 'primary' : 'ghost');
+}
+$('tabs').onclick = e => { if (e.target.dataset.tab) showTab(e.target.dataset.tab); };
+
+/* ----- Announcements ----- */
+async function loadPosts(){
+  const box = $('posts'); box.replaceChildren();
+  try{
+    const rows = await api('GET', '/api/admin/announcements');
+    if (!rows.length) { box.append(el('p', 'meta', 'Nothing here yet. Use the form above to post your first announcement.')); return; }
+    rows.forEach(a => {
+      const row = el('div', 'item'), info = el('div');
+      const h = el('h3', null, a.title);
+      if (a.pinned) h.append(el('span', 'badge', 'Pinned'));
+      if (!a.published) h.append(el('span', 'badge', 'Hidden'));
+      info.append(h, el('div', 'meta', `${a.category} · ${announcementEthLabel(a.date)}${a.author ? ' · by ' + a.author : ''}`));
+      const act = el('div', 'actions'); act.style.marginTop = '0';
+      if (me.role === 'admin' || a.author_id === me.id){
+        const ed = el('button', 'ghost', 'Edit'); ed.type = 'button'; ed.onclick = () => edit(a);
+        const del = el('button', 'danger', 'Delete'); del.type = 'button';
+        del.onclick = async () => {
+          if (!confirm(`Delete "${a.title}"? This can't be undone.`)) return;
+          try{ await api('DELETE', '/api/admin/announcements/' + a.id); say('topMsg', 'Deleted.', true); loadPosts(); }
+          catch(err){ say('topMsg', err.message); }
+        };
+        act.append(ed, del);
+      }
+      row.append(info, act); box.append(row);
+    });
+  }catch(err){ box.append(el('p', 'msg err', err.message)); }
+}
+function edit(a){
+  editingId = a.id;
+  $('t').value = a.title; $('ta').value = a.title_am || ''; $('c').value = a.category; setAnnouncementEthDate(a.date); $('b').value = a.body; $('ba').value = a.body_am || '';
+  $('pub').checked = a.published; $('pin').checked = a.pinned;
+  setLocalized('formTitle', 'Edit announcement', 'ማስታወቂያ አስተካክል'); setLocalized('saveBtn', 'Save changes', 'ለውጦቹን አስቀምጥ'); $('cancelBtn').hidden = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' }); $('t').focus();
+}
+function resetForm(){
+  editingId = null; $('postForm').reset(); const now = new Date(), today = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`; setAnnouncementEthDate(today); $('pub').checked = true;
+  setLocalized('formTitle', 'New announcement', 'አዲስ ማስታወቂያ'); setLocalized('saveBtn', 'Publish', 'አትም'); $('cancelBtn').hidden = true;
+}
+$('cancelBtn').onclick = resetForm;
+$('postForm').onsubmit = async e => {
+  e.preventDefault();
+  syncAnnouncementIsoDate();
+  if (!$('d').value) { say('topMsg', 'Please choose a valid Ethiopian date.'); return; }
+  const body = { title: $('t').value, title_am: $('ta').value, category: $('c').value, date: $('d').value, body: $('b').value, body_am: $('ba').value, published: $('pub').checked, pinned: $('pin').checked };
+  try{
+    if (editingId) { await api('PUT', '/api/admin/announcements/' + editingId, body); say('topMsg', 'Changes saved.', true); }
+    else { await api('POST', '/api/admin/announcements', body); say('topMsg', body.published ? 'Published.' : 'Saved as hidden.', true); }
+    resetForm(); loadPosts();
+  }catch(err){ say('topMsg', err.message); }
+};
+
+/* ----- Staff (admin only) ----- */
+async function loadUsers(){
+  const box = $('users'); box.replaceChildren();
+  try{
+    (await api('GET', '/api/admin/users')).forEach(u => {
+      const row = el('div', 'item'), info = el('div');
+      info.append(el('h3', null, u.full_name), el('div', 'meta', `${u.username} · ${u.role === 'admin' ? 'Admin' : 'Publisher'}`));
+      const act = el('div', 'actions'); act.style.marginTop = '0';
+      const rs = el('button', 'ghost', 'Reset password'); rs.type = 'button';
+      rs.onclick = async () => {
+        const password = prompt(`New password for ${u.full_name} (at least 10 characters):`); if (!password) return;
+        try{ await api('PUT', `/api/admin/users/${u.id}/password`, { password }); say('topMsg', 'Password reset.', true); }
+        catch(err){ say('topMsg', err.message); }
+      };
+      act.append(rs);
+      if (u.id !== me.id){
+        const del = el('button', 'danger', 'Remove'); del.type = 'button';
+        del.onclick = async () => {
+          if (!confirm(`Remove ${u.full_name}? They will lose access immediately.`)) return;
+          try{ await api('DELETE', '/api/admin/users/' + u.id); say('topMsg', 'Account removed.', true); loadUsers(); loadPosts(); }
+          catch(err){ say('topMsg', err.message); }
+        };
+        act.append(del);
+      }
+      row.append(info, act); box.append(row);
+    });
+  }catch(err){ box.append(el('p', 'msg err', err.message)); }
+}
+$('userForm').onsubmit = async e => {
+  e.preventDefault();
+  try{
+    await api('POST', '/api/admin/users', { full_name: $('uf').value, username: $('uu').value, password: $('up').value, role: $('ur').value });
+    $('userForm').reset(); say('topMsg', 'Account created. Give them the username and temporary password.', true); loadUsers();
+  }catch(err){ say('topMsg', err.message); }
+};
+
+/* ----- Exam news and question sources (Grade 12 students portal) ----- */
+const ADMIN_SUBJECTS = ['Mathematics','Physics','Chemistry','Biology','English','Aptitude','Geography','History','Economics','Civics'];
+const NEWS_TAGS = ['General','Exam date','Registration','Rules','Results','Study tip'];
+const SRC_TYPES = ['Past exam','Textbook','Practice','Video','Reference','Notes'];
+const STREAM_NAME = { natural: 'Natural Science', social: 'Social Science', both: 'Both streams' };
+let editingNews = null, editingSrc = null, editingHasFile = false, portalReady = false;
+const today = () => new Date().toISOString().slice(0, 10);
+const fmtSize = b => b >= 1048576 ? (b / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(b / 1024)) + ' KB';
+function fillSel(id, list){
+  const s = $(id); s.replaceChildren();
+  list.forEach(v => { const o = document.createElement('option'); o.value = Array.isArray(v) ? v[0] : v; o.textContent = Array.isArray(v) ? v[1] : v; s.append(o); });
+}
+function initPortalForms(){
+  if (portalReady) return; portalReady = true;
+  fillSel('ng', NEWS_TAGS); fillSel('ss', ['All subjects', ...ADMIN_SUBJECTS]); fillSel('sty', SRC_TYPES);
+  fillSel('sst', [['natural', 'Natural Science'], ['social', 'Social Science'], ['both', 'Both streams']]);
+  fillSel('pnSubject', ADMIN_SUBJECTS); fillSel('pnGrade', [['12', 'Grade 12 (Short notes page)'], ['11', 'Grade 11'], ['10', 'Grade 10'], ['9', 'Grade 9'], ['all', 'All grades']]);
+  $('sst').value = 'both'; $('nd').value = today(); $('sg').value = '12';
+  $('sk').onchange = () => { $('fileRow').hidden = $('sk').value !== 'file'; $('linkRow').hidden = $('sk').value !== 'link'; };
+}
+
+/* exam news */
+async function loadNews(){
+  const box = $('newsList'); box.replaceChildren();
+  try{
+    const rows = await api('GET', '/api/portal/admin/news');
+    if (!rows.length) { box.append(el('p', 'meta', 'No exam news yet. Use the form above to post the first one.')); return; }
+    rows.forEach(n => {
+      const row = el('div', 'item'), info = el('div'), h = el('h3', null, n.title);
+      if (n.pinned) h.append(el('span', 'badge', 'Pinned'));
+      if (!n.published) h.append(el('span', 'badge', 'Hidden'));
+      info.append(h, el('div', 'meta', `${n.tag} · ${n.date}${n.author ? ' · by ' + n.author : ''}`));
+      const act = el('div', 'actions'); act.style.marginTop = '0';
+      if (me.role === 'admin' || n.author_id === me.id){
+        const ed = el('button', 'ghost', 'Edit'); ed.type = 'button'; ed.onclick = () => editNews(n);
+        const del = el('button', 'danger', 'Delete'); del.type = 'button';
+        del.onclick = async () => {
+          if (!confirm(`Delete "${n.title}"? This can't be undone.`)) return;
+          try{ await api('DELETE', '/api/portal/admin/news/' + n.id); say('topMsg', 'Deleted.', true); loadNews(); }
+          catch(err){ say('topMsg', err.message); }
+        };
+        act.append(ed, del);
+      }
+      row.append(info, act); box.append(row);
+    });
+  }catch(err){ box.append(el('p', 'msg err', err.message)); }
+}
+function editNews(n){
+  editingNews = n.id;
+  $('nt').value = n.title; $('ng').value = n.tag; $('nd').value = n.date; $('nb').value = n.body; $('npub').checked = n.published; $('npin').checked = n.pinned;
+  setLocalized('newsFormTitle', 'Edit exam news', 'የፈተና ዜና አስተካክል'); setLocalized('newsSave', 'Save changes', 'ለውጦቹን አስቀምጥ'); $('newsCancel').hidden = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' }); $('nt').focus();
+}
+function resetNews(){
+  editingNews = null; $('newsForm').reset(); $('nd').value = today(); $('npub').checked = true;
+  setLocalized('newsFormTitle', 'New exam news', 'አዲስ የፈተና ዜና'); setLocalized('newsSave', 'Publish', 'አትም'); $('newsCancel').hidden = true;
+}
+$('newsCancel').onclick = resetNews;
+$('newsForm').onsubmit = async e => {
+  e.preventDefault();
+  const body = { title: $('nt').value, tag: $('ng').value, date: $('nd').value, body: $('nb').value, published: $('npub').checked, pinned: $('npin').checked };
+  try{
+    if (editingNews) { await api('PUT', '/api/portal/admin/news/' + editingNews, body); say('topMsg', 'Changes saved.', true); }
+    else { await api('POST', '/api/portal/admin/news', body); say('topMsg', body.published ? 'Published on the students portal.' : 'Saved as hidden.', true); }
+    resetNews(); loadNews();
+  }catch(err){ say('topMsg', err.message); }
+};
+
+/* question sources */
+async function uploadPdf(id, file){
+  if (!/\.pdf$/i.test(file.name) && file.type !== 'application/pdf') throw new Error('Please choose a PDF file.');
+  if (file.size > 25 * 1024 * 1024) throw new Error('File is too large (25 MB at most).');
+  const res = await fetch(`/api/portal/admin/resources/${id}/file`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/pdf', Authorization: 'Bearer ' + sessionStorage.getItem('token'), 'X-File-Name': encodeURIComponent(file.name) },
+    body: file
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || 'Upload failed.');
+}
+async function loadSources(){
+  const box = $('srcList'); box.replaceChildren();
+  try{
+    const rows = await api('GET', '/api/portal/admin/resources');
+    if (!rows.length) { box.append(el('p', 'meta', 'No question sources yet. Add the first one above.')); return; }
+    rows.forEach(r => {
+      const row = el('div', 'item'), info = el('div'), h = el('h3', null, r.title);
+      if (!r.published) h.append(el('span', 'badge', 'Hidden'));
+      if (!r.file_name && !r.url) h.append(el('span', 'badge', 'No file yet'));
+      const what = r.file_name ? `PDF · ${r.file_name} · ${fmtSize(r.file_size)}` : (r.url ? 'Link · ' + r.url : '');
+      info.append(h, el('div', 'meta', `Grade ${r.grade === 'all' ? '9–12' : r.grade} · ${r.subject} · ${STREAM_NAME[r.stream]} · ${r.type}${r.year ? ' · ' + r.year : ''}`));
+      if (what) info.append(el('div', 'meta', what));
+      const act = el('div', 'actions'); act.style.marginTop = '0';
+      if (me.role === 'admin' || r.author_id === me.id){
+        const ed = el('button', 'ghost', 'Edit'); ed.type = 'button'; ed.onclick = () => editSrc(r);
+        const del = el('button', 'danger', 'Delete'); del.type = 'button';
+        del.onclick = async () => {
+          if (!confirm(`Delete "${r.title}"${r.file_name ? ' and its PDF' : ''}? This can't be undone.`)) return;
+          try{ await api('DELETE', '/api/portal/admin/resources/' + r.id); say('topMsg', 'Deleted.', true); loadSources(); }
+          catch(err){ say('topMsg', err.message); }
+        };
+        act.append(ed, del);
+      }
+      row.append(info, act); box.append(row);
+    });
+  }catch(err){ box.append(el('p', 'msg err', err.message)); }
+}
+function editSrc(r){
+  editingSrc = r.id; editingHasFile = !!r.file_name;
+  $('stt').value = r.title; $('ss').value = r.subject; $('sst').value = r.stream; $('sty').value = r.type; $('syr').value = r.year || ''; $('sde').value = r.description || '';
+  $('sg').value = r.grade || '12';
+  $('spub').checked = r.published; $('sk').value = r.file_name || !r.url ? 'file' : 'link'; $('sk').onchange(); $('su').value = r.url || ''; $('sf').value = '';
+  $('fileHint').textContent = r.file_name ? `Current file: ${r.file_name}. Leave this empty to keep it, or choose a new PDF to replace it.` : '';
+  setLocalized('srcFormTitle', 'Edit question source', 'የጥያቄ ምንጭ አስተካክል'); setLocalized('srcSave', 'Save changes', 'ለውጦቹን አስቀምጥ'); $('srcCancel').hidden = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' }); $('stt').focus();
+}
+function resetSrc(){
+  editingSrc = null; editingHasFile = false; $('srcForm').reset(); $('sst').value = 'both'; $('sg').value = '12'; $('spub').checked = true; $('sk').onchange(); $('fileHint').textContent = '';
+  setLocalized('srcFormTitle', 'Add a question source', 'የጥያቄ ምንጭ ጨምር'); setLocalized('srcSave', 'Add source', 'ምንጭ ጨምር'); $('srcCancel').hidden = true;
+}
+$('srcCancel').onclick = resetSrc;
+$('srcForm').onsubmit = async e => {
+  e.preventDefault();
+  const kind = $('sk').value, file = $('sf').files[0];
+  if (kind === 'file' && !file && !(editingSrc && editingHasFile)) { say('topMsg', 'Please choose a PDF file.'); return; }
+  const body = { title: $('stt').value, subject: $('ss').value, stream: $('sst').value, type: $('sty').value, year: $('syr').value, description: $('sde').value, grade: $('sg').value,
+                 kind, url: kind === 'link' ? $('su').value : '', published: $('spub').checked };
+  const btn = $('srcSave'); btn.disabled = true;
+  try{
+    let id = editingSrc;
+    if (id) await api('PUT', '/api/portal/admin/resources/' + id, body);
+    else id = (await api('POST', '/api/portal/admin/resources', body)).id;
+    if (kind === 'file' && file){
+      try{ say('topMsg', 'Uploading the PDF...', true); await uploadPdf(id, file); }
+      catch(err){ if (!editingSrc) await api('DELETE', '/api/portal/admin/resources/' + id).catch(() => {}); throw err; }
+    }
+    say('topMsg', editingSrc ? 'Changes saved.' : 'Added. Students can now find it under Question sources.', true);
+    resetSrc(); loadSources();
+  }catch(err){ say('topMsg', err.message); }
+  btn.disabled = false;
+};
+
+/* student stories: teachers approve what students send in */
+async function loadStories(){
+  const box = $('storyList'); box.replaceChildren();
+  try{
+    const rows = await api('GET', '/api/portal/admin/stories');
+    const pending = rows.filter(s => s.status === 'pending').length;
+    setLocalized('storiesTabBtn', pending ? `Student stories (${pending} new)` : 'Student stories', pending ? `የተማሪዎች ታሪኮች (አዲስ ${pending})` : 'የተማሪዎች ታሪኮች');
+    if (!rows.length) { box.append(el('p', 'meta', 'No stories yet. They will appear here when students share them.')); return; }
+    rows.forEach(s => {
+      const row = el('div', 'item'), info = el('div'), h = el('h3', null, s.title);
+      h.append(el('span', 'badge', s.status === 'approved' ? 'Shown' : s.status === 'hidden' ? 'Hidden' : 'Waiting for approval'));
+      info.append(h, el('div', 'meta', `${s.subject} · ${s.date} · ${s.name || 'a student'}`));
+      const text = el('p', null, s.text); text.style.margin = '.4rem 0 0'; text.style.whiteSpace = 'pre-wrap'; info.append(text);
+      const act = el('div', 'actions'); act.style.marginTop = '0';
+      const set = async status => { try{ await api('PUT', '/api/portal/admin/stories/' + s.id, { status }); loadStories(); } catch(err){ say('topMsg', err.message); } };
+      if (s.status !== 'approved'){ const b = el('button', null, 'Approve'); b.type = 'button'; b.onclick = () => set('approved'); act.append(b); }
+      if (s.status !== 'hidden'){ const b = el('button', 'ghost', 'Hide'); b.type = 'button'; b.onclick = () => set('hidden'); act.append(b); }
+      const del = el('button', 'danger', 'Delete'); del.type = 'button';
+      del.onclick = async () => {
+        if (!confirm(`Delete "${s.title}"? This can't be undone.`)) return;
+        try{ await api('DELETE', '/api/portal/admin/stories/' + s.id); loadStories(); } catch(err){ say('topMsg', err.message); }
+      };
+      act.append(del); row.append(info, act); box.append(row);
+    });
+  }catch(err){ box.append(el('p', 'msg err', err.message)); }
+}
+
+/* discussion board teachers (admin only) */
+async function loadTeachers(){
+  fillSel('tcSubj', ADMIN_SUBJECTS);
+  const box = $('teacherList'); box.replaceChildren();
+  try{
+    const rows = await api('GET', '/api/portal/admin/teachers');
+    if (!rows.length) { box.append(el('p', 'meta', 'No teachers yet. Add the first one above.')); return; }
+    rows.forEach(t => {
+      const row = el('div', 'item'), info = el('div');
+      info.append(el('h3', null, t.name || 'Teacher'), el('div', 'meta', `${t.subject} · added ${String(t.created_at).slice(0, 10)}`));
+      const act = el('div', 'actions'); act.style.marginTop = '0';
+      const pw = el('button', 'ghost', 'Change password'); pw.type = 'button';
+      pw.onclick = async () => {
+        const password = prompt(`New password for ${t.name || 'this teacher'} (at least 8 characters):`); if (!password) return;
+        try{ await api('PUT', '/api/portal/admin/teachers/' + t.id, { password }); say('topMsg', 'Password changed. The teacher must log in again.', true); }
+        catch(err){ say('topMsg', err.message); }
+      };
+      const del = el('button', 'danger', 'Remove'); del.type = 'button';
+      del.onclick = async () => {
+        if (!confirm(`Remove ${t.name || 'this teacher'}? They will lose teacher access at once.`)) return;
+        try{ await api('DELETE', '/api/portal/admin/teachers/' + t.id); say('topMsg', 'Teacher removed.', true); loadTeachers(); }
+        catch(err){ say('topMsg', err.message); }
+      };
+      act.append(pw, del); row.append(info, act); box.append(row);
+    });
+  }catch(err){ box.append(el('p', 'msg err', err.message)); }
+}
+$('tcForm').onsubmit = async e => {
+  e.preventDefault();
+  try{
+    await api('POST', '/api/portal/admin/teachers', { name: $('tcName').value, subject: $('tcSubj').value, password: $('tcPass').value });
+    $('tcName').value = ''; $('tcPass').value = ''; say('topMsg', 'Teacher added. Give them the password.', true); loadTeachers();
+  }catch(err){ say('topMsg', err.message); }
+};
+
+/* short notes (Text): using dedicated routes to prevent conflicts */
+async function loadNotes(){
+  const box = $('pnList'); box.replaceChildren();
+  try{
+    const rows = await api('GET', '/api/admin/short-notes');
+    if (!rows.length) { box.append(el('p', 'meta', 'No short notes yet. Add the first one above.')); return; }
+    rows.forEach(r => {
+      const row = el('div', 'item'), info = el('div'), h = el('h3', null, r.title);
+      if (!r.published) h.append(el('span', 'badge', 'Hidden'));
+      info.append(h, el('div', 'meta', `${r.grade === 'all' ? 'All grades' : 'Grade ' + r.grade} · ${r.subject}`));
+      if (r.note_text) {
+        const snippet = el('p', null, r.note_text.substring(0, 100) + (r.note_text.length > 100 ? '...' : ''));
+        snippet.style.cssText = 'margin:.4rem 0 0;font-size:.85rem;color:#64748b;white-space:pre-wrap;';
+        info.append(snippet);
+      }
+      const act = el('div', 'actions'); act.style.marginTop = '0';
+      if (me.role === 'admin' || r.author_id === me.id){
+        const tog = el('button', 'ghost', r.published ? 'Hide' : 'Show'); tog.type = 'button';
+        tog.onclick = async () => { try{ await api('PUT', '/api/admin/short-notes/' + r.id, { published: !r.published }); loadNotes(); } catch(err){ say('topMsg', err.message); } };
+        const del = el('button', 'danger', 'Delete'); del.type = 'button';
+        del.onclick = async () => {
+          if (!confirm(`Delete "${r.title}"? This can't be undone.`)) return;
+          try{ await api('DELETE', '/api/admin/short-notes/' + r.id); say('topMsg', 'Deleted.', true); loadNotes(); }
+          catch(err){ say('topMsg', err.message); }
+        };
+        act.append(tog, del);
+      }
+      row.append(info, act); box.append(row);
+    });
+  }catch(err){ box.append(el('p', 'msg err', err.message)); }
+}
+$('noteForm').onsubmit = async e => {
+  e.preventDefault();
+  const noteText = $('pnText').value.trim();
+  const show = (t, ok) => { $('pnMsg').textContent = t; $('pnMsg').className = 'msg ' + (ok ? 'good' : 'err'); };
+  if (!noteText) return show('Please enter the note content.', false);
+  const btn = $('pnSave'); btn.disabled = true;
+  const body = { 
+    title: $('pnTitle').value, 
+    subject: $('pnSubject').value, 
+    grade: $('pnGrade').value, 
+    description: $('pnDesc').value, 
+    note_text: noteText,
+    published: $('pnPub').checked 
+  };
+  try{
+    await api('POST', '/api/admin/short-notes', body);
+    $('noteForm').reset(); $('pnPub').checked = true; show('Saved! Students can now read it under Short notes.', true); loadNotes();
+  }catch(err){ show(err.message, false); }
+  btn.disabled = false;
+};
+
+boot();
+</script>
+</body>
+</html>

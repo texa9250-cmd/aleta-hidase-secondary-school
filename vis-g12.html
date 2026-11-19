@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="Visual study lab | አለታ ህዳሴ" data-am="የእይታ የጥናት ላብ | አለታ ህዳሴ">Visual study lab | አለታ ህዳሴ</title>
+<script src="/site-effects.js"></script>
+<style>
+:root{--bg:#0a1029;--bg2:#101a3d;--card:#131d42;--line:#26346a;--ink:#eef1ff;--muted:#9aa7d4;--acc:#ff8a5b;--acc2:#ffc857;--blue:#5ec2ff;--green:#6ee7b7}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 600px at 80% -10%,#1b2a66 0,transparent 60%),var(--bg);color:var(--ink);font:400 1rem/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+:focus-visible{outline:3px solid var(--acc2);outline-offset:2px}
+.wrap{max-width:62rem;margin:0 auto;padding:1.2rem 1.1rem 3rem}
+.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+.top a{color:var(--acc2);text-decoration:none;font-weight:600}
+.top a:hover{text-decoration:underline}
+h1{margin:.2rem 0 .3rem;font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.15}
+h1 span{color:var(--acc)}
+.sub{color:var(--muted);margin:0 0 1.2rem;max-width:42rem}
+.tabs{display:flex;gap:.55rem;flex-wrap:wrap;margin-bottom:1rem}
+.tab{font:600 .95rem system-ui,sans-serif;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.55rem 1rem;cursor:pointer;transition:transform .15s,background .15s}
+.tab:hover{transform:translateY(-2px)}
+.tab[aria-selected="true"]{background:var(--acc);color:#1b1020;border-color:var(--acc)}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) 18.5rem;gap:1rem;align-items:start}
+@media(max-width:52rem){.stage{grid-template-columns:1fr}}
+.panel{background:linear-gradient(180deg,var(--card),#0f1836);border:1px solid var(--line);border-radius:18px;padding:1rem}
+.canvaswrap{padding:.6rem}
+canvas{display:block;width:100%;border-radius:12px;background:#0c1432}
+.head{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin:.2rem 0 .5rem}
+.head h2{margin:0;font-size:1.25rem}
+.pill{font-size:.78rem;font-weight:700;color:#1b1020;background:var(--acc2);padding:.1rem .6rem;border-radius:999px}
+.blurb{color:var(--muted);margin:.2rem 0 .8rem}
+.ctl{display:block;margin:.7rem 0}
+.ctl span{display:flex;justify-content:space-between;font-weight:600;font-size:.92rem;margin-bottom:.2rem}
+.ctl output{color:var(--acc2);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--acc)}
+.grp{margin:.8rem 0}
+.grp>b{display:block;font-size:.88rem;margin-bottom:.35rem}
+.opts{display:flex;gap:.4rem;flex-wrap:wrap}
+.opt,.act{font:600 .88rem system-ui,sans-serif;color:var(--ink);background:#1a2552;border:1px solid var(--line);border-radius:10px;padding:.45rem .8rem;cursor:pointer}
+.opt[aria-pressed="true"]{background:var(--blue);color:#07142a;border-color:var(--blue)}
+.act{background:var(--acc);color:#1b1020;border-color:var(--acc);margin-top:.3rem}
+.act:hover{filter:brightness(1.08)}
+.read{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:.55rem;margin-top:.9rem}
+.read div{background:#0e1738;border:1px solid var(--line);border-radius:12px;padding:.5rem .7rem}
+.read small{display:block;color:var(--muted);font-size:.76rem;text-transform:uppercase;letter-spacing:.04em}
+.read b{font-size:1.05rem;font-variant-numeric:tabular-nums}
+.task{margin-top:1rem;border-left:4px solid var(--acc);background:#16214b;border-radius:0 12px 12px 0;padding:.7rem .9rem}
+.task b{color:var(--acc2)}
+</style></head>
+<body>
+<div class="wrap">
+  <div class="top"><a id="back" href="students.html" data-en="← Back to my study space" data-am="← ወደ ጥናት ቦታዬ ተመለስ">&larr; Back to my study space</a><a href="../index.html" data-en="School site" data-am="የትምህርት ቤቱ ድረ-ገጽ">School site</a></div>
+  <h1><span data-en="Visual study lab" data-am="የእይታ የጥናት ላብ">Visual study lab</span></h1>
+  <p class="sub" data-en="Move the sliders and watch the idea change. Seeing a graph, a flight or a current in motion makes it easier to remember than reading a formula." data-am="ማንሸራተቻዎቹን ያንቀሳቅሱና ሃሳቡ ሲቀየር ይመልከቱ። ግራፍን፣ በረራን ወይም የኤሌክትሪክ ፍሰትን በእንቅስቃሴ ማየት ቀመር ከማንበብ ይልቅ ለማስታወስ ያግዛል።">Move the sliders and watch the idea change. Seeing a graph, a flight or a current in motion makes it easier to remember than reading a formula.</p>
+  <div class="tabs" id="tabs" role="tablist" aria-label="Choose a tool" data-en-aria-label="Choose a tool" data-am-aria-label="መሣሪያ ይምረጡ"></div>
+  <div class="stage">
+    <div class="panel canvaswrap"><canvas id="cv" role="img" aria-label="Animation" data-en-aria-label="Animation" data-am-aria-label="እነማ"></canvas>
+      <div class="read" id="read" aria-live="polite"></div></div>
+    <div class="panel">
+      <div class="head"><h2 id="tname"></h2><span class="pill" id="tsub"></span></div>
+      <p class="blurb" id="tblurb"></p>
+      <div id="controls"></div>
+      <div class="task"><b data-en="Try this:" data-am="ይህን ይሞክሩ፦">Try this:</b> <span id="ttask"></span></div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  const $ = s => document.querySelector(s);
+  const TAU = Math.PI * 2, ACC = '#ff8a5b', ACC2 = '#ffc857', BLUE = '#5ec2ff', GREEN = '#6ee7b7', INK = '#eef1ff', MUTED = '#8f9bc4', GRID = 'rgba(150,170,240,.14)';
+  const RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const n = (x, d = 2) => String(Math.abs(x) < 1e-9 ? 0 : +x.toFixed(d));
+
+  /* back link keeps the grade and level */
+  const P = new URLSearchParams(location.search);
+  if (['9', '10', '11'].includes(P.get('grade'))) $('#back').href = 'grade.html?grade=' + P.get('grade') + (P.get('level') ? '&level=' + P.get('level') : '');
+
+  const cv = $('#cv'), ctx = cv.getContext('2d');
+  let locale = localStorage.getItem('site_lang') === 'am' ? 'am' : 'en';
+  let W = 600, H = 360;
+  function resize() {
+    W = cv.parentElement.clientWidth - 20;
+    H = Math.round(W < 480 ? W * 0.85 : Math.min(W * 0.58, 430));
+    const d = window.devicePixelRatio || 1;
+    cv.width = W * d; cv.height = H * d; cv.style.height = H + 'px';
+    ctx.setTransform(d, 0, 0, d, 0, 0);
+  }
+
+  /* ---------- drawing helpers ---------- */
+  function line(x1, y1, x2, y2, c, w, dash) {
+    ctx.beginPath(); ctx.setLineDash(dash || []); ctx.strokeStyle = c; ctx.lineWidth = w || 1;
+    ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); ctx.setLineDash([]);
+  }
+  function dot(x, y, r, c, glow) {
+    ctx.save(); ctx.fillStyle = c; if (glow) { ctx.shadowColor = c; ctx.shadowBlur = glow; }
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fill(); ctx.restore();
+  }
+  function arrow(x1, y1, x2, y2, c) {
+    const a = Math.atan2(y2 - y1, x2 - x1);
+    line(x1, y1, x2, y2, c, 2.5);
+    ctx.fillStyle = c; ctx.beginPath(); ctx.moveTo(x2, y2);
+    ctx.lineTo(x2 - 9 * Math.cos(a - 0.4), y2 - 9 * Math.sin(a - 0.4));
+    ctx.lineTo(x2 - 9 * Math.cos(a + 0.4), y2 - 9 * Math.sin(a + 0.4)); ctx.closePath(); ctx.fill();
+  }
+  function background() {
+    const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#11204d'); g.addColorStop(1, '#0a1030');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  }
+  function drawLobes(cx, cy, start, R, nLobes, rgb) {
+    for (let i = 0; i < nLobes; i++) {
+      const a = start + i * TAU / nLobes;
+      ctx.save(); ctx.translate(cx, cy); ctx.rotate(a); ctx.translate(R * 0.55, 0);
+      const lg = ctx.createRadialGradient(0, 0, 2, 0, 0, R * 0.5);
+      lg.addColorStop(0, 'rgba(' + rgb + ',0.9)'); lg.addColorStop(1, 'rgba(' + rgb + ',0)');
+      ctx.fillStyle = lg;
+      ctx.beginPath(); ctx.ellipse(0, 0, R * 0.42, R * 0.26, 0, 0, TAU); ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  const CANVAS_AM = {
+    'deriv': 'ተዋጽኦ', 'tangent': 'ታንጀንት', 'integ': 'ውህደት', 'Area': 'ስፋት',
+    'Earth': 'ምድር', 'Moon': 'ጨረቃ', 'Mars': 'ማርስ', 'Series': 'ተከታታይ', 'Parallel': 'ትይዩ',
+    'Current': 'ፍሰት', 'Voltage': 'ቮልቴጅ', 'sin': 'ሳይን', 'cos': 'ኮሳይን',
+    'object': 'ነገር', 'image at infinity': 'ምስሉ በማያልቅ ርቀት ላይ ነው', 'real, inverted': 'እውነተኛ፣ የተገለበጠ',
+    'virtual, upright': 'ምናባዊ፣ ቀጥ ያለ', 'reactants': 'ምላሽ ሰጪዎች', 'products': 'ምርቶች',
+    'transition state': 'የሽግግር ሁኔታ', 'Exothermic': 'ኤግዞተርሚክ', 'Endothermic': 'ኢንዶተርሚክ',
+    'reaction progress': 'የምላሽ ሂደት', 'energy': 'ኃይል', 'equivalence': 'እኩልነት', 'pH': 'pH',
+    'base added (mL)': 'የተጨመረ ቤዝ (mL)', 'B here': 'B በዚህ', 'I': 'I', 'F': 'F', 'v': 'v',
+    'Interphase': 'ኢንተርፌዝ', 'Prophase': 'ፕሮፌዝ', 'Metaphase': 'ሜታፌዝ', 'Anaphase': 'አናፌዝ', 'Telophase': 'ቴሎፌዝ',
+    'parent (dashed)  →  transformed': 'ወላጅ (ባለ ተቋራጭ)  →  የተለወጠ', 'unit circle': 'ክፍል ክብ',
+    'y = sin θ': 'y = ሳይን θ', 'SOH-CAH-TOA': 'SOH-CAH-TOA', 'θ': 'θ', 'slope': 'ተዳፋት',
+    'Photoelectric': 'ፎቶኤሌክትሪክ', 'Electrons ejected': 'ኤሌክትሮኖች ተለቀቁ', 'No electrons': 'ኤሌክትሮኖች የሉም',
+    'Nucleophile': 'ኑክሊዮፋይል', 'Leaving Group': 'የሚወጣ ቡድን', 'Backside Attack': 'የኋላ ጥቃት',
+    'Genotype Frequencies': 'የጂኖታይፕ ድግግሞሽ', 'Moving magnet induces current': 'ማግኔት ማንቀሳቀስ ፍሰት ይፈጥራል'
+  };
+  function text(s, x, y, c, size, align) {
+    ctx.fillStyle = c || INK; ctx.font = '600 ' + (size || 13) + 'px system-ui,sans-serif'; ctx.textAlign = align || 'left';
+    ctx.fillText(locale === 'am' ? (CANVAS_AM[s] || s) : s, x, y);
+  }
+
+  /* =====================================================
+     G11/12 MATH: Derivative (Tangent Line)
+     ===================================================== */
+  const deriv = {
+    id: 'deriv', name: 'Derivative (Tangent)', sub: 'Mathematics',
+    blurb: 'The derivative is the slope of the tangent line at a point.',
+    task: 'Move x. What happens to the slope of the tangent line?',
+    v: {x: 1},
+    sliders: [{id: 'x', label: 'x-coordinate', min: -3, max: 3, step: 0.1}],
+    read(v) {
+      const y = v.x*v.x*v.x/3 - v.x;
+      const m = v.x*v.x - 1;
+      return [['x', n(v.x, 2)], ['f(x)', n(y, 2)], ["f'(x)", n(m, 2)]];
+    },
+    draw(t, v) {
+      const X0 = -4, X1 = 4, Y0 = -4, Y1 = 4;
+      const px = x => (x - X0)/(X1 - X0)*W;
+      const py = y => H - (y - Y0)/(Y1 - Y0)*H;
+      const f = x => x*x*x/3 - x;
+      
+      for(let i=-4; i<=4; i++) { line(px(i),0,px(i),H,GRID, 1); line(0,py(i),W,py(i),GRID, 1); }
+      line(px(0),0,px(0),H,'#6d7fc7', 1.6); line(0,py(0),W,py(0),'#6d7fc7', 1.6);
+
+      ctx.beginPath(); ctx.strokeStyle = BLUE; ctx.lineWidth = 3;
+      for(let x=X0; x<=X1; x+=0.05) {
+        const y = f(x); if(y<Y0||y>Y1) continue;
+        x===X0 ? ctx.moveTo(px(x),py(y)) : ctx.lineTo(px(x),py(y));
+      }
+      ctx.stroke();
+
+      const x0 = v.x, y0 = f(x0), m = x0*x0 - 1;
+      ctx.beginPath(); ctx.strokeStyle = ACC; ctx.lineWidth = 2.5;
+      const tx1 = x0-2, ty1 = m*(tx1-x0)+y0;
+      const tx2 = x0+2, ty2 = m*(tx2-x0)+y0;
+      ctx.moveTo(px(tx1),py(ty1)); ctx.lineTo(px(tx2),py(ty2)); ctx.stroke();
+
+      dot(px(x0),py(y0),7,ACC2,14);
+      text(`x = ${n(x0,2)}, slope = ${n(m,2)}`, 16, 28, ACC2, 14);
+    }
+  };
+
+  /* =====================================================
+     G12 MATH: Integration (Riemann Sum)
+     ===================================================== */
+  const integ = {
+    id: 'integ', name: 'Integration (Area)', sub: 'Mathematics',
+    blurb: 'As the number of rectangles increases, the area approaches the exact integral.',
+    task: 'Increase n to 50. How does the area compare to the exact value?',
+    v: {n: 10},
+    sliders: [{id: 'n', label: 'Rectangles (n)', min: 1, max: 50, step: 1}],
+    read(v) {
+      const a = 0, b = 3;
+      const dx = (b-a)/v.n;
+      let area = 0;
+      for(let i=0; i<v.n; i++) {
+        const x = a + i*dx + dx/2;
+        area += (x*x) * dx;
+      }
+      return [['n', v.n], ['Approx Area', n(area,2)], ['Exact Integral', '9.00']];
+    },
+    draw(t, v) {
+      const X0 = -1, X1 = 4, Y0 = -1, Y1 = 10;
+      const px = x => (x - X0)/(X1 - X0)*W;
+      const py = y => H - (y - Y0)/(Y1 - Y0)*H;
+      const f = x => x*x;
+      
+      for(let i=-1; i<=4; i++) { line(px(i),0,px(i),H,GRID,1); }
+      for(let i=-1; i<=10; i+=2) { line(0,py(i),W,py(i),GRID,1); }
+      line(px(0),0,px(0),H,'#6d7fc7',1.6); line(0,py(0),W,py(0),'#6d7fc7',1.6);
+
+      ctx.beginPath(); ctx.strokeStyle = BLUE; ctx.lineWidth = 3;
+      for(let x=0; x<=3; x+=0.05) {
+        const y = f(x);
+        x===0 ? ctx.moveTo(px(x),py(y)) : ctx.lineTo(px(x),py(y));
+      }
+      ctx.stroke();
+
+      const a=0, b=3, dx=(b-a)/v.n;
+      ctx.fillStyle = 'rgba(255,138,91,0.25)';
+      ctx.strokeStyle = 'rgba(255,138,91,0.6)';
+      for(let i=0; i<v.n; i++) {
+        const x = a + i*dx;
+        const mid = x + dx/2;
+        const h = f(mid);
+        const w = dx;
+        ctx.fillRect(px(x), py(h), px(x+w)-px(x), py(0)-py(h));
+        ctx.strokeRect(px(x), py(h), px(x+w)-px(x), py(0)-py(h));
+      }
+    }
+  };
+
+  /* =====================================================
+     G11 MATH: Graph Transformations
+     ===================================================== */
+  const transform = {
+    id: 'transform', name: 'Graph transformations', sub: 'Mathematics',
+    blurb: 'y = a·f(x − h) + k stretches, reflects and shifts the parent graph.',
+    task: 'Start with x². Set h = 2 and k = −3. Where is the vertex now? Then set a = −1.',
+    v: {base: 0, a: 1, h: 0, k: 0},
+    sliders: [{id: 'a', label: 'a (stretch / reflect)', min: -2, max: 2, step: 0.1}, {id: 'h', label: 'h (horizontal shift)', min: -5, max: 5, step: 0.5}, {id: 'k', label: 'k (vertical shift)', min: -5, max: 5, step: 0.5}],
+    choices: [{id: 'base', label: 'Parent function', opts: [[0, 'x²'], [1, 'sin x'], [2, '|x|'], [3, '√x']]}],
+    f(base, x) { return base === 0 ? x * x : base === 1 ? Math.sin(x) : base === 2 ? Math.abs(x) : (x < 0 ? NaN : Math.sqrt(x)); },
+    read(v) {
+      const base = +v.base, a = +v.a, h = +v.h, k = +v.k, names = ['x²', 'sin x', '|x|', '√x'];
+      const eq = 'y = ' + (a === 1 ? '' : n(a, 2) + '·') + names[base].replace('x', '(x − ' + n(h, 1) + ')') + (k >= 0 ? ' + ' + n(k, 1) : ' − ' + n(-k, 1));
+      const rows = [['Parent function', names[base]], ['Equation', eq], ['a', n(a, 2)], ['h', n(h, 1)], ['k', n(k, 1)]];
+      if (base === 0) rows.push(['Vertex', '(' + n(h, 1) + ', ' + n(k, 1) + ')']);
+      if (base === 1) rows.push(['Amplitude', n(Math.abs(a), 2)]);
+      rows.push(['Reflection', a < 0 ? 'reflected across x-axis' : 'none']);
+      return rows;
+    },
+    draw(t, v, dt) {
+      const base = +v.base, a = +v.a, h = +v.h, k = +v.k, X0 = -8, X1 = 8, Y0 = -8, Y1 = 8;
+      const px = x => (x - X0) / (X1 - X0) * W, py = y => H - (y - Y0) / (Y1 - Y0) * H;
+      for (let x = X0; x <= X1; x += 2) line(px(x), 0, px(x), H, x === 0 ? '#6d7fc7' : GRID, x === 0 ? 1.6 : 1);
+      for (let y = Y0; y <= Y1; y += 2) line(0, py(y), W, py(y), y === 0 ? '#6d7fc7' : GRID, y === 0 ? 1.6 : 1);
+      const drawFn = (fn, col, wd, dash) => {
+        ctx.save(); ctx.beginPath(); ctx.strokeStyle = col; ctx.lineWidth = wd; ctx.setLineDash(dash || []); ctx.lineJoin = 'round';
+        let started = false;
+        for (let i = 0; i <= 400; i++) {
+          const x = X0 + (X1 - X0) * i / 400, y = fn(x);
+          if (!isFinite(y) || y < Y0 - 4 || y > Y1 + 4) { started = false; continue; }
+          const X = px(x), Y = py(y);
+          if (!started) { ctx.moveTo(X, Y); started = true; } else ctx.lineTo(X, Y);
+        }
+        ctx.stroke(); ctx.restore();
+      };
+      drawFn(x => this.f(base, x), 'rgba(150,170,240,.55)', 2, [6, 6]);
+      drawFn(x => a * this.f(base, x - h) + k, ACC, 3.5);
+      text('parent (dashed)  →  transformed', 14, 26, MUTED, 13);
+      if (base === 0) { dot(px(h), py(k), 7, ACC2, 14); text('vertex (' + n(h, 1) + ', ' + n(k, 1) + ')', px(h) + 10, py(k) - 10, ACC2, 12); }
+    }
+  };
+
+  /* =====================================================
+     G12 PHYSICS: Photoelectric Effect
+     ===================================================== */
+  const photo = {
+    id: 'photo', name: 'Photoelectric Effect', sub: 'Physics',
+    blurb: 'Light hits a metal surface. Only light above the threshold frequency ejects electrons.',
+    task: 'Decrease the frequency below 5. What happens to the electrons?',
+    v: {f: 7},
+    sliders: [{id: 'f', label: 'Frequency (f)', min: 1, max: 10, step: 0.1}],
+    read(v) {
+      const f0 = 5;
+      const ejected = v.f >= f0;
+      return [['Frequency', n(v.f,1)], ['Threshold', f0], ['Electrons?', ejected ? 'Yes' : 'No'], ['KE', ejected ? n(v.f-f0,1) : '0']];
+    },
+    draw(t, v) {
+      const w = W, h = H;
+      ctx.fillStyle = '#334155'; ctx.fillRect(w*0.1, h*0.7, w*0.8, h*0.3);
+      ctx.fillStyle = '#64748b'; ctx.fillRect(w*0.1, h*0.7, w*0.8, 8);
+      
+      const f0 = 5;
+      const on = v.f >= f0;
+      ctx.fillStyle = on ? 'rgba(94,194,255,0.2)' : 'rgba(255,138,91,0.2)';
+      ctx.beginPath(); ctx.moveTo(w/2, 0); ctx.lineTo(w*0.3, h*0.7); ctx.lineTo(w*0.7, h*0.7); ctx.fill();
+      
+      for(let i=0; i<5; i++) {
+        dot(w/2 + (i-2)*20, 20+i*30, 4, on ? BLUE : ACC, 10);
+      }
+      
+      if(on) {
+        for(let i=0; i<5; i++) {
+          const ex = w*0.3 + i*w*0.1;
+          const ey = h*0.7 - 30 - (v.f-f0)*10 - i*10;
+          dot(ex, ey, 6, ACC2, 15);
+          arrow(ex, ey, ex, ey-15, ACC2);
+        }
+      }
+      text(on ? 'Electrons ejected' : 'No electrons', 16, 28, on ? GREEN : ACC, 14);
+    }
+  };
+
+  /* =====================================================
+     G11 PHYSICS: Circular Motion
+     ===================================================== */
+  const circular = {
+    id: 'circular', name: 'Circular motion', sub: 'Physics',
+    blurb: 'An object moving in a circle needs a centripetal force toward the centre.',
+    task: 'Double the speed. What happens to the required force? (Hint: F depends on v².)',
+    v: {r: 2, speed: 6, mass: 1.5, t: 0},
+    sliders: [{id: 'r', label: 'Radius r', min: 0.5, max: 5, step: 0.1, unit: ' m'}, {id: 'speed', label: 'Speed v', min: 1, max: 15, step: 0.5, unit: ' m/s'}, {id: 'mass', label: 'Mass m', min: 0.1, max: 5, step: 0.1, unit: ' kg'}],
+    read(v) {
+      const a = v.speed * v.speed / v.r, F = v.mass * a, T = TAU * v.r / v.speed;
+      return [['Radius r', n(v.r, 1) + ' m'], ['Speed v', n(v.speed, 1) + ' m/s'], ['Centripetal a = v²/r', n(a, 2) + ' m/s²'], ['Centripetal F = mv²/r', n(F, 2) + ' N'], ['Period T = 2πr/v', n(T, 2) + ' s'], ['Frequency f', n(1 / T, 2) + ' Hz']];
+    },
+    draw(t, v, dt) {
+      v.t += dt / 1000;
+      const cx = W / 2, cy = H / 2 + 6, R = Math.min(W, H) * 0.32;
+      ctx.beginPath(); ctx.strokeStyle = 'rgba(150,170,240,.4)'; ctx.setLineDash([6, 6]); ctx.lineWidth = 2; ctx.arc(cx, cy, R, 0, TAU); ctx.stroke(); ctx.setLineDash([]);
+      dot(cx, cy, 4, MUTED);
+      const w = v.speed / v.r, ang = w * v.t, px = cx + R * Math.cos(ang), py = cy + R * Math.sin(ang);
+      for (let i = 1; i <= 18; i++) { const a2 = ang - i * 0.12; dot(cx + R * Math.cos(a2), cy + R * Math.sin(a2), 3, 'rgba(255,138,91,' + Math.max(0, 0.5 - i * 0.025) + ')'); }
+      const tvx = -Math.sin(ang), tvy = Math.cos(ang);
+      arrow(px, py, px + tvx * 70, py + tvy * 70, GREEN); text('v', px + tvx * 84, py + tvy * 84 + 4, GREEN, 14, 'center');
+      const fx = cx - px, fy = cy - py, fl = Math.hypot(fx, fy) || 1;
+      arrow(px, py, px + fx / fl * 70, py + fy / fl * 70, ACC); text('F', px + fx / fl * 84, py + fy / fl * 84 + 4, ACC, 14, 'center');
+      dot(px, py, 11, BLUE, 20);
+      text('F = ' + n(v.mass * v.speed * v.speed / v.r, 1) + ' N', 16, 28, ACC2, 14);
+    }
+  };
+
+  /* =====================================================
+     G11 PHYSICS: Magnetic field of a wire
+     ===================================================== */
+  const magnet = {
+    id: 'magnet', name: 'Magnetic field of a wire', sub: 'Physics',
+    blurb: 'Current in a straight wire creates circular magnetic field lines. Reverse the current and the field reverses.',
+    task: 'Double the current. Does the field at the same distance double or quadruple?',
+    v: {I: 5, r: 0.05, dir: 1},
+    sliders: [{id: 'I', label: 'Current I', min: 0.5, max: 20, step: 0.5, unit: ' A'}, {id: 'r', label: 'Distance r', min: 0.01, max: 0.2, step: 0.01, unit: ' m'}],
+    choices: [{id: 'dir', label: 'Current direction', opts: [[1, 'Up the page'], [0, 'Down the page']]}],
+    read(v) {
+      const B = 4 * Math.PI * 1e-7 * v.I / (TAU * v.r);
+      return [['Current I', n(v.I, 1) + ' A'], ['Distance r', n(v.r * 100, 1) + ' cm'], ['B = μ₀I / (2πr)', B.toExponential(2) + ' T'], ['Direction', +v.dir ? 'anticlockwise' : 'clockwise']];
+    },
+    draw(t, v, dt) {
+      const cx = W / 2, cy = H / 2 + 6, dir = +v.dir;
+      line(cx, 30, cx, H - 40, '#8ea2e8', 5);
+      const ay = dir ? cy - 70 : cy + 70, ay2 = dir ? cy - 110 : cy + 110;
+      arrow(cx, ay, cx, ay2, ACC2); text('I', cx + 12, ay2 + (dir ? 8 : 18), ACC2, 16);
+      if (dir) { dot(cx, 22, 9, '#0a1029'); dot(cx, 22, 6, ACC2); }
+      else { ctx.strokeStyle = ACC2; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(cx - 8, 14); ctx.lineTo(cx + 8, 30); ctx.moveTo(cx + 8, 14); ctx.lineTo(cx - 8, 30); ctx.stroke(); }
+      [40, 80, 120, 160].filter(r => r < Math.min(W, H) / 2 - 20).forEach((r, i) => {
+        ctx.beginPath(); ctx.strokeStyle = 'rgba(94,194,255,' + (0.5 - i * 0.09) + ')'; ctx.lineWidth = 2; ctx.arc(cx, cy, r, 0, TAU); ctx.stroke();
+        const na = 4 + i * 2;
+        for (let j = 0; j < na; j++) {
+          const ang = j * TAU / na + (dir ? 1 : -1) * t / 2000;
+          const ax = cx + r * Math.cos(ang), ayy = cy + r * Math.sin(ang);
+          const tang = ang + (dir ? Math.PI / 2 : -Math.PI / 2);
+          arrow(ax - 6 * Math.cos(tang), ayy - 6 * Math.sin(tang), ax + 10 * Math.cos(tang), ayy + 10 * Math.sin(tang), 'rgba(94,194,255,.8)');
+        }
+      });
+      const pr = 30 + (v.r / 0.2) * 140;
+      dot(cx + pr, cy, 6, ACC2, 12); text('B here', cx + pr + 8, cy - 8, ACC2, 12);
+      text('I = ' + n(v.I, 1) + ' A', 16, 26, ACC2, 14);
+      text('B = ' + (4 * Math.PI * 1e-7 * v.I / (TAU * v.r)).toExponential(2) + ' T', 16, 48, BLUE, 13);
+    }
+  };
+
+  /* =====================================================
+     G11 PHYSICS: Newton's 2nd law on a ramp
+     ===================================================== */
+  const incline = {
+    id: 'incline', name: "Newton's 2nd law on a ramp", sub: 'Physics',
+    blurb: 'A block slides down a ramp. See how angle, mass and friction change the acceleration.',
+    task: 'Set friction μ = 0.5. At what angle does the block stop accelerating? (Hint: tan θ = μ.)',
+    v: {m: 5, angle: 25, mu: 0.3},
+    sliders: [{id: 'm', label: 'Mass m', min: 1, max: 20, step: 1, unit: ' kg'}, {id: 'angle', label: 'Ramp angle θ', min: 0, max: 60, step: 1, unit: '°'}, {id: 'mu', label: 'Friction μ', min: 0, max: 0.9, step: 0.05}],
+    calc(v) { const th = v.angle * Math.PI / 180, g = 9.8; const par = v.m * g * Math.sin(th), perp = v.m * g * Math.cos(th), fmax = v.mu * perp, net = Math.max(0, par - fmax); return {par, perp, fmax, net, a: net / v.m}; },
+    read(v) { const c = this.calc(v); return [['Weight', n(v.m * 9.8, 1) + ' N'], ['Down-slope force', n(c.par, 1) + ' N'], ['Normal force', n(c.perp, 1) + ' N'], ['Friction', n(c.fmax, 1) + ' N'], ['Net force', n(c.net, 1) + ' N'], ['Acceleration', n(c.a, 2) + ' m/s²']]; },
+    draw(t, v, dt) {
+      const c = this.calc(v), th = v.angle * Math.PI / 180, pad = 58;
+      const baseY = H - pad, leftX = pad + 10;
+      const L = Math.max(120, Math.min(W - leftX - pad, (H - 2 * pad) / Math.max(Math.sin(th), 0.18)));
+      const topX = leftX + L * Math.cos(th), topY = baseY - L * Math.sin(th);
+      line(leftX - 25, baseY, W - 20, baseY, '#6d7fc7', 2);
+      ctx.beginPath(); ctx.moveTo(leftX, baseY); ctx.lineTo(topX, topY); ctx.lineTo(topX, baseY); ctx.closePath();
+      ctx.fillStyle = 'rgba(92,74,46,.55)'; ctx.fill(); ctx.strokeStyle = '#8a7550'; ctx.lineWidth = 2; ctx.stroke();
+      ctx.beginPath(); ctx.arc(leftX, baseY, 44, -th, 0); ctx.strokeStyle = ACC2; ctx.lineWidth = 2.5; ctx.stroke();
+      text('θ = ' + v.angle + '°', leftX + 56, baseY - 16, ACC2, 14);
+      const f = 0.55, bx = leftX + L * Math.cos(th) * f, by = baseY - L * Math.sin(th) * f;
+      const ux = Math.cos(th), uy = -Math.sin(th), nx = -Math.sin(th), ny = -Math.cos(th);
+      ctx.save(); ctx.translate(bx, by); ctx.rotate(-th);
+      ctx.fillStyle = '#5ec2ff'; ctx.fillRect(-22, -14, 44, 28); ctx.strokeStyle = '#eef1ff'; ctx.lineWidth = 1.5; ctx.strokeRect(-22, -14, 44, 28);
+      ctx.restore();
+      const k = 70 / (v.m * 9.8);
+      arrow(bx, by, bx, by + 70, '#ff5c8a'); text('mg', bx + 6, by + 80, '#ff5c8a', 12);
+      arrow(bx, by, bx + nx * c.perp * k, by + ny * c.perp * k, BLUE); text('N', bx + nx * c.perp * k - 14, by + ny * c.perp * k - 6, BLUE, 12);
+      if (c.fmax * k > 4) { arrow(bx, by, bx + ux * c.fmax * k, by + uy * c.fmax * k, GREEN); text('f', bx + ux * c.fmax * k + 6, by + uy * c.fmax * k, GREEN, 12); }
+      if (c.net * k > 4) { arrow(bx, by, bx - ux * c.net * k, by - uy * c.net * k, ACC); text('F_net', bx - ux * c.net * k + 6, by - uy * c.net * k + 16, ACC, 12); }
+      text('a = ' + n(c.a, 2) + ' m/s²', 16, 26, ACC2, 15);
+    }
+  };
+
+  /* =====================================================
+     G11 PHYSICS: Lens ray diagram
+     ===================================================== */
+  const lens = {
+    id: 'lens', name: 'Lens ray diagram', sub: 'Physics',
+    blurb: 'Move the object and see where the image forms. Try u > f, then u < f.',
+    task: 'Set f = 15, u = 45. Where is the image? Then set u = 10 (inside the focus). What changes?',
+    v: {u: 45, f: 15},
+    sliders: [{id: 'u', label: 'Object distance u', min: 5, max: 60, step: 1}, {id: 'f', label: 'Focal length f', min: 5, max: 30, step: 1}],
+    read(v) {
+      const u = v.u, f = v.f, vv = Math.abs(u - f) < 0.5 ? null : u * f / (u - f), m = vv === null ? null : -vv / u;
+      if (vv === null) return [['f', f], ['u', u], ['Image', 'at infinity'], ['Because', 'object is exactly at F']];
+      const real = vv > 0;
+      return [['f', f], ['u', u], ['v = uf /(u−f)', n(vv, 1)], ['Magnification |m|', n(Math.abs(m), 2)], ['Image', real ? 'Real, inverted' : 'Virtual, upright'], ['Size', Math.abs(m) > 1 ? 'Enlarged' : Math.abs(m) < 1 ? 'Diminished' : 'Same size']];
+    },
+    draw(t, v, dt) {
+      const cy = H / 2 + 10, h = 45, scale = Math.min(W / 130, 5), cx = W * 0.55;
+      const u = v.u, f = v.f, vv = Math.abs(u - f) < 0.5 ? null : u * f / (u - f), hp = vv === null ? null : h * f / (f - u), ox = cx - u * scale;
+      line(10, cy, W - 10, cy, 'rgba(150,170,240,.5)', 1.5);
+      line(cx, cy - H * 0.4, cx, cy + H * 0.4, 'rgba(150,170,240,.75)', 2.5);
+      if (f * scale < W / 2) { dot(cx - f * scale, cy, 4, ACC2, 8); dot(cx + f * scale, cy, 4, ACC2, 8); text('F', cx - f * scale - 14, cy - 6, ACC2, 12); text("F'", cx + f * scale + 6, cy - 6, ACC2, 12); }
+      arrow(ox, cy, ox, cy - h, ACC); text('object', ox, cy + 20, ACC, 12, 'center');
+      if (vv === null) {
+        ctx.beginPath(); ctx.strokeStyle = 'rgba(255,200,87,.7)'; ctx.lineWidth = 1.5;
+        ctx.moveTo(ox, cy - h); ctx.lineTo(cx, cy - h); ctx.lineTo(W - 10, cy + (W - 10 - cx) * h / (f * scale)); ctx.stroke();
+        text('image at infinity', W - 20, 34, ACC2, 14, 'right'); return;
+      }
+      const ix = cx + vv * scale, iy = cy - hp, isReal = vv > 0;
+      ctx.beginPath(); ctx.strokeStyle = 'rgba(255,200,87,.7)'; ctx.lineWidth = 1.5;
+      ctx.moveTo(ox, cy - h); ctx.lineTo(cx, cy - h);
+      const s = vv / f; ctx.lineTo(cx + s * f * scale, cy - h + s * h); ctx.stroke();
+      ctx.beginPath(); ctx.strokeStyle = 'rgba(94,194,255,.7)'; ctx.lineWidth = 1.5;
+      ctx.moveTo(ox, cy - h); ctx.lineTo(ix, iy); ctx.stroke();
+      if (ix > 5 && ix < W - 5) { arrow(ix, cy, ix, iy, isReal ? GREEN : BLUE); text(isReal ? 'real, inverted' : 'virtual, upright', ix, cy + 22, isReal ? GREEN : BLUE, 12, 'center'); }
+    }
+  };
+
+  /* =====================================================
+     G11 PHYSICS: Wave interference
+     ===================================================== */
+  const waveint = {
+    id: 'waveint', name: 'Wave interference', sub: 'Physics',
+    blurb: 'Two waves meet. If crests line up they reinforce; if crest meets trough they cancel.',
+    task: "Set both amplitudes to 1, then change B's phase to 180°. The sum should be flat — that's destructive interference.",
+    v: {a1: 1, a2: 1, phase: 0, freq: 1},
+    sliders: [
+      {id: 'a1', label: 'Wave A amplitude', min: 0, max: 2, step: 0.1}, {id: 'a2', label: 'Wave B amplitude', min: 0, max: 2, step: 0.1},
+      {id: 'phase', label: 'Phase shift of B', min: 0, max: 360, step: 5, unit: '°'}, {id: 'freq', label: 'Frequency', min: 0.5, max: 3, step: 0.1}
+    ],
+    read(v) {
+      const max = v.a1 + v.a2, min = Math.abs(v.a1 - v.a2), p = v.phase;
+      const type = (p < 20 || p > 340) ? 'Constructive' : (Math.abs(p - 180) < 20 ? 'Destructive' : 'Mixed');
+      return [['A amplitude', n(v.a1, 1)], ['B amplitude', n(v.a2, 1)], ['Phase shift', n(p, 0) + '°'], ['Sum: max amplitude', n(max, 2)], ['Sum: min amplitude', n(min, 2)], ['Interference', type]];
+    },
+    draw(t, v, dt) {
+      const midY = H / 2, scaleY = Math.min(60, H * 0.14), ph = v.phase * Math.PI / 180, k = v.freq * 2 * Math.PI / (W - 40);
+      ctx.beginPath(); ctx.strokeStyle = BLUE; ctx.lineWidth = 2.5;
+      for (let x = 20; x <= W - 20; x += 3) { const y = midY - v.a1 * scaleY * Math.sin(k * (x - 20)); x === 20 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); }
+      ctx.stroke();
+      ctx.beginPath(); ctx.strokeStyle = GREEN; ctx.lineWidth = 2.5; ctx.setLineDash([6, 5]);
+      for (let x = 20; x <= W - 20; x += 3) { const y = midY - v.a2 * scaleY * Math.sin(k * (x - 20) + ph); x === 20 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); }
+      ctx.stroke(); ctx.setLineDash([]);
+      ctx.beginPath(); ctx.strokeStyle = ACC; ctx.lineWidth = 3.5; ctx.shadowColor = ACC; ctx.shadowBlur = 12;
+      for (let x = 20; x <= W - 20; x += 3) {
+        const y1 = v.a1 * scaleY * Math.sin(k * (x - 20)), y2 = v.a2 * scaleY * Math.sin(k * (x - 20) + ph), y = midY + (y1 + y2) * 0.55;
+        x === 20 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke(); ctx.shadowBlur = 0;
+      text('A', 26, 30, BLUE, 14); text('B (dashed)', 46, 30, GREEN, 14); text('A + B (bottom half)', W - 20, H - 14, ACC, 13, 'right');
+    }
+  };
+
+  /* =====================================================
+     G12 PHYSICS: Faraday's Law / Lenz's Law
+     ===================================================== */
+  const faraday = {
+    id: 'faraday', name: "Faraday's Law / Lenz", sub: 'Physics',
+    blurb: 'Moving a magnet near a coil induces a current. Lenz\'s law opposes the change.',
+    task: 'Move the magnet back and forth. Watch the current direction change.',
+    v: {pos: 0},
+    sliders: [{id: 'pos', label: 'Magnet position', min: -1, max: 1, step: 0.05}],
+    read(v) {
+      return [['Position', n(v.pos,2)], ['Induced Current', v.pos === 0 ? '0' : (v.pos > 0 ? 'Left' : 'Right')]];
+    },
+    draw(t, v) {
+      const cx = W*0.6, cy = H/2;
+      
+      // Coil
+      ctx.strokeStyle = ACC2; ctx.lineWidth = 4;
+      for(let i=0; i<5; i++) {
+        ctx.beginPath(); ctx.ellipse(cx, cy - 40 + i*20, 20, 30, 0, 0, Math.PI*2); ctx.stroke();
+      }
+      
+      // Magnet
+      const mx = cx - 100 + v.pos * 60;
+      ctx.fillStyle = '#ef4444'; ctx.fillRect(mx, cy-30, 40, 30);
+      ctx.fillStyle = '#3b82f6'; ctx.fillRect(mx, cy, 40, 30);
+      text('N', mx+20, cy-12, '#fff', 16, 'center');
+      text('S', mx+20, cy+20, '#fff', 16, 'center');
+      
+      // Current arrow
+      if(v.pos !== 0) {
+        const dir = v.pos > 0 ? 1 : -1;
+        arrow(cx, cy-80, cx + dir*40, cy-80, GREEN);
+        text('I', cx + dir*50, cy-75, GREEN, 16, 'center');
+      }
+      text('Moving magnet induces current', 16, 28, GREEN, 14);
+    }
+  };
+
+  /* =====================================================
+     G11 CHEMISTRY: Quantum Mechanical Model of the Atom
+     ===================================================== */
+  const quantum = {
+    id: 'quantum', name: 'Quantum atom', sub: 'Chemistry',
+    blurb: 'Quantum numbers describe where an electron can be. n sets the shell, l the orbital shape, m the orientation.',
+    task: 'Set n = 3. How many subshells? Set l = 2 (d). How many orbitals, and how many electrons can that subshell hold?',
+    v: {n: 2, l: 1, m: 0, view: 0},
+    sliders: [{id: 'n', label: 'Principal n', min: 1, max: 4, step: 1}, {id: 'l', label: 'Angular l', min: 0, max: 3, step: 1}, {id: 'm', label: 'Magnetic m', min: -3, max: 3, step: 1}],
+    choices: [{id: 'view', label: 'Show', opts: [[0, 'Orbital shape'], [1, 'Bohr shells']]}],
+    clamp() { const v = this.v; v.l = Math.max(0, Math.min(v.l, v.n - 1)); v.m = Math.max(-v.l, Math.min(v.m, v.l)); },
+    onChange() { this.clamp(); syncSlider('l'); syncSlider('m'); },
+    read(v) {
+      const names = ['s', 'p', 'd', 'f'], orbitals = 2 * v.l + 1, maxE = 2 * orbitals, cap = [2, 8, 18, 32][v.n - 1];
+      return [['Shell n', v.n], ['Subshell', v.n + names[v.l]], ['Shape l', names[v.l]], ['Orientation m', v.m], ['Orbitals in subshell', orbitals], ['Max electrons (subshell)', maxE], ['Max electrons (shell)', cap]];
+    },
+    draw(t, v, dt) {
+      const cx = W / 2, cy = H / 2 + 6;
+      if (+v.view === 1) {
+        dot(cx, cy, 14, ACC, 18); text('+' + v.n, cx, cy + 5, '#0a1029', 12, 'center');
+        for (let s = 1; s <= v.n; s++) {
+          const r = 40 + s * Math.min(48, (Math.min(W, H) * 0.4 - 40) / v.n);
+          ctx.beginPath(); ctx.strokeStyle = s === v.n ? 'rgba(255,200,87,.9)' : 'rgba(150,170,240,.35)'; ctx.lineWidth = s === v.n ? 2.5 : 1.5; ctx.arc(cx, cy, r, 0, TAU); ctx.stroke();
+          text(s + ': ' + (2 * s * s) + 'e⁻', cx + r * 0.72, cy - r * 0.72, s === v.n ? ACC2 : MUTED, 12, 'center');
+        }
+        text('shell n = ' + v.n + ' holds up to ' + 2 * v.n * v.n + ' electrons', cx, H - 16, ACC2, 13, 'center');
+        return;
+      }
+      const l = v.l, m = v.m, R = Math.min(W, H) * 0.36;
+      if (l === 0) {
+        const g = ctx.createRadialGradient(cx, cy, 4, cx, cy, R);
+        g.addColorStop(0, 'rgba(255,200,87,.85)'); g.addColorStop(0.6, 'rgba(94,194,255,.35)'); g.addColorStop(1, 'rgba(94,194,255,0)');
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, R * 0.85, 0, TAU); ctx.fill();
+        for (let i = 0; i < 40; i++) { const a = i * 2.399, rr = R * 0.8 * Math.sqrt((i + 0.5) / 40); dot(cx + rr * Math.cos(a + t / 3000), cy + rr * Math.sin(a + t / 3000), 2, 'rgba(255,255,255,.5)'); }
+        text('s orbital — spherical', cx, cy + R + 22, ACC2, 14, 'center');
+      } else if (l === 1) {
+        const ang = m === 0 ? -Math.PI / 2 : (m === 1 ? 0 : Math.PI / 4);
+        drawLobes(cx, cy, ang, R, 2, '94,194,255');
+        text('p orbital — dumbbell (m = ' + m + ')', cx, H - 16, ACC2, 14, 'center');
+      } else if (l === 2) {
+        drawLobes(cx, cy, (m === 0) ? 0 : Math.PI / 4, R, 4, '110,231,183');
+        text('d orbital — clover (m = ' + m + ')', cx, H - 16, ACC2, 14, 'center');
+      } else {
+        drawLobes(cx, cy, 0, R, 6, '255,138,91');
+        text('f orbital — multi-lobed (m = ' + m + ')', cx, H - 16, ACC2, 14, 'center');
+      }
+      text('n=' + v.n + '   l=' + v.l + '   m=' + v.m, 14, 26, MUTED, 13);
+    }
+  };
+
+  /* =====================================================
+     G11 CHEMISTRY: Energy profile (ΔH)
+     ===================================================== */
+  const hess = {
+    id: 'hess', name: 'Energy profile (ΔH)', sub: 'Chemistry',
+    blurb: 'Reactants gain activation energy to reach the transition state, then release energy as products form.',
+    task: 'Make products higher than reactants. Is the reaction exothermic or endothermic? When is ΔH negative?',
+    v: {er: 20, ep: 10, ea: 40},
+    sliders: [{id: 'er', label: 'Reactant energy', min: 0, max: 80, step: 1, unit: ' kJ'}, {id: 'ep', label: 'Product energy', min: 0, max: 80, step: 1, unit: ' kJ'}, {id: 'ea', label: 'Activation energy Ea', min: 5, max: 80, step: 1, unit: ' kJ'}],
+    read(v) {
+      const dH = v.ep - v.er;
+      return [['Reactants', v.er + ' kJ'], ['Products', v.ep + ' kJ'], ['ΔH = products − reactants', n(dH, 1) + ' kJ'], ['Type', dH < 0 ? 'Exothermic' : (dH > 0 ? 'Endothermic' : 'No change')], ['Ea (forward)', v.ea + ' kJ'], ['Ea (reverse)', n(v.ea - dH, 1) + ' kJ']];
+    },
+    draw(t, v, dt) {
+      const padL = 56, padR = 30, padT = 40, padB = 44;
+      const maxE = Math.max(v.er + v.ea, v.ep) + 8;
+      const gx = x => padL + x * (W - padL - padR), gy = e => H - padB - (e / maxE) * (H - padT - padB);
+      line(padL, padT, padL, H - padB, '#6d7fc7', 2); line(padL, H - padB, W - padR, H - padB, '#6d7fc7', 2);
+      for (let e = 0; e <= maxE; e += Math.ceil(maxE / 6)) line(padL, gy(e), W - padR, gy(e), GRID, 1);
+      text('reaction progress', W - padR, H - padB + 24, MUTED, 12, 'right');
+      text('energy', padL - 6, padT - 10, MUTED, 12, 'right');
+      const smooth = s => s * s * (3 - 2 * s);
+      ctx.beginPath(); ctx.strokeStyle = ACC; ctx.lineWidth = 3.5; ctx.shadowColor = ACC; ctx.shadowBlur = 10;
+      for (let i = 0; i <= 100; i++) {
+        const x = i / 100; let e;
+        if (x < 0.5) e = v.er + v.ea * smooth(x / 0.5);
+        else e = v.er + v.ea - (v.er + v.ea - v.ep) * smooth((x - 0.5) / 0.5);
+        const X = gx(0.08 + 0.84 * x), Y = gy(e); i ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y);
+      }
+      ctx.stroke(); ctx.shadowBlur = 0;
+      line(gx(0.08), gy(v.er), gx(0.5), gy(v.er), 'rgba(255,200,87,.5)', 1.5, [5, 5]);
+      line(gx(0.5), gy(v.ep), gx(0.92), gy(v.ep), 'rgba(110,231,183,.5)', 1.5, [5, 5]);
+      text('reactants', gx(0.08), gy(v.er) - 8, ACC2, 12);
+      text('products', gx(0.92), gy(v.ep) - 8, GREEN, 12, 'right');
+      dot(gx(0.5), gy(v.er + v.ea), 7, ACC, 16);
+      text('transition state', gx(0.5), gy(v.er + v.ea) - 12, ACC, 12, 'center');
+      const dH = v.ep - v.er, bx = gx(0.965);
+      line(bx, gy(v.er), bx, gy(v.ep), '#ff5c8a', 2.5);
+      text('ΔH = ' + n(dH, 1) + ' kJ', bx - 6, (gy(v.er) + gy(v.ep)) / 2, '#ff5c8a', 13, 'right');
+      text(dH < 0 ? 'Exothermic' : (dH > 0 ? 'Endothermic' : 'No change'), 16, 26, dH < 0 ? GREEN : ACC2, 15);
+    }
+  };
+
+  /* =====================================================
+     G11 CHEMISTRY: Acid–base titration
+     ===================================================== */
+  const titr = {
+    id: 'titr', name: 'Acid–base titration', sub: 'Chemistry',
+    blurb: 'Add base to acid and watch pH change. The steep jump marks the equivalence point.',
+    task: 'Set Ca = Cb = 0.1 M, Va = 25 mL. At what volume added does pH = 7?',
+    v: {ca: 0.1, cb: 0.1, va: 25, vb: 0},
+    sliders: [{id: 'ca', label: 'Acid conc. Ca (M)', min: 0.01, max: 0.5, step: 0.01}, {id: 'cb', label: 'Base conc. Cb (M)', min: 0.01, max: 0.5, step: 0.01}, {id: 'va', label: 'Acid volume Va (mL)', min: 5, max: 50, step: 1, unit: ' mL'}, {id: 'vb', label: 'Base added (mL)', min: 0, max: 60, step: 0.5, unit: ' mL'}],
+    pH(vb, v) {
+      const Va = v.va / 1000, Vb = vb / 1000, Vt = Va + Vb, nA = v.ca * Va, nB = v.cb * Vb;
+      if (Math.abs(nA - nB) < 1e-12) return 7;
+      if (nA > nB) return -Math.log10(Math.max(1e-14, (nA - nB) / Vt));
+      return 14 + Math.log10(Math.max(1e-14, (nB - nA) / Vt));
+    },
+    read(v) {
+      const eq = v.ca * v.va / v.cb, ph = this.pH(v.vb, v);
+      return [['Equivalence volume', n(eq, 1) + ' mL'], ['Base added', n(v.vb, 1) + ' mL'], ['pH now', n(ph, 2)], ['Region', v.vb < eq - 0.3 ? 'Acidic (excess acid)' : (v.vb > eq + 0.3 ? 'Basic (excess base)' : 'Near equivalence')]];
+    },
+    draw(t, v, dt) {
+      const padL = 56, padR = 30, padT = 40, padB = 48, maxVb = 60;
+      const gx = x => padL + x / maxVb * (W - padL - padR), gy = p => H - padB - p / 14 * (H - padT - padB);
+      line(padL, padT, padL, H - padB, '#6d7fc7', 2); line(padL, H - padB, W - padR, H - padB, '#6d7fc7', 2);
+      for (let p = 0; p <= 14; p += 2) { line(padL, gy(p), W - padR, gy(p), GRID, 1); text(p, padL - 8, gy(p) + 4, MUTED, 11, 'right'); }
+      for (let x = 0; x <= maxVb; x += 10) { line(gx(x), padT, gx(x), H - padB, GRID, 1); text(x, gx(x), H - padB + 18, MUTED, 11, 'center'); }
+      text('base added (mL)', W - padR, H - padB + 36, MUTED, 12, 'right');
+      text('pH', padL - 6, padT - 10, MUTED, 12, 'right');
+      ctx.beginPath(); ctx.strokeStyle = ACC; ctx.lineWidth = 3; ctx.shadowColor = ACC; ctx.shadowBlur = 10;
+      for (let i = 0; i <= 240; i++) {
+        const vb = i / 240 * maxVb, p = Math.max(0, Math.min(14, this.pH(vb, v)));
+        const X = gx(vb), Y = gy(p); i ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y);
+      }
+      ctx.stroke(); ctx.shadowBlur = 0;
+      const eq = v.ca * v.va / v.cb;
+      if (eq <= maxVb) { line(gx(eq), padT, gx(eq), H - padB, 'rgba(110,231,183,.6)', 1.5, [6, 6]); text('equivalence', gx(eq) + 6, padT + 14, GREEN, 12); }
+      const pnow = Math.max(0, Math.min(14, this.pH(v.vb, v)));
+      dot(gx(Math.min(v.vb, maxVb)), gy(pnow), 9, ACC2, 18);
+      text('pH = ' + n(pnow, 2), 16, 26, ACC2, 16);
+      text('V = ' + n(v.vb, 1) + ' mL', 16, 48, MUTED, 13);
+    }
+  };
+
+  /* =====================================================
+     G11 CHEMISTRY: Ideal gas law
+     ===================================================== */
+  const gas = {
+    id: 'gas', name: 'Ideal gas law', sub: 'Chemistry',
+    blurb: 'Particles bounce inside a container. Heat raises their speed; adding moles raises the pressure.',
+    task: 'Double the temperature (in K). What happens to pressure if volume stays the same?',
+    v: {n: 1, T: 300, V: 22.4},
+    sliders: [{id: 'n', label: 'Moles n', min: 0.1, max: 5, step: 0.1, unit: ' mol'}, {id: 'T', label: 'Temperature T', min: 100, max: 800, step: 10, unit: ' K'}, {id: 'V', label: 'Volume V', min: 2, max: 50, step: 1, unit: ' L'}],
+    parts: null,
+    initParts() { this.parts = []; for (let i = 0; i < 120; i++) this.parts.push({x: Math.random(), y: Math.random(), vx: (Math.random() * 2 - 1) || 0.3, vy: (Math.random() * 2 - 1) || 0.3}); },
+    read(v) {
+      const R = 0.0821, P = v.n * R * v.T / v.V;
+      return [['Moles n', n(v.n, 2) + ' mol'], ['Temperature T', n(v.T, 0) + ' K'], ['Volume V', n(v.V, 1) + ' L'], ['P = nRT / V', n(P, 2) + ' atm'], ['P in kPa', n(P * 101.3, 0) + ' kPa'], ['Gas constant R', '0.0821 L·atm/mol·K']];
+    },
+    draw(t, v, dt) {
+      if (!this.parts) this.initParts();
+      const gy = H - 46, bw = Math.min(W * 0.42, 240), bh = 50 + (H * 0.45) * (v.V / 50), bx = (W - bw) / 2, by = gy - bh;
+      ctx.strokeStyle = 'rgba(150,170,240,.8)'; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx, gy); ctx.lineTo(bx + bw, gy); ctx.lineTo(bx + bw, by); ctx.stroke();
+      ctx.fillStyle = '#26346a'; ctx.fillRect(bx - 4, by - 12, bw + 8, 14); ctx.strokeStyle = '#8ea2e8'; ctx.lineWidth = 2; ctx.strokeRect(bx - 4, by - 12, bw + 8, 14);
+      line(bx + bw / 2, by - 12, bx + bw / 2, 24, '#8ea2e8', 4);
+      const shown = Math.min(this.parts.length, Math.round(20 + v.n * 20)), step = Math.sqrt(v.T / 300) * dt / 900;
+      for (let i = 0; i < shown; i++) {
+        const p = this.parts[i];
+        p.x += p.vx * step; p.y += p.vy * step;
+        if (p.x < 0.02) { p.x = 0.02; p.vx *= -1; } if (p.x > 0.98) { p.x = 0.98; p.vx *= -1; }
+        if (p.y < 0.02) { p.y = 0.02; p.vy *= -1; } if (p.y > 0.98) { p.y = 0.98; p.vy *= -1; }
+        dot(bx + p.x * bw, by + p.y * bh, 3.2, 'rgba(255,200,87,.85)');
+      }
+      text('n = ' + n(v.n, 1) + ' mol', bx, by - 24, ACC2, 13);
+      text('V = ' + n(v.V, 1) + ' L', bx + bw, gy + 22, BLUE, 13, 'right');
+      text('T = ' + n(v.T, 0) + ' K', bx + bw, gy + 40, GREEN, 13, 'right');
+      text('P = ' + n(v.n * 0.0821 * v.T / v.V, 2) + ' atm', 16, 26, ACC2, 15);
+    }
+  };
+
+  /* =====================================================
+     G11 CHEMISTRY: SN2 Backside Attack
+     ===================================================== */
+  const sn2 = {
+    id: 'sn2', name: 'SN2 Backside Attack', sub: 'Chemistry',
+    blurb: 'Nucleophile attacks from the back, kicking off the leaving group.',
+    task: 'Move the slider to 50%. What is the shape of the transition state?',
+    v: {p: 0},
+    sliders: [{id: 'p', label: 'Progress %', min: 0, max: 100, step: 1}],
+    read(v) {
+      return [['Progress', v.p + '%'], ['Leaving group', v.p < 50 ? 'Attached' : 'Leaving'], ['Nucleophile', v.p > 50 ? 'Attached' : 'Approaching']];
+    },
+    draw(t, v) {
+      const cx = W/2, cy = H/2;
+      const p = v.p / 100;
+      
+      dot(cx, cy, 15, '#94a3b8');
+      text('C', cx, cy+5, '#fff', 14, 'center');
+      
+      const lgY = cy - 60 + p * 80;
+      ctx.strokeStyle = '#8f9bc4'; ctx.lineWidth = 2; ctx.setLineDash([5,5]);
+      line(cx, cy-15, cx, lgY+15);
+      ctx.setLineDash([]);
+      dot(cx, lgY, 14, ACC);
+      text('X', cx, lgY+5, '#fff', 14, 'center');
+      
+      const nuY = cy + 60 - p * 80;
+      ctx.strokeStyle = '#8f9bc4'; ctx.lineWidth = 2; ctx.setLineDash([5,5]);
+      line(cx, cy+15, cx, nuY-15);
+      ctx.setLineDash([]);
+      dot(cx, nuY, 14, BLUE);
+      text('Nu', cx, nuY+5, '#fff', 14, 'center');
+      
+      if(p > 0.2 && p < 0.8) {
+        text('Transition state (Trigonal Bipyramidal)', cx, 20, ACC2, 14, 'center');
+      }
+    }
+  };
+
+  /* =====================================================
+     G11 BIOLOGY: Hardy-Weinberg Equilibrium
+     ===================================================== */
+  const hardy = {
+    id: 'hardy', name: 'Hardy-Weinberg', sub: 'Biology',
+    blurb: 'Allele frequencies in a population. p² + 2pq + q² = 1.',
+    task: 'Set q = 0.5. What are the genotype frequencies?',
+    v: {q: 0.3},
+    sliders: [{id: 'q', label: 'Allele q', min: 0, max: 1, step: 0.01}],
+    read(v) {
+      const p = 1 - v.q;
+      return [['p (dominant)', n(p,2)], ['q (recessive)', n(v.q,2)], ['AA (p²)', n(p*p,2)], ['Aa (2pq)', n(2*p*v.q,2)], ['aa (q²)', n(v.q*v.q,2)]];
+    },
+    draw(t, v) {
+      const q = v.q, p = 1-q;
+      const vals = [p*p, 2*p*q, q*q];
+      const labels = ['AA', 'Aa', 'aa'];
+      const colors = [ACC, ACC2, BLUE];
+      
+      const bw = W*0.6, bh = 50, startX = W*0.2, startY = H*0.3;
+      
+      for(let i=0; i<3; i++) {
+        const w = vals[i] * bw;
+        ctx.fillStyle = colors[i];
+        ctx.fillRect(startX, startY + i*70, w, bh);
+        ctx.strokeStyle = '#333'; ctx.lineWidth = 2;
+        ctx.strokeRect(startX, startY + i*70, w, bh);
+        text(labels[i] + ': ' + n(vals[i],2), startX - 50, startY + i*70 + 30, colors[i], 14, 'right');
+      }
+      text('Genotype Frequencies', W/2, 30, INK, 16, 'center');
+    }
+  };
+
+  /* =====================================================
+     G11 BIOLOGY: Mitosis stages
+     ===================================================== */
+  const mitosis = {
+    id: 'mitosis', name: 'Mitosis stages', sub: 'Biology',
+    blurb: 'One cell divides into two identical cells. Walk through interphase, prophase, metaphase, anaphase and telophase.',
+    task: 'Which stage has chromosomes lined up at the middle? Which stage separates the chromatids?',
+    v: {stage: 0},
+    choices: [{id: 'stage', label: 'Stage', opts: [[0, 'Interphase'], [1, 'Prophase'], [2, 'Metaphase'], [3, 'Anaphase'], [4, 'Telophase']]}],
+    read(v) {
+      const stages = [
+        {n: 'Interphase', e: 'DNA replicates; cell grows', c: 'chromatin (thread-like)', m: 'intact'},
+        {n: 'Prophase', e: 'Chromosomes condense; spindle forms', c: 'X-shaped chromosomes', m: 'breaking down'},
+        {n: 'Metaphase', e: 'Chromosomes line up at the equator', c: 'aligned at middle', m: 'gone'},
+        {n: 'Anaphase', e: 'Sister chromatids pull to opposite poles', c: 'separating', m: 'gone'},
+        {n: 'Telophase', e: 'Two nuclei form; cell divides', c: 'two sets', m: 'reforming'}
+      ];
+      const s = stages[+v.stage];
+      return [['Stage', s.n], ['Key event', s.e], ['Chromosomes', s.c], ['Nuclear membrane', s.m], ['Result', +v.stage === 4 ? '2 identical diploid cells' : 'one cell']];
+    },
+    draw(t, v, dt) {
+      const st = +v.stage, cx = W / 2, cy = H / 2 + 6, R = Math.min(W, H) * 0.33;
+      ctx.beginPath(); ctx.strokeStyle = 'rgba(150,170,240,.7)'; ctx.lineWidth = 3; ctx.arc(cx, cy, R, 0, TAU); ctx.stroke();
+      const chrom = (x, y, ang, col) => {
+        ctx.save(); ctx.translate(x, y); ctx.rotate(ang); ctx.strokeStyle = col; ctx.lineWidth = 6; ctx.lineCap = 'round';
+        ctx.beginPath(); ctx.moveTo(-12, -12); ctx.lineTo(12, 12); ctx.moveTo(12, -12); ctx.lineTo(-12, 12); ctx.stroke(); ctx.restore();
+      };
+      if (st === 0) {
+        ctx.beginPath(); ctx.strokeStyle = 'rgba(94,194,255,.6)'; ctx.setLineDash([5, 5]); ctx.lineWidth = 2; ctx.arc(cx, cy, R * 0.55, 0, TAU); ctx.stroke(); ctx.setLineDash([]);
+        for (let i = 0; i < 7; i++) { const a = i * TAU / 7 + t / 2500, rr = R * 0.4; ctx.beginPath(); ctx.strokeStyle = 'rgba(255,138,91,.5)'; ctx.lineWidth = 2.5; ctx.arc(cx + rr * Math.cos(a) * 0.6, cy + rr * Math.sin(a) * 0.6, 14, 0, TAU); ctx.stroke(); }
+      } else if (st === 1) {
+        ctx.beginPath(); ctx.strokeStyle = 'rgba(94,194,255,.4)'; ctx.setLineDash([5, 5]); ctx.lineWidth = 2; ctx.arc(cx, cy, R * 0.7, 0, TAU); ctx.stroke(); ctx.setLineDash([]);
+        [[-0.35, -0.35], [0.35, -0.2], [-0.25, 0.35], [0.3, 0.35]].forEach((p, i) => chrom(cx + p[0] * R, cy + p[1] * R, i * 0.6, i % 2 ? GREEN : ACC));
+      } else if (st === 2) {
+        [-0.4, -0.13, 0.13, 0.4].forEach((yy, i) => chrom(cx, cy + yy * R, 0, i % 2 ? GREEN : ACC));
+        line(cx, cy - R * 0.75, cx, cy + R * 0.75, 'rgba(255,200,87,.5)', 1.5, [5, 5]);
+      } else if (st === 3) {
+        const sep = R * 0.55;
+        [-1, 1].forEach(sgn => { [-0.12, 0.12].forEach((yy, i) => chrom(cx + sgn * sep, cy + yy * R, sgn * 0.5, i % 2 ? GREEN : ACC)); });
+        arrow(cx - sep * 0.3, cy, cx - sep, cy, BLUE); arrow(cx + sep * 0.3, cy, cx + sep, cy, BLUE);
+      } else {
+        const dx = R * 0.55;
+        [-1, 1].forEach(sgn => {
+          const x = cx + sgn * dx;
+          ctx.beginPath(); ctx.strokeStyle = 'rgba(150,170,240,.7)'; ctx.lineWidth = 2.5; ctx.arc(x, cy, R * 0.5, 0, TAU); ctx.stroke();
+          chrom(x - 10, cy, 0.4, ACC); chrom(x + 10, cy, -0.4, GREEN);
+        });
+        ctx.beginPath(); ctx.strokeStyle = 'rgba(255,92,138,.7)'; ctx.lineWidth = 3;
+        ctx.moveTo(cx, cy - R * 0.9); ctx.quadraticCurveTo(cx + 10, cy, cx, cy + R * 0.9); ctx.stroke();
+      }
+      text(['Interphase', 'Prophase', 'Metaphase', 'Anaphase', 'Telophase'][st], 16, 28, ACC2, 16);
+    }
+  };
+
+  /* ---------- tool registry (all advanced tools) ---------- */
+  const TOOLS = [deriv, integ, transform, photo, circular, magnet, incline, lens, waveint, faraday, quantum, hess, titr, gas, sn2, hardy, mitosis];
+
+  /* ---------- Amharic metadata ---------- */
+  const VAM = {
+    deriv: {name: 'ተዋጽኦ (ታንጀንት)', sub: 'ሒሳብ', blurb: 'ተዋጽኦ የታንጀንት መስመር ተዳፋት ነው።', task: 'x ን ያንቀሳቅሱ። የታንጀንቱ ተዳፋት ምን ይሆናል?', controls: {x: 'x-ኮኦርዲኔት'}},
+    integ: {name: 'ውህደት (ስፋት)', sub: 'ሒሳብ', blurb: 'የአራት ማዕዘኖች ቁጥር ሲጨምር ስፋቱ ወደ ትክክለኛው ውህደት ይቃረባል።', task: 'n ን ወደ 50 ያሳድጉ። ስፋቱ ከትክክለኛው እሴት ጋር እንዴት ይነጻጸራል?', controls: {n: 'አራት ማዕዘኖች (n)'}},
+    transform: {name: 'የግራፍ ለውጦች', sub: 'ሒሳብ', blurb: 'y = a·f(x − h) + k የመሠረት ግራፉን ይዘረጋል፣ ያንጸባርቃልና ያንቀሳቅሳል።', task: 'በx² ይጀምሩ። h = 2 እና k = −3 ያድርጉ። ጫፉ አሁን የት ነው? ከዚያ a = −1 ያድርጉ።', controls: {a: 'a (መዘርጋት / ነጸብራቅ)', h: 'h (አግድም መንቀሳቀስ)', k: 'k (ቁመት መንቀሳቀስ)', base: 'የመሠረት ተግባር'}, choices: {'x²': 'x²', 'sin x': 'ሳይን x', '|x|': '|x|', '√x': '√x'}},
+    photo: {name: 'ፎቶኤሌክትሪክ ውጤት', sub: 'ፊዚክስ', blurb: 'ብርሃን የብረት ገጽን ይመታል። ከተወሰነው ድግግሞሽ በላይ ያለው ብርሃን ብቻ ኤሌክትሮኖችን ይለቃል።', task: 'ድግግሞሹን ከ5 በታች ያድርጉ። በኤሌክትሮኖቹ ላይ ምን ይሆናል?', controls: {f: 'ድግግሞሽ (f)'}},
+    circular: {name: 'ክብ እንቅስቃሴ', sub: 'ፊዚክስ', blurb: 'በክብ የሚንቀሳቀስ ነገር ወደ መሃል የሚመራ ሴንትሪፔታል ኃይል ይፈልጋል።', task: 'ፍጥነቱን ሁለት እጥፍ ያድርጉ። የሚያስፈልገው ኃይል ምን ይሆናል? (ፍንጭ፦ F በv² ላይ ይመሰረታል።)', controls: {r: 'ራዲየስ r', speed: 'ፍጥነት v', mass: 'ስብዕና m'}},
+    magnet: {name: 'የሽቦ ማግኔቲክ መስክ', sub: 'ፊዚክስ', blurb: 'በቀጥተኛ ሽቦ ውስጥ ያለ ፍሰት ክብ የማግኔት መስክ መስመሮችን ይፈጥራል። ፍሰቱን ይቀይሩ፤ መስኩም ይቀየራል።', task: 'ፍሰቱን ሁለት እጥፍ ያድርጉ። በተመሳሳይ ርቀት ያለው መስክ ሁለት እጥፍ ይሆናል ወይስ አራት እጥፍ?', controls: {I: 'ፍሰት I', r: 'ርቀት r', dir: 'የፍሰት አቅጣጫ'}, choices: {'Up the page': 'ወደ ገጹ ላይ', 'Down the page': 'ወደ ገጹ ታች'}},
+    incline: {name: 'የኒውተን 2ኛ ህግ በተዳፋት ላይ', sub: 'ፊዚክስ', blurb: 'ብሎክ በተዳፋት ላይ ይንሸራተታል። አንግል፣ ስብዕናና ግጭት ማጣደፉን እንዴት እንደሚቀይሩ ይመልከቱ።', task: 'ግጭት μ = 0.5 ያድርጉ። ብሎኩ ማጣደፍ የሚያቆምበት አንግል ስንት ነው? (ፍንጭ፦ tan θ = μ።)', controls: {m: 'ስብዕና m', angle: 'የተዳፋት አንግል θ', mu: 'ግጭት μ'}},
+    lens: {name: 'የሌንስ ጨረር ሥዕል', sub: 'ፊዚክስ', blurb: 'ነገሩን ያንቀሳቅሱና ምስሉ የት እንደሚፈጠር ይመልከቱ። u > f፣ ከዚያ u < f ይሞክሩ።', task: 'f = 15፣ u = 45 ያድርጉ። ምስሉ የት ነው? ከዚያ u = 10 ያድርጉ። ምን ይቀየራል?', controls: {u: 'የነገር ርቀት u', f: 'የትኩረት ርዝመት f'}},
+    waveint: {name: 'የሞገድ ጣልቃ ገብነት', sub: 'ፊዚክስ', blurb: 'ሁለት ሞገዶች ይገናኛሉ። ጫፎች ሲደራረቡ ይጠናከራሉ፤ ጫፍና ሸለቆ ሲገናኙ ይሰረዛሉ።', task: 'ሁለቱንም ስፋት 1 ያድርጉ፤ ከዚያ የB ደረጃን ወደ 180° ይቀይሩ። ድምሩ ጠፍጣፋ መሆን አለበት፤ ይህ አፍራሽ ጣልቃ ገብነት ነው።', controls: {a1: 'የሞገድ A ስፋት', a2: 'የሞገድ B ስፋት', phase: 'የB ደረጃ ለውጥ', freq: 'ድግግሞሽ'}},
+    faraday: {name: 'የፋራዴይ ህግ / ሌንዝ', sub: 'ፊዚክስ', blurb: 'ማግኔትን ወደ ጥቅልል ማቅረብ ፍሰት ይፈጥራል። የሌንዝ ህግ ለውጡን ይቃወማል።', task: 'ማግኔቱን ወደፊትና ወደኋላ ያንቀሳቅሱ። የፍሰቱ አቅጣጫ ሲቀየር ይመልከቱ።', controls: {pos: 'የማግኔት ቦታ'}},
+    quantum: {name: 'የኳንተም አቶም ሞዴል', sub: 'ኬሚስትሪ', blurb: 'ኳንተም ቁጥሮች ኤሌክትሮን የት ሊኖር እንደሚችል ይገልጻሉ። n ቅርፊቱን፣ l የኦርቢታል ቅርጹን፣ m አቅጣጫውን ይወስናል።', task: 'n = 3 ያድርጉ። ስንት ንዑስ ቅርፊቶች አሉ? l = 2 (d) ያድርጉ። ስንት ኦርቢታሎች? ያ ንዑስ ቅርፊት ስንት ኤሌክትሮን ይይዛል?', controls: {n: 'ዋና n', l: 'አንግላር l', m: 'ማግኔቲክ m', view: 'አሳይ'}, choices: {'Orbital shape': 'የኦርቢታል ቅርጽ', 'Bohr shells': 'የቦር ቅርፊቶች'}},
+    hess: {name: 'የኃይል መገለጫ (ΔH)', sub: 'ኬሚስትሪ', blurb: 'ምላሽ ሰጪዎች ወደ ሽግግር ሁኔታ ለመድረስ የማግበሪያ ኃይል ይወስዳሉ፣ ከዚያ ምርቶች ሲፈጠሩ ኃይል ይለቃሉ።', task: 'ምርቶች ከምላሽ ሰጪዎች ከፍ እንዲሉ ያድርጉ። ምላሹ ኤግዞተርሚክ ነው ወይስ ኢንዶተርሚክ? ΔH መቼ አሉታዊ ነው?', controls: {er: 'የምላሽ ሰጪ ኃይል', ep: 'የምርት ኃይል', ea: 'የማግበሪያ ኃይል Ea'}},
+    titr: {name: 'የአሲድ–ቤዝ ታይትሬሽን', sub: 'ኬሚስትሪ', blurb: 'ወደ አሲድ ቤዝ ይጨምሩና pH ሲቀየር ይመልከቱ። ገደላማው መዝለል የእኩልነት ነጥቡን ያሳያል።', task: 'Ca = Cb = 0.1 M፣ Va = 25 mL ያድርጉ። pH = 7 የሚሆነው በስንት መጠን ሲጨመር ነው?', controls: {ca: 'የአሲድ ክምችት Ca (M)', cb: 'የቤዝ ክምችት Cb (M)', va: 'የአሲድ መጠን Va (mL)', vb: 'የተጨመረ ቤዝ (mL)'}},
+    gas: {name: 'የተስማሚ ጋዝ ህግ', sub: 'ኬሚስትሪ', blurb: 'ቅንጣቶች በመያዣ ውስጥ ይመላለሳሉ። ሙቀት ፍጥነታቸውን ይጨምራል፤ ሞሎች መጨመር ግፊቱን ይጨምራል።', task: 'ሙቀቱን (በK) ሁለት እጥፍ ያድርጉ። መጠኑ ቋሚ ከሆነ ግፊቱ ምን ይሆናል?', controls: {n: 'ሞሎች n', T: 'ሙቀት T', V: 'መጠን V'}},
+    sn2: {name: 'የ SN2 የኋላ ጥቃት', sub: 'ኬሚስትሪ', blurb: 'ኑክሊዮፋይል ከኋላ ይመታል፣ የሚወጣውን ቡድን ያስወጣል።', task: 'ማንሸራተቻውን ወደ 50% ያንቀሳቅሱ። የሽግግር ሁኔታው ቅርጽ ምን ይመስላል?', controls: {p: 'ሂደት %'}},
+    hardy: {name: 'ሃርዲ-ዋይንበርግ', sub: 'ባዮሎጂ', blurb: 'በስነ-ህዝብ ውስጥ የአሌል ድግግሞሽ። p² + 2pq + q² = 1።', task: 'q = 0.5 ያድርጉ። የጂኖታይፕ ድግግሞሾች ስንት ናቸው?', controls: {q: 'አሌል q'}},
+    mitosis: {name: 'የሚቶሲስ ደረጃዎች', sub: 'ባዮሎጂ', blurb: 'አንድ ሴል ወደ ሁለት ተመሳሳይ ሴሎች ይከፈላል። በኢንተርፌዝ፣ ፕሮፌዝ፣ ሜታፌዝ፣ አናፌዝና ቴሎፌዝ ያልፉ።', task: 'ክሮሞሶሞች በመሃል የሚሰለፉበት ደረጃ የትኛው ነው? ክሮማቲዶች የሚለያዩበትስ?', controls: {stage: 'ደረጃ'}, choices: {Interphase: 'ኢንተርፌዝ', Prophase: 'ፕሮፌዝ', Metaphase: 'ሜታፌዝ', Anaphase: 'አናፌዝ', Telophase: 'ቴሎፌዝ'}}
+  };
+  const VAM_VALUES = {
+    'x': 'x', 'f(x)': 'f(x)', "f'(x)": "f'(x)", 'n': 'n', 'Approx Area': 'የተገመተ ስፋት', 'Exact Integral': 'ትክክለኛ ውህደት',
+    'Equation': 'ቀመር', 'Parent function': 'የመሠረት ተግባር', 'Amplitude': 'ስፋት', 'Reflection': 'ነጸብራቅ', 'Vertex': 'ጫፍ ነጥብ',
+    'Frequency': 'ድግግሞሽ', 'Threshold': 'ገደብ', 'Electrons?': 'ኤሌክትሮኖች?', 'KE': 'KE',
+    'Radius r': 'ራዲየስ r', 'Speed v': 'ፍጥነት v', 'Centripetal a = v²/r': 'ሴንትሪፔታል a = v²/r', 'Centripetal F = mv²/r': 'ሴንትሪፔታል F = mv²/r', 'Period T = 2πr/v': 'ዑደት T = 2πr/v',
+    'Current I': 'ፍሰት I', 'Distance r': 'ርቀት r', 'B = μ₀I / (2πr)': 'B = μ₀I / (2πr)', 'Direction': 'አቅጣጫ',
+    'Weight': 'ክብደት', 'Down-slope force': 'ወደ ቁልቁል ኃይል', 'Normal force': 'መደበኛ ኃይል', 'Friction': 'ግጭት', 'Net force': 'የተጣራ ኃይል', 'Acceleration': 'ማጣደፍ',
+    'Image': 'ምስል', 'Size': 'መጠን', 'Magnification |m|': 'ማጉያ |m|',
+    'A amplitude': 'የA ስፋት', 'B amplitude': 'የB ስፋት', 'Phase shift': 'የደረጃ ለውጥ', 'Sum: max amplitude': 'ድምር፦ ከፍተኛ ስፋት', 'Sum: min amplitude': 'ድምር፦ ዝቅተኛ ስፋት', 'Interference': 'ጣልቃ ገብነት',
+    'Position': 'ቦታ', 'Induced Current': 'የተነሳሳ ፍሰት',
+    'Subshell': 'ንዑስ ቅርፊት', 'Shape l': 'ቅርጽ l', 'Orientation m': 'አቅጣጫ m', 'Shell n': 'ቅርፊት n',
+    'Orbitals in subshell': 'ኦርቢታሎች በንዑስ ቅርፊት', 'Max electrons (subshell)': 'ከፍተኛ ኤሌክትሮኖች (ንዑስ ቅርፊት)', 'Max electrons (shell)': 'ከፍተኛ ኤሌክትሮኖች (ቅርፊት)',
+    'Reactants': 'ምላሽ ሰጪዎች', 'Products': 'ምርቶች', 'Type': 'ዓይነት', 'Ea (forward)': 'Ea (ወደፊት)', 'Ea (reverse)': 'Ea (ወደኋላ)',
+    'Equivalence volume': 'የእኩልነት መጠን', 'Base added': 'የተጨመረ ቤዝ', 'pH now': 'አሁን pH', 'Region': 'ክልል',
+    'Moles n': 'ሞሎች n', 'Temperature T': 'ሙቀት T', 'Volume V': 'መጠን V', 'P = nRT / V': 'P = nRT / V', 'P in kPa': 'P በkPa', 'Gas constant R': 'የጋዝ ቋሚ R',
+    'Progress': 'ሂደት', 'Leaving group': 'የሚወጣ ቡድን', 'Nucleophile': 'ኑክሊዮፋይል',
+    'p (dominant)': 'p (ዋና)', 'q (recessive)': 'q (ድብቅ)', 'AA (p²)': 'AA (p²)', 'Aa (2pq)': 'Aa (2pq)', 'aa (q²)': 'aa (q²)',
+    'Stage': 'ደረጃ', 'Key event': 'ዋና ክስተት', 'Chromosomes': 'ክሮሞሶሞች', 'Nuclear membrane': 'ኒውክሌያር ሽፋን', 'Result': 'ውጤት'
+  };
+
+  let cur = TOOLS[0];
+  const toolText = (key, value) => {
+    if (locale !== 'am') return value;
+    const tx = VAM[cur.id] || {};
+    return (tx[key] || {})[value] || (tx.values || {})[value] || (tx.choices || {})[value] || (tx.buttons || {})[value] || VAM_VALUES[value] || value;
+  };
+  function renderRead() { $('#read').innerHTML = cur.read(cur.v).map(r => '<div><small>' + toolText('reads', r[0]) + '</small><b>' + toolText('values', r[1]) + '</b></div>').join(''); }
+  function fmt(s, val) { return (+val % 1 ? n(+val, 1) : val) + (s.unit || ''); }
+  function syncSlider(id) {
+    const inp = document.getElementById('c_' + id), out = document.getElementById('o_' + id);
+    if (!inp) return;
+    const s = (cur.sliders || []).find(x => x.id === id);
+    inp.value = cur.v[id];
+    if (out && s) out.textContent = fmt(s, inp.value);
+  }
+  function syncChoice(id) { document.querySelectorAll('[data-ch="' + id + '"]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.val) === String(cur.v[id]))); }
+  function buildControls() {
+    const box = $('#controls'); box.innerHTML = '';
+    (cur.sliders || []).forEach(s => {
+      const l = document.createElement('label'); l.className = 'ctl';
+      l.innerHTML = '<span>' + toolText('controls', s.id) + '<output id="o_' + s.id + '"></output></span><input type="range" id="c_' + s.id + '" min="' + s.min + '" max="' + s.max + '" step="' + s.step + '" value="' + cur.v[s.id] + '">';
+      box.append(l);
+      const inp = l.querySelector('input'), out = l.querySelector('output');
+      out.textContent = fmt(s, inp.value);
+      inp.addEventListener('input', () => {
+        cur.v[s.id] = +inp.value;
+        out.textContent = fmt(s, inp.value);
+        if (s.id === 'angle' && cur.id === 'wave') { cur.v.auto = 0; syncChoice('auto'); }
+        if (cur.onChange) cur.onChange();
+        renderRead();
+      });
+    });
+    (cur.choices || []).forEach(ch => {
+      const g = document.createElement('div'); g.className = 'grp'; g.innerHTML = '<b>' + toolText('controls', ch.label) + '</b><div class="opts"></div>'; box.append(g);
+      ch.opts.forEach(o => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'opt'; b.textContent = toolText('choices', o[1]); b.dataset.ch = ch.id; b.dataset.val = o[0];
+        b.addEventListener('click', () => {
+          cur.v[ch.id] = ch.text ? o[0] : +o[0];
+          syncChoice(ch.id);
+          if (cur.onChange) cur.onChange();
+          renderRead();
+        });
+        g.querySelector('.opts').append(b);
+      });
+      syncChoice(ch.id);
+    });
+    (cur.buttons || []).forEach(bt => { const b = document.createElement('button'); b.type = 'button'; b.className = 'act'; b.textContent = toolText('buttons', bt.label); b.addEventListener('click', bt.run); box.append(b); });
+  }
+  function updateToolText(tool) {
+    const tx = VAM[tool.id] || {};
+    $('#tname').textContent = locale === 'am' ? tx.name || tool.name : tool.name;
+    $('#tsub').textContent = locale === 'am' ? tx.sub || ({Mathematics: 'ሒሳብ', Physics: 'ፊዚክስ', Chemistry: 'ኬሚስትሪ', Biology: 'ባዮሎጂ', Economics: 'ኢኮኖሚክስ', Geography: 'ጂኦግራፊ'}[tool.sub] || tool.sub) : tool.sub;
+    $('#tblurb').textContent = locale === 'am' ? tx.blurb || tool.blurb : tool.blurb;
+    $('#ttask').textContent = locale === 'am' ? tx.task || tool.task : tool.task;
+    cv.setAttribute('aria-label', (locale === 'am' ? tx.name || tool.name : tool.name) + (locale === 'am' ? ' እነማ' : ' animation'));
+    document.querySelectorAll('#tabs .tab').forEach(b => {
+      const t = TOOLS.find(x => x && x.id === b.dataset.id);
+      if (t) b.textContent = locale === 'am' ? (VAM[t.id] || {}).name || t.name : t.name;
+    });
+  }
+  function select(tool) {
+    if (!tool) return;
+    cur = tool;
+    document.querySelectorAll('#tabs .tab').forEach(b => b.setAttribute('aria-selected', b.dataset.id === tool.id));
+    updateToolText(tool);
+    buildControls(); renderRead();
+    if (tool.reset) tool.reset();
+  }
+  $('#tabs').innerHTML = TOOLS.filter(Boolean).map(t => '<button type="button" class="tab" role="tab" data-id="' + t.id + '">' + t.name + '</button>').join('');
+  $('#tabs').addEventListener('click', e => {
+    const b = e.target.closest('.tab'); if (!b) return;
+    const t = TOOLS.find(x => x && x.id === b.dataset.id);
+    if (t) select(t);
+  });
+
+  let last = performance.now();
+  function frame(now) {
+    const dt = Math.min(50, now - last); last = now;
+    background(); cur.draw(now, cur.v, dt);
+    requestAnimationFrame(frame);
+  }
+  window.addEventListener('resize', resize);
+  resize(); select(TOOLS[0]); frame(performance.now());
+  document.addEventListener('site-language-change', e => {
+    locale = e.detail && e.detail.language === 'am' ? 'am' : 'en';
+    try { localStorage.setItem('site_lang', locale); localStorage.setItem('lv_lang', locale); } catch (x) {}
+    updateToolText(cur); buildControls(); renderRead();
+  });
+})();
+</script>
+</body></html>

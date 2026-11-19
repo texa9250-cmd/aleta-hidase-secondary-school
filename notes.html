@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-en="Short notes | አለታ ህዳሴ Grade 12 Prep" data-am="አጭር ማስታወሻዎች | አለታ ህዳሴ 12ኛ ክፍል ዝግጅት">Short notes | አለታ ህዳሴ Grade 12 Prep</title>
+  <script src="/site-effects.js"></script>
+  <link rel="stylesheet" href="css/portal.css">
+  <link rel="stylesheet" href="css/portal-extra.css">
+  <style>
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 1.2rem; margin-top: 1.5rem; }
+    .card { background: #fff; border: 1px solid #d9e1ef; border-radius: 14px; padding: 1.2rem; box-shadow: 0 4px 12px rgba(16,23,51,.04); display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(16,23,51,.08); }
+    .card .meta { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+    .card .tag { font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.6rem; border-radius: 99px; background: #e2e8f0; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; }
+    .card .tag.hot { background: #ffedd5; color: #9a3412; }
+    .card .tag.date { background: #e0f2fe; color: #0369a1; }
+    .card h3 { margin: 0 0 0.5rem; font-size: 1.1rem; color: #101733; line-height: 1.3; }
+    .card p { margin: 0 0 1rem; font-size: 0.9rem; color: #55607f; flex: 1; }
+    .card ul { margin: 0 0 1rem; padding-left: 1.2rem; color: #475569; font-size: 0.9rem; line-height: 1.6; flex: 1; }
+    .card li { margin-bottom: 0.4rem; }
+    .card .res-actions { display: flex; gap: 0.5rem; margin-top: auto; flex-wrap: wrap; }
+    .card .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.6rem 1rem; border-radius: 8px; background: #0b1f8a; color: #fff; font-weight: 600; font-size: 0.85rem; text-decoration: none; transition: background 0.2s; white-space: nowrap; cursor: pointer; border: 0; }
+    .card .btn:hover { background: #1e3a8a; }
+    .card .btn[aria-busy="true"] { opacity: 0.7; cursor: wait; }
+    .card .btn.alt { background: #f1f5f9; color: #0b1f8a; border: 1px solid #cbd5e1; }
+    .card .btn.alt:hover { background: #e2e8f0; }
+
+    /* Styles for the text box inside the card */
+    .note-content {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #334155;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      margin-top: auto;
+      overflow-y: auto;
+      max-height: 250px;
+    }
+
+    .filters { background: #fff; border: 1px solid #d9e1ef; border-radius: 14px; padding: 1rem; display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1rem; }
+    .filters input[type="search"] { width: 100%; padding: 12px 16px; border: 2px solid #cbd5e1; border-radius: 99px; font: inherit; }
+    .chips { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .chip { font: inherit; font-weight: 600; font-size: 0.85rem; padding: 0.4rem 0.8rem; border-radius: 99px; border: 2px solid #cbd5e1; background: #fff; color: #475569; cursor: pointer; transition: all 0.2s; }
+    .chip:hover { border-color: #94a3b8; }
+    .chip[aria-pressed="true"] { background: #0b1f8a; border-color: #0b1f8a; color: #fff; }
+    .empty { text-align: center; padding: 3rem 1rem; background: #f8fafc; border-radius: 12px; color: #64748b; font-size: 1.1rem; margin-top: 1rem; }
+
+    .back-link { display: inline-flex; align-items: center; text-decoration: none; font-weight: 600; color: #55607f; margin-bottom: 1rem; font-size: 0.95rem; transition: color 0.2s; }
+    .back-link:hover { color: #101733; }
+    .back-link svg { margin-right: 6px; margin-top: -2px; }
+
+    @media (max-width: 600px) {
+      .card .res-actions { flex-direction: column; }
+      .card .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body data-page="notes">
+  <div id="site-header"></div>
+
+  <div class="pagehead">
+    <div class="wrap">
+      <a href="javascript:history.back()" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        back
+      </a>
+
+      <h1 data-en="Short notes" data-am="አጭር ማስታወሻዎች">Short notes</h1>
+      <p data-en="Formulas and key facts for quick revision. Read the notes uploaded by your teachers." data-am="ለፈጣን ክለሳ የሚረዱ ቀመሮችና ዋና እውነታዎች። በመምህራንዎ የተጫኑትን ማስታወሻዎች ያንብቡ።">Formulas and key facts for quick revision. Read the notes uploaded by your teachers.</p>
+    </div>
+  </div>
+
+  <main>
+    <div class="wrap">
+
+      <div class="filters">
+        <input id="q" type="search" placeholder="Search notes, for example: pH, derivative" aria-label="Search" data-en-placeholder="Search notes, for example: pH, derivative" data-am-placeholder="ማስታወሻዎችን ይፈልጉ፤ ምሳሌ፦ pH፣ ውህደት" data-en-aria-label="Search" data-am-aria-label="ፍለጋ">
+        <div id="chips" class="chips" role="group" aria-label="Filter by subject"></div>
+      </div>
+
+      <p class="count" id="count" style="font-weight:600;color:#64748b;margin-bottom:1rem;"></p>
+      <div id="list" class="grid"></div>
+
+      <div id="empty" class="empty" hidden data-en="Nothing matches. Try another subject or a different word." data-am="ምንም ውጤት አልተገኘም። ሌላ ትምህርት ዓይነት ወይም ቃል ይሞክሩ።">Nothing matches. Try another subject or a different word.</div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="/site-nav.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/portal-config.js"></script>
+
+  <script>
+    (function () {
+      const listEl = document.getElementById('list');
+      const emptyEl = document.getElementById('empty');
+      const countEl = document.getElementById('count');
+      const chipsEl = document.getElementById('chips');
+      const searchInput = document.getElementById('q');
+
+      let allNotes = [];
+      let currentSubject = 'all';
+      let currentSearch = '';
+
+      async function loadNotes() {
+        // This page is the Grade 12 Short Notes page.
+        // Use the grade-specific endpoint so Grade 12 and "all grades"
+        // notes are returned consistently.
+        try {
+          const res = await fetch('/api/grade/resources?grade=12', {
+            cache: 'no-store',
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (!res.ok) {
+            const detail = await res.text();
+            throw new Error(`Could not load Grade 12 notes (${res.status}). ${detail.slice(0, 180)}`);
+          }
+
+          const data = await res.json();
+          if (!Array.isArray(data)) {
+            throw new Error('The notes API returned an unexpected response.');
+          }
+
+          const uploadedNotes = data.filter(r =>
+            String(r.type || '').trim().toLowerCase() === 'notes'
+          );
+
+          uploadedNotes.forEach(p => {
+            allNotes.push({
+              id: p.id,
+              title: p.title || 'Untitled note',
+              subject: p.subject || 'General',
+              type: 'pdf',
+              url: p.file_url || p.url || '',
+              size: p.file_size,
+              description: p.description || '',
+              fileName: p.file_name || '',
+              noteText: p.note_text || ''
+            });
+          });
+        } catch (e) {
+          console.error('[notes] failed to load Grade 12 notes:', e);
+          emptyEl.hidden = false;
+          emptyEl.textContent = `Unable to load notes. ${e.message}`;
+        }
+
+        if (typeof NOTES !== 'undefined') {
+          NOTES.forEach(n => {
+            if (n.title.includes('(G12)') || n.title.includes('(G9-12)')) {
+              allNotes.push({
+                title: n.title.replace(/\s*\(G\d+.*?\)\s*$/, ''),
+                subject: n.subject,
+                type: 'text',
+                points: n.points || [],
+                pointsAm: n.pointsAm || []
+              });
+            }
+          });
+        }
+
+        buildChips();
+        render();
+      }
+
+      function buildChips() {
+        const subjects = ['all', ...new Set(allNotes.map(n => n.subject))];
+        chipsEl.innerHTML = subjects.map(sub => `
+          <button class="chip" data-s="${sub}" aria-pressed="${sub === 'all'}">
+            ${sub === 'all' ? 'All Subjects' : sub}
+          </button>
+        `).join('');
+      }
+
+      function escapeHtml(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[c]));
+      }
+
+      function render() {
+        let filtered = allNotes.filter(n => {
+          const matchSub = currentSubject === 'all' || n.subject === currentSubject;
+          const matchSearch =
+            n.title.toLowerCase().includes(currentSearch) ||
+            n.subject.toLowerCase().includes(currentSearch) ||
+            (n.description && n.description.toLowerCase().includes(currentSearch)) ||
+            (n.fileName && n.fileName.toLowerCase().includes(currentSearch)) ||
+            (n.noteText && n.noteText.toLowerCase().includes(currentSearch)) ||
+            (n.points && n.points.join(' ').toLowerCase().includes(currentSearch));
+          return matchSub && matchSearch;
+        });
+
+        filtered.sort((a, b) => {
+          if (a.type === 'pdf' && b.type !== 'pdf') return -1;
+          if (a.type !== 'pdf' && b.type === 'pdf') return 1;
+          return a.title.localeCompare(b.title);
+        });
+
+        countEl.textContent = `${filtered.length} notes found`;
+        emptyEl.hidden = filtered.length > 0;
+        if (filtered.length === 0 && !emptyEl.textContent.startsWith('Unable to load notes.')) {
+          emptyEl.textContent = 'No Grade 12 notes have been published yet. Please check back later.';
+        }
+
+        listEl.innerHTML = filtered.map(n => {
+          if (n.type === 'pdf') {
+            const textContent = n.noteText ? escapeHtml(n.noteText).replace(/\n/g, '<br>') : '';
+            
+            // If there is text content, display it in a box. Otherwise fallback to a message.
+            const contentHtml = textContent 
+              ? `<div class="note-content">${textContent}</div>`
+              : `<div class="note-content" style="color:#94a3b8; font-style:italic;">No text content has been added to this note yet.</div>`;
+
+            return `
+              <article class="card">
+                <div class="meta">
+                  <span class="tag">${escapeHtml(n.subject)}</span>
+                  <span class="tag hot">Note</span>
+                </div>
+                <h3>${escapeHtml(n.title)}</h3>
+                ${n.description ? `<p>${escapeHtml(n.description)}</p>` : '<p style="flex:1"></p>'}
+                ${contentHtml}
+              </article>
+            `;
+          } else {
+            const points = n.points.map(p => `<li>${escapeHtml(p)}</li>`).join('');
+            return `
+              <article class="card">
+                <div class="meta">
+                  <span class="tag">${escapeHtml(n.subject)}</span>
+                  <span class="tag date">Quick Revision</span>
+                </div>
+                <h3>${escapeHtml(n.title)}</h3>
+                <ul>${points}</ul>
+              </article>
+            `;
+          }
+        }).join('');
+      }
+
+      searchInput.addEventListener('input', (e) => {
+        currentSearch = e.target.value.toLowerCase();
+        render();
+      });
+
+      chipsEl.addEventListener('click', (e) => {
+        const btn = e.target.closest('.chip');
+        if (!btn) return;
+        currentSubject = btn.dataset.s;
+        chipsEl.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', 'false'));
+        btn.setAttribute('aria-pressed', 'true');
+        render();
+      });
+
+      loadNotes();
+    })();
+  </script>
+</body>
+</html>

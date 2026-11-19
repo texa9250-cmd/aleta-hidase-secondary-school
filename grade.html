@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="Grade | አለታ ህዳሴ Prep" data-am="ክፍል | አለታ ህዳሴ ዝግጅት">Grade | አለታ ህዳሴ Prep</title><script src="/site-effects.js"></script>
+<link rel="stylesheet" href="css/portal.css"><link rel="stylesheet" href="css/portal-extra.css">
+<style>
+  .lvl-badge{display:inline-block;font-weight:700;font-size:.85rem;padding:.2rem .7rem;border-radius:999px;border:1px solid currentColor;margin-bottom:.6rem}
+  .lvl-msg{margin-top:.4rem}
+  .sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap}
+  .stream[hidden],[hidden]{display:none!important}
+  .grade-back-row{background:#f8fafc;border-bottom:1px solid #e2e8f0}
+  .grade-back-in{width:min(1120px,100% - 32px);margin:0 auto;padding:13px 0 15px}
+  .grade-back-link{display:inline-flex;align-items:center;padding:3px 0;color:#101733;font-size:.92rem;font-weight:700;text-decoration:none}
+  .grade-back-link:hover{color:#ff7a3d;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+</style></head>
+<body data-page="grade"><div id="site-header"></div>
+<div class="hero"><div class="wrap">
+  <div><span class="lvl-badge" id="lvl" hidden></span>
+  <h1 id="gh" data-en="Your grade" data-am="የእርስዎ ክፍል">Your grade</h1>
+  <p id="gp" data-en="Short notes and question sources for every subject in your grade, plus an animated lab that shows ideas in action." data-am="ለእያንዳንዱ የትምህርት ዓይነት አጭር ማስታወሻዎችና የጥያቄ ምንጮች፣ እንዲሁም ሃሳቦችን በተግባር የሚያሳይ እነማ ያለው ላብራቶሪ።">Short notes and question sources for every subject in your grade, plus an animated lab that shows ideas in action.</p>
+  <p class="lvl-msg" id="lvlmsg"></p></div>
+  <div class="tabs" id="gswitch" aria-label="Switch grade"></div>
+</div></div>
+<main>
+<section class="block" id="subjects"><div class="wrap"><h2 data-en="Choose your subject" data-am="የትምህርት ዓይነትዎን ይምረጡ">Choose your subject</h2>
+  <p class="lead" data-en="Open a subject to jump to its question sources or notes." data-am="የጥያቄ ምንጮቹን ወይም ማስታወሻዎቹን ለማየት የትምህርት ዓይነቱን ይክፈቱ።">Open a subject to jump to its question sources or notes.</p>
+  <div class="streams" id="streams"></div></div></section>
+
+<section class="block" style="padding-top:0"><div class="wrap"><h2 data-en="What do you need today?" data-am="ዛሬ ምን ያስፈልግዎታል?">What do you need today?</h2>
+  <p class="lead" data-en="Pick a section." data-am="አንድ ክፍል ይምረጡ።">Pick a section.</p>
+  <div class="doors">
+    <a class="door" href="#sources"><h3 data-en="Question sources" data-am="የጥያቄ ምንጮች">Question sources</h3><p data-en="Past exams, textbooks, videos and practice sets for your grade." data-am="ያለፉ ፈተናዎች፣ የመማሪያ መጻሕፍት፣ ቪዲዮዎችና የልምምድ ስብስቦች ለክፍልዎ።">Past exams, textbooks, videos and practice sets for your grade.</p></a>
+    <a class="door" href="#notes"><h3 data-en="Short notes" data-am="አጭር ማስታወሻዎች">Short notes</h3><p data-en="Formulas and key facts you can review in minutes." data-am="በደቂቃዎች ውስጥ ሊከልሷቸው የሚችሉ ቀመሮችና ዋና እውነታዎች።">Formulas and key facts you can review in minutes.</p></a>
+    <a class="door" id="labdoor" href="visualizer.html"><h3 data-en="Visual study lab" data-am="የእይታ ጥናት ላብራቶሪ">Visual study lab</h3><p data-en="Animated tools: graphs, motion, circuits and waves." data-am="እነማ ያላቸው መሣሪያዎች፦ ግራፎች፣ እንቅስቃሴ፣ ወረዳዎችና ሞገዶች።">Animated tools: graphs, motion, circuits and waves.</p></a>
+  </div></div></section>
+
+<section class="block" style="padding-top:0"><div class="wrap">
+  <div class="filters"><input id="q" type="search" placeholder="Search notes and sources, for example: forces, sets" aria-label="Search" data-en-placeholder="Search notes and sources, for example: forces, sets" data-am-placeholder="ማስታወሻዎችንና ምንጮችን ይፈልጉ፤ ምሳሌ፦ ኃይሎች፣ ስብስቦች" data-en-aria-label="Search" data-am-aria-label="ፍለጋ">
+    <div id="chips" class="chips" role="group" aria-label="Filter by subject" data-en-aria-label="Filter by subject" data-am-aria-label="በትምህርት ዓይነት አጣራ"></div></div>
+</div></section>
+
+<section class="block" id="sources" style="padding-top:0"><div class="wrap">
+  <div class="sec-head"><h2 data-en="Question sources" data-am="የጥያቄ ምንጮች">Question sources</h2><p class="count" id="scount"></p></div>
+  <div id="slist" class="grid"></div>
+  <div id="sempty" class="empty" hidden></div></div></section>
+
+<section class="block" id="notes" style="padding-top:0"><div class="wrap">
+  <div class="sec-head"><h2 data-en="Short notes" data-am="አጭር ማስታወሻዎች">Short notes</h2><p class="count" id="ncount"></p></div>
+  <div id="nlist" class="grid"></div>
+  <div id="nempty" class="empty" hidden></div></div></section>
+</main>
+<div id="site-footer"></div>
+<script src="js/data.js"></script><script src="js/portal-config.js"></script>
+
+<script src="grade.js?v=2"></script>
+<script>
+/* Remove Concept map section after grade.js renders it */
+(function () {
+  function removeConceptMap() {
+    var headings = document.querySelectorAll('h1, h2, h3, h4');
+    headings.forEach(function (h) {
+      if (h.textContent && /concept\s*map/i.test(h.textContent)) {
+        var el = h;
+        for (var i = 0; i < 6; i++) {
+          if (!el.parentElement) break;
+          el = el.parentElement;
+          if (el.tagName === 'SECTION' || el.tagName === 'ARTICLE' || 
+              (el.classList && (el.classList.contains('block') || el.classList.contains('wrap') || el.classList.contains('card')))) {
+            break;
+          }
+        }
+        el.style.display = 'none';
+        el.setAttribute('hidden', '');
+        try { el.remove(); } catch (e) {}
+      }
+    });
+  }
+  removeConceptMap();
+  setTimeout(removeConceptMap, 300);
+  setTimeout(removeConceptMap, 800);
+  setTimeout(removeConceptMap, 1500);
+  var observer = new MutationObserver(function () { removeConceptMap(); });
+  observer.observe(document.body, { childList: true, subtree: true });
+  setTimeout(function () { observer.disconnect(); }, 5000);
+})();
+</script>
+</body></html>

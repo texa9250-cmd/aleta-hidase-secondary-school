@@ -1,0 +1,40 @@
+/* extra styles for the subject list and question sources (load after portal.css) */
+.streams{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;margin-top:8px}
+.stream{background:#fff;border:1px solid var(--line);border-top:6px solid var(--orange);border-radius:16px;padding:20px 22px 22px;scroll-margin-top:90px}
+.stream:nth-child(2){border-top-color:var(--sun)}
+.stream>h3{font-size:1.3rem;color:var(--navy);margin-bottom:14px}
+.stream>h3 span{font-weight:400;font-size:1rem;color:var(--muted);margin-left:6px}
+.subj-grid{display:grid;gap:10px}
+.subj{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#f8faff;display:grid;gap:6px}
+.subj b{color:var(--ink);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.subj b small{font-weight:400;color:var(--muted)}
+.subj .cnt{font-size:.8rem;color:var(--muted)}
+.subj-links{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.9rem}
+.subj-links a{font-weight:600;text-decoration:none}
+.subj-links a:hover{text-decoration:underline}
+.subj-links a.primary{background:var(--navy);color:#fff;padding:3px 12px;border-radius:999px}
+.subj-links a.primary:hover{background:var(--orange);text-decoration:none}
+.row-filters{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:620px){.row-filters{grid-template-columns:1fr}}
+.pdf-ic{display:inline-block;font-size:.72rem;font-weight:800;color:#fff;background:#c62828;border-radius:4px;padding:1px 6px;margin-right:6px}
+.res-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:auto}
+.btn.alt{background:transparent;color:var(--navy);border:2px solid var(--navy)}
+.btn.alt:hover{background:var(--navy);color:#fff}
+.tag.stream{background:#e3f6ee;color:#17805a}
+.host{font-size:.8rem;color:var(--muted)}
+.topic-image{display:block;max-width:100%;max-height:220px;object-fit:contain;border-radius:10px}
+.tutor-box{margin:24px 0;padding:18px 20px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px rgba(16,23,51,.06)}
+.tutor-box h2{font-size:1.15rem;margin:0 0 4px}
+.tutor-box .lead{margin:0 0 12px}
+.tutor-form{display:flex;gap:8px}
+.tutor-form input{flex:1;min-width:0;padding:11px 14px;border:1px solid #cbd5e1;border-radius:999px;font:inherit}
+.tutor-form button{padding:10px 18px;border:0;border-radius:999px;background:var(--blue);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.tutor-form button:disabled{opacity:.6;cursor:wait}
+.tutor-privacy,.tutor-status{margin:8px 2px 0;color:var(--muted);font-size:.85rem}
+.tutor-response{margin:12px 0 0;padding:12px 14px;border-left:4px solid #1f9d8a;background:var(--bg);border-radius:0 10px 10px 0}
+.tutor-response.error{border-left-color:#b45309;background:#fff7ed}
+.tutor-response h3{margin:0 0 6px;font-size:1rem}
+.tutor-answer{margin:0;white-space:pre-wrap}
+.tutor-response[hidden]{display:none}
+.tutor-status:empty{display:none}
+@media(max-width:520px){.tutor-form{align-items:stretch;flex-direction:column}.tutor-form button{align-self:flex-end}}

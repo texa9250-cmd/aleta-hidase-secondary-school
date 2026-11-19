@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="Student stories | አለታ ህዳሴ Grade 12 Prep" data-am="የተማሪዎች ተሞክሮ | አለታ ህዳሴ 12ኛ ክፍል ዝግጅት">Student stories | አለታ ህዳሴ Grade 12 Prep</title><script src="../site-effects.js"></script><link rel="stylesheet" href="css/portal.css"><link rel="stylesheet" href="css/portal-extra.css">
+<style>
+  .back-link { 
+    display: inline-flex; 
+    align-items: center; 
+    text-decoration: none; 
+    font-weight: 600; 
+    color: #55607f; 
+    margin-bottom: 1rem; 
+    font-size: 0.95rem; 
+    transition: color 0.2s; 
+  }
+  .back-link:hover { color: #101733; }
+  .back-link svg { margin-right: 6px; margin-top: -2px; }
+</style>
+</head>
+<body data-page="stories"><div id="site-header"></div>
+<div class="pagehead"><div class="wrap">
+  <a href="javascript:history.back()" class="back-link">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    back
+  </a>
+
+  <h1 data-en="Student stories" data-am="የተማሪዎች ተሞክሮ">Student stories</h1><p data-en="What worked for students who sat the exam before you." data-am="ከእርስዎ በፊት ፈተናውን ለወሰዱ ተማሪዎች የረዳቸው።">What worked for students who sat the exam before you.</p></div></div><main>
+<div class="wrap">
+  <div class="formcard"><h2 style="font-size:1.3rem;margin-bottom:14px" data-en="Share your experience" data-am="ተሞክሮዎን ያጋሩ">Share your experience</h2>
+    <form id="story-form">
+      <div class="row2"><label data-en="Your name (optional)" data-am="ስምዎ (አማራጭ)">Your name (optional)<input id="f-name" maxlength="40"></label>
+      <label data-en="Subject" data-am="ትምህርት ዓይነት">Subject<select id="f-subject"></select></label></div>
+      <label data-en="Title" data-am="ርዕስ">Title<input id="f-title" required maxlength="80" placeholder="What is your advice in one line?" data-en-placeholder="What is your advice in one line?" data-am-placeholder="ምክርዎን በአንድ መስመር ይግለጹ።"></label>
+      <label data-en="Your story" data-am="ተሞክሮዎ">Your story<textarea id="f-text" required rows="4" maxlength="800" placeholder="How did you study? What would you do differently?" data-en-placeholder="How did you study? What would you do differently?" data-am-placeholder="እንዴት አጠኑ? ምን በተለየ መንገድ ያደርጉ ነበር?"></textarea></label>
+      <input id="f-website" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+      <button class="btn" type="submit" style="margin:0" data-en="Share story" data-am="ተሞክሮውን ያጋሩ">Share story</button>
+      <p class="note" id="story-note" data-en="Stories you add are saved in this browser only." data-am="የሚያጋሯቸው ተሞክሮዎች በዚህ አሳሽ ውስጥ ብቻ ይቀመጣሉ።">Stories you add are saved in this browser only.</p>
+      <p class="ok" id="story-msg" role="status"></p>
+    </form></div>
+  <div id="list" class="grid"></div></div></main>
+<div id="site-footer"></div>
+<script src="/site-nav.js"></script><script src="js/data.js"></script><script src="js/portal-config.js"></script><script src="js/app.js"></script>
+
+<!-- STORIES → SERVER: override app.js's localStorage handler -->
+<script>
+(function () {
+  function wire() {
+    const form = document.getElementById('story-form');
+    if (!form || form.dataset.wiredToServer === 'v1') return;
+
+    // Clone the form to strip any submit listeners app.js attached (cloneNode does not copy listeners)
+    const clone = form.cloneNode(true);
+    clone.dataset.wiredToServer = 'v1';
+    form.parentNode.replaceChild(clone, form);
+
+    const note = document.getElementById('story-note');
+    if (note) {
+      // stop misleading the user — stories now go to the server
+      note.dataset.en = 'Stories are reviewed by a teacher before they appear.';
+      note.dataset.am = 'ተሞክሮዎች ከመታየታቸው በፊት በመምህር ይገመገማሉ።';
+      note.textContent = note.dataset.en;
+    }
+
+    clone.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msg = document.getElementById('story-msg');
+      const setMsg = (text, cls) => { if (msg) { msg.textContent = text; msg.className = cls || ''; } };
+
+      // honeypot — silently drop bots
+      const honey = document.getElementById('f-website');
+      if (honey && honey.value) { setMsg(''); return; }
+
+      const title = document.getElementById('f-title').value.trim();
+      const text  = document.getElementById('f-text').value.trim();
+      if (!title || !text) { setMsg('Please add both a title and a story.', 'err'); return; }
+
+      const btn = clone.querySelector('button[type="submit"]');
+      if (btn) btn.disabled = true;
+      setMsg('Sending…', 'note');
+
+      try {
+        const res = await fetch('/api/portal/stories', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title,
+            text,
+            name: (document.getElementById('f-name') || {}).value || '',
+            subject: (document.getElementById('f-subject') || {}).value || ''
+          })
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || 'Could not send the story.');
+        clone.reset();
+        setMsg('Thank you! Your story will appear after a teacher approves it.', 'ok');
+      } catch (err) {
+        setMsg(err.message || 'Could not send the story.', 'err');
+      } finally {
+        if (btn) btn.disabled = false;
+      }
+    });
+
+    loadPublicStories();
+  }
+
+  async function loadPublicStories() {
+    const list = document.getElementById('list');
+    if (!list) return;
+    try {
+      const res = await fetch('/api/portal/stories', { cache: 'no-store' });
+      if (!res.ok) return;
+      const rows = await res.json();
+      if (!Array.isArray(rows)) return;
+      list.replaceChildren();
+      rows.forEach(s => {
+        const card = document.createElement('article');
+        card.className = 'storycard';
+        const h = document.createElement('h3');
+        h.textContent = s.title;
+        const meta = document.createElement('p');
+        meta.className = 'meta';
+        meta.textContent = [s.name || 'A student', s.subject, s.date].filter(Boolean).join(' · ');
+        const txt = document.createElement('p');
+        txt.textContent = s.text;
+        card.append(h, meta, txt);
+        list.append(card);
+      });
+      if (!rows.length) list.textContent = 'No approved stories yet — be the first to share.';
+    } catch (err) {
+      console.warn('[stories] could not load list:', err);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', wire);
+  } else {
+    wire();
+  }
+})();
+</script>
+</body></html>

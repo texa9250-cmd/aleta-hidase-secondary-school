@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="Concept Map | አለታ ህዳሴ Grade 9-12 Prep" data-am="የፅንሰ-ሃሳብ ካርታ | አለታ ህዳሴ 9-12ኛ ክፍል ዝግጅት">Concept Map | አለታ ህዳሴ Grade 9-12 Prep</title>
+    <script src="/site-effects.js"></script>
+    <link rel="stylesheet" href="css/portal.css">
+    <link rel="stylesheet" href="css/portal-extra.css">
+    <style>
+        /* =========================================
+           BASE LAYOUT (Matching notes.html)
+           ========================================= */
+        body { background-color: #f8fafc; color: #101733; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; }
+        
+        .wrap { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem 4rem; }
+        
+        .pagehead { background: #fff; border-bottom: 1px solid #d9e1ef; padding: 2.5rem 0; margin-bottom: 2rem; }
+        .pagehead h1 { margin: 0 0 0.5rem; font-size: 2rem; color: #101733; }
+        .pagehead p { margin: 0; color: #55607f; max-width: 800px; font-size: 1.1rem; }
+
+        /* BACK BUTTON */
+        .back-link { 
+            display: inline-flex; align-items: center; text-decoration: none; 
+            font-weight: 600; color: #55607f; margin-bottom: 1rem; font-size: 0.95rem; 
+            transition: color 0.2s; 
+        }
+        .back-link:hover { color: #101733; }
+        .back-link svg { margin-right: 6px; margin-top: -2px; }
+
+        /* =========================================
+           TABS & FILTERS
+           ========================================= */
+        .stream-tabs { display: flex; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
+        .stream-btn {
+            background: none; border: none; font-size: 1.1rem; font-weight: 700; color: #64748b;
+            padding: 0.5rem 1rem; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s;
+        }
+        .stream-btn:hover { color: #0b1f8a; }
+        .stream-btn.active { color: #0b1f8a; border-bottom-color: #0b1f8a; }
+
+        .subject-tabs { display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .tab-btn {
+            background: #fff; border: 1px solid #cbd5e1; padding: 0.6rem 1.2rem;
+            border-radius: 99px; cursor: pointer; font-weight: 600; color: #475569;
+            font-size: 0.9rem; transition: all 0.2s; display: flex; align-items: center; gap: 0.4rem;
+        }
+        .tab-btn:hover { border-color: #94a3b8; background: #f1f5f9; }
+        .tab-btn.active { background: #0b1f8a; color: #fff; border-color: #0b1f8a; }
+
+        /* =========================================
+           CONTENT CARDS & TABLES
+           ========================================= */
+        .subject-panel { display: none; }
+        .subject-panel.active { display: block; animation: fadeIn 0.3s ease; }
+
+        .theme-card {
+            background: #fff; border: 1px solid #d9e1ef; border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(16,23,51,.04); margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        .theme-header {
+            background: #f8fafc; border-bottom: 1px solid #e2e8f0;
+            padding: 1.25rem 1.5rem; font-size: 1.2rem; font-weight: 700; color: #0b1f8a;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+
+        .table-responsive { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem; }
+        th { background: #fff; color: #64748b; padding: 1rem 1.5rem; font-weight: 600; border-bottom: 2px solid #e2e8f0; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.05em; }
+        td { padding: 1.2rem 1.5rem; border-bottom: 1px solid #e2e8f0; vertical-align: top; color: #475569; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #f8fafc; }
+
+        .grade-badge { display: inline-block; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; }
+        .g9 { background: #e0f2fe; color: #0369a1; }
+        .g10 { background: #dcfce7; color: #15803d; }
+        .g11 { background: #fef9c3; color: #a16207; }
+        .g12 { background: #f3e8ff; color: #6b21a8; }
+
+        .page-marker { font-family: monospace; font-weight: bold; color: #0e8c78; background: #f0fdf4; padding: 0.2rem 0.5rem; border-radius: 6px; font-size: 0.85rem; white-space: nowrap; }
+        .unit-title { font-weight: 700; color: #101733; display: block; margin-bottom: 0.2rem; }
+        .concepts { font-size: 0.9rem; line-height: 1.5; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Mobile Responsive Tables */
+        @media (max-width: 768px) {
+            .pagehead h1 { font-size: 1.6rem; }
+            table, tr, td, th { display: block; }
+            thead { display: none; }
+            tr { padding: 1rem; border-bottom: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 0.5rem; }
+            td { padding: 0; border: none; }
+            td::before { content: attr(data-label); font-weight: 700; display: block; color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.2rem; }
+            .theme-header { padding: 1rem; font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body data-page="topics">
+    <div id="site-header"></div>
+
+    <div class="pagehead">
+        <div class="wrap">
+            <a href="javascript:history.back()" class="back-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                back
+            </a>
+            <h1 data-en="Concept Map" data-am="የፅንሰ-ሃሳብ ካርታ">Concept Map</h1>
+            <p data-en="See how foundational topics grow continuously across Grades 9, 10, 11, and 12 under the New Ethiopian Curriculum Framework." data-am="መሠረታዊ ርዕሶች በአዲሱ የኢትዮጵያ ሥርዓተ ትምህርት ማዕቀፍ መሠረት ከ9ኛ እስከ 12ኛ ክፍል እንዴት በቀጣይነት እንደሚያድጉ ይመልከቱ።">See how foundational topics grow continuously across Grades 9, 10, 11, and 12 under the New Ethiopian Curriculum Framework.</p>
+        </div>
+    </div>
+
+    <div class="wrap">
+        <!-- Stream Toggle -->
+        <div class="stream-tabs">
+            <button class="stream-btn active" onclick="switchStream('natural', event)">🧬 Natural Sciences</button>
+            <button class="stream-btn" onclick="switchStream('social', event)">🌍 Social Sciences</button>
+        </div>
+
+        <!-- Subject Tabs -->
+        <div class="subject-tabs" id="subjectTabs">
+            <!-- Populated by JS -->
+        </div>
+
+        <!-- Subject Panels Container -->
+        <div id="panelsContainer">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+
+    <div id="site-footer"></div>
+
+    <script>
+        // Comprehensive Concept Map Data
+        const CONCEPT_DATA = {
+            natural: {
+                biology: {
+                    name: "Biology", icon: "🧬", color: "#15803d",
+                    themes: [
+                        {
+                            title: "🔬 Theme 1: Cell Biology & Bioenergetics",
+                            rows: [
+                                { grade: 9, unit: "Unit 3: Cells", page: "p. 105", concepts: "Microscope usage, cell theory, structure, and function of organelles (plant vs. animal)." },
+                                { grade: 10, unit: "Unit 3: Biochemical Molecules", page: "p. 50", concepts: "Structural configurations of organic macromolecules (Carbohydrates, Proteins, Lipids) and cell composition." },
+                                { grade: 11, unit: "Unit 3: Enzymes", page: "p. 79", concepts: "Thermodynamics of biological catalysts, activation energy charts, active sites, and competitive inhibition." },
+                                { grade: 12, unit: "Unit 3: Energy Transformation", page: "p. 84", concepts: "Cellular respiration, ATP synthesis, Glycolysis, Krebs cycle, and light/dark photosynthetic pathways." }
+                            ]
+                        },
+                        {
+                            title: "🧬 Theme 2: Genetics, Evolution & Continuity",
+                            rows: [
+                                { grade: 9, unit: "Unit 4: Reproduction", page: "p. 74", concepts: "Cell division (Mitosis/Meiosis), male and female reproductive anatomy, and basic genetics." },
+                                { grade: 10, unit: "Unit 2: Heredity", page: "p. 81", concepts: "Mendelian genetics, Punnett squares, DNA structure, and protein synthesis." },
+                                { grade: 11, unit: "Unit 4: Genetics", page: "p. 113", concepts: "Advanced Mendelian ratios, sex-linked traits, mutations, and genetic engineering applications." },
+                                { grade: 12, unit: "Unit 4: Evolution", page: "p. 122", concepts: "Natural selection, Hardy-Weinberg equilibrium, speciation, and evidence for evolution." }
+                            ]
+                        },
+                        {
+                            title: "🌱 Theme 3: Ecology & Human Systems",
+                            rows: [
+                                { grade: 9, unit: "Unit 5: Ecology", page: "p. 150", concepts: "Food chains, trophic levels, energy flow, and ecosystem components." },
+                                { grade: 10, unit: "Unit 5: Human Impact", page: "p. 172", concepts: "Pollution, deforestation, climate change, and conservation strategies." },
+                                { grade: 11, unit: "Unit 6: Population Ecology", page: "p. 200", concepts: "Population growth models, carrying capacity, and ecological succession." },
+                                { grade: 12, unit: "Unit 5: Human Physiology", page: "p. 160", concepts: "Advanced human anatomy (nervous, endocrine, immune) and homeostasis." }
+                            ]
+                        },
+                        {
+                            title: "🦠 Theme 4: Microbiology & Disease",
+                            rows: [
+                                { grade: 9, unit: "Unit 6: Micro-organisms", page: "p. 180", concepts: "Types of micro-organisms (bacteria, viruses, fungi) and their economic importance." },
+                                { grade: 10, unit: "Unit 4: Disease & Immunity", page: "p. 120", concepts: "Pathogens, transmission of diseases, and basic body defense mechanisms." },
+                                { grade: 11, unit: "Unit 5: Biotechnology", page: "p. 160", concepts: "Genetic engineering, recombinant DNA, and applications in medicine and agriculture." },
+                                { grade: 12, unit: "Unit 6: Applied Biology", page: "p. 210", concepts: "Immunology, vaccines, and advanced biotechnological techniques." }
+                            ]
+                        }
+                    ]
+                },
+                chemistry: {
+                    name: "Chemistry", icon: "🧪", color: "#b45309",
+                    themes: [
+                        {
+                            title: "🧪 Theme 1: Atomic Structure & Bonding",
+                            rows: [
+                                { grade: 9, unit: "Unit 3: Structure of the Atom", page: "p. 14", concepts: "Subatomic particles, atomic number, mass number, isotopes, and electron configurations." },
+                                { grade: 10, unit: "Unit 1: Periodic Classification", page: "p. 1", concepts: "Periodic trends (atomic radius, electronegativity), groups, and periods." },
+                                { grade: 11, unit: "Unit 2: Chemical Bonding", page: "p. 109", concepts: "Ionic, covalent, and metallic bonds; VSEPR theory, hybridisation, and molecular geometry." },
+                                { grade: 12, unit: "Unit 1: Quantum Atom", page: "p. 1", concepts: "Quantum numbers, atomic orbitals, electron spin, and Pauli exclusion principle." }
+                            ]
+                        },
+                        {
+                            title: "⚖️ Theme 2: Chemical Reactions & Stoichiometry",
+                            rows: [
+                                { grade: 9, unit: "Unit 4: Chemical Reactions", page: "p. 50", concepts: "Balancing equations, types of reactions (synthesis, decomposition, etc.), and conservation of mass." },
+                                { grade: 10, unit: "Unit 2: Stoichiometry", page: "p. 45", concepts: "Mole concept, molar mass, Avogadro's number, and stoichiometric calculations." },
+                                { grade: 11, unit: "Unit 3: Chemical Kinetics", page: "p. 130", concepts: "Rate laws, collision theory, activation energy, and factors affecting reaction rates." },
+                                { grade: 12, unit: "Unit 2: Chemical Equilibrium", page: "p. 56", concepts: "Le Chatelier's principle, equilibrium constants (Kc, Kp), and factors shifting equilibrium." }
+                            ]
+                        },
+                        {
+                            title: "🔋 Theme 3: Energy & Electrochemistry",
+                            rows: [
+                                { grade: 9, unit: "Unit 5: Energy Changes", page: "p. 85", concepts: "Exothermic and endothermic reactions, enthalpy, and energy level diagrams." },
+                                { grade: 10, unit: "Unit 4: Electrochemistry", page: "p. 80", concepts: "Oxidation-reduction (redox) reactions, galvanic cells, and electrolysis." },
+                                { grade: 11, unit: "Unit 4: Thermochemistry", page: "p. 150", concepts: "Hess's Law, standard enthalpy of formation, and calorimetry." },
+                                { grade: 12, unit: "Unit 3: Electrochemistry II", page: "p. 90", concepts: "Standard electrode potentials, Nernst equation, and Faraday's laws of electrolysis." }
+                            ]
+                        },
+                        {
+                            title: "🧬 Theme 4: Organic Chemistry",
+                            rows: [
+                                { grade: 9, unit: "Unit 6: Intro to Organic", page: "p. 120", concepts: "Carbon bonding, alkanes, and basic nomenclature." },
+                                { grade: 10, unit: "Unit 5: Hydrocarbons", page: "p. 110", concepts: "Alkenes, alkynes, and structural isomerism." },
+                                { grade: 11, unit: "Unit 5: Functional Groups", page: "p. 180", concepts: "Alcohols, aldehydes, ketones, and carboxylic acids." },
+                                { grade: 12, unit: "Unit 4: Polymers & Reactions", page: "p. 130", concepts: "Esterification, polymerization, and organic reaction mechanisms." }
+                            ]
+                        }
+                    ]
+                },
+                physics: {
+                    name: "Physics", icon: "⚙️", color: "#1d4ed8",
+                    themes: [
+                        {
+                            title: "⚙️ Theme 1: Mechanics & Motion",
+                            rows: [
+                                { grade: 9, unit: "Unit 2: Motion in a Straight Line", page: "p. 42", concepts: "Speed, velocity, acceleration, and kinematic equations (v=u+at, s=ut+½at²)." },
+                                { grade: 10, unit: "Unit 1: Uniformly Accelerated Motion", page: "p. 21", concepts: "Displacement-time and velocity-time graphs, free fall, and projectile motion." },
+                                { grade: 11, unit: "Unit 2: Motion in Two Dimensions", page: "p. 47", concepts: "Vector resolution, relative velocity, and advanced projectile motion equations." },
+                                { grade: 12, unit: "Unit 1: Rotational Motion", page: "p. 24", concepts: "Circular motion, centripetal force, torque, and rotational kinematics." }
+                            ]
+                        },
+                        {
+                            title: "⚡ Theme 2: Energy, Work & Power",
+                            rows: [
+                                { grade: 9, unit: "Unit 4: Work, Energy and Power", page: "p. 116", concepts: "Work done by a force, kinetic and potential energy, and conservation of energy." },
+                                { grade: 10, unit: "Unit 2: Power and Machines", page: "p. 50", concepts: "Power calculations, mechanical advantage, levers, pulleys, and efficiency." },
+                                { grade: 11, unit: "Unit 3: Momentum and Collisions", page: "p. 80", concepts: "Linear momentum, impulse, conservation of momentum, and elastic/inelastic collisions." },
+                                { grade: 12, unit: "Unit 2: Mechanics & Equilibrium", page: "p. 50", concepts: "Static equilibrium, torque, center of mass, and rotational dynamics." }
+                            ]
+                        },
+                        {
+                            title: "🌊 Theme 3: Waves, Sound & Light",
+                            rows: [
+                                { grade: 9, unit: "Unit 6: Waves", page: "p. 160", concepts: "Wave properties, frequency, wavelength, and sound waves." },
+                                { grade: 10, unit: "Unit 3: Light & Optics", page: "p. 90", concepts: "Reflection, refraction, Snell's law, and lenses." },
+                                { grade: 11, unit: "Unit 4: Wave Optics", page: "p. 140", concepts: "Interference, diffraction, and polarization." },
+                                { grade: 12, unit: "Unit 3: Modern Physics", page: "p. 80", concepts: "Photoelectric effect, wave-particle duality, and quantum theory." }
+                            ]
+                        },
+                        {
+                            title: "🔌 Theme 4: Electricity & Magnetism",
+                            rows: [
+                                { grade: 9, unit: "Unit 5: Static Electricity", page: "p. 140", concepts: "Electric charge, Coulomb's law, conductors, insulators, and electric fields." },
+                                { grade: 10, unit: "Unit 4: Current Electricity", page: "p. 80", concepts: "Ohm's law, resistance, series/parallel circuits, and electrical power." },
+                                { grade: 11, unit: "Unit 6: Electrostatics & Circuits", page: "p. 175", concepts: "Capacitors, Kirchhoff's laws, and complex circuit analysis." },
+                                { grade: 12, unit: "Unit 4: Electromagnetism", page: "p. 100", concepts: "Magnetic fields, Faraday's law of induction, Lenz's law, and AC circuits." }
+                            ]
+                        }
+                    ]
+                },
+                math: {
+                    name: "Mathematics", icon: "📐", color: "#6b21a8",
+                    themes: [
+                        {
+                            title: "📐 Theme 1: Algebra & Functions",
+                            rows: [
+                                { grade: 9, unit: "Unit 2: Number Systems", page: "p. 27", concepts: "Real numbers, rational/irrational numbers, and basic algebraic operations." },
+                                { grade: 10, unit: "Unit 2: Polynomial Functions", page: "p. 43", concepts: "Quadratic functions, discriminant, roots, and graphs of polynomial functions." },
+                                { grade: 11, unit: "Unit 2: Rational Expressions", page: "p. 79", concepts: "Simplifying rational expressions, operations, and solving rational equations." },
+                                { grade: 12, unit: "Unit 2: Introduction to Calculus", page: "p. 50", concepts: "Limits, continuity, derivatives (power, product, quotient, chain rule), and applications." }
+                            ]
+                        },
+                        {
+                            title: "📊 Theme 2: Geometry & Trigonometry",
+                            rows: [
+                                { grade: 9, unit: "Unit 4: Intro to Trigonometry", page: "p. 162", concepts: "Trigonometric ratios (sin, cos, tan), solving right-angled triangles." },
+                                { grade: 10, unit: "Unit 4: Trigonometric Functions", page: "p. 100", concepts: "Unit circle, graphs of sine/cosine, trigonometric identities, and equations." },
+                                { grade: 11, unit: "Unit 5: Coordinate Geometry", page: "p. 120", concepts: "Distance, midpoint, equations of lines, circles, and conic sections." },
+                                { grade: 12, unit: "Unit 6: 3D Geometry & Vectors", page: "p. 180", concepts: "3D vectors, dot product, cross product, and equations of planes in space." }
+                            ]
+                        },
+                        {
+                            title: "🎲 Theme 3: Statistics & Probability",
+                            rows: [
+                                { grade: 9, unit: "Unit 6: Statistics", page: "p. 200", concepts: "Data collection, mean, median, mode, and basic graphs (histograms, pie charts)." },
+                                { grade: 10, unit: "Unit 5: Probability", page: "p. 150", concepts: "Basic probability, mutually exclusive events, and tree diagrams." },
+                                { grade: 11, unit: "Unit 6: Advanced Statistics", page: "p. 160", concepts: "Standard deviation, variance, permutations, and combinations." },
+                                { grade: 12, unit: "Unit 5: Probability Distributions", page: "p. 210", concepts: "Normal distribution, binomial distribution, and z-scores." }
+                            ]
+                        },
+                        {
+                            title: "🔢 Theme 4: Matrices & Complex Numbers",
+                            rows: [
+                                { grade: 9, unit: "Unit 5: Linear Systems", page: "p. 180", concepts: "Solving systems of linear equations using matrices." },
+                                { grade: 10, unit: "Unit 6: Matrix Operations", page: "p. 180", concepts: "Addition, multiplication, and inverses of matrices." },
+                                { grade: 11, unit: "Unit 7: Determinants", page: "p. 200", concepts: "Determinants, Cramer's rule, and eigenvalues." },
+                                { grade: 12, unit: "Unit 7: Complex Numbers", page: "p. 230", concepts: "Argand diagrams, polar form, and De Moivre's theorem." }
+                            ]
+                        }
+                    ]
+                },
+                english: {
+                    name: "English", icon: "🇬🇧", color: "#0284c7",
+                    themes: [
+                        {
+                            title: "📖 Theme 1: Reading Comprehension & Vocabulary",
+                            rows: [
+                                { grade: 9, unit: "Unit 1: Reading Skills", page: "p. 1", concepts: "Skimming, scanning, identifying main ideas, and basic vocabulary building." },
+                                { grade: 10, unit: "Unit 2: Comprehension", page: "p. 25", concepts: "Making inferences, understanding context clues, and summarizing texts." },
+                                { grade: 11, unit: "Unit 3: Critical Reading", page: "p. 50", concepts: "Analyzing arguments, identifying bias, and understanding figurative language." },
+                                { grade: 12, unit: "Unit 4: Academic Reading", page: "p. 80", concepts: "Reading research articles, synthesizing information, and advanced vocabulary." }
+                            ]
+                        },
+                        {
+                            title: "✍️ Theme 2: Grammar & Writing Mechanics",
+                            rows: [
+                                { grade: 9, unit: "Unit 2: Grammar Basics", page: "p. 35", concepts: "Tenses, subject-verb agreement, and writing simple sentences." },
+                                { grade: 10, unit: "Unit 1: Paragraph Writing", page: "p. 10", concepts: "Complex sentences, conjunctions, and writing cohesive paragraphs." },
+                                { grade: 11, unit: "Unit 2: Essay Writing", page: "p. 40", concepts: "Essay structure (intro, body, conclusion), transitions, and report writing." },
+                                { grade: 12, unit: "Unit 1: Advanced Writing", page: "p. 15", concepts: "Argumentative essays, research papers, and formal letters." }
+                            ]
+                        },
+                        {
+                            title: "🗣️ Theme 3: Oral Communication & Listening",
+                            rows: [
+                                { grade: 9, unit: "Unit 4: Speaking", page: "p. 80", concepts: "Basic dialogues, pronunciation, and listening for specific details." },
+                                { grade: 10, unit: "Unit 3: Presentations", page: "p. 60", concepts: "Giving short presentations, active listening, and peer feedback." },
+                                { grade: 11, unit: "Unit 4: Debates", page: "p. 90", concepts: "Participating in debates, persuasive speaking, and note-taking." },
+                                { grade: 12, unit: "Unit 5: Public Speaking", page: "p. 110", concepts: "Formal speeches, interviews, and advanced listening comprehension." }
+                            ]
+                        },
+                        {
+                            title: "📚 Theme 4: Literature & Culture",
+                            rows: [
+                                { grade: 9, unit: "Unit 3: Short Stories", page: "p. 55", concepts: "Elements of a story (plot, character, setting) and basic poetry." },
+                                { grade: 10, unit: "Unit 4: Poetry & Drama", page: "p. 75", concepts: "Poetic devices, themes, and reading plays." },
+                                { grade: 11, unit: "Unit 5: Novels", page: "p. 100", concepts: "Character analysis, theme exploration, and literary criticism." },
+                                { grade: 12, unit: "Unit 6: World Literature", page: "p. 130", concepts: "Comparative literature, Shakespeare, and cultural contexts." }
+                            ]
+                        }
+                    ]
+                }
+            },
+            social: {
+                geography: {
+                    name: "Geography", icon: "🌍", color: "#0369a1",
+                    themes: [
+                        {
+                            title: "🌍 Theme 1: Physical Geography & Topography",
+                            rows: [
+                                { grade: 9, unit: "Unit 1: Geological History", page: "p. 1", concepts: "Geography meaning/scope, location/size of Ethiopia, geological history, and relief." },
+                                { grade: 10, unit: "Unit 1: Landforms of Africa", page: "p. 1", concepts: "Major landforms of Africa, geological processes, and tectonic activity." },
+                                { grade: 11, unit: "Unit 1: Formation of Continents", page: "p. 1", concepts: "Continental drift, plate tectonics, and formation of oceans and continents." },
+                                { grade: 12, unit: "Unit 1: Major Geological Processes", page: "p. 1", concepts: "Plate tectonics, earthquakes, volcanoes, and associated landforms." }
+                            ]
+                        },
+                        {
+                            title: "🌦️ Theme 2: Climate & Weather Systems",
+                            rows: [
+                                { grade: 9, unit: "Unit 2: Climate of Ethiopia", page: "p. 31", concepts: "Elements of weather/climate, climate types, and factors affecting Ethiopian climate." },
+                                { grade: 10, unit: "Unit 2: Climate of Africa", page: "p. 20", concepts: "Climate regions of Africa, factors influencing climate, and climate change." },
+                                { grade: 11, unit: "Unit 2: Climate Classification", page: "p. 25", concepts: "Köppen climate classification, world climate regions, and climate systems." },
+                                { grade: 12, unit: "Unit 2: Climate Change", page: "p. 50", concepts: "Global warming, greenhouse gases, climate change impacts, and mitigation." }
+                            ]
+                        },
+                        {
+                            title: "🏙️ Theme 3: Human Geography & Population",
+                            rows: [
+                                { grade: 9, unit: "Unit 3: Population", page: "p. 60", concepts: "Population distribution, density, growth rates, and demographic structure." },
+                                { grade: 10, unit: "Unit 3: Migration", page: "p. 50", concepts: "Types of migration, push/pull factors, and urbanization." },
+                                { grade: 11, unit: "Unit 3: Economic Activities", page: "p. 70", concepts: "Primary (agriculture), secondary (industry), and tertiary (services) sectors." },
+                                { grade: 12, unit: "Unit 3: Sustainable Development", page: "p. 90", concepts: "Resource management, environmental conservation, and sustainable development goals." }
+                            ]
+                        },
+                        {
+                            title: "🗺️ Theme 4: Map Reading & Cartography",
+                            rows: [
+                                { grade: 9, unit: "Unit 4: Map Reading", page: "p. 90", concepts: "Scale, grid references, and interpreting physical maps." },
+                                { grade: 10, unit: "Unit 4: Advanced Maps", page: "p. 70", concepts: "Topographic maps, contour lines, and cross-sections." },
+                                { grade: 11, unit: "Unit 4: GIS & Remote Sensing", page: "p. 100", concepts: "Geographic Information Systems (GIS), aerial photography, and satellite imagery." },
+                                { grade: 12, unit: "Unit 4: Cartographic Analysis", page: "p. 120", concepts: "Map projections, thematic mapping, and spatial analysis." }
+                            ]
+                        }
+                    ]
+                },
+                history: {
+                    name: "History", icon: "🏛️", color: "#b91c1c",
+                    themes: [
+                        {
+                            title: "🏛️ Theme 1: Early History & Ancient Civilizations",
+                            rows: [
+                                { grade: 9, unit: "Unit 1: Human Evolution", page: "p. 1", concepts: "Meaning of history, human evolution, Neolithic Revolution, and ancient world civilizations." },
+                                { grade: 10, unit: "Unit 1: Capitalism", page: "p. 1", concepts: "Development of capitalism, nationalism, and the industrial revolution." },
+                                { grade: 11, unit: "Unit 1: Historian's Craft", page: "p. 1", concepts: "History as a discipline, historical sources, and research methods." },
+                                { grade: 12, unit: "Unit 1: Advanced Historical Studies", page: "p. 1", concepts: "In-depth historical analysis, historiography, and thematic history." }
+                            ]
+                        },
+                        {
+                            title: "👑 Theme 2: Ethiopian History",
+                            rows: [
+                                { grade: 9, unit: "Unit 3: Ancient Ethiopia", page: "p. 50", concepts: "Aksumite civilization, Zagwe dynasty, and early Solomonic period." },
+                                { grade: 10, unit: "Unit 2: Modern Ethiopian Empire", page: "p. 50", concepts: "Formation of modern Ethiopia (1855-1906), Tewodros, Yohannes, and Menelik." },
+                                { grade: 11, unit: "Unit 5: Ethiopian Region", page: "p. 100", concepts: "Peoples and states in Ethiopia up to 1270, and the medieval period." },
+                                { grade: 12, unit: "Unit 4: Ethiopia (1941-1991)", page: "p. 120", concepts: "Haile Selassie era, Derg regime, and the 1974 revolution." }
+                            ]
+                        },
+                        {
+                            title: "🌍 Theme 3: African & World History",
+                            rows: [
+                                { grade: 9, unit: "Unit 5: World Civilizations", page: "p. 120", concepts: "Mesopotamia, Egypt, Greece, Rome, and the Middle Ages." },
+                                { grade: 10, unit: "Unit 3: Colonialism", page: "p. 80", concepts: "Scramble for Africa, colonial administration, and African resistance." },
+                                { grade: 11, unit: "Unit 4: World Wars", page: "p. 150", concepts: "Causes, events, and consequences of World War I and World War II." },
+                                { grade: 12, unit: "Unit 5: Cold War", page: "p. 160", concepts: "Superpower rivalry, decolonization, and the post-Cold War world order." }
+                            ]
+                        },
+                        {
+                            title: "🌐 Theme 4: Contemporary Global History",
+                            rows: [
+                                { grade: 9, unit: "Unit 6: Modern World", page: "p. 160", concepts: "Introduction to modern global politics and economy." },
+                                { grade: 10, unit: "Unit 4: Post-Colonial Africa", page: "p. 110", concepts: "Independence movements and challenges of new African states." },
+                                { grade: 11, unit: "Unit 6: Globalization", page: "p. 180", concepts: "Globalization, technology, and global economic shifts." },
+                                { grade: 12, unit: "Unit 6: 21st Century Issues", page: "p. 200", concepts: "Terrorism, climate change, and global pandemics in the 21st century." }
+                            ]
+                        }
+                    ]
+                },
+                economics: {
+                    name: "Economics", icon: "📈", color: "#047857",
+                    themes: [
+                        {
+                            title: "📈 Theme 1: Microeconomics",
+                            rows: [
+                                { grade: 9, unit: "Unit 1: Basics of Economics", page: "p. 1", concepts: "Definition of economics, basic economic problems, and economic systems." },
+                                { grade: 10, unit: "Unit 1: Consumer Behavior", page: "p. 1", concepts: "Theory of consumer behavior, utility, and indifference curves." },
+                                { grade: 11, unit: "Unit 1: Demand & Supply", page: "p. 2", concepts: "Demand and supply curves, equilibrium, and elasticity." },
+                                { grade: 12, unit: "Unit 2: Market Structures", page: "p. 40", concepts: "Perfect competition, monopoly, oligopoly, and monopolistic competition." }
+                            ]
+                        },
+                        {
+                            title: "🏦 Theme 2: Macroeconomics",
+                            rows: [
+                                { grade: 9, unit: "Unit 6: Introduction to Money", page: "p. 85", concepts: "Barter system, evolution of money, and functions of money." },
+                                { grade: 10, unit: "Unit 5: Banking", page: "p. 70", concepts: "Banking and finance, central banking, and monetary policy." },
+                                { grade: 11, unit: "Unit 7: National Income", page: "p. 19", concepts: "GDP, GNP, national income accounting, and economic growth." },
+                                { grade: 12, unit: "Unit 5: Balance of Payment", page: "p. 15", concepts: "Balance of payments, exchange rates, and international trade." }
+                            ]
+                        },
+                        {
+                            title: "🇪🇹 Theme 3: Ethiopian Economy",
+                            rows: [
+                                { grade: 9, unit: "Unit 7: Ethiopian Economy", page: "p. 110", concepts: "Overview of the Ethiopian economy, agriculture, and industry." },
+                                { grade: 10, unit: "Unit 6: Economic Development", page: "p. 90", concepts: "Economic development vs. growth, poverty, and income inequality." },
+                                { grade: 11, unit: "Unit 8: Fiscal Policy", page: "p. 60", concepts: "Government budget, taxation, and public expenditure." },
+                                { grade: 12, unit: "Unit 6: Public Finance", page: "p. 60", concepts: "Public finance, fiscal policy, and public debt management." }
+                            ]
+                        },
+                        {
+                            title: "🌱 Theme 4: Development & Sustainability",
+                            rows: [
+                                { grade: 9, unit: "Unit 8: Resources", page: "p. 130", concepts: "Types of resources and the importance of sustainable use." },
+                                { grade: 10, unit: "Unit 7: Agriculture", page: "p. 100", concepts: "Role of agriculture in development and modernization." },
+                                { grade: 11, unit: "Unit 9: Industry", page: "p. 80", concepts: "Industrialization strategies and economic transformation." },
+                                { grade: 12, unit: "Unit 7: Sustainable Development", page: "p. 90", concepts: "Sustainable development goals, environmental economics, and green growth." }
+                            ]
+                        }
+                    ]
+                },
+                civics: {
+                    name: "Civics", icon: "⚖️", color: "#4b5563",
+                    themes: [
+                        {
+                            title: "⚖️ Theme 1: Democracy & Constitution",
+                            rows: [
+                                { grade: 9, unit: "Unit 1: Ethical Values", page: "p. 1", concepts: "Ethical values, constitution and constitutionalism, and rule of law." },
+                                { grade: 10, unit: "Unit 2: Rule of Law", page: "p. 15", concepts: "Rule of law, equality, and justice in the Ethiopian context." },
+                                { grade: 11, unit: "Unit 1: Democracy", page: "p. 1", concepts: "Democracy, citizenship, and the role of individuals in a democratic society." },
+                                { grade: 12, unit: "Unit 1: Advanced Civics", page: "p. 1", concepts: "Comparative political systems, governance, and contemporary civic issues." }
+                            ]
+                        },
+                        {
+                            title: "🌐 Theme 2: Society & Diversity",
+                            rows: [
+                                { grade: 9, unit: "Unit 5: Multiculturalism", page: "p. 89", concepts: "Multiculturalism in Ethiopia, indigenous knowledge, and tolerance." },
+                                { grade: 10, unit: "Unit 4: Diversity", page: "p. 40", concepts: "Diversity management, national unity, and social cohesion." },
+                                { grade: 11, unit: "Unit 4: Social Institutions", page: "p. 50", concepts: "Social institutions (family, education, religion) and their roles." },
+                                { grade: 12, unit: "Unit 3: Human Rights", page: "p. 40", concepts: "Human rights protection, humanitarian law, and civic responsibilities." }
+                            ]
+                        },
+                        {
+                            title: "🌍 Theme 3: Global Issues",
+                            rows: [
+                                { grade: 9, unit: "Unit 8: Foreign Relations", page: "p. 120", concepts: "Ethiopia's foreign relations and international cooperation." },
+                                { grade: 10, unit: "Unit 5: International Orgs", page: "p. 60", concepts: "The role of international organizations (UN, AU, etc.)." },
+                                { grade: 11, unit: "Unit 5: Global Citizenship", page: "p. 80", concepts: "Global citizenship, global challenges, and sustainable development." },
+                                { grade: 12, unit: "Unit 4: Global Issues", page: "p. 80", concepts: "Contemporary global issues: terrorism, climate change, migration." }
+                            ]
+                        },
+                        {
+                            title: "🤝 Theme 4: Civic Virtues & Responsibility",
+                            rows: [
+                                { grade: 9, unit: "Unit 6: Patriotism", page: "p. 100", concepts: "Patriotism, civic duties, and community service." },
+                                { grade: 10, unit: "Unit 6: Civic Engagement", page: "p. 80", concepts: "Volunteering, advocacy, and participating in local governance." },
+                                { grade: 11, unit: "Unit 6: Justice & Equality", page: "p. 100", concepts: "Social justice, gender equality, and protecting vulnerable groups." },
+                                { grade: 12, unit: "Unit 5: Leadership & Ethics", page: "p. 100", concepts: "Good governance, ethical leadership, and accountability." }
+                            ]
+                        }
+                    ]
+                },
+                english: {
+                    name: "English", icon: "🇬🇧", color: "#0284c7",
+                    themes: [
+                        {
+                            title: "📖 Theme 1: Reading Comprehension & Vocabulary",
+                            rows: [
+                                { grade: 9, unit: "Unit 1: Reading Skills", page: "p. 1", concepts: "Skimming, scanning, identifying main ideas, and basic vocabulary building." },
+                                { grade: 10, unit: "Unit 2: Comprehension", page: "p. 25", concepts: "Making inferences, understanding context clues, and summarizing texts." },
+                                { grade: 11, unit: "Unit 3: Critical Reading", page: "p. 50", concepts: "Analyzing arguments, identifying bias, and understanding figurative language." },
+                                { grade: 12, unit: "Unit 4: Academic Reading", page: "p. 80", concepts: "Reading research articles, synthesizing information, and advanced vocabulary." }
+                            ]
+                        },
+                        {
+                            title: "✍️ Theme 2: Grammar & Writing Mechanics",
+                            rows: [
+                                { grade: 9, unit: "Unit 2: Grammar Basics", page: "p. 35", concepts: "Tenses, subject-verb agreement, and writing simple sentences." },
+                                { grade: 10, unit: "Unit 1: Paragraph Writing", page: "p. 10", concepts: "Complex sentences, conjunctions, and writing cohesive paragraphs." },
+                                { grade: 11, unit: "Unit 2: Essay Writing", page: "p. 40", concepts: "Essay structure (intro, body, conclusion), transitions, and report writing." },
+                                { grade: 12, unit: "Unit 1: Advanced Writing", page: "p. 15", concepts: "Argumentative essays, research papers, and formal letters." }
+                            ]
+                        },
+                        {
+                            title: "🗣️ Theme 3: Oral Communication & Listening",
+                            rows: [
+                                { grade: 9, unit: "Unit 4: Speaking", page: "p. 80", concepts: "Basic dialogues, pronunciation, and listening for specific details." },
+                                { grade: 10, unit: "Unit 3: Presentations", page: "p. 60", concepts: "Giving short presentations, active listening, and peer feedback." },
+                                { grade: 11, unit: "Unit 4: Debates", page: "p. 90", concepts: "Participating in debates, persuasive speaking, and note-taking." },
+                                { grade: 12, unit: "Unit 5: Public Speaking", page: "p. 110", concepts: "Formal speeches, interviews, and advanced listening comprehension." }
+                            ]
+                        },
+                        {
+                            title: "📚 Theme 4: Literature & Culture",
+                            rows: [
+                                { grade: 9, unit: "Unit 3: Short Stories", page: "p. 55", concepts: "Elements of a story (plot, character, setting) and basic poetry." },
+                                { grade: 10, unit: "Unit 4: Poetry & Drama", page: "p. 75", concepts: "Poetic devices, themes, and reading plays." },
+                                { grade: 11, unit: "Unit 5: Novels", page: "p. 100", concepts: "Character analysis, theme exploration, and literary criticism." },
+                                { grade: 12, unit: "Unit 6: World Literature", page: "p. 130", concepts: "Comparative literature, Shakespeare, and cultural contexts." }
+                            ]
+                        }
+                    ]
+                }
+            }
+        };
+
+        let currentStream = 'natural';
+        let currentSubject = 'biology';
+
+        function switchStream(stream, event) {
+            currentStream = stream;
+            
+            // Update stream buttons
+            document.querySelectorAll('.stream-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Set default subject for the stream
+            currentSubject = Object.keys(CONCEPT_DATA[stream])[0];
+            
+            renderSubjectTabs();
+            renderPanels();
+        }
+
+        function switchSubject(subjectId, event) {
+            currentSubject = subjectId;
+            
+            // Update subject tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            renderPanels();
+        }
+
+        function renderSubjectTabs() {
+            const container = document.getElementById('subjectTabs');
+            container.innerHTML = '';
+            
+            const subjects = CONCEPT_DATA[currentStream];
+            Object.keys(subjects).forEach(key => {
+                const sub = subjects[key];
+                const btn = document.createElement('button');
+                btn.className = `tab-btn ${key === currentSubject ? 'active' : ''}`;
+                btn.innerHTML = `${sub.icon} ${sub.name}`;
+                btn.onclick = (e) => switchSubject(key, e);
+                container.appendChild(btn);
+            });
+        }
+
+        function renderPanels() {
+            const container = document.getElementById('panelsContainer');
+            container.innerHTML = '';
+            
+            const subject = CONCEPT_DATA[currentStream][currentSubject];
+            
+            subject.themes.forEach(theme => {
+                const card = document.createElement('div');
+                card.className = 'theme-card';
+                
+                let rowsHtml = theme.rows.map(row => `
+                    <tr>
+                        <td data-label="Grade"><span class="grade-badge g${row.grade}">Grade ${row.grade}</span></td>
+                        <td data-label="Unit & Curricular Topic">
+                            <span class="unit-title">${row.unit}</span>
+                        </td>
+                        <td data-label="Start Page"><span class="page-marker">${row.page}</span></td>
+                        <td data-label="Core Focal Concepts" class="concepts">${row.concepts}</td>
+                    </tr>
+                `).join('');
+
+                card.innerHTML = `
+                    <div class="theme-header">${theme.title}</div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 15%">Grade</th>
+                                    <th style="width: 25%">Unit & Curricular Topic</th>
+                                    <th style="width: 15%">Start Page</th>
+                                    <th style="width: 45%">Core Focal Concepts</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${rowsHtml}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Initialize
+        renderSubjectTabs();
+        renderPanels();
+    </script>
+</body>
+</html>
