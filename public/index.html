@@ -106,6 +106,38 @@
             .hero-letter{animation:none;opacity:1}
         }
 
+        /* ---- Attractive greeting (hero welcome text) ---- */
+        .hero h1{
+            font-size:clamp(2rem,7.5vw,3.6rem);
+            font-weight:800;
+            line-height:1.15;
+            letter-spacing:.01em;
+            margin-bottom:.9rem;
+            text-wrap:balance;
+            text-shadow:0 3px 18px rgba(0,0,0,.55);
+        }
+        .hero h1 .h1{font-size:inherit}
+        .hero-word{display:inline-block;white-space:nowrap}
+        .hero-word--greet{color:#fff;font-weight:600;letter-spacing:.05em}
+        .hero-word--name{
+            color:#ffc9a8;
+            text-shadow:0 0 24px rgba(255,138,92,.6),0 3px 18px rgba(0,0,0,.55);
+        }
+        .hero h1::after{
+            content:"";
+            display:block;
+            width:84px;height:4px;
+            margin:1rem auto 0;
+            border-radius:4px;
+            background:linear-gradient(90deg,#ff8a5c,#ffd27a);
+        }
+        .hero p{
+            font-size:clamp(1rem,2.6vw,1.2rem);
+            line-height:1.75;
+            color:rgba(255,255,255,.95);
+            text-wrap:pretty;
+        }
+
         /* =========================================================
            8. STATISTICS BAR
            ========================================================= */
@@ -1029,7 +1061,7 @@
   </div>
 
   <div class="footer-bottom">
-    <span data-en="Developed by Texa. © 2026 Aleta Hidase School. All rights reserved." data-am="በቴክሳ የተዘጋጀ። © 2026 አለታ ህዳሴ ትምህርት ቤት። መብቱ በሕግ የተጠበቀ ነው።">Developed by Texa. &copy; 2026 Aleta Hidase School. All rights reserved.</span>
+    <span data-en="© 2026 Aleta Hidase School. All rights reserved." data-am="© 2026 አለታ ህዳሴ ትምህርት ቤት። መብቱ በሕግ የተጠበቀ ነው።">&copy; 2026 Aleta Hidase School. All rights reserved.</span>
     
     <!-- ADMIN BUTTON ADDED HERE -->
     <a href="./admin.html" class="admin-btn">
@@ -1166,16 +1198,24 @@ if (welcomeHeading && welcomeText) {
     welcomeHeading.setAttribute('aria-label', text);
     welcomeText.setAttribute('aria-hidden', 'true');
     welcomeText.textContent = '';
-    Array.from(text).forEach((character, index) => {
-      if (character === ' ') {
-        welcomeText.appendChild(document.createTextNode(' '));
-        return;
-      }
-      const letter = document.createElement('span');
-      letter.className = 'hero-letter';
-      letter.style.setProperty('--letter-delay', `${index * 65}ms`);
-      letter.textContent = character;
-      welcomeText.appendChild(letter);
+    const isAm = document.documentElement.lang === 'am';
+    const words = text.split(' ');
+    let charIndex = 0;
+    words.forEach((word, w) => {
+      const greet = isAm ? w >= words.length - 3 : w < 2;
+      const wordEl = document.createElement('span');
+      wordEl.className = 'hero-word ' + (greet ? 'hero-word--greet' : 'hero-word--name');
+      Array.from(word).forEach((character) => {
+        const letter = document.createElement('span');
+        letter.className = 'hero-letter';
+        letter.style.setProperty('--letter-delay', `${charIndex * 65}ms`);
+        letter.textContent = character;
+        wordEl.appendChild(letter);
+        charIndex++;
+      });
+      charIndex++;
+      welcomeText.appendChild(wordEl);
+      if (w < words.length - 1) welcomeText.appendChild(document.createTextNode(' '));
     });
   };
   renderWelcome();
